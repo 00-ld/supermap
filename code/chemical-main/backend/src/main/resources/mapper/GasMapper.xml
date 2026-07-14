@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.at.mapper.GasMapper">
+    <insert id="insert" parameterType="com.at.pojo.Gas">
+        INSERT INTO gas (id, name, detection_range, installation_height, effective_range,
+                         install_remark, priority, risk, type, mode)
+        VALUES (#{id}, #{name}, #{detectionRange}, #{installationHeight}, #{effectiveRange},
+                #{installRemark}, #{priority}, #{risk}, #{type}, #{mode})
+    </insert>
+
+    <update id="updateById" parameterType="com.at.pojo.Gas">
+        UPDATE gas
+        SET name = #{name}, detection_range = #{detectionRange},
+            installation_height = #{installationHeight}, effective_range = #{effectiveRange},
+            install_remark = #{installRemark}, priority = #{priority}, risk = #{risk},
+            type = #{type}, mode = #{mode}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.String">
+        DELETE FROM gas WHERE id = #{id}
+    </delete>
+
+    <select id="selectList" resultType="com.at.pojo.Gas">
+        SELECT id, name, detection_range as detectionRange,
+               installation_height as installationHeight, effective_range as effectiveRange,
+               install_remark as installRemark, priority, risk, type, mode,
+               created_at as createdAt, updated_at as updatedAt
+        FROM gas
+        ORDER BY id ASC
+    </select>
+
+    <select id="selectById" parameterType="java.lang.String" resultType="com.at.pojo.Gas">
+        SELECT id, name, detection_range as detectionRange,
+               installation_height as installationHeight, effective_range as effectiveRange,
+               install_remark as installRemark, priority, risk, type, mode,
+               created_at as createdAt, updated_at as updatedAt
+        FROM gas
+        WHERE id = #{id}
+    </select>
+</mapper>

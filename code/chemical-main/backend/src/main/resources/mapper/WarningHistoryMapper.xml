@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.at.mapper.WarningHistoryMapper">
+    <!-- 新增记录 -->
+    <insert id="insert" parameterType="com.at.pojo.WarningHistory">
+        INSERT INTO warning_history (car_id, area_name, x, y, gas_type, gas_value, warning_time)
+        VALUES (#{carId}, #{areaName}, #{x}, #{y}, #{gasType}, #{gasValue}, #{warningTime})
+    </insert>
+
+    <!-- 查询所有记录（按预警时间倒序，最新的在前） -->
+    <select id="selectList" resultType="com.at.pojo.WarningHistory">
+        SELECT id, car_id as carId, area_name as areaName, x, y, gas_type as gasType, gas_value as gasValue, warning_time as warningTime
+        FROM warning_history
+        ORDER BY warning_time DESC, id DESC
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        DELETE FROM warning_history WHERE id = #{id}
+    </delete>
+</mapper>

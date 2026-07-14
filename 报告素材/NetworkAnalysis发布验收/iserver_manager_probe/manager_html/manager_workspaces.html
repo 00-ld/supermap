@@ -1,0 +1,543 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Login SuperMap iServer</title>
+    <style type="text/css">
+        @import "http://8.130.175.232:18090/iserver/services/security/../../manager/static/bootstrap/css/bootstrap.min.css";
+        @import "http://8.130.175.232:18090/iserver/services/security/../../manager/static/css/login.css";
+    </style>
+    <script type="text/javascript">
+        //作为是否为登陆页面的标识
+        var isISERVERLOGINPAGE = true;
+    </script>
+    <script type="text/javascript" src="http://8.130.175.232:18090/iserver/services/security/../../manager/static/js/resource_en_US.js"></script>
+    <script type="text/javascript" src="http://8.130.175.232:18090/iserver/services/security/../../manager/static/jquery/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="http://8.130.175.232:18090/iserver/services/security/../../manager/static/jquery-ui/jquery-ui-1.14.0.min.js"></script>
+    <link type="text/css" href="http://8.130.175.232:18090/iserver/services/security/../../static/jquery-ui/smoothness/jquery-ui-1.14.0.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="http://8.130.175.232:18090/iserver/services/security/static/js/forge.min.js"></script>
+    <script type="text/javascript" src="http://8.130.175.232:18090/iserver/services/security/../../manager/static/js/utility.js"></script>
+    <script type="text/javascript" src="http://8.130.175.232:18090/iserver/services/security/../../manager/static/libs/json_parse.js"></script>
+    <script type="text/javascript" src="http://8.130.175.232:18090/iserver/services/security/static/js/updateURI.js"></script>
+    <script type="text/javascript" src="http://8.130.175.232:18090/iserver/services/security/static/js/RSAAndAESEn-DecryptorUtil.js"></script>
+    <script type="text/javascript" src="http://8.130.175.232:18090/iserver/services/security/static/js/resource_en_US.js"></script>
+    <script language="JavaScript" type="text/javascript" src="http://8.130.175.232:18090/iserver/services/security/../../manager/static/js/iServerMainPageUI.js"></script>
+    <!--模块交互jQuery修改css样式-->
+    <link rel="Shortcut Icon" href="/favicon20.ico" type="image/x-icon"/>
+</head>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        var ieEd = false;
+                isEd = false;
+        if (isEd){
+            var title = document.title;
+            document.title=title+"「SuperMap Education」";
+        }
+        // LicenseInfoTitle();
+    })
+    function LicenseInfoTitle() {
+        var url = "http://8.130.175.232:18090/iserver/services/security";
+        let keyPath = "/iserver";
+        let index = url.indexOf(keyPath);
+        if(index !== -1){
+            url = url.substring(0,index + keyPath.length);
+        }
+        url = url + "/manager/licenseInfo.json";
+        $.ajax({
+            type: "GET",
+            url: url,
+            async: false,
+            dataType: "json",
+            success: function (liceseInfo) {
+                var title = document.title;
+                if(!(!liceseInfo.shortCompanyName)){
+                    document.title = title+" "+liceseInfo.shortCompanyName;
+                }
+            }
+        });
+    }
+</script>
+<body style="position:relative;min-height:100vh;background-size:cover;"
+      
+      onload="window.document.forms[0].username.focus();document.getElementById('username').focus();">
+<div class="loginTopWrapper clearFix">
+    <div class="loginTopWrapperHeader">
+        <div class="loginLogotopWrapper">
+            <a href="http://8.130.175.232:18090/iserver/services/security/../../">
+                    <img class="loginLogoPic" src="http://8.130.175.232:18090/iserver/services/security/../../manager/static/img/iServer_login_logo_light.png" width="132" height="72"/>
+            </a>
+        </div>
+        <div style="float:right;margin-right: 16px;">
+            <div class="btn-group language" id="language">
+                <a id="language-text" class="btn btnSample"
+                   data-toggle="dropdown">English
+                    <svg class="closesvg openclose" width="10px" height="10px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 1024 1024">
+                        <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"/>
+                    </svg>
+                    <svg class="opensvg openclose" hidden width="10px" height="10px" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                         viewBox="0 0 1024 1024">
+                        <path d="M890.5 755.3L537.9 269.2c-12.8-17.6-39-17.6-51.7 0L133.5 755.3A8 8 0 0 0 140 768h75c5.1 0 9.9-2.5 12.9-6.6L512 369.8l284.1 391.6c3 4.1 7.8 6.6 12.9 6.6h75c6.5 0 10.3-7.4 6.5-12.7z"/>
+                    </svg>
+                </a>
+                <ul class="dropdown-menu" role="menu" style="margin-left: 0px;margin-top: 0px;">
+                    <li id="dropdown-menuli" onclick="selectLanguage('en-US')"><a>English</a></li>
+                    <li id="dropdown-menuli" onclick="selectLanguage('zh-CN')"><a>中文</a></li>
+                </ul>
+            </div>
+            <a class="help" href="http://8.130.175.232:18090/iserver/services/security/../../help">
+                <img style="vertical-align: middle;"/>
+            </a>
+        </div>
+    </div>
+</div>
+<div id="noCookiesEnabledMessage" class="noCookiesEnabledMessage" style="display: none;"> Please enable cookies in your browser to proceed with login.</div>
+<div id="loginError"  style="visibility: hidden">
+    <img class="loginErrorPic" src="http://8.130.175.232:18090/iserver/services/security/../../manager/static/img/error-light.svg" />
+    <span id="errorMessage"  style="display: inline-block"></span>
+</div>
+<span id="testCookie"></span>
+
+<div id="loginPage">
+    <div id="pageContent">
+        <form name="loginform" id="loginform" action="" method="post" class="form-singin">
+            <div width="100%" style="padding:48px 0px">
+                <div id="header" class="bottomBorder form-signin">Welcome to SuperMap iServer</div>
+                <div id="subTitle" class="text-muted vWord">Version 12.0.1.0</div>
+            </div>
+            <div align="center">
+                <div align="center" width="100%">
+                    <input class="form-control logininput" id="username" type="text" name="username" placeholder="the user name">
+                </div>
+                <div align="center" width="100%" style="margin-top: 24px;position: relative;">
+                    <input class="form-control logininput" id="password" type="password" name="password"
+                           placeholder="the password" autocomplete="off">
+                    <span style="position: absolute;right: 11px;top:14px;width: 14px;height:11px;">
+                        <img id="showText" onclick="hideShowPsw()"/>
+                        </span>
+                </div>
+                <div align="center" width="100%" style="position: relative;">
+                    <div id="captcha-tr" style="display: none">
+                        <div style="margin-right: auto;">
+                            <input class="form-control logininput" id="captcha-input" type="text" name="captcha" maxlength="4"
+                                   placeholder="the verification code">
+                        </div>
+                        <div style="margin-left: auto;">
+                            <img id="captcha-img" alt="Verification code loading failed"
+                                 title="Can't see clearly, click to change">
+                        </div>
+                    </div>
+                    <div id="captcha-error" align="left" style="display: block">
+                    </div>
+                </div>
+                <div id="rememberMeAndForgetPass">
+                    <div style="margin-right: auto;">
+                        <input id="rememberMe" type="checkbox" name="rememberMe" style="margin: auto 0">&nbsp;&nbsp;
+                        <label class="loginText" for="rememberMe">Remember me</label>
+                    </div>
+                    <div style="margin-left: auto;">
+                        <a
+                                href="http://8.130.175.232:18090/iserver/services/security/../../help/index.htm#Server_Service_Management/Login_service_manager.htm#forgetpassword"
+                                target="_blank">
+                            <div id="forgetPassword" class="loginText">Lost Password</div>
+                        </a>
+                    </div>
+                </div>
+                <button id="loginButton" class="btn" onclick="login();" type="button" disabled>Login</button>
+        </form>
+
+    </div>
+    <div id="resultDisplay" style="color:#ffaaaa;display:none"></div>
+</div>
+<script>
+    var Sys = {};
+    var ua = navigator.userAgent.toLowerCase();
+    var ieResult = ua.match(/msie ([\d.]+)/i);
+    var ffResult = ua.match(/firefox\/([\d.]+)/i);
+    var chromeResult = ua.match(/chrome\/([\d.]+)/i);
+    var operaResult = ua.match(/opera.([\d.]+)/i);
+    var safariResult = ua.match(/version\/([\d.]+)/i);
+    var captchaEnable = false;
+    var captchaConfig;
+    var captchaTicket = "";
+    var lastRefreshTime;
+    var isChecking = true;
+    var passwordInput = document.getElementById("password");
+    var usernameInput = document.getElementById("username");
+    var loginButton = document.getElementById("loginButton");
+    passwordInput.addEventListener('input',updateButtonStatus);
+    usernameInput.addEventListener('input',updateButtonStatus);
+    window.ActiveXObject && ieResult ? Sys.ie = ieResult[1] :
+        document.getBoxObjectFor && ffResult ? Sys.firefox = ffResult[1] :
+            window.MessageEvent && !document.getBoxObjectFor && chromeResult ? Sys.chrome = chromeResult[1] :
+                window.opera && operaResult ? Sys.opera = operaResult[1] :
+                    window.openDatabase && safariResult ? Sys.safari = safariResult[1] : 0;
+    var theme = JSON.parse(localStorage.getItem("pro__DEFAULT_THEME"));
+    var themeValue = theme ? theme.value : "light";
+    var body = document.body;
+    body.classList.remove("light", "dark");
+    body.classList.add(themeValue);
+    loadLoginPage();
+
+    var url = "http://8.130.175.232:18090/iserver/services/security/../../manager/static/img/bgLogin-1-" + themeValue + ".png";
+    document.body.style.backgroundImage = "url(" + url + ")";
+    var docurl = "http://8.130.175.232:18090/iserver/services/security/../../manager/static/img/doc-" + themeValue + ".png";
+    var help = document.getElementsByClassName("help")[0].getElementsByTagName("img")[0];
+    help.src = docurl;
+    var loginLogoPic = document.getElementsByClassName("loginLogoPic")[0];
+    loginLogoPic.src = "http://8.130.175.232:18090/iserver/services/security/../../manager/static/img/iServer_login_logo_" + themeValue + ".png";
+
+    var loginErrorPic= document.getElementsByClassName("loginErrorPic")[0];
+    loginErrorPic.src = "http://8.130.175.232:18090/iserver/services/security/../../manager/static/img/error-" + themeValue + ".svg";
+    //获取input框内的切换图片id和input文本框的id
+    var demoImg = document.getElementById("showText");
+    var demoInput = document.getElementById("password");
+
+    demoImg.src = "http://8.130.175.232:18090/iserver/services/security/../../manager/static/img/pwhide-" + themeValue + ".svg";
+    function updateButtonStatus(){
+        if(passwordInput.value===''||usernameInput.value===''){
+            loginButton.disabled=true;
+        }else{
+            loginButton.disabled=false;
+        }
+    }
+    function loadLoginPage(){
+        var loginPage = document.getElementById("loginPage");
+        loginPage.style.height = window.getComputedStyle(document.getElementById("pageContent")).height;
+        loginPage.style.top = 0;
+        loginPage.style.left = 0;
+        loginPage.style.bottom = 0;
+        loginPage.style.right = 0;
+    }
+    function hideShowPsw() {
+        if (demoInput.type == "password") {
+            demoInput.type = "text";
+            demoImg.src = "http://8.130.175.232:18090/iserver/services/security/../../manager/static/img/pwhide-" + themeValue + ".svg";
+        } else {
+            demoInput.type = "password";
+            demoImg.src = "http://8.130.175.232:18090/iserver/services/security/../../manager/static/img/pwshow-" + themeValue + ".svg";
+            ;
+        }
+    }
+    function loadLoginPage(){
+        var loginPage = document.getElementById("loginPage");
+        loginPage.style.height = window.getComputedStyle(document.getElementById("pageContent")).height;
+        loginPage.style.top = 0;
+        loginPage.style.left = 0;
+        loginPage.style.bottom = 0;
+        loginPage.style.right = 0;
+    }
+    function selectLanguage(language) {
+        delCookie("language");
+        setCookie("language", language, 3600 * 24 * 31);
+        window.location.reload();
+    };
+
+    //设置语言...开始
+    function setCookie(c_name, value, expiredays) {
+        var exdate = new Date()
+        exdate.setDate(exdate.getDate() + expiredays)
+        var protocol = window.location.protocol;
+        var secure = "";
+        if (protocol === "https:") {
+            secure = ";secure=true";
+        }
+        cookieVal = c_name + "=" + escape(value) + ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString()) + ";path=/" + secure;
+        document.cookie = cookieVal;
+    };
+
+    function delCookie(name) {
+        var date = new Date();
+        date.setTime(date.getTime() - 10000);
+        document.cookie = name + "=a;expires=" + date.toGMTString() + ";path=/";
+    }
+
+    function keyDown() {
+    };
+    document.onkeydown = keyDown;
+
+    function keyDown(e) {
+        if (navigator.appName == "Microsoft Internet Explorer") {
+            var keycode = event.keyCode;
+
+        } else {
+            var keycode = e.which;
+        }
+        if (keycode == 13) {
+            if (captchaEnable && isChecking) {
+                var captchaInput = document.getElementById('captcha-input');
+                var captchaItem = document.getElementById('captcha-error');
+                captchaInputChange(captchaConfig, captchaInput, captchaItem);
+            }
+            document.getElementById('loginButton').click();
+            return false;
+        }
+    }
+
+    function correctPNG() {
+        for (var i = 0; i < document.images.length; i++) {
+            var img = document.images[i];
+            var imgName = img.src.toUpperCase();
+            if (imgName.substring(imgName.length - 3, imgName.length) == "PNG") {
+                var imgID = (img.id) ? "id='" + img.id + "'" : "";
+                var imgClass = (img.className) ? "class='" + img.className + "'" : "";
+                var imgTitle = (img.title) ? "title='" + img.title + "'" : "title='" + img.alt + "'";
+                var imgStyle = "display:inline-block;" + img.style.cssText;
+                if (img.align == "left") imgStyle = "float:left;" + imgStyle;
+                if (img.align == "right") imgStyle = "float:right;" + imgStyle;
+                if (img.parentElement.href) imgStyle = "cursor:hand;" + imgStyle;
+                var strNewHTML = "<span " + imgID + imgClass + imgTitle + "style=\"" + "width:" + img.width + "px; height:" + img.height + "px;"
+                    + imgStyle + ";" + "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader" + "(src=\'" + img.src + "\', sizingMethod='scale');\"</span>"
+                img.outerHTML = strNewHTML;
+                i = i - 1;
+            }
+            ;
+        }
+        ;
+    };
+
+    if (Sys.ie && Sys.ie < 7.0) {
+        window.attachEvent("onload", correctPNG);
+    }
+
+    async function login() {
+        var url = "http://8.130.175.232:18090/iserver/services/security/login.json";
+        url = convertUrl(url);
+        var loginError = document.getElementById("loginError");
+        var msg= loginError.getElementsByTagName("span")[0];
+
+
+        msg.textContent = "";
+        var entity = {};
+        entity.username = document.getElementById("username").value;
+        if (entity.username == null || entity.username.length <= 0) {
+            msg.textContent = "User name can not be null";
+            loginError.style.visibility = "visible";
+            $("#loginError").fadeTo(0,1);
+            $("#loginError").fadeOut(5000);
+            $("#loginError").fadeTo(100,0);
+            $(msg).show();
+            return false;
+        }
+        entity.password = document.getElementById("password").value;
+        if (entity.password == null || entity.password.length <= 0) {
+            msg.textContent = "Password can not be null";
+            loginError.style.visibility = "visible";
+            $("#loginError").fadeTo(0,1);
+            $("#loginError").fadeOut(5000);
+            $("#loginError").fadeTo(100,0);
+            $(msg).show();
+            return false;
+        }
+        entity.rememberme = document.getElementById("rememberMe").checked;
+                //将请求体以及url进行aes加密
+        let result;
+        try {
+            if (captchaEnable) {
+                result = await new Promise(resolve => {
+                    var id = setInterval(function () {
+                        var loginResult = waitLogin(url, entity, id);
+                        if (loginResult) {
+                            resolve(loginResult);
+                        }
+                    }, 50);
+                })
+            } else {
+                result = JSON.parse(encryptionRequest(url, "POST", entity));
+            }
+        } catch (error) {
+            return false;
+        }
+        if (result.succeed) {
+            if (result.anotherPlaceLogin) {
+                msg.textContent = "detected that the current user is logging in the another place";
+                $(msg).show();
+                loginError.style.visibility = "visible";
+                $("#loginError").fadeTo(0,1);
+                $("#loginError").fadeOut(5000);
+                $("#loginError").fadeTo(100,0);
+                setTimeout(function () {
+                    location.href = result.referer;
+                    $(msg).hide()
+                }, 5000)
+            } else {
+                var resultRef = result.referer;
+                // 如login请求上一次请求是setup，自然无需再跳回setup，跳到首页即可。
+                if (resultRef.indexOf("/setup") >= 0) {
+                    resultRef = "/";
+                }
+                location.href = resultRef;
+                $(msg).hide();
+            }
+        } else {
+            if (result.pwdMustModify) {
+                window.localStorage.setItem("lockedUser", entity.username);
+                SuperMapServer.Dialog.alert("Please reset your password", "You have encountered the following situations and need to reset your password:\n 1.Log in to the account assigned by the administrator for the first time \n 2.Password has expired \n 3.Password has been reset by administrator \n\n Please click the OK button to jump to the reset password page", function () {
+                    location.href = getIServerUrl() + "/services/security/profile";
+                });
+            } else if (result.reason) {
+                msg.textContent = result.reason;
+            } else {
+                msg.textContent = "Error user name or password";
+            }
+            $(msg).show();
+            loginError.style.visibility = "visible";
+            $("#loginError").fadeTo(0,1);
+            $("#loginError").fadeOut(5000);
+            $("#loginError").fadeTo(100,0);
+            return false;
+        }
+    }
+
+    function waitLogin(url, entity, id) {
+        if (!isChecking) {
+            clearInterval(id);
+            if (captchaTicket) {
+                var headers = [];
+                var captchaTicketHeader = {
+                    name: "captchaTicket",
+                    value: captchaTicket
+                };
+                headers.push(captchaTicketHeader);
+                return JSON.parse(encryptionRequest(url, "POST", entity, headers));
+            } else {
+                return {succeed: false};
+            }
+        }
+        return null;
+    }
+
+    $(document).ready(function () {
+        processCaptcha();
+    });
+
+    function processCaptcha() {
+        var url = "http://8.130.175.232:18090/iserver/services/security".replace("/services", "") + "/captcha/config.json";
+        $.ajax({
+            type: "GET",
+            url: url,
+            async: false,
+            dataType: "text",
+            success: function (msg) {
+                captchaConfig = json_parse(msg);
+                if (captchaConfig.enable) {
+                    captchaEnable = true;
+                    initVerificationCode(captchaConfig);
+                }
+            }
+        });
+    }
+
+    function initVerificationCode(imageCaptchaConfig) {
+        var loginPage = document.getElementById('loginPage');
+        var captchaTr = document.getElementById('captcha-tr');
+        captchaTr.style.display = "-webkit-flex";
+        var captchaInput = document.getElementById('captcha-input');
+        captchaInput.maxLength = imageCaptchaConfig.length;
+        var image = document.getElementById('captcha-img');
+        image.src = getRootUrl().replace("/manager", "") + "security/captcha.json" + "?t=" + new Date().getTime();
+        var captchaItem = document.getElementById('captcha-error');
+        captchaInput.onchange = function () {
+            captchaInputChange(imageCaptchaConfig, captchaInput, captchaItem);
+        };
+        captchaInput.onblur = function () {
+            if (!captchaInput.value && captchaItem) {
+                deleteErrorMsgElement(captchaItem);
+                addErrorMsgElement(captchaItem, imageCaptchaRes.nullCaptcha);
+                captchaInput.setAttribute('style', 'border:1px solid #E41318;');
+            }
+        };
+        image.onclick = function () {
+            imageOnclick(imageCaptchaConfig, captchaInput, captchaItem, image);
+        };
+        image.onload = function () {
+            lastRefreshTime = Date.now();
+        };
+        loadLoginPage();
+    }
+
+    function captchaInputChange(imageCaptchaConfig, captchaInput, captchaItem) {
+        isChecking = true;
+        if (imageCaptchaConfig && imageCaptchaConfig.length === captchaInput.value.length) {
+            verifyCaptcha(captchaInput, captchaItem);
+        } else {
+            deleteErrorMsgElement(captchaItem);
+            captchaInput.setAttribute('style', 'border:1px solid #f5222d;');
+            addErrorMsgElement(captchaItem, imageCaptchaRes.enterCaptchaError);
+        }
+    }
+
+    function imageOnclick(imageCaptchaConfig, captchaInput, captchaItem, image) {
+        if (imageCaptchaConfig && imageCaptchaConfig.refreshIntervalInSeconds) {
+            var refreshIntervalInSeconds = imageCaptchaConfig.refreshIntervalInSeconds ? imageCaptchaConfig.refreshIntervalInSeconds * 1000 : 0;
+            if (lastRefreshTime && Date.now() - lastRefreshTime >= refreshIntervalInSeconds) {
+                image.src = getRootUrl().replace("/manager", "") + "security/captcha.json" + "?t=" + new Date().getTime();
+            } else {
+                deleteErrorMsgElement(captchaItem);
+                addErrorMsgElement(captchaItem, imageCaptchaRes.tooManyCaptchaRequests);
+                setTimeout(() => {
+                    if (getCaptchaErrorMsgTip(captchaItem) === imageCaptchaRes.tooManyCaptchaRequests) {
+                        deleteErrorMsgElement(captchaItem);
+                    }
+                }, 2000);
+            }
+        }
+    }
+
+    function deleteErrorMsgElement(captchaItem) {
+        if (captchaItem && captchaItem.childElementCount > 0) {
+            var lastElementChild = captchaItem.lastElementChild;
+            captchaItem.removeChild(lastElementChild);
+            var rememberMeAndForgetPass = document.getElementById("rememberMeAndForgetPass");
+            rememberMeAndForgetPass.style = "margin:0 0 56px 0;";
+        }
+    }
+
+    function addErrorMsgElement(captchaItem, msg) {
+        if (captchaItem) {
+            var tipDiv = document.createElement('span');
+            var newTip = document.createTextNode(msg);
+            tipDiv.appendChild(newTip);
+            captchaItem.appendChild(tipDiv);
+            var rememberMeAndForgetPass = document.getElementById("rememberMeAndForgetPass");
+            rememberMeAndForgetPass.style = "margin:24px 0 33px 0;";
+        }
+    }
+
+    function verifyCaptcha(captchaInput, captchaItem) {
+        var url = getRootUrl().replace("/services", "").replace("/manager", "") + "security/captcha.json";
+        $.ajax({
+            type: "POST",
+            url: url,
+            async: false,
+            data: captchaInput.value,
+            dataType: "text",
+            success: function (data) {
+                deleteErrorMsgElement(captchaItem);
+                captchaInput.setAttribute('style', '');
+                captchaTicket = data;
+                isChecking = false;
+            }, error: function (error) {
+                deleteErrorMsgElement(captchaItem);
+                captchaInput.setAttribute('style', 'border:1px solid #E41318;');
+                var msg = error.responseText;
+                var errorEntity = json_parse(msg);
+                addErrorMsgElement(captchaItem, errorEntity.error.errorMsg);
+                var image = document.getElementById('captcha-img');
+                image.src = getRootUrl().replace("/manager", "") + "security/captcha.json" + "?t=" + new Date().getTime();
+            }
+        });
+    }
+
+    function getCaptchaErrorMsgTip(captchaItem) {
+        if (captchaItem && captchaItem.childElementCount) {
+            var lastElementChild = captchaItem.lastElementChild;
+            return lastElementChild.innerText;
+        }
+        return '';
+    }
+</script>
+</body>
+</html>
+

@@ -1,0 +1,60 @@
+{
+    "name": "transportationAnalystProvider-Changchun",
+    "alias": null,
+    "innerProviders": ["ugcDataProvider-Changchun"],
+    "type": "com.supermap.services.providers.UGCTransportationAnalystProvider",
+    "config": {
+        "DEFAULT_POOLSIZE": 10,
+        "workspaceConnectString": "../../samples/data/NetworkAnalyst/Changchun.sxwu",
+        "edgeIDField": "SmEdgeID",
+        "initFacilityAnalyst": true,
+        "pathGuideDescriptionLanguage": null,
+        "multiInstance": false,
+        "barrierEdges": null,
+        "forwardSingleWayRuleValues": ["FT"],
+        "weightFieldInfos": [
+            {
+                "unit": null,
+                "name": "length",
+                "forwardWeightField": "Length",
+                "backWeightField": "Length"
+            },
+            {
+                "unit": null,
+                "name": "time",
+                "forwardWeightField": "FT_TIME",
+                "backWeightField": "TF_TIME"
+            }
+        ],
+        "toNodeIDField": "SmTNode",
+        "edgeNameField": "RoadName",
+        "datasourceName": "Changchun",
+        "tolerance": 500,
+        "analystModeSetting": null,
+        "turnDatasetInfo": {
+            "toEdgeIDField": "TEdgeID",
+            "workspaceConnectString": "../../samples/data/NetworkAnalyst/Changchun.sxwu",
+            "workspaceType": null,
+            "nodeIDField": "NodeID",
+            "datasetName": "RoadNet_TURN",
+            "fromEdgeIDField": "FEdgeID",
+            "weightFields": ["TurnCost"],
+            "datasourceName": "Changchun"
+        },
+        "poolSize": 0,
+        "datasetName": "RoadNet",
+        "fromNodeIDField": "SmFNode",
+        "backwardSingleWayRuleValues": ["TF"],
+        "prohibitedWayRuleValues": ["prohibit"],
+        "workspaceType": null,
+        "directionField": "SmResistanceA",
+        "barrierNodes": null,
+        "nodeIDField": "SmNodeID",
+        "nodeNameField": "SmNodeID",
+        "ruleField": "TRule",
+        "twoWayRuleValues": ["twoWay"],
+        "nodeIDFilterField": null,
+        "autoCheckNetwork": null
+    },
+    "enabled": false
+}

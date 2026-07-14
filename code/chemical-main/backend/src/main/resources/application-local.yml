@@ -1,0 +1,20 @@
+# 本机开发配置：默认连本地 MySQL 的 chemical 库。
+# 密码可通过 DB_PASSWORD / SPRING_DATASOURCE_PASSWORD 传入；本地 root 无密码时可不设。
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://127.0.0.1:3306/chemical?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true}
+    username: ${SPRING_DATASOURCE_USERNAME:${DB_USERNAME:root}}
+    password: ${SPRING_DATASOURCE_PASSWORD:${DB_PASSWORD:}}
+
+server:
+  port: ${SERVER_PORT:8081}
+
+cors:
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173,http://127.0.0.1:5173}
+
+analysis:
+  service:
+    url: ${ANALYSIS_SERVICE_URL:http://127.0.0.1:8001/api/analysis/person}
+
+inspection:
+  default-location: ${INSPECTION_DEFAULT_LOCATION:核心作业区 A7}

@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+commit_msg_file="$1"
+case "$commit_msg_file" in
+  /*) ;;
+  *) commit_msg_file="$(pwd)/$commit_msg_file" ;;
+esac
+
+cd "$(dirname "$0")/.."
+npm exec -- commitlint --config commitlint.config.cjs -e "$commit_msg_file" -V

@@ -1,0 +1,25 @@
+﻿{
+  "source": "external-real-dom-source/ResultDOM_2.tiff",
+  "asset": "frontend\\public\\maps\\real-park-dom.jpg",
+  "sourceWidthPx": 31744,
+  "sourceHeightPx": 18944,
+  "assetWidthPx": 3968,
+  "assetHeightPx": 2368,
+  "downsampleFactor": 8,
+  "metersPerSourcePixel": 0.05,
+  "mapWidthMeters": 1587.2,
+  "mapHeightMeters": 947.2,
+  "geoPixelScale": [
+    4.760171881717351e-07,
+    4.760171881718742e-07,
+    0.0
+  ],
+  "geoTiepoint": [
+    0.0,
+    0.0,
+    0.0,
+    -104.12864063398341,
+    -19.33471840840183,
+    0.0
+  ]
+}

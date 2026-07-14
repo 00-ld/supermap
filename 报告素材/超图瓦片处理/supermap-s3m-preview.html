@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SuperMap S3M 瓦片预览</title>
+    <link rel="stylesheet" href="/supermap3d/Widgets/widgets.css" />
+    <script src="/supermap3d/SuperMap3D.js"></script>
+    <style>
+      html,
+      body,
+      #container {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background: #050b14;
+        font-family:
+          Microsoft YaHei,
+          Arial,
+          sans-serif;
+      }
+
+      .panel {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        z-index: 10;
+        width: 360px;
+        padding: 14px;
+        border: 1px solid rgba(74, 222, 128, 0.35);
+        background: rgba(3, 10, 22, 0.82);
+        color: #e8f6ff;
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.32);
+      }
+
+      .panel h1 {
+        margin: 0 0 10px;
+        font-size: 16px;
+        font-weight: 700;
+      }
+
+      .panel select,
+      .panel button {
+        width: 100%;
+        height: 34px;
+        margin-top: 8px;
+        border: 1px solid rgba(148, 163, 184, 0.45);
+        background: #0f172a;
+        color: #e8f6ff;
+      }
+
+      .panel button {
+        cursor: pointer;
+        border-color: rgba(56, 189, 248, 0.7);
+      }
+
+      .status {
+        min-height: 42px;
+        margin-top: 10px;
+        font-size: 13px;
+        line-height: 1.6;
+        color: rgba(226, 232, 240, 0.86);
+        word-break: break-all;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <section class="panel">
+      <h1>化工园区 S3M 瓦片预览</h1>
+      <select id="layerSelect"></select>
+      <button id="loadBtn">加载所选瓦片</button>
+      <button id="loadAllBtn">加载全部瓦片</button>
+      <div id="status" class="status">等待加载。</div>
+    </section>
+
+    <script>
+      const layers = [
+        {
+          key: "processing-factory",
+          name: "加工厂房",
+          scp: "/tiles/processing-factory/result_ImportFBX.scp",
+        },
+        {
+          key: "raw-warehouse",
+          name: "原材料仓库",
+          scp: "/tiles/raw-warehouse/result_ImportFBX.scp",
+        },
+        {
+          key: "production-plant",
+          name: "生产装置厂房",
+          scp: "/tiles/production-plant/result_ImportFBX.scp",
+        },
+        {
+          key: "heat-exchanger",
+          name: "换热器",
+          scp: "/tiles/heat-exchanger/换热器.scp",
+        },
+        {
+          key: "vertical-tank",
+          name: "立式罐子",
+          scp: "/tiles/vertical-tank/罐子.scp",
+        },
+        {
+          key: "distillation-tower",
+          name: "蒸馏塔",
+          scp: "/tiles/distillation-tower/蒸馏塔.scp",
+        },
+      ];
+
+      const statusEl = document.getElementById("status");
+      const selectEl = document.getElementById("layerSelect");
+      for (const layer of layers) {
+        const option = document.createElement("option");
+        option.value = layer.key;
+        option.textContent = `${layer.name} - ${layer.scp}`;
+        selectEl.appendChild(option);
+      }
+
+      const viewer = new SuperMap3D.Viewer("container", {
+        animation: false,
+        timeline: false,
+        baseLayerPicker: false,
+        geocoder: false,
+        homeButton: true,
+        sceneModePicker: true,
+        navigationHelpButton: false,
+        infoBox: false,
+        selectionIndicator: false,
+      });
+      window.viewer = viewer;
+
+      viewer.scene.skyAtmosphere.show = false;
+      viewer.scene.globe.show = false;
+      viewer.scene.globe.depthTestAgainstTerrain = false;
+      viewer.scene.backgroundColor = SuperMap3D.Color.fromCssColorString("#07111f");
+
+      const loadedLayers = new Map();
+
+      function setStatus(text) {
+        statusEl.textContent = text;
+        window.__supermapPreviewStatus = text;
+      }
+
+      async function readScp(layer) {
+        const response = await fetch(layer.scp);
+        if (!response.ok) {
+          throw new Error(`SCP 元文件读取失败 HTTP ${response.status}`);
+        }
+        const scp = await response.json();
+        layer.scpInfo = scp;
+        return scp;
+      }
+
+      function focusPlanarScp(layer, scp) {
+        const bounds = scp.geoBounds || {};
+        const height = scp.heightRange || {};
+        const position = scp.position && scp.position.point3D ? scp.position.point3D : { x: 0, y: 0, z: 0 };
+        const centerX = Number(position.x || 0);
+        const centerY = Number(position.y || 0);
+        const maxZ = Number(height.max || 100);
+        const width = Math.max(1, Math.abs(Number(bounds.right || 0) - Number(bounds.left || 0)));
+        const depth = Math.max(1, Math.abs(Number(bounds.top || 0) - Number(bounds.bottom || 0)));
+        const range = Math.max(width, depth, maxZ, 80);
+        viewer.scene.camera.setView({
+          destination: new SuperMap3D.Cartesian3(centerX, centerY - range * 2.2, maxZ + range * 1.25),
+          orientation: {
+            heading: 0,
+            pitch: SuperMap3D.Math.toRadians(-35),
+            roll: 0,
+          },
+        });
+        window.__supermapPreviewCamera = {
+          layer: layer.key,
+          centerX,
+          centerY,
+          maxZ,
+          range,
+        };
+      }
+
+      async function loadLayer(layer) {
+        if (loadedLayers.has(layer.key)) {
+          setStatus(`${layer.name} 已加载。`);
+          return loadedLayers.get(layer.key);
+        }
+        setStatus(`正在加载 ${layer.name}: ${layer.scp}`);
+        const scp = await readScp(layer);
+        focusPlanarScp(layer, scp);
+        const s3mLayer = await viewer.scene.addS3MTilesLayerByScp(layer.scp, {
+          name: layer.name,
+        });
+        loadedLayers.set(layer.key, s3mLayer);
+        window.__supermapPreviewState = {
+          key: layer.key,
+          name: layer.name,
+          crs: scp.crs,
+          geoBounds: scp.geoBounds,
+          heightRange: scp.heightRange,
+          position: scp.position,
+          layerName: s3mLayer && s3mLayer.name,
+          layerVisible: s3mLayer && s3mLayer.visible,
+          layerReady: s3mLayer && s3mLayer.ready,
+          layerBounds: s3mLayer && s3mLayer.layerBounds,
+        };
+        setStatus(`${layer.name} 加载完成。CRS=${scp.crs || "未知"}，范围=${JSON.stringify(scp.geoBounds || {})}`);
+        if (s3mLayer && s3mLayer.readyPromise) {
+          await s3mLayer.readyPromise.catch(() => undefined);
+        }
+        focusPlanarScp(layer, scp);
+        return s3mLayer;
+      }
+
+      document.getElementById("loadBtn").addEventListener("click", async () => {
+        const layer = layers.find((item) => item.key === selectEl.value);
+        try {
+          await loadLayer(layer);
+        } catch (error) {
+          console.error(error);
+          setStatus(`${layer.name} 加载失败：${error.message || error}`);
+        }
+      });
+
+      document.getElementById("loadAllBtn").addEventListener("click", async () => {
+        for (const layer of layers) {
+          try {
+            await loadLayer(layer);
+          } catch (error) {
+            console.error(error);
+            setStatus(`${layer.name} 加载失败：${error.message || error}`);
+            return;
+          }
+        }
+        setStatus("全部瓦片加载完成。");
+      });
+
+      window.__supermapPreview = {
+        layers,
+        loadLayerByKey: async (key) => {
+          const layer = layers.find((item) => item.key === key);
+          selectEl.value = key;
+          return loadLayer(layer);
+        },
+        loadAll: async () => {
+          for (const layer of layers) {
+            await loadLayer(layer);
+          }
+          setStatus("全部瓦片加载完成。");
+        },
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,242 @@
+[
+    {
+        "date": "2026-7-14 16:40:05",
+        "logLevel": {
+            "name": "INFO",
+            "priority": 200
+        },
+        "line": null,
+        "className": null,
+        "packageName": null,
+        "stackTrace": "",
+        "message": "业务组件transportationAnalyst-chemical_park_vectors_cgcs2000_network-4创建成功 "
+    },
+    {
+        "date": "2026-7-14 16:40:05",
+        "logLevel": {
+            "name": "INFO",
+            "priority": 200
+        },
+        "line": null,
+        "className": null,
+        "packageName": null,
+        "stackTrace": "",
+        "message": "业务组件transportationAnalyst-chemical_park_vectors_cgcs2000_network-4开始创建 "
+    },
+    {
+        "date": "2026-7-14 16:40:05",
+        "logLevel": {
+            "name": "INFO",
+            "priority": 200
+        },
+        "line": null,
+        "className": null,
+        "packageName": null,
+        "stackTrace": "",
+        "message": "服务提供者transportationAnalyst-chemical_park_vectors_cgcs2000_network-4创建成功 "
+    },
+    {
+        "date": "2026-7-14 16:40:05",
+        "logLevel": {
+            "name": "INFO",
+            "priority": 200
+        },
+        "line": null,
+        "className": null,
+        "packageName": null,
+        "stackTrace": "",
+        "message": "服务提供者transportationAnalyst-chemical_park_vectors_cgcs2000_network-4开始创建 "
+    },
+    {
+        "date": "2026-7-14 16:40:05",
+        "logLevel": {
+            "name": "INFO",
+            "priority": 200
+        },
+        "line": null,
+        "className": null,
+        "packageName": null,
+        "stackTrace": "",
+        "message": "工作空间UntitledWorkspace成功打开 "
+    },
+    {
+        "date": "2026-7-14 16:40:05",
+        "logLevel": {
+            "name": "INFO",
+            "priority": 200
+        },
+        "line": null,
+        "className": null,
+        "packageName": null,
+        "stackTrace": "",
+        "message": "工作空间chemical_park_vectors_cgcs2000_network正在打开 "
+    },
+    {
+        "date": "2026-7-14 16:40:05",
+        "logLevel": {
+            "name": "INFO",
+            "priority": 200
+        },
+        "line": null,
+        "className": null,
+        "packageName": null,
+        "stackTrace": "",
+        "message": "工作空间UntitledWorkspace成功打开 "
+    },
+    {
+        "date": "2026-7-14 16:40:05",
+        "logLevel": {
+            "name": "INFO",
+            "priority": 200
+        },
+        "line": null,
+        "className": null,
+        "packageName": null,
+        "stackTrace": "",
+        "message": "工作空间chemical_park_vectors_cgcs2000_network正在打开 "
+    },
+    {
+        "date": "2026-7-14 16:40:04",
+        "logLevel": {
+            "name": "INFO",
+            "priority": 200
+        },
+        "line": null,
+        "className": null,
+        "packageName": null,
+        "stackTrace": "",
+        "message": "工作空间UntitledWorkspace成功打开 "
+    },
+    {
+        "date": "2026-7-14 16:40:04",
+        "logLevel": {
+            "name": "INFO",
+            "priority": 200
+        },
+        "line": null,
+        "className": null,
+        "packageName": null,
+        "stackTrace": "",
+        "message": "工作空间chemical_park_vectors_cgcs2000_network正在打开 "
+    },
+    {
+        "date": "2026-7-14 16:34:28",
+        "logLevel": {
+            "name": "INFO",
+            "priority": 200
+        },
+        "line": null,
+        "className": null,
+        "packageName": null,
+        "stackTrace": "",
+        "message": "request path not matched. rootPath: /iserver/manager, path: instances.rjson, id: serviceManager "
+    },
+    {
+        "date": "2026-7-14 16:34:28",
+        "logLevel": {
+            "name": "INFO",
+            "priority": 200
+        },
+        "line": null,
+        "className": null,
+        "packageName": null,
+        "stackTrace": "",
+        "message": "request path not matched. rootPath: /iserver/manager, path: status.rjson, id: managerRoot "
+    },
+    {
+        "date": "2026-7-14 16:34:28",
+        "logLevel": {
+            "name": "INFO",
+            "priority": 200
+        },
+        "line": null,
+        "className": null,
+        "packageName": null,
+        "stackTrace": "",
+        "message": "request path not matched. rootPath: /iserver/manager, path: log.rjson, id: managerRoot "
+    },
+    {
+        "date": "2026-7-14 16:33:57",
+        "logLevel": {
+            "name": "WARN",
+            "priority": 300
+        },
+        "line": null,
+        "className": null,
+        "packageName": null,
+        "stackTrace": "",
+        "message": "业务组件transportationAnalyst-chemical_park_vectors_cgcs2000_network创建失败，失败原因:业务组件中没有任何可用的服务提供者 "
+    },
+    {
+        "date": "2026-7-14 16:33:57",
+        "logLevel": {
+            "name": "INFO",
+            "priority": 200
+        },
+        "line": null,
+        "className": null,
+        "packageName": null,
+        "stackTrace": "",
+        "message": "业务组件transportationAnalyst-chemical_park_vectors_cgcs2000_network开始创建 "
+    },
+    {
+        "date": "2026-7-14 16:33:57",
+        "logLevel": {
+            "name": "INFO",
+            "priority": 200
+        },
+        "line": null,
+        "className": null,
+        "packageName": null,
+        "stackTrace": "",
+        "message": "销毁服务实例 transportationAnalyst-chemical_park_vectors_cgcs2000_network/rest。 "
+    },
+    {
+        "date": "2026-7-14 16:33:54",
+        "logLevel": {
+            "name": "WARN",
+            "priority": 300
+        },
+        "line": null,
+        "className": null,
+        "packageName": null,
+        "stackTrace": "",
+        "message": "业务组件transportationAnalyst-chemical_park_vectors_cgcs2000_network创建失败，失败原因:业务组件中没有任何可用的服务提供者 "
+    },
+    {
+        "date": "2026-7-14 16:33:54",
+        "logLevel": {
+            "name": "INFO",
+            "priority": 200
+        },
+        "line": null,
+        "className": null,
+        "packageName": null,
+        "stackTrace": "",
+        "message": "业务组件transportationAnalyst-chemical_park_vectors_cgcs2000_network开始创建 "
+    },
+    {
+        "date": "2026-7-14 16:33:54",
+        "logLevel": {
+            "name": "INFO",
+            "priority": 200
+        },
+        "line": null,
+        "className": null,
+        "packageName": null,
+        "stackTrace": "",
+        "message": "销毁服务实例 transportationAnalyst-chemical_park_vectors_cgcs2000_network/rest。 "
+    },
+    {
+        "date": "2026-7-14 16:33:54",
+        "logLevel": {
+            "name": "WARN",
+            "priority": 300
+        },
+        "line": null,
+        "className": null,
+        "packageName": null,
+        "stackTrace": "",
+        "message": "业务组件transportationAnalyst-chemical_park_vectors_cgcs2000_network创建失败，失败原因:业务组件上下文中没有包含TransportationAnalystProvider对应的服务提供者对象 "
+    }
+]

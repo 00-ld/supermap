@@ -1,0 +1,583 @@
+{
+  "type": "FeatureCollection",
+  "name": "building_facility_polygons_map",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "EPSG:4547",
+      "coordSys": "CGCS2000_3GK_CM_114E"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_facility_polygon",
+        "id": "pa-west-north",
+        "name": "西北生产装置区",
+        "facilityType": "production",
+        "zone": "prod_a",
+        "status": "运行中",
+        "personnel": 36,
+        "hazardLevel": 0.75,
+        "source": "frontend.realMapAssets.facilities",
+        "precisionLevel": "facility_zone",
+        "needsDesktopRefinement": true,
+        "note": "Current feature is a manually interpreted facility/building zone. Refine into single-building footprints in iDesktopX before final publication when necessary.",
+        "mapX": 415,
+        "mapY": 340,
+        "s3mX": -974.126,
+        "s3mY": 157.365,
+        "longitude": 113.54270049,
+        "latitude": 34.83071222,
+        "localMapX": 415,
+        "localMapY": 340,
+        "cgcs2000E": 458167.343,
+        "cgcs2000N": 3855905.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458000.343,
+              3855993.172
+            ],
+            [
+              458334.343,
+              3855993.172
+            ],
+            [
+              458334.343,
+              3855817.172
+            ],
+            [
+              458000.343,
+              3855817.172
+            ],
+            [
+              458000.343,
+              3855993.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_facility_polygon",
+        "id": "pa-west-south",
+        "name": "西南储罐与泵区",
+        "facilityType": "production",
+        "zone": "tank_farm",
+        "status": "运行中",
+        "personnel": 18,
+        "hazardLevel": 0.85,
+        "source": "frontend.realMapAssets.facilities",
+        "precisionLevel": "facility_zone",
+        "needsDesktopRefinement": true,
+        "note": "Current feature is a manually interpreted facility/building zone. Refine into single-building footprints in iDesktopX before final publication when necessary.",
+        "mapX": 415,
+        "mapY": 551,
+        "s3mX": -974.126,
+        "s3mY": -290.038,
+        "longitude": 113.54270049,
+        "latitude": 34.82881679,
+        "localMapX": 415,
+        "localMapY": 551,
+        "cgcs2000E": 458167.343,
+        "cgcs2000N": 3855694.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458000.343,
+              3855815.172
+            ],
+            [
+              458334.343,
+              3855815.172
+            ],
+            [
+              458334.343,
+              3855573.172
+            ],
+            [
+              458000.343,
+              3855573.172
+            ],
+            [
+              458000.343,
+              3855815.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_facility_polygon",
+        "id": "pa-center-north",
+        "name": "中北厂房装置区",
+        "facilityType": "production",
+        "zone": "prod_a",
+        "status": "运行中",
+        "personnel": 26,
+        "hazardLevel": 0.65,
+        "source": "frontend.realMapAssets.facilities",
+        "precisionLevel": "facility_zone",
+        "needsDesktopRefinement": true,
+        "note": "Current feature is a manually interpreted facility/building zone. Refine into single-building footprints in iDesktopX before final publication when necessary.",
+        "mapX": 672,
+        "mapY": 340,
+        "s3mX": -582.872,
+        "s3mY": 157.365,
+        "longitude": 113.54551293,
+        "latitude": 34.83071222,
+        "localMapX": 672,
+        "localMapY": 340,
+        "cgcs2000E": 458424.343,
+        "cgcs2000N": 3855905.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458340.343,
+              3855993.172
+            ],
+            [
+              458508.343,
+              3855993.172
+            ],
+            [
+              458508.343,
+              3855817.172
+            ],
+            [
+              458340.343,
+              3855817.172
+            ],
+            [
+              458340.343,
+              3855993.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_facility_polygon",
+        "id": "pa-center-south",
+        "name": "中南反应装置区",
+        "facilityType": "production",
+        "zone": "prod_a",
+        "status": "运行中",
+        "personnel": 24,
+        "hazardLevel": 0.7,
+        "source": "frontend.realMapAssets.facilities",
+        "precisionLevel": "facility_zone",
+        "needsDesktopRefinement": true,
+        "note": "Current feature is a manually interpreted facility/building zone. Refine into single-building footprints in iDesktopX before final publication when necessary.",
+        "mapX": 672,
+        "mapY": 551,
+        "s3mX": -582.872,
+        "s3mY": -290.038,
+        "longitude": 113.54551293,
+        "latitude": 34.82881679,
+        "localMapX": 672,
+        "localMapY": 551,
+        "cgcs2000E": 458424.343,
+        "cgcs2000N": 3855694.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458340.343,
+              3855815.172
+            ],
+            [
+              458508.343,
+              3855815.172
+            ],
+            [
+              458508.343,
+              3855573.172
+            ],
+            [
+              458340.343,
+              3855573.172
+            ],
+            [
+              458340.343,
+              3855815.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_facility_polygon",
+        "id": "tw-center",
+        "name": "中东塔器与罐组区",
+        "facilityType": "tower",
+        "zone": "tower_area",
+        "status": "运行中",
+        "personnel": 12,
+        "hazardLevel": 0.8,
+        "source": "frontend.realMapAssets.facilities",
+        "precisionLevel": "facility_zone",
+        "needsDesktopRefinement": true,
+        "note": "Current feature is a manually interpreted facility/building zone. Refine into single-building footprints in iDesktopX before final publication when necessary.",
+        "mapX": 901,
+        "mapY": 462,
+        "s3mX": -234.246,
+        "s3mY": -101.323,
+        "longitude": 113.54801896,
+        "latitude": 34.82961628,
+        "localMapX": 901,
+        "localMapY": 462,
+        "cgcs2000E": 458653.343,
+        "cgcs2000N": 3855783.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458608.343,
+              3855993.172
+            ],
+            [
+              458698.343,
+              3855993.172
+            ],
+            [
+              458698.343,
+              3855573.172
+            ],
+            [
+              458608.343,
+              3855573.172
+            ],
+            [
+              458608.343,
+              3855993.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_facility_polygon",
+        "id": "ut-center",
+        "name": "公用工程与管廊区",
+        "facilityType": "utility",
+        "zone": "utility",
+        "status": "运行中",
+        "personnel": 8,
+        "hazardLevel": 0.45,
+        "source": "frontend.realMapAssets.facilities",
+        "precisionLevel": "facility_zone",
+        "needsDesktopRefinement": true,
+        "note": "Current feature is a manually interpreted facility/building zone. Refine into single-building footprints in iDesktopX before final publication when necessary.",
+        "mapX": 804,
+        "mapY": 462,
+        "s3mX": -381.917,
+        "s3mY": -101.323,
+        "longitude": 113.54695745,
+        "latitude": 34.82961628,
+        "localMapX": 804,
+        "localMapY": 462,
+        "cgcs2000E": 458556.343,
+        "cgcs2000N": 3855783.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458512.343,
+              3855993.172
+            ],
+            [
+              458600.343,
+              3855993.172
+            ],
+            [
+              458600.343,
+              3855573.172
+            ],
+            [
+              458512.343,
+              3855573.172
+            ],
+            [
+              458512.343,
+              3855993.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_facility_polygon",
+        "id": "pb-north-tank",
+        "name": "东北罐组与管汇区",
+        "facilityType": "tank",
+        "zone": "prod_b",
+        "status": "运行中",
+        "personnel": 14,
+        "hazardLevel": 0.75,
+        "source": "frontend.realMapAssets.facilities",
+        "precisionLevel": "facility_zone",
+        "needsDesktopRefinement": true,
+        "note": "Current feature is a manually interpreted facility/building zone. Refine into single-building footprints in iDesktopX before final publication when necessary.",
+        "mapX": 1086,
+        "mapY": 337,
+        "s3mX": 47.396,
+        "s3mY": 163.727,
+        "longitude": 113.55004348,
+        "latitude": 34.83073917,
+        "localMapX": 1086,
+        "localMapY": 337,
+        "cgcs2000E": 458838.343,
+        "cgcs2000N": 3855908.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458708.343,
+              3855993.172
+            ],
+            [
+              458968.343,
+              3855993.172
+            ],
+            [
+              458968.343,
+              3855823.172
+            ],
+            [
+              458708.343,
+              3855823.172
+            ],
+            [
+              458708.343,
+              3855993.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_facility_polygon",
+        "id": "pb-mid-process",
+        "name": "东中生产与污水装置区",
+        "facilityType": "production",
+        "zone": "prod_b2",
+        "status": "运行中",
+        "personnel": 18,
+        "hazardLevel": 0.6,
+        "source": "frontend.realMapAssets.facilities",
+        "precisionLevel": "facility_zone",
+        "needsDesktopRefinement": true,
+        "note": "Current feature is a manually interpreted facility/building zone. Refine into single-building footprints in iDesktopX before final publication when necessary.",
+        "mapX": 1086,
+        "mapY": 478,
+        "s3mX": 47.396,
+        "s3mY": -135.249,
+        "longitude": 113.55004348,
+        "latitude": 34.82947255,
+        "localMapX": 1086,
+        "localMapY": 478,
+        "cgcs2000E": 458838.343,
+        "cgcs2000N": 3855767.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458708.343,
+              3855825.172
+            ],
+            [
+              458968.343,
+              3855825.172
+            ],
+            [
+              458968.343,
+              3855709.172
+            ],
+            [
+              458708.343,
+              3855709.172
+            ],
+            [
+              458708.343,
+              3855825.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_facility_polygon",
+        "id": "wh-logistics",
+        "name": "东南仓储物流区",
+        "facilityType": "warehouse",
+        "zone": "warehouse",
+        "status": "正常",
+        "personnel": 10,
+        "hazardLevel": 0.45,
+        "source": "frontend.realMapAssets.facilities",
+        "precisionLevel": "facility_zone",
+        "needsDesktopRefinement": true,
+        "note": "Current feature is a manually interpreted facility/building zone. Refine into single-building footprints in iDesktopX before final publication when necessary.",
+        "mapX": 1146,
+        "mapY": 599,
+        "s3mX": 138.739,
+        "s3mY": -391.817,
+        "longitude": 113.55070008,
+        "latitude": 34.8283856,
+        "localMapX": 1146,
+        "localMapY": 599,
+        "cgcs2000E": 458898.343,
+        "cgcs2000N": 3855646.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458828.343,
+              3855709.172
+            ],
+            [
+              458968.343,
+              3855709.172
+            ],
+            [
+              458968.343,
+              3855583.172
+            ],
+            [
+              458828.343,
+              3855583.172
+            ],
+            [
+              458828.343,
+              3855709.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_facility_polygon",
+        "id": "fs-east-yard",
+        "name": "东侧应急与装卸边界区",
+        "facilityType": "utility",
+        "zone": "fire_safety",
+        "status": "正常",
+        "personnel": 4,
+        "hazardLevel": 0.35,
+        "source": "frontend.realMapAssets.facilities",
+        "precisionLevel": "facility_zone",
+        "needsDesktopRefinement": true,
+        "note": "Current feature is a manually interpreted facility/building zone. Refine into single-building footprints in iDesktopX before final publication when necessary.",
+        "mapX": 1030,
+        "mapY": 599,
+        "s3mX": -37.858,
+        "s3mY": -391.817,
+        "longitude": 113.54943065,
+        "latitude": 34.8283856,
+        "localMapX": 1030,
+        "localMapY": 599,
+        "cgcs2000E": 458782.343,
+        "cgcs2000N": 3855646.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458736.343,
+              3855709.172
+            ],
+            [
+              458828.343,
+              3855709.172
+            ],
+            [
+              458828.343,
+              3855583.172
+            ],
+            [
+              458736.343,
+              3855583.172
+            ],
+            [
+              458736.343,
+              3855709.172
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

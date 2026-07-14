@@ -1,0 +1,22 @@
+{
+  "createdAt": "2026-07-14T16:08:49",
+  "zip": "G:\\竞赛\\超图杯\\报告素材\\NetworkAnalysis发布验收\\chemical_park_vectors_cgcs2000_network_publish.zip",
+  "target": "chemical_park_vectors_cgcs2000_network_publish.zip",
+  "steps": [
+    {
+      "step": "createUploadTask",
+      "status": 201,
+      "taskId": "054d42fdb7ea471985684b4510ca67f1_c74a1253e4094dd2981a6aab098c9a09"
+    },
+    {
+      "step": "uploadZip",
+      "status": 201,
+      "body": "{\"fileName\":\"chemical_park_vectors_cgcs2000_network_publish\",\"fileSize\":0,\"filePath\":\"D:\\\\6119_10_1supermap\\\\iserver\\\\supermap-iserver-2025u1a-windows-x64-all\\\\webapps\\\\iserver\\\\chemical_park_vectors_cgcs2000_network_publish\\\\\",\"isDirectory\":true}"
+    },
+    {
+      "step": "uploadTaskStatus",
+      "status": 200,
+      "body": "{\n  \"uploadedByteCount\": 0,\n  \"path\": null,\n  \"progress\": 100,\n  \"state\": \"COMPLETED\",\n  \"uploadedDataMD5\": null,\n  \"taskID\": \"054d42fdb7ea471985684b4510ca67f1_c74a1253e4094dd2981a6aab098c9a09\",\n  \"md5\": null\n}"
+    }
+  ]
+}

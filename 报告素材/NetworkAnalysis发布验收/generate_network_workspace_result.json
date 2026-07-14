@@ -1,0 +1,39 @@
+{
+  "udbx": "G:\\竞赛\\超图杯\\报告素材\\NetworkAnalysis发布验收\\chemical_park_vectors_cgcs2000_network.udbx",
+  "attempts": [
+    {
+      "out": "G:\\竞赛\\超图杯\\报告素材\\NetworkAnalysis发布验收\\chemical_park_vectors_cgcs2000_network_generated.sxwu",
+      "opened": true,
+      "datasets": [
+        "Park_RoadPolygon_R",
+        "Park_RoadNetworkNode_P",
+        "Park_RoadNetworkEdge_L",
+        "Park_BuildingFacilityPolygon_R",
+        "Park_BuildingFootprint_R",
+        "Park_EntrancePoint_P",
+        "Park_S3MObjectFootprint_R",
+        "Park_RoadNetwork_N"
+      ],
+      "saved": true,
+      "exists": true,
+      "size": 1016
+    },
+    {
+      "out": "G:\\竞赛\\超图杯\\报告素材\\NetworkAnalysis发布验收\\chemical_park_vectors_cgcs2000_network_generated.smwu",
+      "opened": true,
+      "datasets": [
+        "Park_RoadPolygon_R",
+        "Park_RoadNetworkNode_P",
+        "Park_RoadNetworkEdge_L",
+        "Park_BuildingFacilityPolygon_R",
+        "Park_BuildingFootprint_R",
+        "Park_EntrancePoint_P",
+        "Park_S3MObjectFootprint_R",
+        "Park_RoadNetwork_N"
+      ],
+      "saved": true,
+      "exists": true,
+      "size": 34548
+    }
+  ]
+}

@@ -1,0 +1,348 @@
+{
+  "type": "FeatureCollection",
+  "name": "entrance_points_map",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "local-planar-meter-current-epsg0"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "park-west",
+        "kind": "park",
+        "parentId": "",
+        "label": "西侧道路入口",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 238,
+        "mapY": 235,
+        "s3mX": -1243.588,
+        "s3mY": 380.007,
+        "longitude": 118.78252216,
+        "latitude": 32.03788897
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          238,
+          235
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "park-east",
+        "kind": "park",
+        "parentId": "",
+        "label": "东侧道路入口",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 1228,
+        "mapY": 684,
+        "s3mX": 263.575,
+        "s3mY": -572.051,
+        "longitude": 118.79301351,
+        "latitude": 32.03385555
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1228,
+          684
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "park-north",
+        "kind": "park",
+        "parentId": "",
+        "label": "北侧道路入口",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 1218,
+        "mapY": 230,
+        "s3mX": 248.351,
+        "s3mY": 390.609,
+        "longitude": 118.79290753,
+        "latitude": 32.03793388
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1218,
+          230
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "park-south",
+        "kind": "park",
+        "parentId": "",
+        "label": "南侧道路入口",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 1218,
+        "mapY": 682,
+        "s3mX": 248.351,
+        "s3mY": -567.81,
+        "longitude": 118.79290753,
+        "latitude": 32.03387352
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1218,
+          682
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "building-pa-west-north",
+        "kind": "building",
+        "parentId": "pa-west-north",
+        "label": "西北生产装置区 边界点",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 248,
+        "mapY": 340,
+        "s3mX": -1228.364,
+        "s3mY": 157.365,
+        "longitude": 118.78262813,
+        "latitude": 32.03694574
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          248,
+          340
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "building-pa-west-south",
+        "kind": "building",
+        "parentId": "pa-west-south",
+        "label": "西南储罐与泵区 边界点",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 248,
+        "mapY": 551,
+        "s3mX": -1228.364,
+        "s3mY": -290.038,
+        "longitude": 118.78262813,
+        "latitude": 32.03505031
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          248,
+          551
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "building-pa-center-north",
+        "kind": "building",
+        "parentId": "pa-center-north",
+        "label": "中北厂房装置区 边界点",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 588,
+        "mapY": 340,
+        "s3mX": -710.753,
+        "s3mY": 157.365,
+        "longitude": 118.78623122,
+        "latitude": 32.03694574
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          588,
+          340
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "building-pa-center-south",
+        "kind": "building",
+        "parentId": "pa-center-south",
+        "label": "中南反应装置区 边界点",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 588,
+        "mapY": 551,
+        "s3mX": -710.753,
+        "s3mY": -290.038,
+        "longitude": 118.78623122,
+        "latitude": 32.03505031
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          588,
+          551
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "building-tw-center",
+        "kind": "building",
+        "parentId": "tw-center",
+        "label": "中东塔器与罐组区 边界点",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 856,
+        "mapY": 462,
+        "s3mX": -302.753,
+        "s3mY": -101.323,
+        "longitude": 118.7890713,
+        "latitude": 32.0358498
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          856,
+          462
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "building-ut-center",
+        "kind": "building",
+        "parentId": "ut-center",
+        "label": "公用工程与管廊区 边界点",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 760,
+        "mapY": 462,
+        "s3mX": -448.902,
+        "s3mY": -101.323,
+        "longitude": 118.78805396,
+        "latitude": 32.0358498
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          760,
+          462
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "building-pb-north-tank",
+        "kind": "building",
+        "parentId": "pb-north-tank",
+        "label": "东北罐组与管汇区 边界点",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 956,
+        "mapY": 337,
+        "s3mX": -150.514,
+        "s3mY": 163.727,
+        "longitude": 118.79013103,
+        "latitude": 32.03697269
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          956,
+          337
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "building-pb-mid-process",
+        "kind": "building",
+        "parentId": "pb-mid-process",
+        "label": "东中生产与污水装置区 边界点",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 956,
+        "mapY": 478,
+        "s3mX": -150.514,
+        "s3mY": -135.249,
+        "longitude": 118.79013103,
+        "latitude": 32.03570607
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          956,
+          478
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "building-wh-logistics",
+        "kind": "building",
+        "parentId": "wh-logistics",
+        "label": "东南仓储物流区 边界点",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 1076,
+        "mapY": 599,
+        "s3mX": 32.172,
+        "s3mY": -391.817,
+        "longitude": 118.79140271,
+        "latitude": 32.03461912
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1076,
+          599
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "building-fs-east-yard",
+        "kind": "building",
+        "parentId": "fs-east-yard",
+        "label": "东侧应急与装卸边界区 边界点",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 984,
+        "mapY": 599,
+        "s3mX": -107.888,
+        "s3mY": -391.817,
+        "longitude": 118.79042776,
+        "latitude": 32.03461912
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          984,
+          599
+        ]
+      }
+    }
+  ]
+}

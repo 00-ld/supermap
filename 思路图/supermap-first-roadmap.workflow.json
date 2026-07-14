@@ -1,0 +1,226 @@
+{
+  "schema_version": 1,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "超图杯 SuperMap 化改造路线",
+    "subtitle": "先修可演示大屏，再做 GIS 服务化，最后扩展网页端与移动端",
+    "output": "G:/竞赛/超图杯/supermap-first-roadmap.html",
+    "animation": "none",
+    "viewBox": [720, 980]
+  },
+  "lanes": [
+    { "id": "first_cut", "label": "第一刀：可演示入口" },
+    { "id": "supermap_base", "label": "SuperMap 底座" },
+    { "id": "web", "label": "网页端主战场" },
+    { "id": "mobile", "label": "移动端加分项" },
+    { "id": "delivery", "label": "验证与参赛交付" }
+  ],
+  "phases": [
+    { "id": "p0", "label": "止血", "fromCol": 0, "toCol": 1, "variant": "security" },
+    { "id": "p1", "label": "GIS 底座", "fromCol": 2, "toCol": 3, "variant": "emphasis" },
+    { "id": "p2", "label": "双端呈现", "fromCol": 4, "toCol": 5, "variant": "dashed" }
+  ],
+  "groups": [
+    { "id": "web_group", "label": "Web 端必须完整闭环", "lane": "web", "fromCol": 2, "toCol": 5, "variant": "emphasis" },
+    { "id": "mobile_group", "label": "移动端做轻量协同", "lane": "mobile", "fromCol": 2, "toCol": 5, "variant": "dashed" }
+  ],
+  "mainPath": ["desktopx", "iserver", "iportal", "iclient3d", "web_loop", "materials"],
+  "nodes": [
+    {
+      "id": "screen_probe",
+      "lane": "first_cut",
+      "col": 0,
+      "type": "security",
+      "label": "大屏体检",
+      "sublabel": "当前 401 / 502",
+      "tag": "先修"
+    },
+    {
+      "id": "screen_fix",
+      "lane": "first_cut",
+      "col": 1,
+      "type": "backend",
+      "label": "修通大屏",
+      "sublabel": "公开访问 + 资源可加载"
+    },
+    {
+      "id": "screen_embed",
+      "lane": "first_cut",
+      "col": 5,
+      "type": "frontend",
+      "label": "演示入口",
+      "sublabel": "可嵌入可答辩"
+    },
+    {
+      "id": "desktopx",
+      "lane": "supermap_base",
+      "col": 0,
+      "type": "frontend",
+      "label": "iDesktopX",
+      "sublabel": "园区数据整理"
+    },
+    {
+      "id": "iserver",
+      "lane": "supermap_base",
+      "col": 2,
+      "type": "cloud",
+      "label": "iServer",
+      "sublabel": "地图/三维/空间分析"
+    },
+    {
+      "id": "iportal",
+      "lane": "supermap_base",
+      "col": 3,
+      "type": "messagebus",
+      "label": "iPortal",
+      "sublabel": "统一资源门户",
+      "width": 64
+    },
+    {
+      "id": "iclient3d",
+      "lane": "supermap_base",
+      "col": 5,
+      "type": "frontend",
+      "label": "iClient3D",
+      "sublabel": "三维场景加载"
+    },
+    {
+      "id": "web_inventory",
+      "lane": "web",
+      "col": 0,
+      "type": "database",
+      "label": "现有盘点",
+      "sublabel": "Vue / 后端 / 算法"
+    },
+    {
+      "id": "web_map",
+      "lane": "web",
+      "col": 2,
+      "type": "frontend",
+      "label": "替换地图",
+      "sublabel": "Canvas -> iClient"
+    },
+    {
+      "id": "algo_layer",
+      "lane": "web",
+      "col": 3,
+      "type": "backend",
+      "label": "算法图层",
+      "sublabel": "扩散/溯源/疏散",
+      "width": 84
+    },
+    {
+      "id": "web_loop",
+      "lane": "web",
+      "col": 5,
+      "type": "frontend",
+      "label": "三维态势",
+      "sublabel": "Web 主演示闭环"
+    },
+    {
+      "id": "mobile_scope",
+      "lane": "mobile",
+      "col": 0,
+      "type": "external",
+      "label": "移动范围",
+      "sublabel": "只做值班协同"
+    },
+    {
+      "id": "mobile_h5",
+      "lane": "mobile",
+      "col": 2,
+      "type": "frontend",
+      "label": "H5 轻端",
+      "sublabel": "告警/地图/任务"
+    },
+    {
+      "id": "mobile_api",
+      "lane": "mobile",
+      "col": 4,
+      "type": "backend",
+      "label": "移动接口",
+      "sublabel": "复用 Spring API",
+      "width": 84
+    },
+    {
+      "id": "imobile",
+      "lane": "mobile",
+      "col": 5,
+      "type": "frontend",
+      "label": "iMobile",
+      "sublabel": "时间够再加"
+    },
+    {
+      "id": "honest",
+      "lane": "delivery",
+      "col": 0,
+      "type": "security",
+      "label": "真实边界",
+      "sublabel": "仿真/公开数据分清"
+    },
+    {
+      "id": "e2e",
+      "lane": "delivery",
+      "col": 4,
+      "type": "database",
+      "label": "端到端验收",
+      "sublabel": "大屏 + Web + 移动"
+    },
+    {
+      "id": "materials",
+      "lane": "delivery",
+      "col": 5,
+      "type": "cloud",
+      "label": "参赛材料",
+      "sublabel": "PPT / 视频 / 文档"
+    }
+  ],
+  "edges": [
+    { "from": "screen_probe", "to": "screen_fix", "label": "先处理", "variant": "security" },
+    { "from": "screen_fix", "to": "desktopx", "variant": "emphasis", "fromSide": "bottom", "toSide": "top", "route": "drop", "labelSegment": 1 },
+    { "from": "desktopx", "to": "iserver", "variant": "emphasis" },
+    { "from": "iserver", "to": "iportal", "variant": "default" },
+    { "from": "iportal", "to": "iclient3d", "variant": "default" },
+    { "from": "iclient3d", "to": "web_loop", "label": "前端加载", "variant": "emphasis", "fromSide": "bottom", "toSide": "top", "route": "drop", "labelSegment": 1 },
+    { "from": "web_loop", "to": "materials", "label": "录制答辩", "variant": "emphasis", "fromSide": "right", "toSide": "right", "route": "outside-right", "labelDy": -28 },
+    { "from": "web_inventory", "to": "web_map", "label": "改 GIS 层", "variant": "dashed" },
+    { "from": "web_map", "to": "algo_layer", "variant": "default" },
+    { "from": "algo_layer", "to": "web_loop", "variant": "emphasis" },
+    { "from": "mobile_scope", "to": "mobile_h5", "label": "轻量先行", "variant": "dashed" },
+    { "from": "mobile_h5", "to": "mobile_api", "variant": "default" },
+    { "from": "mobile_api", "to": "imobile", "variant": "dashed" },
+    { "from": "iserver", "to": "web_map", "label": "REST 图层", "variant": "dashed", "fromSide": "bottom", "toSide": "top", "route": "drop", "labelSegment": 1 },
+    { "from": "honest", "to": "e2e", "label": "证据矩阵", "variant": "security" },
+    { "from": "e2e", "to": "materials", "variant": "emphasis" },
+    { "from": "screen_fix", "to": "screen_embed", "label": "保底演示", "variant": "dashed" }
+  ],
+  "cards": [
+    {
+      "dot": "rose",
+      "title": "先从哪动刀",
+      "items": [
+        "先修 iPortal 大屏加载失败",
+        "再用 iDesktopX/iServer 接管 GIS 层",
+        "不要先做移动端"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Web 端目标",
+      "items": [
+        "数字园区首页改为 iClient3D",
+        "算法结果转为 SuperMap 图层",
+        "保留 Spring Boot 与 FastAPI 算法"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "移动端边界",
+      "items": [
+        "优先 H5：告警、定位、任务确认",
+        "iMobile 作为时间充足后的加分项",
+        "移动端服务复用现有后端接口"
+      ]
+    }
+  ]
+}

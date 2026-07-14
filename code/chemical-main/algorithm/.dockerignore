@@ -1,0 +1,39 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage/
+
+# Model weights and large generated data
+*.pt
+*.pth
+*.onnx
+*.npy
+*.npz
+*.mp4
+*.glb
+models/
+datasets/
+output/
+
+# Logs
+*.log
+logs/
+
+# Development tools
+.vscode/
+.idea/
+*.iml
+
+# Tests
+tests/
+algorithm_tests/
+
+# Documentation
+docs/
+*.md

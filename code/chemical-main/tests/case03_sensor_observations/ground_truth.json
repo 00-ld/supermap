@@ -1,0 +1,17 @@
+{
+  "true_source": {
+    "x": 0.0,
+    "y": 0.0,
+    "H": 50.0,
+    "Q": 100.0
+  },
+  "wind_speed_m_s": 5.0,
+  "stability": "D",
+  "noise": {
+    "snr_db": 20.0,
+    "min_floor": 0.001,
+    "_comment": "高斯噪声, 信噪比 20dB; 读数下限 floor 模拟检出限"
+  },
+  "unit": "mg/m^3",
+  "note": "反演时仅可用 observations.csv 的 conc_observed; 本文件与 conc_true 仅供评估误差, 不得作为反演输入"
+}

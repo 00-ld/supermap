@@ -1,0 +1,80 @@
+{
+    "isStreamingService": false,
+    "interfaceTypes": "com.supermap.services.rest.RestServlet",
+    "isSet": false,
+    "instances": [{
+        "interfaceType": "com.supermap.services.rest.RestServlet",
+        "componentType": "com.supermap.services.components.impl.DataImpl",
+        "name": "data-chemical_park_vectors_cgcs2000/rest",
+        "componentSetName": null,
+        "authorizeSetting": {
+            "permittedRoles": [],
+            "deniedRoles": [],
+            "type": "PUBLIC"
+        },
+        "id": null,
+        "componentName": "data-chemical_park_vectors_cgcs2000",
+        "interfaceName": "rest",
+        "isDisabled": false,
+        "enabled": true,
+        "status": "OK"
+    }],
+    "isClusterService": false,
+    "type": "com.supermap.services.components.impl.DataImpl",
+    "interfaceNames": "rest",
+    "clusterInterfaceNames": "",
+    "isDataflowService": false,
+    "component": {
+        "isScSet": false,
+        "scSetSetting": null,
+        "scSetting": {
+            "disabledInterfaceNames": "",
+            "initPriority": 0,
+            "initOnCreate": false,
+            "instanceCount": 0,
+            "name": "data-chemical_park_vectors_cgcs2000",
+            "alias": "data-chemical_park_vectors_cgcs2000",
+            "interfaceNames": "rest",
+            "type": "com.supermap.services.components.impl.DataImpl",
+            "config": {
+                "disableQueryCache": false,
+                "editable": false,
+                "cacheStrategyConfig": null
+            },
+            "providers": "data-chemical_park_vectors_cgcs2000",
+            "enabled": true
+        }
+    },
+    "providerNames": "data-chemical_park_vectors_cgcs2000",
+    "name": "data-chemical_park_vectors_cgcs2000",
+    "alias": "data-chemical_park_vectors_cgcs2000",
+    "isDistributedanalystService": false,
+    "providers": [{
+        "spsetSetting": null,
+        "isSPSet": false,
+        "spSetting": {
+            "name": "data-chemical_park_vectors_cgcs2000",
+            "alias": null,
+            "innerProviders": null,
+            "type": "com.supermap.services.providers.UGCDataProvider",
+            "config": {
+                "workspacePath": "D:\\6119_10_1supermap\\iserver\\supermap-iserver-2025u1a-windows-x64-all\\webapps\\iserver\\chemical_park_vectors_cgcs2000_publish\\chemical_park_vectors_cgcs2000.smwu",
+                "featureMetadatasEnabled": false,
+                "attachmentsEnabled": true,
+                "datasourceInfos": null,
+                "maxFeatureWriteThreadCount": 1,
+                "datasourceNames": [],
+                "dataProviderDelayCommitSetting": null,
+                "maxFeatures": 1000,
+                "multiInstance": false,
+                "disableFieldNameToUpperCase": false,
+                "ignoreTotalCount": false,
+                "videoStreamServiceInfo": null,
+                "isDatasetsCheck": false,
+                "writePermitTimeout": 120,
+                "defaultFieldForOrderBy": null
+            },
+            "enabled": true
+        }
+    }]
+}

@@ -1,0 +1,62 @@
+{
+  "createdAt": "2026-07-14T16:31:57",
+  "steps": [
+    {
+      "step": "putService",
+      "status": 200,
+      "body": [
+        123,
+        34,
+        115,
+        117,
+        99,
+        99,
+        101,
+        101,
+        100,
+        34,
+        58,
+        32,
+        116,
+        114,
+        117,
+        101,
+        125
+      ]
+    },
+    {
+      "step": "putComponent",
+      "status": 200,
+      "body": [
+        123,
+        34,
+        115,
+        117,
+        99,
+        99,
+        101,
+        101,
+        100,
+        34,
+        58,
+        32,
+        116,
+        114,
+        117,
+        101,
+        125
+      ]
+    },
+    {
+      "step": "serviceAfter",
+      "instanceStatus": "FAILED",
+      "enabled": true,
+      "providerWorkspace": "D:\\6119_10_1supermap\\iserver\\supermap-iserver-2025u1a-windows-x64-all\\webapps\\iserver\\chemical_park_vectors_cgcs2000_network_sxwu_publish\\chemical_park_vectors_cgcs2000_network.sxwu"
+    },
+    {
+      "step": "verifyRest",
+      "error": "Response status code does not indicate success: 404 ().",
+      "detail": "HTTP状态 404 - 未找到body {font-family:Tahoma,Arial,sans-serif;} h1, h2, h3, b {color:white;background-color:#525D76;} h1 {font-size:22px;} h2 {font-size:16px;} h3 {font-size:14px;} p {font-size:12px;} a {color:black;} .line {height:1px;background-color:#525D76;border:none;}HTTP状态 404 - 未找到"
+    }
+  ]
+}

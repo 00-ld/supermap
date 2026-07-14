@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "model-manifest/v1",
+  "updatedAt": "2026-06-20",
+  "rules": [
+    "Large weights stay outside Git and are mounted or generated locally.",
+    "Every inference response should expose a stable modelId and modelVersion.",
+    "Validation limits must point back to docs/dataset-sources.md and docs/algorithm-verification-report.md."
+  ],
+  "models": [
+    {
+      "id": "yolo11m-person-detector",
+      "version": "yolo11m-ultralytics-8.4.28-external-v1",
+      "task": "patrol-image-person-detection",
+      "runtime": "algorithm.polo",
+      "artifactPath": "models/yolo11m.pt",
+      "artifactTrackedInGit": false,
+      "envPath": "YOLO_MODEL_PATH",
+      "source": "Ultralytics YOLO11m operator-supplied weights",
+      "inputTypes": ["image/jpeg", "image/png"],
+      "resultFields": ["modelId", "modelVersion", "modelPath", "analysis_info"],
+      "validationStatus": "missing-real-project-labeled-set",
+      "knownLimits": [
+        "No committed, labeled patrol-car image or video validation set is available yet.",
+        "No mAP, precision, recall, false-positive, or false-negative report is committed yet.",
+        "The model version identifies the configured detector; it is not proof of field accuracy."
+      ]
+    },
+    {
+      "id": "deep-gas-surrogate",
+      "version": "deep-gas-surrogate-v1",
+      "task": "gas-diffusion-response-surrogate",
+      "runtime": "algorithm.deep_learning.gas_surrogate",
+      "artifactPath": "models/deep_gas_surrogate.pt",
+      "artifactTrackedInGit": false,
+      "source": "Project-generated physics-informed surrogate",
+      "validationStatus": "limited-real-evidence-plus-regression",
+      "validationReport": "docs/algorithm-verification-report.md",
+      "knownLimits": [
+        "Prairie Grass validates crosswind spread width only.",
+        "D6589 source localization is limited_pass_location_only.",
+        "BTEX concentration calibration is small-sample and source localization fails the 500 m check."
+      ]
+    },
+    {
+      "id": "btex-response-calibrator",
+      "version": "btex-real-residual-calibrator-v1",
+      "task": "small-sample-real-sf6-response-calibration",
+      "runtime": "algorithm.deep_learning.validate_btex_real_data",
+      "artifactPath": "models/btex_response_calibrator.pt",
+      "artifactTrackedInGit": false,
+      "source": "Generated from BTEX PANGAEA processed observations",
+      "validationStatus": "limited-small-sample-fail-source-localization",
+      "validationReport": "output/btex_real_validation.json",
+      "knownLimits": [
+        "Generated artifact is ignored and must be reproduced locally.",
+        "Supports limited concentration-response calibration evidence only.",
+        "Does not prove chemical-park CO/NH3/CH4/O2 field telemetry training."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "state": {
+    "url": "http://127.0.0.1:5173/#/screen",
+    "title": "基于时空智能和数字孪生的化工园区危险气体监测和溯源系统",
+    "statusClass": "status-pill fallback",
+    "statusText": "iPortal 兜底",
+    "canvasCount": 1,
+    "canvasSize": {
+      "width": 0,
+      "height": 0,
+      "clientWidth": 0,
+      "clientHeight": 0
+    },
+    "iframeSrc": "http://8.130.175.232:18190/iportal/apps/mapdashboard/v2/index.html?id=1782865708&action=view&mode=pc",
+    "panelText": "SuperMap Digital Twin化工园区三维应急态势入口iPortal 兜底三维场景默认场景iPortal 大屏兜底展示iServer 图层0等待三维图层返回算法封装在线chemical-algorithm 3.0.0扩散模拟泄漏源反演粒子滤波溯源疏散路径规划气体类型目录S3M图层1加载超时定位园区重新加载",
+    "scripts": [
+      "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/SuperMap3D.js"
+    ],
+    "links": [
+      "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Widgets/widgets.css"
+    ],
+    "runtime": {
+      "cesium": false,
+      "superMap3D": true,
+      "superMap": false
+    }
+  },
+  "logs": [
+    {
+      "type": "pageerror",
+      "text": "HO"
+    },
+    {
+      "type": "pageerror",
+      "text": "HO"
+    },
+    {
+      "type": "warning",
+      "text": "-ms-high-constrast is in the process of being deprecated. Please see https://blogs.windows.com/msedgedev/2024/04/29/deprecating-ms-high-contrast/ for tips on updating to the new Forced Colors Mode standard."
+    },
+    {
+      "type": "warning",
+      "text": "-ms-high-constrast is in the process of being deprecated. Please see https://blogs.windows.com/msedgedev/2024/04/29/deprecating-ms-high-contrast/ for tips on updating to the new Forced Colors Mode standard."
+    },
+    {
+      "type": "warning",
+      "text": "-ms-high-constrast is in the process of being deprecated. Please see https://blogs.windows.com/msedgedev/2024/04/29/deprecating-ms-high-contrast/ for tips on updating to the new Forced Colors Mode standard."
+    },
+    {
+      "type": "warning",
+      "text": "-ms-high-constrast is in the process of being deprecated. Please see https://blogs.windows.com/msedgedev/2024/04/29/deprecating-ms-high-contrast/ for tips on updating to the new Forced Colors Mode standard."
+    },
+    {
+      "type": "warning",
+      "text": "-ms-high-constrast is in the process of being deprecated. Please see https://blogs.windows.com/msedgedev/2024/04/29/deprecating-ms-high-contrast/ for tips on updating to the new Forced Colors Mode standard."
+    },
+    {
+      "type": "warning",
+      "text": "-ms-high-constrast is in the process of being deprecated. Please see https://blogs.windows.com/msedgedev/2024/04/29/deprecating-ms-high-contrast/ for tips on updating to the new Forced Colors Mode standard."
+    },
+    {
+      "type": "warning",
+      "text": "-ms-high-constrast is in the process of being deprecated. Please see https://blogs.windows.com/msedgedev/2024/04/29/deprecating-ms-high-contrast/ for tips on updating to the new Forced Colors Mode standard."
+    },
+    {
+      "type": "warning",
+      "text": "-ms-high-constrast is in the process of being deprecated. Please see https://blogs.windows.com/msedgedev/2024/04/29/deprecating-ms-high-contrast/ for tips on updating to the new Forced Colors Mode standard."
+    },
+    {
+      "type": "warning",
+      "text": "-ms-high-constrast is in the process of being deprecated. Please see https://blogs.windows.com/msedgedev/2024/04/29/deprecating-ms-high-contrast/ for tips on updating to the new Forced Colors Mode standard."
+    },
+    {
+      "type": "warning",
+      "text": "-ms-high-constrast is in the process of being deprecated. Please see https://blogs.windows.com/msedgedev/2024/04/29/deprecating-ms-high-contrast/ for tips on updating to the new Forced Colors Mode standard."
+    },
+    {
+      "type": "warning",
+      "text": "-ms-high-constrast is in the process of being deprecated. Please see https://blogs.windows.com/msedgedev/2024/04/29/deprecating-ms-high-contrast/ for tips on updating to the new Forced Colors Mode standard."
+    },
+    {
+      "type": "warning",
+      "text": "-ms-high-constrast is in the process of being deprecated. Please see https://blogs.windows.com/msedgedev/2024/04/29/deprecating-ms-high-contrast/ for tips on updating to the new Forced Colors Mode standard."
+    },
+    {
+      "type": "warning",
+      "text": "-ms-high-constrast is in the process of being deprecated. Please see https://blogs.windows.com/msedgedev/2024/04/29/deprecating-ms-high-contrast/ for tips on updating to the new Forced Colors Mode standard."
+    },
+    {
+      "type": "warning",
+      "text": "-ms-high-constrast is in the process of being deprecated. Please see https://blogs.windows.com/msedgedev/2024/04/29/deprecating-ms-high-contrast/ for tips on updating to the new Forced Colors Mode standard."
+    },
+    {
+      "type": "warning",
+      "text": "-ms-high-constrast is in the process of being deprecated. Please see https://blogs.windows.com/msedgedev/2024/04/29/deprecating-ms-high-contrast/ for tips on updating to the new Forced Colors Mode standard."
+    },
+    {
+      "type": "warning",
+      "text": "-ms-high-constrast is in the process of being deprecated. Please see https://blogs.windows.com/msedgedev/2024/04/29/deprecating-ms-high-contrast/ for tips on updating to the new Forced Colors Mode standard."
+    },
+    {
+      "type": "warning",
+      "text": "-ms-high-constrast is in the process of being deprecated. Please see https://blogs.windows.com/msedgedev/2024/04/29/deprecating-ms-high-contrast/ for tips on updating to the new Forced Colors Mode standard."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 401 ()"
+    },
+    {
+      "type": "pageerror",
+      "text": "Blocked a frame with origin \"http://8.130.175.232:18190\" from accessing a cross-origin frame."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 401 ()"
+    },
+    {
+      "type": "warning",
+      "text": "协同环境未准备就绪，请联系管理员"
+    },
+    {
+      "type": "pageerror",
+      "text": "Identifier 'OpenConfig' has already been declared"
+    },
+    {
+      "type": "pageerror",
+      "text": "Identifier 'OpenConfig' has already been declared"
+    },
+    {
+      "type": "pageerror",
+      "text": "Identifier 'OpenConfig' has already been declared"
+    },
+    {
+      "type": "pageerror",
+      "text": "Identifier 'OpenConfig' has already been declared"
+    },
+    {
+      "type": "pageerror",
+      "text": "Identifier 'OpenConfig' has already been declared"
+    },
+    {
+      "type": "pageerror",
+      "text": "Identifier 'OpenConfig' has already been declared"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 ()"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 ()"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 ()"
+    },
+    {
+      "type": "pageerror",
+      "text": "Cannot read properties of null (reading 'url')"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 ()"
+    },
+    {
+      "type": "pageerror",
+      "text": "Cannot read properties of null (reading 'url')"
+    },
+    {
+      "type": "pageerror",
+      "text": "$WebScene_0 is not defined"
+    },
+    {
+      "type": "pageerror",
+      "text": "k5"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 ()"
+    },
+    {
+      "type": "pageerror",
+      "text": "Cannot read properties of null (reading 'url')"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 ()"
+    },
+    {
+      "type": "pageerror",
+      "text": "Cannot read properties of null (reading 'url')"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 ()"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 ()"
+    },
+    {
+      "type": "pageerror",
+      "text": "Cannot read properties of null (reading 'url')"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 ()"
+    },
+    {
+      "type": "pageerror",
+      "text": "Cannot read properties of null (reading 'url')"
+    },
+    {
+      "type": "pageerror",
+      "text": "Cannot read properties of null (reading 'url')"
+    }
+  ]
+}

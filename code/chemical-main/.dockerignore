@@ -1,0 +1,46 @@
+# Java build
+target/
+*.class
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Python
+algorithm/.venv/
+algorithm/__pycache__/
+**/__pycache__/
+*.pyc
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Git
+.git/
+.github/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Large generated/binary files
+*.mp4
+*.glb
+*.pt
+*.pth
+*.onnx
+*.npy
+*.npz
+datasets/

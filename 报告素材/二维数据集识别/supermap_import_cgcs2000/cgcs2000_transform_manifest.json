@@ -1,0 +1,232 @@
+{
+  "generatedAt": "2026-07-14T03:55:42.175Z",
+  "sourceRoot": "G:\\竞赛\\超图杯\\报告素材\\二维数据集识别\\supermap_import",
+  "outputRoot": "G:\\竞赛\\超图杯\\报告素材\\二维数据集识别\\supermap_import_cgcs2000",
+  "coordSys": "CGCS2000_3GK_CM_114E",
+  "epsg": 4547,
+  "geographicEpsg": 4490,
+  "transform": {
+    "sourceCoordSys": "PCS_NON_EARTH_LOCAL_METER",
+    "targetCoordSys": "CGCS2000_3GK_CM_114E",
+    "targetEpsg": 4547,
+    "geographicEpsg": 4490,
+    "anchorLocal": {
+      "x": 1218,
+      "y": 682
+    },
+    "anchorProjected": {
+      "easting": 458970.343,
+      "northing": 3855563.172
+    },
+    "anchorWgs84": {
+      "longitude": 113.551488,
+      "latitude": 34.82764
+    },
+    "rotationDegrees": 0,
+    "scale": 1,
+    "xAxis": "east",
+    "yAxis": "south"
+  },
+  "controlPoints": [
+    {
+      "id": "CP0",
+      "name": "南门锚点",
+      "usage": "园区大门 = 河工大南门",
+      "local": {
+        "x": 1218,
+        "y": 682
+      },
+      "projected": {
+        "easting": 458970.343,
+        "northing": 3855563.172
+      },
+      "wgs84": {
+        "longitude": 113.551488,
+        "latitude": 34.82764,
+        "altitude": 0
+      }
+    },
+    {
+      "id": "CP1",
+      "name": "北侧入口",
+      "usage": "控制南北方向比例",
+      "local": {
+        "x": 1218,
+        "y": 230
+      },
+      "projected": {
+        "easting": 458970.343,
+        "northing": 3856015.172
+      },
+      "wgs84": {
+        "longitude": 113.551488,
+        "latitude": 34.83170037,
+        "altitude": 0
+      }
+    },
+    {
+      "id": "CP2",
+      "name": "西侧入口",
+      "usage": "控制东西方向比例",
+      "local": {
+        "x": 238,
+        "y": 235
+      },
+      "projected": {
+        "easting": 457990.343,
+        "northing": 3856010.172
+      },
+      "wgs84": {
+        "longitude": 113.54076351,
+        "latitude": 34.83165545,
+        "altitude": 0
+      }
+    },
+    {
+      "id": "CP3",
+      "name": "东侧入口",
+      "usage": "校核入口近邻位置",
+      "local": {
+        "x": 1228,
+        "y": 684
+      },
+      "projected": {
+        "easting": 458980.343,
+        "northing": 3855561.172
+      },
+      "wgs84": {
+        "longitude": 113.55159743,
+        "latitude": 34.82762203,
+        "altitude": 0
+      }
+    },
+    {
+      "id": "CP4",
+      "name": "西北角",
+      "usage": "校核整体包络",
+      "local": {
+        "x": 0,
+        "y": 0
+      },
+      "projected": {
+        "easting": 457752.343,
+        "northing": 3856245.172
+      },
+      "wgs84": {
+        "longitude": 113.538159,
+        "latitude": 34.83376648,
+        "altitude": 0
+      }
+    },
+    {
+      "id": "CP5",
+      "name": "东南角",
+      "usage": "校核整体包络",
+      "local": {
+        "x": 1587.2,
+        "y": 947.2
+      },
+      "projected": {
+        "easting": 459339.543,
+        "northing": 3855297.972
+      },
+      "wgs84": {
+        "longitude": 113.55552829,
+        "latitude": 34.82525768,
+        "altitude": 0
+      }
+    }
+  ],
+  "fieldContract": {
+    "geometry": "EPSG:4547 CGCS2000 / 3-degree Gauss-Kruger CM 114E projected meters",
+    "mapX": "retained original local X for traceability",
+    "mapY": "retained original local Y for traceability",
+    "localMapX": "original local X",
+    "localMapY": "original local Y",
+    "cgcs2000E": "projected easting in EPSG:4547",
+    "cgcs2000N": "projected northing in EPSG:4547",
+    "longitude": "CGCS2000 geographic reference, approximate local inverse for display",
+    "latitude": "CGCS2000 geographic reference, approximate local inverse for display",
+    "s3mX": "retained original current S3M local X",
+    "s3mY": "retained original current S3M local Y"
+  },
+  "outputs": [
+    {
+      "fileName": "road_polygons_map.geojson",
+      "outputPath": "G:\\竞赛\\超图杯\\报告素材\\二维数据集识别\\supermap_import_cgcs2000\\road_polygons_map.geojson",
+      "featureCount": 15,
+      "bounds": {
+        "left": 457752.343,
+        "right": 459339.543,
+        "bottom": 3855297.972,
+        "top": 3856245.172
+      }
+    },
+    {
+      "fileName": "road_network_nodes_map.geojson",
+      "outputPath": "G:\\竞赛\\超图杯\\报告素材\\二维数据集识别\\supermap_import_cgcs2000\\road_network_nodes_map.geojson",
+      "featureCount": 69,
+      "bounds": {
+        "left": 457752.343,
+        "right": 459339.543,
+        "bottom": 3855297.972,
+        "top": 3856245.172
+      }
+    },
+    {
+      "fileName": "road_network_edges_map.geojson",
+      "outputPath": "G:\\竞赛\\超图杯\\报告素材\\二维数据集识别\\supermap_import_cgcs2000\\road_network_edges_map.geojson",
+      "featureCount": 93,
+      "bounds": {
+        "left": 457752.343,
+        "right": 459339.543,
+        "bottom": 3855297.972,
+        "top": 3856245.172
+      }
+    },
+    {
+      "fileName": "building_facility_polygons_map.geojson",
+      "outputPath": "G:\\竞赛\\超图杯\\报告素材\\二维数据集识别\\supermap_import_cgcs2000\\building_facility_polygons_map.geojson",
+      "featureCount": 10,
+      "bounds": {
+        "left": 458000.343,
+        "right": 458968.343,
+        "bottom": 3855573.172,
+        "top": 3855993.172
+      }
+    },
+    {
+      "fileName": "building_footprints_map.geojson",
+      "outputPath": "G:\\竞赛\\超图杯\\报告素材\\二维数据集识别\\supermap_import_cgcs2000\\building_footprints_map.geojson",
+      "featureCount": 29,
+      "bounds": {
+        "left": 458020.383,
+        "right": 458954.343,
+        "bottom": 3855603.332,
+        "top": 3855979.092
+      }
+    },
+    {
+      "fileName": "entrance_points_map.geojson",
+      "outputPath": "G:\\竞赛\\超图杯\\报告素材\\二维数据集识别\\supermap_import_cgcs2000\\entrance_points_map.geojson",
+      "featureCount": 14,
+      "bounds": {
+        "left": 457990.343,
+        "right": 458980.343,
+        "bottom": 3855561.172,
+        "top": 3856015.172
+      }
+    },
+    {
+      "fileName": "s3m_object_footprints_map.geojson",
+      "outputPath": "G:\\竞赛\\超图杯\\报告素材\\二维数据集识别\\supermap_import_cgcs2000\\s3m_object_footprints_map.geojson",
+      "featureCount": 6,
+      "bounds": {
+        "left": 458606.302,
+        "right": 458829.498,
+        "bottom": 3855808.017,
+        "top": 3855851.9
+      }
+    }
+  ]
+}

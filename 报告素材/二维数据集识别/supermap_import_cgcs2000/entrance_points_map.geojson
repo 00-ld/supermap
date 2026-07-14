@@ -1,0 +1,447 @@
+{
+  "type": "FeatureCollection",
+  "name": "entrance_points_map",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "EPSG:4547",
+      "coordSys": "CGCS2000_3GK_CM_114E"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "park-west",
+        "kind": "park",
+        "parentId": "",
+        "label": "西侧道路入口",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 238,
+        "mapY": 235,
+        "s3mX": -1243.588,
+        "s3mY": 380.007,
+        "longitude": 113.54076351,
+        "latitude": 34.83165545,
+        "localMapX": 238,
+        "localMapY": 235,
+        "cgcs2000E": 457990.343,
+        "cgcs2000N": 3856010.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          457990.343,
+          3856010.172
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "park-east",
+        "kind": "park",
+        "parentId": "",
+        "label": "东侧道路入口",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 1228,
+        "mapY": 684,
+        "s3mX": 263.575,
+        "s3mY": -572.051,
+        "longitude": 113.55159743,
+        "latitude": 34.82762203,
+        "localMapX": 1228,
+        "localMapY": 684,
+        "cgcs2000E": 458980.343,
+        "cgcs2000N": 3855561.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          458980.343,
+          3855561.172
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "park-north",
+        "kind": "park",
+        "parentId": "",
+        "label": "北侧道路入口",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 1218,
+        "mapY": 230,
+        "s3mX": 248.351,
+        "s3mY": 390.609,
+        "longitude": 113.551488,
+        "latitude": 34.83170037,
+        "localMapX": 1218,
+        "localMapY": 230,
+        "cgcs2000E": 458970.343,
+        "cgcs2000N": 3856015.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          458970.343,
+          3856015.172
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "park-south",
+        "kind": "park",
+        "parentId": "",
+        "label": "南侧道路入口",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 1218,
+        "mapY": 682,
+        "s3mX": 248.351,
+        "s3mY": -567.81,
+        "longitude": 113.551488,
+        "latitude": 34.82764,
+        "localMapX": 1218,
+        "localMapY": 682,
+        "cgcs2000E": 458970.343,
+        "cgcs2000N": 3855563.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          458970.343,
+          3855563.172
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "building-pa-west-north",
+        "kind": "building",
+        "parentId": "pa-west-north",
+        "label": "西北生产装置区 边界点",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 248,
+        "mapY": 340,
+        "s3mX": -1228.364,
+        "s3mY": 157.365,
+        "longitude": 113.54087295,
+        "latitude": 34.83071222,
+        "localMapX": 248,
+        "localMapY": 340,
+        "cgcs2000E": 458000.343,
+        "cgcs2000N": 3855905.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          458000.343,
+          3855905.172
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "building-pa-west-south",
+        "kind": "building",
+        "parentId": "pa-west-south",
+        "label": "西南储罐与泵区 边界点",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 248,
+        "mapY": 551,
+        "s3mX": -1228.364,
+        "s3mY": -290.038,
+        "longitude": 113.54087295,
+        "latitude": 34.82881679,
+        "localMapX": 248,
+        "localMapY": 551,
+        "cgcs2000E": 458000.343,
+        "cgcs2000N": 3855694.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          458000.343,
+          3855694.172
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "building-pa-center-north",
+        "kind": "building",
+        "parentId": "pa-center-north",
+        "label": "中北厂房装置区 边界点",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 588,
+        "mapY": 340,
+        "s3mX": -710.753,
+        "s3mY": 157.365,
+        "longitude": 113.54459369,
+        "latitude": 34.83071222,
+        "localMapX": 588,
+        "localMapY": 340,
+        "cgcs2000E": 458340.343,
+        "cgcs2000N": 3855905.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          458340.343,
+          3855905.172
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "building-pa-center-south",
+        "kind": "building",
+        "parentId": "pa-center-south",
+        "label": "中南反应装置区 边界点",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 588,
+        "mapY": 551,
+        "s3mX": -710.753,
+        "s3mY": -290.038,
+        "longitude": 113.54459369,
+        "latitude": 34.82881679,
+        "localMapX": 588,
+        "localMapY": 551,
+        "cgcs2000E": 458340.343,
+        "cgcs2000N": 3855694.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          458340.343,
+          3855694.172
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "building-tw-center",
+        "kind": "building",
+        "parentId": "tw-center",
+        "label": "中东塔器与罐组区 边界点",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 856,
+        "mapY": 462,
+        "s3mX": -302.753,
+        "s3mY": -101.323,
+        "longitude": 113.54752651,
+        "latitude": 34.82961628,
+        "localMapX": 856,
+        "localMapY": 462,
+        "cgcs2000E": 458608.343,
+        "cgcs2000N": 3855783.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          458608.343,
+          3855783.172
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "building-ut-center",
+        "kind": "building",
+        "parentId": "ut-center",
+        "label": "公用工程与管廊区 边界点",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 760,
+        "mapY": 462,
+        "s3mX": -448.902,
+        "s3mY": -101.323,
+        "longitude": 113.54647594,
+        "latitude": 34.82961628,
+        "localMapX": 760,
+        "localMapY": 462,
+        "cgcs2000E": 458512.343,
+        "cgcs2000N": 3855783.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          458512.343,
+          3855783.172
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "building-pb-north-tank",
+        "kind": "building",
+        "parentId": "pb-north-tank",
+        "label": "东北罐组与管汇区 边界点",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 956,
+        "mapY": 337,
+        "s3mX": -150.514,
+        "s3mY": 163.727,
+        "longitude": 113.54862084,
+        "latitude": 34.83073917,
+        "localMapX": 956,
+        "localMapY": 337,
+        "cgcs2000E": 458708.343,
+        "cgcs2000N": 3855908.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          458708.343,
+          3855908.172
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "building-pb-mid-process",
+        "kind": "building",
+        "parentId": "pb-mid-process",
+        "label": "东中生产与污水装置区 边界点",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 956,
+        "mapY": 478,
+        "s3mX": -150.514,
+        "s3mY": -135.249,
+        "longitude": 113.54862084,
+        "latitude": 34.82947255,
+        "localMapX": 956,
+        "localMapY": 478,
+        "cgcs2000E": 458708.343,
+        "cgcs2000N": 3855767.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          458708.343,
+          3855767.172
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "building-wh-logistics",
+        "kind": "building",
+        "parentId": "wh-logistics",
+        "label": "东南仓储物流区 边界点",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 1076,
+        "mapY": 599,
+        "s3mX": 32.172,
+        "s3mY": -391.817,
+        "longitude": 113.54993404,
+        "latitude": 34.8283856,
+        "localMapX": 1076,
+        "localMapY": 599,
+        "cgcs2000E": 458828.343,
+        "cgcs2000N": 3855646.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          458828.343,
+          3855646.172
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_entrance_point",
+        "id": "building-fs-east-yard",
+        "kind": "building",
+        "parentId": "fs-east-yard",
+        "label": "东侧应急与装卸边界区 边界点",
+        "source": "frontend.realMapAssets.entrances",
+        "mapX": 984,
+        "mapY": 599,
+        "s3mX": -107.888,
+        "s3mY": -391.817,
+        "longitude": 113.54892726,
+        "latitude": 34.8283856,
+        "localMapX": 984,
+        "localMapY": 599,
+        "cgcs2000E": 458736.343,
+        "cgcs2000N": 3855646.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          458736.343,
+          3855646.172
+        ]
+      }
+    }
+  ]
+}

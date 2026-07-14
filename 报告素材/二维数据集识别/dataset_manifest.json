@@ -1,0 +1,47 @@
+{
+  "generatedAt": "2026-07-13T14:04:59.272Z",
+  "map": {
+    "image": "/maps/real-park-dom.jpg",
+    "sourceWidthPx": 31744,
+    "sourceHeightPx": 18944,
+    "assetWidthPx": 3968,
+    "assetHeightPx": 2368,
+    "metersPerSourcePixel": 0.05,
+    "metersPerAssetPixel": 0.4,
+    "width": 1587.2,
+    "height": 947.2,
+    "source": "external-real-dom-source/ResultDOM_2.tiff",
+    "standardBasis": "GB/T 50493-2019"
+  },
+  "datasets": {
+    "roadPolygons": 15,
+    "roadNetworkNodes": 69,
+    "roadNetworkEdges": 93,
+    "buildingFacilityPolygons": 10,
+    "entrances": 14,
+    "s3mObjectFootprints": 6
+  },
+  "outputs": [
+    "building_facility_polygons.csv",
+    "building_facility_polygons_map.geojson",
+    "building_facility_polygons_s3m_local.geojson",
+    "building_facility_polygons_wgs84.geojson",
+    "entrance_points.csv",
+    "entrance_points_map.geojson",
+    "road_network_edges.csv",
+    "road_network_edges_map.geojson",
+    "road_network_edges_s3m_local.geojson",
+    "road_network_edges_wgs84.geojson",
+    "road_network_nodes.csv",
+    "road_network_nodes_map.geojson",
+    "road_polygons_map.geojson",
+    "s3m_object_footprints.csv",
+    "s3m_object_footprints_map.geojson"
+  ],
+  "nextDesktopSteps": [
+    "Import *_map.geojson into iDesktopX as planar meter datasets for current EPSG:0 alignment.",
+    "Use road_network_edges_map.geojson and road_network_nodes_map.geojson to build the network dataset.",
+    "Compare building_facility_polygons_map.geojson with S3M model and refine facility zones into individual building footprints.",
+    "When real CGCS2000/WGS84 control points are available, republish using *_wgs84.geojson or reproject in iDesktopX."
+  ]
+}

@@ -1,0 +1,3174 @@
+{
+  "type": "FeatureCollection",
+  "name": "road_network_edges_s3m_local",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "local-planar-meter-current-epsg0"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-north-main-edge-01",
+        "roadId": "road-north-main",
+        "fromNode": "node-001",
+        "toNode": "node-002",
+        "main": true,
+        "length_m": 238,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 119,
+        "mapY": 236,
+        "s3mX": -1424.752,
+        "s3mY": 377.887,
+        "longitude": 118.78126108,
+        "latitude": 32.03787999
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -1605.916,
+            377.887
+          ],
+          [
+            -1243.588,
+            377.887
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-north-main-edge-02",
+        "roadId": "road-north-main",
+        "fromNode": "node-002",
+        "toNode": "node-003",
+        "main": true,
+        "length_m": 161,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 318.5,
+        "mapY": 236,
+        "s3mX": -1121.036,
+        "s3mY": 377.887,
+        "longitude": 118.78337525,
+        "latitude": 32.03787999
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -1243.588,
+            377.887
+          ],
+          [
+            -998.484,
+            377.887
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-north-main-edge-03",
+        "roadId": "road-north-main",
+        "fromNode": "node-003",
+        "toNode": "node-004",
+        "main": true,
+        "length_m": 276,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 537,
+        "mapY": 236,
+        "s3mX": -788.395,
+        "s3mY": 377.887,
+        "longitude": 118.78569076,
+        "latitude": 32.03787999
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -998.484,
+            377.887
+          ],
+          [
+            -578.305,
+            377.887
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-north-main-edge-04",
+        "roadId": "road-north-main",
+        "fromNode": "node-004",
+        "toNode": "node-005",
+        "main": true,
+        "length_m": 93,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 721.5,
+        "mapY": 236,
+        "s3mX": -507.514,
+        "s3mY": 377.887,
+        "longitude": 118.78764596,
+        "latitude": 32.03787999
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -578.305,
+            377.887
+          ],
+          [
+            -436.723,
+            377.887
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-north-main-edge-05",
+        "roadId": "road-north-main",
+        "fromNode": "node-005",
+        "toNode": "node-006",
+        "main": true,
+        "length_m": 180,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 858,
+        "mapY": 236,
+        "s3mX": -299.708,
+        "s3mY": 377.887,
+        "longitude": 118.7890925,
+        "latitude": 32.03787999
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -436.723,
+            377.887
+          ],
+          [
+            -162.693,
+            377.887
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-north-main-edge-06",
+        "roadId": "road-north-main",
+        "fromNode": "node-006",
+        "toNode": "node-007",
+        "main": true,
+        "length_m": 127,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1011.5,
+        "mapY": 236,
+        "s3mX": -66.022,
+        "s3mY": 377.887,
+        "longitude": 118.79071919,
+        "latitude": 32.03787999
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -162.693,
+            377.887
+          ],
+          [
+            30.65,
+            377.887
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-north-main-edge-07",
+        "roadId": "road-north-main",
+        "fromNode": "node-007",
+        "toNode": "node-008",
+        "main": true,
+        "length_m": 152,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1151,
+        "mapY": 236,
+        "s3mX": 146.351,
+        "s3mY": 377.887,
+        "longitude": 118.79219751,
+        "latitude": 32.03787999
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            30.65,
+            377.887
+          ],
+          [
+            262.053,
+            377.887
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-north-main-edge-08",
+        "roadId": "road-north-main",
+        "fromNode": "node-008",
+        "toNode": "node-009",
+        "main": true,
+        "length_m": 360.2,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1407.1,
+        "mapY": 236,
+        "s3mX": 536.234,
+        "s3mY": 377.887,
+        "longitude": 118.79491148,
+        "latitude": 32.03787999
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            262.053,
+            377.887
+          ],
+          [
+            810.416,
+            377.887
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-south-main-edge-01",
+        "roadId": "road-south-main",
+        "fromNode": "node-010",
+        "toNode": "node-011",
+        "main": true,
+        "length_m": 238,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 119,
+        "mapY": 689,
+        "s3mX": -1424.752,
+        "s3mY": -582.653,
+        "longitude": 118.78126108,
+        "latitude": 32.03381064
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -1605.916,
+            -582.653
+          ],
+          [
+            -1243.588,
+            -582.653
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-south-main-edge-02",
+        "roadId": "road-south-main",
+        "fromNode": "node-011",
+        "toNode": "node-012",
+        "main": true,
+        "length_m": 989,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 732.5,
+        "mapY": 689,
+        "s3mX": -490.768,
+        "s3mY": -582.653,
+        "longitude": 118.78776253,
+        "latitude": 32.03381064
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -1243.588,
+            -582.653
+          ],
+          [
+            262.053,
+            -582.653
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-south-main-edge-03",
+        "roadId": "road-south-main",
+        "fromNode": "node-012",
+        "toNode": "node-013",
+        "main": true,
+        "length_m": 360.2,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1407.1,
+        "mapY": 689,
+        "s3mX": 536.234,
+        "s3mY": -582.653,
+        "longitude": 118.79491148,
+        "latitude": 32.03381064
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            262.053,
+            -582.653
+          ],
+          [
+            810.416,
+            -582.653
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-main-edge-01",
+        "roadId": "road-west-main",
+        "fromNode": "node-014",
+        "toNode": "node-002",
+        "main": true,
+        "length_m": 236,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 238,
+        "mapY": 118,
+        "s3mX": -1243.588,
+        "s3mY": 628.093,
+        "longitude": 118.78252216,
+        "latitude": 32.03893999
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -1243.588,
+            878.3
+          ],
+          [
+            -1243.588,
+            377.887
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-main-edge-02",
+        "roadId": "road-west-main",
+        "fromNode": "node-002",
+        "toNode": "node-015",
+        "main": true,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 238,
+        "mapY": 289.5,
+        "s3mX": -1243.588,
+        "s3mY": 264.445,
+        "longitude": 118.78252216,
+        "latitude": 32.03739939
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -1243.588,
+            377.887
+          ],
+          [
+            -1243.588,
+            151.004
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-main-edge-03",
+        "roadId": "road-west-main",
+        "fromNode": "node-015",
+        "toNode": "node-016",
+        "main": true,
+        "length_m": 113,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 238,
+        "mapY": 399.5,
+        "s3mX": -1243.588,
+        "s3mY": 31.202,
+        "longitude": 118.78252216,
+        "latitude": 32.03641125
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -1243.588,
+            151.004
+          ],
+          [
+            -1243.588,
+            -88.601
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-main-edge-04",
+        "roadId": "road-west-main",
+        "fromNode": "node-016",
+        "toNode": "node-017",
+        "main": true,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 238,
+        "mapY": 509.5,
+        "s3mX": -1243.588,
+        "s3mY": -202.042,
+        "longitude": 118.78252216,
+        "latitude": 32.0354231
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -1243.588,
+            -88.601
+          ],
+          [
+            -1243.588,
+            -315.483
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-main-edge-05",
+        "roadId": "road-west-main",
+        "fromNode": "node-017",
+        "toNode": "node-011",
+        "main": true,
+        "length_m": 126,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 238,
+        "mapY": 626,
+        "s3mX": -1243.588,
+        "s3mY": -449.068,
+        "longitude": 118.78252216,
+        "latitude": 32.03437657
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -1243.588,
+            -315.483
+          ],
+          [
+            -1243.588,
+            -582.653
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-main-edge-06",
+        "roadId": "road-west-main",
+        "fromNode": "node-011",
+        "toNode": "node-018",
+        "main": true,
+        "length_m": 258.2,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 238,
+        "mapY": 818.1,
+        "s3mX": -1243.588,
+        "s3mY": -856.396,
+        "longitude": 118.78252216,
+        "latitude": 32.03265092
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -1243.588,
+            -582.653
+          ],
+          [
+            -1243.588,
+            -1130.139
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-east-main-edge-01",
+        "roadId": "road-east-main",
+        "fromNode": "node-019",
+        "toNode": "node-008",
+        "main": true,
+        "length_m": 236,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1227,
+        "mapY": 118,
+        "s3mX": 262.053,
+        "s3mY": 628.093,
+        "longitude": 118.79300291,
+        "latitude": 32.03893999
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            262.053,
+            878.3
+          ],
+          [
+            262.053,
+            377.887
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-east-main-edge-02",
+        "roadId": "road-east-main",
+        "fromNode": "node-008",
+        "toNode": "node-020",
+        "main": true,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1227,
+        "mapY": 289.5,
+        "s3mX": 262.053,
+        "s3mY": 264.445,
+        "longitude": 118.79300291,
+        "latitude": 32.03739939
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            262.053,
+            377.887
+          ],
+          [
+            262.053,
+            151.004
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-east-main-edge-03",
+        "roadId": "road-east-main",
+        "fromNode": "node-020",
+        "toNode": "node-021",
+        "main": true,
+        "length_m": 113,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1227,
+        "mapY": 399.5,
+        "s3mX": 262.053,
+        "s3mY": 31.202,
+        "longitude": 118.79300291,
+        "latitude": 32.03641125
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            262.053,
+            151.004
+          ],
+          [
+            262.053,
+            -88.601
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-east-main-edge-04",
+        "roadId": "road-east-main",
+        "fromNode": "node-021",
+        "toNode": "node-022",
+        "main": true,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1227,
+        "mapY": 509.5,
+        "s3mX": 262.053,
+        "s3mY": -202.042,
+        "longitude": 118.79300291,
+        "latitude": 32.0354231
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            262.053,
+            -88.601
+          ],
+          [
+            262.053,
+            -315.483
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-east-main-edge-05",
+        "roadId": "road-east-main",
+        "fromNode": "node-022",
+        "toNode": "node-012",
+        "main": true,
+        "length_m": 126,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1227,
+        "mapY": 626,
+        "s3mX": 262.053,
+        "s3mY": -449.068,
+        "longitude": 118.79300291,
+        "latitude": 32.03437657
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            262.053,
+            -315.483
+          ],
+          [
+            262.053,
+            -582.653
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-east-main-edge-06",
+        "roadId": "road-east-main",
+        "fromNode": "node-012",
+        "toNode": "node-023",
+        "main": true,
+        "length_m": 258.2,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1227,
+        "mapY": 818.1,
+        "s3mX": 262.053,
+        "s3mY": -856.396,
+        "longitude": 118.79300291,
+        "latitude": 32.03265092
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            262.053,
+            -582.653
+          ],
+          [
+            262.053,
+            -1130.139
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-center-west-edge-01",
+        "roadId": "road-center-west",
+        "fromNode": "node-024",
+        "toNode": "node-005",
+        "main": false,
+        "length_m": 10,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 768,
+        "mapY": 231,
+        "s3mX": -436.723,
+        "s3mY": 388.489,
+        "longitude": 118.78813874,
+        "latitude": 32.0379249
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -436.723,
+            399.091
+          ],
+          [
+            -436.723,
+            377.887
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-center-west-edge-02",
+        "roadId": "road-center-west",
+        "fromNode": "node-005",
+        "toNode": "node-025",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 768,
+        "mapY": 289.5,
+        "s3mX": -436.723,
+        "s3mY": 264.445,
+        "longitude": 118.78813874,
+        "latitude": 32.03739939
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -436.723,
+            377.887
+          ],
+          [
+            -436.723,
+            151.004
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-center-west-edge-03",
+        "roadId": "road-center-west",
+        "fromNode": "node-025",
+        "toNode": "node-026",
+        "main": false,
+        "length_m": 113,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 768,
+        "mapY": 399.5,
+        "s3mX": -436.723,
+        "s3mY": 31.202,
+        "longitude": 118.78813874,
+        "latitude": 32.03641125
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -436.723,
+            151.004
+          ],
+          [
+            -436.723,
+            -88.601
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-center-west-edge-04",
+        "roadId": "road-center-west",
+        "fromNode": "node-026",
+        "toNode": "node-027",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 768,
+        "mapY": 509.5,
+        "s3mX": -436.723,
+        "s3mY": -202.042,
+        "longitude": 118.78813874,
+        "latitude": 32.0354231
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -436.723,
+            -88.601
+          ],
+          [
+            -436.723,
+            -315.483
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-center-west-edge-05",
+        "roadId": "road-center-west",
+        "fromNode": "node-027",
+        "toNode": "node-028",
+        "main": false,
+        "length_m": 115,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 768,
+        "mapY": 620.5,
+        "s3mX": -436.723,
+        "s3mY": -437.406,
+        "longitude": 118.78813874,
+        "latitude": 32.03442598
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -436.723,
+            -315.483
+          ],
+          [
+            -436.723,
+            -559.329
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-center-east-edge-01",
+        "roadId": "road-center-east",
+        "fromNode": "node-029",
+        "toNode": "node-006",
+        "main": false,
+        "length_m": 10,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 948,
+        "mapY": 231,
+        "s3mX": -162.693,
+        "s3mY": 388.489,
+        "longitude": 118.79004626,
+        "latitude": 32.0379249
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -162.693,
+            399.091
+          ],
+          [
+            -162.693,
+            377.887
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-center-east-edge-02",
+        "roadId": "road-center-east",
+        "fromNode": "node-006",
+        "toNode": "node-030",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 948,
+        "mapY": 289.5,
+        "s3mX": -162.693,
+        "s3mY": 264.445,
+        "longitude": 118.79004626,
+        "latitude": 32.03739939
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -162.693,
+            377.887
+          ],
+          [
+            -162.693,
+            151.004
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-center-east-edge-03",
+        "roadId": "road-center-east",
+        "fromNode": "node-030",
+        "toNode": "node-031",
+        "main": false,
+        "length_m": 113,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 948,
+        "mapY": 399.5,
+        "s3mX": -162.693,
+        "s3mY": 31.202,
+        "longitude": 118.79004626,
+        "latitude": 32.03641125
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -162.693,
+            151.004
+          ],
+          [
+            -162.693,
+            -88.601
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-center-east-edge-04",
+        "roadId": "road-center-east",
+        "fromNode": "node-031",
+        "toNode": "node-032",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 948,
+        "mapY": 509.5,
+        "s3mX": -162.693,
+        "s3mY": -202.042,
+        "longitude": 118.79004626,
+        "latitude": 32.0354231
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -162.693,
+            -88.601
+          ],
+          [
+            -162.693,
+            -315.483
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-center-east-edge-05",
+        "roadId": "road-center-east",
+        "fromNode": "node-032",
+        "toNode": "node-033",
+        "main": false,
+        "length_m": 115,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 948,
+        "mapY": 620.5,
+        "s3mX": -162.693,
+        "s3mY": -437.406,
+        "longitude": 118.79004626,
+        "latitude": 32.03442598
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -162.693,
+            -315.483
+          ],
+          [
+            -162.693,
+            -559.329
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-service-edge-01",
+        "roadId": "road-west-service",
+        "fromNode": "node-034",
+        "toNode": "node-003",
+        "main": false,
+        "length_m": 10,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 399,
+        "mapY": 231,
+        "s3mX": -998.484,
+        "s3mY": 388.489,
+        "longitude": 118.78422833,
+        "latitude": 32.0379249
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -998.484,
+            399.091
+          ],
+          [
+            -998.484,
+            377.887
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-service-edge-02",
+        "roadId": "road-west-service",
+        "fromNode": "node-003",
+        "toNode": "node-035",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 399,
+        "mapY": 289.5,
+        "s3mX": -998.484,
+        "s3mY": 264.445,
+        "longitude": 118.78422833,
+        "latitude": 32.03739939
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -998.484,
+            377.887
+          ],
+          [
+            -998.484,
+            151.004
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-service-edge-03",
+        "roadId": "road-west-service",
+        "fromNode": "node-035",
+        "toNode": "node-036",
+        "main": false,
+        "length_m": 113,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 399,
+        "mapY": 399.5,
+        "s3mX": -998.484,
+        "s3mY": 31.202,
+        "longitude": 118.78422833,
+        "latitude": 32.03641125
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -998.484,
+            151.004
+          ],
+          [
+            -998.484,
+            -88.601
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-service-edge-04",
+        "roadId": "road-west-service",
+        "fromNode": "node-036",
+        "toNode": "node-037",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 399,
+        "mapY": 509.5,
+        "s3mX": -998.484,
+        "s3mY": -202.042,
+        "longitude": 118.78422833,
+        "latitude": 32.0354231
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -998.484,
+            -88.601
+          ],
+          [
+            -998.484,
+            -315.483
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-service-edge-05",
+        "roadId": "road-west-service",
+        "fromNode": "node-037",
+        "toNode": "node-038",
+        "main": false,
+        "length_m": 115,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 399,
+        "mapY": 620.5,
+        "s3mX": -998.484,
+        "s3mY": -437.406,
+        "longitude": 118.78422833,
+        "latitude": 32.03442598
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -998.484,
+            -315.483
+          ],
+          [
+            -998.484,
+            -559.329
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-mid-service-edge-01",
+        "roadId": "road-mid-service",
+        "fromNode": "node-039",
+        "toNode": "node-004",
+        "main": false,
+        "length_m": 10,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 675,
+        "mapY": 231,
+        "s3mX": -578.305,
+        "s3mY": 388.489,
+        "longitude": 118.78715319,
+        "latitude": 32.0379249
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -578.305,
+            399.091
+          ],
+          [
+            -578.305,
+            377.887
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-mid-service-edge-02",
+        "roadId": "road-mid-service",
+        "fromNode": "node-004",
+        "toNode": "node-040",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 675,
+        "mapY": 289.5,
+        "s3mX": -578.305,
+        "s3mY": 264.445,
+        "longitude": 118.78715319,
+        "latitude": 32.03739939
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -578.305,
+            377.887
+          ],
+          [
+            -578.305,
+            151.004
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-mid-service-edge-03",
+        "roadId": "road-mid-service",
+        "fromNode": "node-040",
+        "toNode": "node-041",
+        "main": false,
+        "length_m": 113,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 675,
+        "mapY": 399.5,
+        "s3mX": -578.305,
+        "s3mY": 31.202,
+        "longitude": 118.78715319,
+        "latitude": 32.03641125
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -578.305,
+            151.004
+          ],
+          [
+            -578.305,
+            -88.601
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-mid-service-edge-04",
+        "roadId": "road-mid-service",
+        "fromNode": "node-041",
+        "toNode": "node-042",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 675,
+        "mapY": 509.5,
+        "s3mX": -578.305,
+        "s3mY": -202.042,
+        "longitude": 118.78715319,
+        "latitude": 32.0354231
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -578.305,
+            -88.601
+          ],
+          [
+            -578.305,
+            -315.483
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-mid-service-edge-05",
+        "roadId": "road-mid-service",
+        "fromNode": "node-042",
+        "toNode": "node-043",
+        "main": false,
+        "length_m": 115,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 675,
+        "mapY": 620.5,
+        "s3mX": -578.305,
+        "s3mY": -437.406,
+        "longitude": 118.78715319,
+        "latitude": 32.03442598
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -578.305,
+            -315.483
+          ],
+          [
+            -578.305,
+            -559.329
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-east-yard-service-edge-01",
+        "roadId": "road-east-yard-service",
+        "fromNode": "node-044",
+        "toNode": "node-007",
+        "main": false,
+        "length_m": 10,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1075,
+        "mapY": 231,
+        "s3mX": 30.65,
+        "s3mY": 388.489,
+        "longitude": 118.79139212,
+        "latitude": 32.0379249
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            30.65,
+            399.091
+          ],
+          [
+            30.65,
+            377.887
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-east-yard-service-edge-02",
+        "roadId": "road-east-yard-service",
+        "fromNode": "node-007",
+        "toNode": "node-045",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1075,
+        "mapY": 289.5,
+        "s3mX": 30.65,
+        "s3mY": 264.445,
+        "longitude": 118.79139212,
+        "latitude": 32.03739939
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            30.65,
+            377.887
+          ],
+          [
+            30.65,
+            151.004
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-east-yard-service-edge-03",
+        "roadId": "road-east-yard-service",
+        "fromNode": "node-045",
+        "toNode": "node-046",
+        "main": false,
+        "length_m": 113,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1075,
+        "mapY": 399.5,
+        "s3mX": 30.65,
+        "s3mY": 31.202,
+        "longitude": 118.79139212,
+        "latitude": 32.03641125
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            30.65,
+            151.004
+          ],
+          [
+            30.65,
+            -88.601
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-east-yard-service-edge-04",
+        "roadId": "road-east-yard-service",
+        "fromNode": "node-046",
+        "toNode": "node-047",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1075,
+        "mapY": 509.5,
+        "s3mX": 30.65,
+        "s3mY": -202.042,
+        "longitude": 118.79139212,
+        "latitude": 32.0354231
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            30.65,
+            -88.601
+          ],
+          [
+            30.65,
+            -315.483
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-east-yard-service-edge-05",
+        "roadId": "road-east-yard-service",
+        "fromNode": "node-047",
+        "toNode": "node-048",
+        "main": false,
+        "length_m": 115,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1075,
+        "mapY": 620.5,
+        "s3mX": 30.65,
+        "s3mY": -437.406,
+        "longitude": 118.79139212,
+        "latitude": 32.03442598
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            30.65,
+            -315.483
+          ],
+          [
+            30.65,
+            -559.329
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-north-edge-01",
+        "roadId": "road-row-north",
+        "fromNode": "node-049",
+        "toNode": "node-015",
+        "main": false,
+        "length_m": 9,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 233.5,
+        "mapY": 343,
+        "s3mX": -1250.439,
+        "s3mY": 151.004,
+        "longitude": 118.78247447,
+        "latitude": 32.03691879
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -1257.29,
+            151.004
+          ],
+          [
+            -1243.588,
+            151.004
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-north-edge-02",
+        "roadId": "road-row-north",
+        "fromNode": "node-015",
+        "toNode": "node-050",
+        "main": false,
+        "length_m": 17,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 246.5,
+        "mapY": 343,
+        "s3mX": -1230.648,
+        "s3mY": 151.004,
+        "longitude": 118.78261224,
+        "latitude": 32.03691879
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -1243.588,
+            151.004
+          ],
+          [
+            -1217.708,
+            151.004
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-north-edge-03",
+        "roadId": "road-row-north",
+        "fromNode": "node-050",
+        "toNode": "node-035",
+        "main": false,
+        "length_m": 144,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 327,
+        "mapY": 343,
+        "s3mX": -1108.096,
+        "s3mY": 151.004,
+        "longitude": 118.78346532,
+        "latitude": 32.03691879
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -1217.708,
+            151.004
+          ],
+          [
+            -998.484,
+            151.004
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-north-edge-04",
+        "roadId": "road-row-north",
+        "fromNode": "node-035",
+        "toNode": "node-051",
+        "main": false,
+        "length_m": 190,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 494,
+        "mapY": 343,
+        "s3mX": -853.857,
+        "s3mY": 151.004,
+        "longitude": 118.78523507,
+        "latitude": 32.03691879
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -998.484,
+            151.004
+          ],
+          [
+            -709.23,
+            151.004
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-north-edge-05",
+        "roadId": "road-row-north",
+        "fromNode": "node-051",
+        "toNode": "node-040",
+        "main": false,
+        "length_m": 86,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 632,
+        "mapY": 343,
+        "s3mX": -643.768,
+        "s3mY": 151.004,
+        "longitude": 118.7866975,
+        "latitude": 32.03691879
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -709.23,
+            151.004
+          ],
+          [
+            -578.305,
+            151.004
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-north-edge-06",
+        "roadId": "road-row-north",
+        "fromNode": "node-040",
+        "toNode": "node-025",
+        "main": false,
+        "length_m": 93,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 721.5,
+        "mapY": 343,
+        "s3mX": -507.514,
+        "s3mY": 151.004,
+        "longitude": 118.78764596,
+        "latitude": 32.03691879
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -578.305,
+            151.004
+          ],
+          [
+            -436.723,
+            151.004
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-north-edge-07",
+        "roadId": "road-row-north",
+        "fromNode": "node-025",
+        "toNode": "node-030",
+        "main": false,
+        "length_m": 180,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 858,
+        "mapY": 343,
+        "s3mX": -299.708,
+        "s3mY": 151.004,
+        "longitude": 118.7890925,
+        "latitude": 32.03691879
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -436.723,
+            151.004
+          ],
+          [
+            -162.693,
+            151.004
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-north-edge-08",
+        "roadId": "road-row-north",
+        "fromNode": "node-030",
+        "toNode": "node-052",
+        "main": false,
+        "length_m": 43,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 969.5,
+        "mapY": 343,
+        "s3mX": -129.962,
+        "s3mY": 151.004,
+        "longitude": 118.7902741,
+        "latitude": 32.03691879
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -162.693,
+            151.004
+          ],
+          [
+            -97.231,
+            151.004
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-north-edge-09",
+        "roadId": "road-row-north",
+        "fromNode": "node-052",
+        "toNode": "node-045",
+        "main": false,
+        "length_m": 84,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1033,
+        "mapY": 343,
+        "s3mX": -33.291,
+        "s3mY": 151.004,
+        "longitude": 118.79094703,
+        "latitude": 32.03691879
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -97.231,
+            151.004
+          ],
+          [
+            30.65,
+            151.004
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-north-edge-10",
+        "roadId": "road-row-north",
+        "fromNode": "node-045",
+        "toNode": "node-020",
+        "main": false,
+        "length_m": 152,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1151,
+        "mapY": 343,
+        "s3mX": 146.351,
+        "s3mY": 151.004,
+        "longitude": 118.79219751,
+        "latitude": 32.03691879
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            30.65,
+            151.004
+          ],
+          [
+            262.053,
+            151.004
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-north-edge-11",
+        "roadId": "road-row-north",
+        "fromNode": "node-020",
+        "toNode": "node-053",
+        "main": false,
+        "length_m": 11,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1232.5,
+        "mapY": 343,
+        "s3mX": 270.426,
+        "s3mY": 151.004,
+        "longitude": 118.79306119,
+        "latitude": 32.03691879
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            262.053,
+            151.004
+          ],
+          [
+            278.799,
+            151.004
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-middle-edge-01",
+        "roadId": "road-row-middle",
+        "fromNode": "node-054",
+        "toNode": "node-016",
+        "main": false,
+        "length_m": 9,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 233.5,
+        "mapY": 456,
+        "s3mX": -1250.439,
+        "s3mY": -88.601,
+        "longitude": 118.78247447,
+        "latitude": 32.0359037
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -1257.29,
+            -88.601
+          ],
+          [
+            -1243.588,
+            -88.601
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-middle-edge-02",
+        "roadId": "road-row-middle",
+        "fromNode": "node-016",
+        "toNode": "node-055",
+        "main": false,
+        "length_m": 17,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 246.5,
+        "mapY": 456,
+        "s3mX": -1230.648,
+        "s3mY": -88.601,
+        "longitude": 118.78261224,
+        "latitude": 32.0359037
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -1243.588,
+            -88.601
+          ],
+          [
+            -1217.708,
+            -88.601
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-middle-edge-03",
+        "roadId": "road-row-middle",
+        "fromNode": "node-055",
+        "toNode": "node-036",
+        "main": false,
+        "length_m": 144,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 327,
+        "mapY": 456,
+        "s3mX": -1108.096,
+        "s3mY": -88.601,
+        "longitude": 118.78346532,
+        "latitude": 32.0359037
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -1217.708,
+            -88.601
+          ],
+          [
+            -998.484,
+            -88.601
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-middle-edge-04",
+        "roadId": "road-row-middle",
+        "fromNode": "node-036",
+        "toNode": "node-056",
+        "main": false,
+        "length_m": 190,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 494,
+        "mapY": 456,
+        "s3mX": -853.857,
+        "s3mY": -88.601,
+        "longitude": 118.78523507,
+        "latitude": 32.0359037
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -998.484,
+            -88.601
+          ],
+          [
+            -709.23,
+            -88.601
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-middle-edge-05",
+        "roadId": "road-row-middle",
+        "fromNode": "node-056",
+        "toNode": "node-041",
+        "main": false,
+        "length_m": 86,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 632,
+        "mapY": 456,
+        "s3mX": -643.768,
+        "s3mY": -88.601,
+        "longitude": 118.7866975,
+        "latitude": 32.0359037
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -709.23,
+            -88.601
+          ],
+          [
+            -578.305,
+            -88.601
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-middle-edge-06",
+        "roadId": "road-row-middle",
+        "fromNode": "node-041",
+        "toNode": "node-026",
+        "main": false,
+        "length_m": 93,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 721.5,
+        "mapY": 456,
+        "s3mX": -507.514,
+        "s3mY": -88.601,
+        "longitude": 118.78764596,
+        "latitude": 32.0359037
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -578.305,
+            -88.601
+          ],
+          [
+            -436.723,
+            -88.601
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-middle-edge-07",
+        "roadId": "road-row-middle",
+        "fromNode": "node-026",
+        "toNode": "node-031",
+        "main": false,
+        "length_m": 180,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 858,
+        "mapY": 456,
+        "s3mX": -299.708,
+        "s3mY": -88.601,
+        "longitude": 118.7890925,
+        "latitude": 32.0359037
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -436.723,
+            -88.601
+          ],
+          [
+            -162.693,
+            -88.601
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-middle-edge-08",
+        "roadId": "road-row-middle",
+        "fromNode": "node-031",
+        "toNode": "node-057",
+        "main": false,
+        "length_m": 43,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 969.5,
+        "mapY": 456,
+        "s3mX": -129.962,
+        "s3mY": -88.601,
+        "longitude": 118.7902741,
+        "latitude": 32.0359037
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -162.693,
+            -88.601
+          ],
+          [
+            -97.231,
+            -88.601
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-middle-edge-09",
+        "roadId": "road-row-middle",
+        "fromNode": "node-057",
+        "toNode": "node-046",
+        "main": false,
+        "length_m": 84,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1033,
+        "mapY": 456,
+        "s3mX": -33.291,
+        "s3mY": -88.601,
+        "longitude": 118.79094703,
+        "latitude": 32.0359037
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -97.231,
+            -88.601
+          ],
+          [
+            30.65,
+            -88.601
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-middle-edge-10",
+        "roadId": "road-row-middle",
+        "fromNode": "node-046",
+        "toNode": "node-021",
+        "main": false,
+        "length_m": 152,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1151,
+        "mapY": 456,
+        "s3mX": 146.351,
+        "s3mY": -88.601,
+        "longitude": 118.79219751,
+        "latitude": 32.0359037
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            30.65,
+            -88.601
+          ],
+          [
+            262.053,
+            -88.601
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-middle-edge-11",
+        "roadId": "road-row-middle",
+        "fromNode": "node-021",
+        "toNode": "node-058",
+        "main": false,
+        "length_m": 11,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1232.5,
+        "mapY": 456,
+        "s3mX": 270.426,
+        "s3mY": -88.601,
+        "longitude": 118.79306119,
+        "latitude": 32.0359037
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            262.053,
+            -88.601
+          ],
+          [
+            278.799,
+            -88.601
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-south-edge-01",
+        "roadId": "road-row-south",
+        "fromNode": "node-059",
+        "toNode": "node-017",
+        "main": false,
+        "length_m": 9,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 233.5,
+        "mapY": 563,
+        "s3mX": -1250.439,
+        "s3mY": -315.483,
+        "longitude": 118.78247447,
+        "latitude": 32.03494251
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -1257.29,
+            -315.483
+          ],
+          [
+            -1243.588,
+            -315.483
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-south-edge-02",
+        "roadId": "road-row-south",
+        "fromNode": "node-017",
+        "toNode": "node-060",
+        "main": false,
+        "length_m": 17,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 246.5,
+        "mapY": 563,
+        "s3mX": -1230.648,
+        "s3mY": -315.483,
+        "longitude": 118.78261224,
+        "latitude": 32.03494251
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -1243.588,
+            -315.483
+          ],
+          [
+            -1217.708,
+            -315.483
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-south-edge-03",
+        "roadId": "road-row-south",
+        "fromNode": "node-060",
+        "toNode": "node-037",
+        "main": false,
+        "length_m": 144,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 327,
+        "mapY": 563,
+        "s3mX": -1108.096,
+        "s3mY": -315.483,
+        "longitude": 118.78346532,
+        "latitude": 32.03494251
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -1217.708,
+            -315.483
+          ],
+          [
+            -998.484,
+            -315.483
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-south-edge-04",
+        "roadId": "road-row-south",
+        "fromNode": "node-037",
+        "toNode": "node-061",
+        "main": false,
+        "length_m": 190,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 494,
+        "mapY": 563,
+        "s3mX": -853.857,
+        "s3mY": -315.483,
+        "longitude": 118.78523507,
+        "latitude": 32.03494251
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -998.484,
+            -315.483
+          ],
+          [
+            -709.23,
+            -315.483
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-south-edge-05",
+        "roadId": "road-row-south",
+        "fromNode": "node-061",
+        "toNode": "node-042",
+        "main": false,
+        "length_m": 86,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 632,
+        "mapY": 563,
+        "s3mX": -643.768,
+        "s3mY": -315.483,
+        "longitude": 118.7866975,
+        "latitude": 32.03494251
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -709.23,
+            -315.483
+          ],
+          [
+            -578.305,
+            -315.483
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-south-edge-06",
+        "roadId": "road-row-south",
+        "fromNode": "node-042",
+        "toNode": "node-027",
+        "main": false,
+        "length_m": 93,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 721.5,
+        "mapY": 563,
+        "s3mX": -507.514,
+        "s3mY": -315.483,
+        "longitude": 118.78764596,
+        "latitude": 32.03494251
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -578.305,
+            -315.483
+          ],
+          [
+            -436.723,
+            -315.483
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-south-edge-07",
+        "roadId": "road-row-south",
+        "fromNode": "node-027",
+        "toNode": "node-032",
+        "main": false,
+        "length_m": 180,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 858,
+        "mapY": 563,
+        "s3mX": -299.708,
+        "s3mY": -315.483,
+        "longitude": 118.7890925,
+        "latitude": 32.03494251
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -436.723,
+            -315.483
+          ],
+          [
+            -162.693,
+            -315.483
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-south-edge-08",
+        "roadId": "road-row-south",
+        "fromNode": "node-032",
+        "toNode": "node-062",
+        "main": false,
+        "length_m": 43,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 969.5,
+        "mapY": 563,
+        "s3mX": -129.962,
+        "s3mY": -315.483,
+        "longitude": 118.7902741,
+        "latitude": 32.03494251
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -162.693,
+            -315.483
+          ],
+          [
+            -97.231,
+            -315.483
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-south-edge-09",
+        "roadId": "road-row-south",
+        "fromNode": "node-062",
+        "toNode": "node-047",
+        "main": false,
+        "length_m": 84,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1033,
+        "mapY": 563,
+        "s3mX": -33.291,
+        "s3mY": -315.483,
+        "longitude": 118.79094703,
+        "latitude": 32.03494251
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -97.231,
+            -315.483
+          ],
+          [
+            30.65,
+            -315.483
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-south-edge-10",
+        "roadId": "road-row-south",
+        "fromNode": "node-047",
+        "toNode": "node-022",
+        "main": false,
+        "length_m": 152,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1151,
+        "mapY": 563,
+        "s3mX": 146.351,
+        "s3mY": -315.483,
+        "longitude": 118.79219751,
+        "latitude": 32.03494251
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            30.65,
+            -315.483
+          ],
+          [
+            262.053,
+            -315.483
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-south-edge-11",
+        "roadId": "road-row-south",
+        "fromNode": "node-022",
+        "toNode": "node-063",
+        "main": false,
+        "length_m": 11,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1232.5,
+        "mapY": 563,
+        "s3mX": 270.426,
+        "s3mY": -315.483,
+        "longitude": 118.79306119,
+        "latitude": 32.03494251
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            262.053,
+            -315.483
+          ],
+          [
+            278.799,
+            -315.483
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-loop-edge-01",
+        "roadId": "road-west-loop",
+        "fromNode": "node-064",
+        "toNode": "node-050",
+        "main": false,
+        "length_m": 97,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 255,
+        "mapY": 294.5,
+        "s3mX": -1217.708,
+        "s3mY": 253.843,
+        "longitude": 118.78270232,
+        "latitude": 32.03735447
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -1217.708,
+            356.683
+          ],
+          [
+            -1217.708,
+            151.004
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-loop-edge-02",
+        "roadId": "road-west-loop",
+        "fromNode": "node-050",
+        "toNode": "node-055",
+        "main": false,
+        "length_m": 113,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 255,
+        "mapY": 399.5,
+        "s3mX": -1217.708,
+        "s3mY": 31.202,
+        "longitude": 118.78270232,
+        "latitude": 32.03641125
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -1217.708,
+            151.004
+          ],
+          [
+            -1217.708,
+            -88.601
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-loop-edge-03",
+        "roadId": "road-west-loop",
+        "fromNode": "node-055",
+        "toNode": "node-060",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 255,
+        "mapY": 509.5,
+        "s3mX": -1217.708,
+        "s3mY": -202.042,
+        "longitude": 118.78270232,
+        "latitude": 32.0354231
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -1217.708,
+            -88.601
+          ],
+          [
+            -1217.708,
+            -315.483
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-loop-edge-04",
+        "roadId": "road-west-loop",
+        "fromNode": "node-060",
+        "toNode": "node-065",
+        "main": false,
+        "length_m": 115,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 255,
+        "mapY": 620.5,
+        "s3mX": -1217.708,
+        "s3mY": -437.406,
+        "longitude": 118.78270232,
+        "latitude": 32.03442598
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -1217.708,
+            -315.483
+          ],
+          [
+            -1217.708,
+            -559.329
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-tank-loop-edge-01",
+        "roadId": "road-tank-loop",
+        "fromNode": "node-066",
+        "toNode": "node-051",
+        "main": false,
+        "length_m": 97,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 589,
+        "mapY": 294.5,
+        "s3mX": -709.23,
+        "s3mY": 253.843,
+        "longitude": 118.78624182,
+        "latitude": 32.03735447
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -709.23,
+            356.683
+          ],
+          [
+            -709.23,
+            151.004
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-tank-loop-edge-02",
+        "roadId": "road-tank-loop",
+        "fromNode": "node-051",
+        "toNode": "node-056",
+        "main": false,
+        "length_m": 113,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 589,
+        "mapY": 399.5,
+        "s3mX": -709.23,
+        "s3mY": 31.202,
+        "longitude": 118.78624182,
+        "latitude": 32.03641125
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -709.23,
+            151.004
+          ],
+          [
+            -709.23,
+            -88.601
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-tank-loop-edge-03",
+        "roadId": "road-tank-loop",
+        "fromNode": "node-056",
+        "toNode": "node-061",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 589,
+        "mapY": 509.5,
+        "s3mX": -709.23,
+        "s3mY": -202.042,
+        "longitude": 118.78624182,
+        "latitude": 32.0354231
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -709.23,
+            -88.601
+          ],
+          [
+            -709.23,
+            -315.483
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-tank-loop-edge-04",
+        "roadId": "road-tank-loop",
+        "fromNode": "node-061",
+        "toNode": "node-067",
+        "main": false,
+        "length_m": 115,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 589,
+        "mapY": 620.5,
+        "s3mX": -709.23,
+        "s3mY": -437.406,
+        "longitude": 118.78624182,
+        "latitude": 32.03442598
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -709.23,
+            -315.483
+          ],
+          [
+            -709.23,
+            -559.329
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-logistics-loop-edge-01",
+        "roadId": "road-logistics-loop",
+        "fromNode": "node-068",
+        "toNode": "node-052",
+        "main": false,
+        "length_m": 97,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 991,
+        "mapY": 294.5,
+        "s3mX": -97.231,
+        "s3mY": 253.843,
+        "longitude": 118.79050194,
+        "latitude": 32.03735447
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -97.231,
+            356.683
+          ],
+          [
+            -97.231,
+            151.004
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-logistics-loop-edge-02",
+        "roadId": "road-logistics-loop",
+        "fromNode": "node-052",
+        "toNode": "node-057",
+        "main": false,
+        "length_m": 113,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 991,
+        "mapY": 399.5,
+        "s3mX": -97.231,
+        "s3mY": 31.202,
+        "longitude": 118.79050194,
+        "latitude": 32.03641125
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -97.231,
+            151.004
+          ],
+          [
+            -97.231,
+            -88.601
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-logistics-loop-edge-03",
+        "roadId": "road-logistics-loop",
+        "fromNode": "node-057",
+        "toNode": "node-062",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 991,
+        "mapY": 509.5,
+        "s3mX": -97.231,
+        "s3mY": -202.042,
+        "longitude": 118.79050194,
+        "latitude": 32.0354231
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -97.231,
+            -88.601
+          ],
+          [
+            -97.231,
+            -315.483
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-logistics-loop-edge-04",
+        "roadId": "road-logistics-loop",
+        "fromNode": "node-062",
+        "toNode": "node-069",
+        "main": false,
+        "length_m": 115,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 991,
+        "mapY": 620.5,
+        "s3mX": -97.231,
+        "s3mY": -437.406,
+        "longitude": 118.79050194,
+        "latitude": 32.03442598
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -97.231,
+            -315.483
+          ],
+          [
+            -97.231,
+            -559.329
+          ]
+        ]
+      }
+    }
+  ]
+}

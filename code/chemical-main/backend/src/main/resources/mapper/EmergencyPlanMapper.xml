@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.at.mapper.EmergencyPlanMapper">
+    <select id="selectList" resultType="com.at.pojo.EmergencyPlan">
+        SELECT id,
+               name,
+               type,
+               description,
+               level,
+               created_at as createdAt,
+               updated_at as updatedAt
+        FROM emergency_plan
+        ORDER BY id ASC
+    </select>
+</mapper>

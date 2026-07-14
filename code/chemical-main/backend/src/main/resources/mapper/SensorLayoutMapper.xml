@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.at.mapper.SensorLayoutMapper">
+    <insert id="insertLayout" parameterType="com.at.pojo.SensorLayout" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO sensor_layout (layout_name, description, sensor_count, coverage_rate, risk_score, status)
+        VALUES (#{layoutName}, #{description}, #{sensorCount}, #{coverageRate}, #{riskScore}, #{status})
+    </insert>
+
+    <delete id="deleteLayout" parameterType="java.lang.Integer">
+        DELETE FROM sensor_layout WHERE id = #{id}
+    </delete>
+
+    <select id="selectLayoutList" resultType="com.at.pojo.SensorLayout">
+        SELECT id, layout_name as layoutName, description, sensor_count as sensorCount,
+               coverage_rate as coverageRate, risk_score as riskScore, status,
+               created_at as createdAt, updated_at as updatedAt
+        FROM sensor_layout
+        ORDER BY updated_at DESC
+    </select>
+
+    <select id="selectLayoutById" parameterType="java.lang.Integer" resultType="com.at.pojo.SensorLayout">
+        SELECT id, layout_name as layoutName, description, sensor_count as sensorCount,
+               coverage_rate as coverageRate, risk_score as riskScore, status,
+               created_at as createdAt, updated_at as updatedAt
+        FROM sensor_layout
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insertDetail" parameterType="com.at.pojo.SensorLayoutDetail" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO sensor_layout_detail (layout_id, sensor_id, x, y, installation_height, effective_range,
+                                          detection_range, priority, risk)
+        VALUES (#{layoutId}, #{sensorId}, #{x}, #{y}, #{installationHeight}, #{effectiveRange},
+                #{detectionRange}, #{priority}, #{risk})
+    </insert>
+
+    <select id="selectDetailsByLayoutId" parameterType="java.lang.Integer" resultType="com.at.pojo.SensorLayoutDetail">
+        SELECT id, layout_id as layoutId, sensor_id as sensorId, x, y,
+               installation_height as installationHeight, effective_range as effectiveRange,
+               detection_range as detectionRange, priority, risk, created_at as createdAt
+        FROM sensor_layout_detail
+        WHERE layout_id = #{layoutId}
+        ORDER BY sensor_id ASC
+    </select>
+</mapper>

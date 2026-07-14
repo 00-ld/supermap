@@ -1,0 +1,131 @@
+{
+    "isStreamingService": false,
+    "interfaceTypes": "com.supermap.services.rest.RestServlet,com.supermap.services.wps.WPSServlet",
+    "isSet": false,
+    "instances": [
+        {
+            "interfaceType": "com.supermap.services.wps.WPSServlet",
+            "componentType": "com.supermap.services.components.impl.TransportationAnalystImpl",
+            "name": "transportationanalyst-sample/wps100",
+            "componentSetName": null,
+            "authorizeSetting": {
+                "permittedRoles": [],
+                "deniedRoles": [],
+                "type": "PUBLIC"
+            },
+            "id": null,
+            "componentName": "transportationanalyst-sample",
+            "interfaceName": "wps100",
+            "isDisabled": false,
+            "enabled": true,
+            "status": "OK"
+        },
+        {
+            "interfaceType": "com.supermap.services.rest.RestServlet",
+            "componentType": "com.supermap.services.components.impl.TransportationAnalystImpl",
+            "name": "transportationanalyst-sample/rest",
+            "componentSetName": null,
+            "authorizeSetting": {
+                "permittedRoles": [],
+                "deniedRoles": [],
+                "type": "PUBLIC"
+            },
+            "id": null,
+            "componentName": "transportationanalyst-sample",
+            "interfaceName": "rest",
+            "isDisabled": false,
+            "enabled": true,
+            "status": "OK"
+        }
+    ],
+    "isClusterService": false,
+    "type": "com.supermap.services.components.impl.TransportationAnalystImpl",
+    "interfaceNames": "rest,wps100",
+    "clusterInterfaceNames": "",
+    "isDataflowService": false,
+    "component": {
+        "isScSet": false,
+        "scSetSetting": null,
+        "scSetting": {
+            "disabledInterfaceNames": "",
+            "initPriority": 0,
+            "initOnCreate": false,
+            "instanceCount": 0,
+            "name": "transportationanalyst-sample",
+            "alias": "",
+            "interfaceNames": "rest,wps100",
+            "type": "com.supermap.services.components.impl.TransportationAnalystImpl",
+            "config": null,
+            "providers": "transportationAnalystProvider-Changchun",
+            "enabled": false
+        }
+    },
+    "providerNames": "transportationAnalystProvider-Changchun",
+    "name": "transportationanalyst-sample",
+    "alias": "",
+    "isDistributedanalystService": false,
+    "providers": [{
+        "spsetSetting": null,
+        "isSPSet": false,
+        "spSetting": {
+            "name": "transportationAnalystProvider-Changchun",
+            "alias": null,
+            "innerProviders": ["ugcDataProvider-Changchun"],
+            "type": "com.supermap.services.providers.UGCTransportationAnalystProvider",
+            "config": {
+                "DEFAULT_POOLSIZE": 10,
+                "workspaceConnectString": "../../samples/data/NetworkAnalyst/Changchun.sxwu",
+                "edgeIDField": "SmEdgeID",
+                "initFacilityAnalyst": true,
+                "pathGuideDescriptionLanguage": null,
+                "multiInstance": false,
+                "barrierEdges": null,
+                "forwardSingleWayRuleValues": ["FT"],
+                "weightFieldInfos": [
+                    {
+                        "unit": null,
+                        "name": "length",
+                        "forwardWeightField": "Length",
+                        "backWeightField": "Length"
+                    },
+                    {
+                        "unit": null,
+                        "name": "time",
+                        "forwardWeightField": "FT_TIME",
+                        "backWeightField": "TF_TIME"
+                    }
+                ],
+                "toNodeIDField": "SmTNode",
+                "edgeNameField": "RoadName",
+                "datasourceName": "Changchun",
+                "tolerance": 500,
+                "analystModeSetting": null,
+                "turnDatasetInfo": {
+                    "toEdgeIDField": "TEdgeID",
+                    "workspaceConnectString": "../../samples/data/NetworkAnalyst/Changchun.sxwu",
+                    "workspaceType": null,
+                    "nodeIDField": "NodeID",
+                    "datasetName": "RoadNet_TURN",
+                    "fromEdgeIDField": "FEdgeID",
+                    "weightFields": ["TurnCost"],
+                    "datasourceName": "Changchun"
+                },
+                "poolSize": 0,
+                "datasetName": "RoadNet",
+                "fromNodeIDField": "SmFNode",
+                "backwardSingleWayRuleValues": ["TF"],
+                "prohibitedWayRuleValues": ["prohibit"],
+                "workspaceType": null,
+                "directionField": "SmResistanceA",
+                "barrierNodes": null,
+                "nodeIDField": "SmNodeID",
+                "nodeNameField": "SmNodeID",
+                "ruleField": "TRule",
+                "twoWayRuleValues": ["twoWay"],
+                "nodeIDFilterField": null,
+                "autoCheckNetwork": null
+            },
+            "enabled": false
+        }
+    }]
+}

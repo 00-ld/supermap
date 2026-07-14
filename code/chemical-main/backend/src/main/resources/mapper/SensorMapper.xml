@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.at.mapper.SensorMapper">
+    <insert id="insert" parameterType="com.at.pojo.Sensor">
+        INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range,
+                            install_remark, priority, risk, type, mode, last_sample_time)
+        VALUES (#{id}, #{x}, #{y}, #{installationHeight}, #{effectiveRange}, #{detectionRange},
+                #{installRemark}, #{priority}, #{risk}, #{type}, #{mode}, #{lastSampleTime})
+    </insert>
+
+    <update id="updateById" parameterType="com.at.pojo.Sensor">
+        UPDATE sensor
+        SET x = #{x}, y = #{y}, installation_height = #{installationHeight},
+            effective_range = #{effectiveRange}, detection_range = #{detectionRange},
+            install_remark = #{installRemark}, priority = #{priority}, risk = #{risk},
+            type = #{type}, mode = #{mode}, last_sample_time = #{lastSampleTime}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.String">
+        DELETE FROM sensor WHERE id = #{id}
+    </delete>
+
+    <select id="selectList" resultType="com.at.pojo.Sensor">
+        SELECT id, x, y, installation_height as installationHeight,
+               effective_range as effectiveRange, detection_range as detectionRange,
+               install_remark as installRemark, priority, risk, type, mode,
+               last_sample_time as lastSampleTime,
+               created_at as createdAt, updated_at as updatedAt
+        FROM sensor
+        ORDER BY created_at ASC
+    </select>
+
+    <select id="selectById" parameterType="java.lang.String" resultType="com.at.pojo.Sensor">
+        SELECT id, x, y, installation_height as installationHeight,
+               effective_range as effectiveRange, detection_range as detectionRange,
+               install_remark as installRemark, priority, risk, type, mode,
+               last_sample_time as lastSampleTime,
+               created_at as createdAt, updated_at as updatedAt
+        FROM sensor
+        WHERE id = #{id}
+    </select>
+</mapper>

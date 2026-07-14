@@ -1,0 +1,367 @@
+{
+  "type": "FeatureCollection",
+  "name": "s3m_object_footprints_map",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "EPSG:4547",
+      "coordSys": "CGCS2000_3GK_CM_114E"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "s3m_object_footprint",
+        "id": "factory_processing",
+        "name": "加工厂房",
+        "crs": "epsg:0",
+        "dataType": "ArtificialModel",
+        "s3mLeft": -305.860501231482,
+        "s3mRight": -174.99067206302325,
+        "s3mBottom": -48.6409556515574,
+        "s3mTop": 44.4084095275819,
+        "minHeight": -2.5983145065819175,
+        "maxHeight": 89.39735650061778,
+        "sourceScp": "G:\\竞赛\\超图杯\\园区大屏部署\\瓦片\\厂房三维瓦片\\加工厂房\\result_ImportFBX\\result_ImportFBX.scp",
+        "source": "scp.geoBounds",
+        "precisionLevel": "s3m_object_bounds",
+        "mapX": 896.94,
+        "mapY": 415.214,
+        "s3mX": -240.426,
+        "s3mY": -2.117,
+        "longitude": 113.54797454,
+        "latitude": 34.83003657,
+        "localMapX": 896.94,
+        "localMapY": 415.214,
+        "cgcs2000E": 458649.284,
+        "cgcs2000N": 3855829.958,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458606.302,
+              3855851.9
+            ],
+            [
+              458692.265,
+              3855851.9
+            ],
+            [
+              458692.265,
+              3855808.017
+            ],
+            [
+              458606.302,
+              3855808.017
+            ],
+            [
+              458606.302,
+              3855851.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "s3m_object_footprint",
+        "id": "factory_production",
+        "name": "生产装置厂房",
+        "crs": "epsg:0",
+        "dataType": "ArtificialModel",
+        "s3mLeft": -9.082141762277615,
+        "s3mRight": 17.615633205502263,
+        "s3mBottom": -24.757209111848397,
+        "s3mTop": 0.6751753495931692,
+        "minHeight": -0.2733395245159045,
+        "maxHeight": 41.08860457481418,
+        "sourceScp": "G:\\竞赛\\超图杯\\园区大屏部署\\瓦片\\厂房三维瓦片\\生产装置厂房\\result_ImportFBX\\result_ImportFBX.scp",
+        "source": "scp.geoBounds",
+        "precisionLevel": "s3m_object_bounds",
+        "mapX": 1057.67,
+        "mapY": 419.894,
+        "s3mX": 4.267,
+        "s3mY": -12.042,
+        "longitude": 113.54973345,
+        "latitude": 34.82999453,
+        "localMapX": 1057.67,
+        "localMapY": 419.894,
+        "cgcs2000E": 458810.013,
+        "cgcs2000N": 3855825.278,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458801.245,
+              3855831.275
+            ],
+            [
+              458818.781,
+              3855831.275
+            ],
+            [
+              458818.781,
+              3855819.281
+            ],
+            [
+              458801.245,
+              3855819.281
+            ],
+            [
+              458801.245,
+              3855831.275
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "s3m_object_footprint",
+        "id": "warehouse_raw_material",
+        "name": "原材料仓库",
+        "crs": "epsg:0",
+        "dataType": "ArtificialModel",
+        "s3mLeft": -47.56125239924586,
+        "s3mRight": 33.93018225989244,
+        "s3mBottom": -32.44537676372511,
+        "s3mTop": 42.7845109700989,
+        "minHeight": 21.63696602009303,
+        "maxHeight": 32.24212001869593,
+        "sourceScp": "G:\\竞赛\\超图杯\\园区大屏部署\\瓦片\\厂房三维瓦片\\原材料仓库\\result_ImportFBX.scp",
+        "source": "scp.geoBounds",
+        "precisionLevel": "s3m_object_bounds",
+        "mapX": 1050.39,
+        "mapY": 411.777,
+        "s3mX": -6.816,
+        "s3mY": 5.17,
+        "longitude": 113.54965378,
+        "latitude": 34.83006744,
+        "localMapX": 1050.39,
+        "localMapY": 411.777,
+        "cgcs2000E": 458802.733,
+        "cgcs2000N": 3855833.395,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458775.969,
+              3855851.135
+            ],
+            [
+              458829.498,
+              3855851.135
+            ],
+            [
+              458829.498,
+              3855815.655
+            ],
+            [
+              458775.969,
+              3855815.655
+            ],
+            [
+              458775.969,
+              3855851.135
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "s3m_object_footprint",
+        "id": "equipment_heat_exchanger",
+        "name": "换热器",
+        "crs": "epsg:0",
+        "dataType": "ArtificialModel",
+        "s3mLeft": 1.9432581482921487,
+        "s3mRight": 5.453381399505014,
+        "s3mBottom": -0.2010394275013869,
+        "s3mTop": 0.790961733619748,
+        "minHeight": 0.005845611448664412,
+        "maxHeight": 0.26366215340812343,
+        "sourceScp": "G:\\竞赛\\超图杯\\园区大屏部署\\瓦片\\设备三维瓦片\\换热器\\换热器.scp",
+        "source": "scp.geoBounds",
+        "precisionLevel": "s3m_object_bounds",
+        "mapX": 1057.296,
+        "mapY": 414.076,
+        "s3mX": 3.698,
+        "s3mY": 0.295,
+        "longitude": 113.54972936,
+        "latitude": 34.83004679,
+        "localMapX": 1057.296,
+        "localMapY": 414.076,
+        "cgcs2000E": 458809.639,
+        "cgcs2000N": 3855831.096,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458808.487,
+              3855831.33
+            ],
+            [
+              458810.792,
+              3855831.33
+            ],
+            [
+              458810.792,
+              3855830.862
+            ],
+            [
+              458808.487,
+              3855830.862
+            ],
+            [
+              458808.487,
+              3855831.33
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "s3m_object_footprint",
+        "id": "equipment_vertical_tank",
+        "name": "立式罐子",
+        "crs": "epsg:0",
+        "dataType": "ArtificialModel",
+        "s3mLeft": -3.9295759516535327,
+        "s3mRight": 7.547342578708677,
+        "s3mBottom": -3.9932274000999226,
+        "s3mTop": 2.427329931195946,
+        "minHeight": -0.8642206658143512,
+        "maxHeight": 1.3112671907312154,
+        "sourceScp": "G:\\竞赛\\超图杯\\园区大屏部署\\瓦片\\设备三维瓦片\\立式罐子\\罐子.scp",
+        "source": "scp.geoBounds",
+        "precisionLevel": "s3m_object_bounds",
+        "mapX": 1056.055,
+        "mapY": 414.584,
+        "s3mX": 1.809,
+        "s3mY": -0.782,
+        "longitude": 113.54971579,
+        "latitude": 34.83004223,
+        "localMapX": 1056.055,
+        "localMapY": 414.584,
+        "cgcs2000E": 458808.399,
+        "cgcs2000N": 3855830.588,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458804.629,
+              3855832.102
+            ],
+            [
+              458812.168,
+              3855832.102
+            ],
+            [
+              458812.168,
+              3855829.074
+            ],
+            [
+              458804.629,
+              3855829.074
+            ],
+            [
+              458804.629,
+              3855832.102
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "s3m_object_footprint",
+        "id": "equipment_distillation_tower",
+        "name": "蒸馏塔",
+        "crs": "epsg:0",
+        "dataType": "ArtificialModel",
+        "s3mLeft": -13.381490090537199,
+        "s3mRight": 24.537562571771957,
+        "s3mBottom": 9.687175899934427,
+        "s3mTop": 13.10337445703428,
+        "minHeight": 1.7020767964816788,
+        "maxHeight": 36.49673222003898,
+        "sourceScp": "G:\\竞赛\\超图杯\\园区大屏部署\\瓦片\\设备三维瓦片\\蒸馏塔\\蒸馏塔.scp",
+        "source": "scp.geoBounds",
+        "precisionLevel": "s3m_object_bounds",
+        "mapX": 1058.532,
+        "mapY": 408.841,
+        "s3mX": 5.578,
+        "s3mY": 11.395,
+        "longitude": 113.54974287,
+        "latitude": 34.83009382,
+        "localMapX": 1058.532,
+        "localMapY": 408.841,
+        "cgcs2000E": 458810.874,
+        "cgcs2000N": 3855836.331,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458798.421,
+              3855837.137
+            ],
+            [
+              458823.328,
+              3855837.137
+            ],
+            [
+              458823.328,
+              3855835.525
+            ],
+            [
+              458798.421,
+              3855835.525
+            ],
+            [
+              458798.421,
+              3855837.137
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

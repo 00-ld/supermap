@@ -1,0 +1,8 @@
+{
+  "coordinatePolicy": "local-planar-meter-current-epsg0; CGCS2000 pending control points",
+  "workspace": "chemical_park_vectors_cn.smwu",
+  "dataService": "http://8.130.175.232:18090/iserver/services/data-chemical_park_vectors_cn/rest",
+  "mapService": "http://8.130.175.232:18090/iserver/services/map-chemical_park_vectors_cn/rest",
+  "datasource": "chemical_park_vectors_cn.udbx",
+  "publishedAt": "2026-07-14T11:06:50"
+}

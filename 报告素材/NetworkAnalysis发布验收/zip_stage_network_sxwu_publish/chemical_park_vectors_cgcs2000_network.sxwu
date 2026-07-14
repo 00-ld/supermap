@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SuperMapWorkspaceUnicode xmlns:sml="http://www.supermap.com/sml" sml:Version="20120328" sml:Description="" sml:LastUpdateTime="2026-07-14 16:38:39" sml:Caption="UntitledWorkspace">
+<sml:Locale>zh_CN</sml:Locale>
+<sml:DataSources>
+<sml:DataSource>
+<sml:EngineType>2054</sml:EngineType>
+<sml:encryType>0</sml:encryType>
+<sml:WebCoordinate/>
+<sml:Server>./chemical_park_vectors_cgcs2000_network.udbx</sml:Server>
+<sml:Driver/>
+<sml:Database/>
+<sml:User/>
+<sml:Password/>
+<sml:Alias>chemical_park_vectors_cgcs2000</sml:Alias>
+<sml:Options>
+<sml:ReadOnly>FALSE</sml:ReadOnly>
+<sml:Encrypt>TRUE</sml:Encrypt>
+<sml:Exclusive>TRUE</sml:Exclusive>
+<sml:Transacted>FALSE</sml:Transacted>
+</sml:Options>
+<sml:AutoConnection>TRUE</sml:AutoConnection>
+<sml:ExpandOpen>FALSE</sml:ExpandOpen>
+<sml:MaxConnPoolNum>1</sml:MaxConnPoolNum>
+</sml:DataSource>
+</sml:DataSources>
+<sml:Maps/>
+<sml:Layouts/>
+<sml:Scenes/>
+<sml:DesktopInfo/>
+</SuperMapWorkspaceUnicode>

@@ -1,0 +1,1737 @@
+{
+  "type": "FeatureCollection",
+  "name": "road_network_nodes_map",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "local-planar-meter-current-epsg0"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-001",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 0,
+        "y_m": 236,
+        "source": "derived_from_road_centerlines",
+        "mapX": 0,
+        "mapY": 236,
+        "s3mX": -1605.916,
+        "s3mY": 377.887,
+        "longitude": 118.78,
+        "latitude": 32.03787999
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0,
+          236
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-002",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 238,
+        "y_m": 236,
+        "source": "derived_from_road_centerlines",
+        "mapX": 238,
+        "mapY": 236,
+        "s3mX": -1243.588,
+        "s3mY": 377.887,
+        "longitude": 118.78252216,
+        "latitude": 32.03787999
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          238,
+          236
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-003",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 399,
+        "y_m": 236,
+        "source": "derived_from_road_centerlines",
+        "mapX": 399,
+        "mapY": 236,
+        "s3mX": -998.484,
+        "s3mY": 377.887,
+        "longitude": 118.78422833,
+        "latitude": 32.03787999
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          399,
+          236
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-004",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 675,
+        "y_m": 236,
+        "source": "derived_from_road_centerlines",
+        "mapX": 675,
+        "mapY": 236,
+        "s3mX": -578.305,
+        "s3mY": 377.887,
+        "longitude": 118.78715319,
+        "latitude": 32.03787999
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          675,
+          236
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-005",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 768,
+        "y_m": 236,
+        "source": "derived_from_road_centerlines",
+        "mapX": 768,
+        "mapY": 236,
+        "s3mX": -436.723,
+        "s3mY": 377.887,
+        "longitude": 118.78813874,
+        "latitude": 32.03787999
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          768,
+          236
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-006",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 948,
+        "y_m": 236,
+        "source": "derived_from_road_centerlines",
+        "mapX": 948,
+        "mapY": 236,
+        "s3mX": -162.693,
+        "s3mY": 377.887,
+        "longitude": 118.79004626,
+        "latitude": 32.03787999
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          948,
+          236
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-007",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 1075,
+        "y_m": 236,
+        "source": "derived_from_road_centerlines",
+        "mapX": 1075,
+        "mapY": 236,
+        "s3mX": 30.65,
+        "s3mY": 377.887,
+        "longitude": 118.79139212,
+        "latitude": 32.03787999
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1075,
+          236
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-008",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 1227,
+        "y_m": 236,
+        "source": "derived_from_road_centerlines",
+        "mapX": 1227,
+        "mapY": 236,
+        "s3mX": 262.053,
+        "s3mY": 377.887,
+        "longitude": 118.79300291,
+        "latitude": 32.03787999
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1227,
+          236
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-009",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 1587.2,
+        "y_m": 236,
+        "source": "derived_from_road_centerlines",
+        "mapX": 1587.2,
+        "mapY": 236,
+        "s3mX": 810.416,
+        "s3mY": 377.887,
+        "longitude": 118.79682006,
+        "latitude": 32.03787999
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1587.2,
+          236
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-010",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 0,
+        "y_m": 689,
+        "source": "derived_from_road_centerlines",
+        "mapX": 0,
+        "mapY": 689,
+        "s3mX": -1605.916,
+        "s3mY": -582.653,
+        "longitude": 118.78,
+        "latitude": 32.03381064
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0,
+          689
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-011",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 238,
+        "y_m": 689,
+        "source": "derived_from_road_centerlines",
+        "mapX": 238,
+        "mapY": 689,
+        "s3mX": -1243.588,
+        "s3mY": -582.653,
+        "longitude": 118.78252216,
+        "latitude": 32.03381064
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          238,
+          689
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-012",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 1227,
+        "y_m": 689,
+        "source": "derived_from_road_centerlines",
+        "mapX": 1227,
+        "mapY": 689,
+        "s3mX": 262.053,
+        "s3mY": -582.653,
+        "longitude": 118.79300291,
+        "latitude": 32.03381064
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1227,
+          689
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-013",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 1587.2,
+        "y_m": 689,
+        "source": "derived_from_road_centerlines",
+        "mapX": 1587.2,
+        "mapY": 689,
+        "s3mX": 810.416,
+        "s3mY": -582.653,
+        "longitude": 118.79682006,
+        "latitude": 32.03381064
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1587.2,
+          689
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-014",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 238,
+        "y_m": 0,
+        "source": "derived_from_road_centerlines",
+        "mapX": 238,
+        "mapY": 0,
+        "s3mX": -1243.588,
+        "s3mY": 878.3,
+        "longitude": 118.78252216,
+        "latitude": 32.04
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          238,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-015",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 238,
+        "y_m": 343,
+        "source": "derived_from_road_centerlines",
+        "mapX": 238,
+        "mapY": 343,
+        "s3mX": -1243.588,
+        "s3mY": 151.004,
+        "longitude": 118.78252216,
+        "latitude": 32.03691879
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          238,
+          343
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-016",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 238,
+        "y_m": 456,
+        "source": "derived_from_road_centerlines",
+        "mapX": 238,
+        "mapY": 456,
+        "s3mX": -1243.588,
+        "s3mY": -88.601,
+        "longitude": 118.78252216,
+        "latitude": 32.0359037
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          238,
+          456
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-017",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 238,
+        "y_m": 563,
+        "source": "derived_from_road_centerlines",
+        "mapX": 238,
+        "mapY": 563,
+        "s3mX": -1243.588,
+        "s3mY": -315.483,
+        "longitude": 118.78252216,
+        "latitude": 32.03494251
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          238,
+          563
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-018",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 238,
+        "y_m": 947.2,
+        "source": "derived_from_road_centerlines",
+        "mapX": 238,
+        "mapY": 947.2,
+        "s3mX": -1243.588,
+        "s3mY": -1130.139,
+        "longitude": 118.78252216,
+        "latitude": 32.0314912
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          238,
+          947.2
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-019",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 1227,
+        "y_m": 0,
+        "source": "derived_from_road_centerlines",
+        "mapX": 1227,
+        "mapY": 0,
+        "s3mX": 262.053,
+        "s3mY": 878.3,
+        "longitude": 118.79300291,
+        "latitude": 32.04
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1227,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-020",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 1227,
+        "y_m": 343,
+        "source": "derived_from_road_centerlines",
+        "mapX": 1227,
+        "mapY": 343,
+        "s3mX": 262.053,
+        "s3mY": 151.004,
+        "longitude": 118.79300291,
+        "latitude": 32.03691879
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1227,
+          343
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-021",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 1227,
+        "y_m": 456,
+        "source": "derived_from_road_centerlines",
+        "mapX": 1227,
+        "mapY": 456,
+        "s3mX": 262.053,
+        "s3mY": -88.601,
+        "longitude": 118.79300291,
+        "latitude": 32.0359037
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1227,
+          456
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-022",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 1227,
+        "y_m": 563,
+        "source": "derived_from_road_centerlines",
+        "mapX": 1227,
+        "mapY": 563,
+        "s3mX": 262.053,
+        "s3mY": -315.483,
+        "longitude": 118.79300291,
+        "latitude": 32.03494251
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1227,
+          563
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-023",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 1227,
+        "y_m": 947.2,
+        "source": "derived_from_road_centerlines",
+        "mapX": 1227,
+        "mapY": 947.2,
+        "s3mX": 262.053,
+        "s3mY": -1130.139,
+        "longitude": 118.79300291,
+        "latitude": 32.0314912
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1227,
+          947.2
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-024",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 768,
+        "y_m": 226,
+        "source": "derived_from_road_centerlines",
+        "mapX": 768,
+        "mapY": 226,
+        "s3mX": -436.723,
+        "s3mY": 399.091,
+        "longitude": 118.78813874,
+        "latitude": 32.03796982
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          768,
+          226
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-025",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 768,
+        "y_m": 343,
+        "source": "derived_from_road_centerlines",
+        "mapX": 768,
+        "mapY": 343,
+        "s3mX": -436.723,
+        "s3mY": 151.004,
+        "longitude": 118.78813874,
+        "latitude": 32.03691879
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          768,
+          343
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-026",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 768,
+        "y_m": 456,
+        "source": "derived_from_road_centerlines",
+        "mapX": 768,
+        "mapY": 456,
+        "s3mX": -436.723,
+        "s3mY": -88.601,
+        "longitude": 118.78813874,
+        "latitude": 32.0359037
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          768,
+          456
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-027",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 768,
+        "y_m": 563,
+        "source": "derived_from_road_centerlines",
+        "mapX": 768,
+        "mapY": 563,
+        "s3mX": -436.723,
+        "s3mY": -315.483,
+        "longitude": 118.78813874,
+        "latitude": 32.03494251
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          768,
+          563
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-028",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 768,
+        "y_m": 678,
+        "source": "derived_from_road_centerlines",
+        "mapX": 768,
+        "mapY": 678,
+        "s3mX": -436.723,
+        "s3mY": -559.329,
+        "longitude": 118.78813874,
+        "latitude": 32.03390945
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          768,
+          678
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-029",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 948,
+        "y_m": 226,
+        "source": "derived_from_road_centerlines",
+        "mapX": 948,
+        "mapY": 226,
+        "s3mX": -162.693,
+        "s3mY": 399.091,
+        "longitude": 118.79004626,
+        "latitude": 32.03796982
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          948,
+          226
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-030",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 948,
+        "y_m": 343,
+        "source": "derived_from_road_centerlines",
+        "mapX": 948,
+        "mapY": 343,
+        "s3mX": -162.693,
+        "s3mY": 151.004,
+        "longitude": 118.79004626,
+        "latitude": 32.03691879
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          948,
+          343
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-031",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 948,
+        "y_m": 456,
+        "source": "derived_from_road_centerlines",
+        "mapX": 948,
+        "mapY": 456,
+        "s3mX": -162.693,
+        "s3mY": -88.601,
+        "longitude": 118.79004626,
+        "latitude": 32.0359037
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          948,
+          456
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-032",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 948,
+        "y_m": 563,
+        "source": "derived_from_road_centerlines",
+        "mapX": 948,
+        "mapY": 563,
+        "s3mX": -162.693,
+        "s3mY": -315.483,
+        "longitude": 118.79004626,
+        "latitude": 32.03494251
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          948,
+          563
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-033",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 948,
+        "y_m": 678,
+        "source": "derived_from_road_centerlines",
+        "mapX": 948,
+        "mapY": 678,
+        "s3mX": -162.693,
+        "s3mY": -559.329,
+        "longitude": 118.79004626,
+        "latitude": 32.03390945
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          948,
+          678
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-034",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 399,
+        "y_m": 226,
+        "source": "derived_from_road_centerlines",
+        "mapX": 399,
+        "mapY": 226,
+        "s3mX": -998.484,
+        "s3mY": 399.091,
+        "longitude": 118.78422833,
+        "latitude": 32.03796982
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          399,
+          226
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-035",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 399,
+        "y_m": 343,
+        "source": "derived_from_road_centerlines",
+        "mapX": 399,
+        "mapY": 343,
+        "s3mX": -998.484,
+        "s3mY": 151.004,
+        "longitude": 118.78422833,
+        "latitude": 32.03691879
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          399,
+          343
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-036",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 399,
+        "y_m": 456,
+        "source": "derived_from_road_centerlines",
+        "mapX": 399,
+        "mapY": 456,
+        "s3mX": -998.484,
+        "s3mY": -88.601,
+        "longitude": 118.78422833,
+        "latitude": 32.0359037
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          399,
+          456
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-037",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 399,
+        "y_m": 563,
+        "source": "derived_from_road_centerlines",
+        "mapX": 399,
+        "mapY": 563,
+        "s3mX": -998.484,
+        "s3mY": -315.483,
+        "longitude": 118.78422833,
+        "latitude": 32.03494251
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          399,
+          563
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-038",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 399,
+        "y_m": 678,
+        "source": "derived_from_road_centerlines",
+        "mapX": 399,
+        "mapY": 678,
+        "s3mX": -998.484,
+        "s3mY": -559.329,
+        "longitude": 118.78422833,
+        "latitude": 32.03390945
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          399,
+          678
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-039",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 675,
+        "y_m": 226,
+        "source": "derived_from_road_centerlines",
+        "mapX": 675,
+        "mapY": 226,
+        "s3mX": -578.305,
+        "s3mY": 399.091,
+        "longitude": 118.78715319,
+        "latitude": 32.03796982
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          675,
+          226
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-040",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 675,
+        "y_m": 343,
+        "source": "derived_from_road_centerlines",
+        "mapX": 675,
+        "mapY": 343,
+        "s3mX": -578.305,
+        "s3mY": 151.004,
+        "longitude": 118.78715319,
+        "latitude": 32.03691879
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          675,
+          343
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-041",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 675,
+        "y_m": 456,
+        "source": "derived_from_road_centerlines",
+        "mapX": 675,
+        "mapY": 456,
+        "s3mX": -578.305,
+        "s3mY": -88.601,
+        "longitude": 118.78715319,
+        "latitude": 32.0359037
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          675,
+          456
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-042",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 675,
+        "y_m": 563,
+        "source": "derived_from_road_centerlines",
+        "mapX": 675,
+        "mapY": 563,
+        "s3mX": -578.305,
+        "s3mY": -315.483,
+        "longitude": 118.78715319,
+        "latitude": 32.03494251
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          675,
+          563
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-043",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 675,
+        "y_m": 678,
+        "source": "derived_from_road_centerlines",
+        "mapX": 675,
+        "mapY": 678,
+        "s3mX": -578.305,
+        "s3mY": -559.329,
+        "longitude": 118.78715319,
+        "latitude": 32.03390945
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          675,
+          678
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-044",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 1075,
+        "y_m": 226,
+        "source": "derived_from_road_centerlines",
+        "mapX": 1075,
+        "mapY": 226,
+        "s3mX": 30.65,
+        "s3mY": 399.091,
+        "longitude": 118.79139212,
+        "latitude": 32.03796982
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1075,
+          226
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-045",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 1075,
+        "y_m": 343,
+        "source": "derived_from_road_centerlines",
+        "mapX": 1075,
+        "mapY": 343,
+        "s3mX": 30.65,
+        "s3mY": 151.004,
+        "longitude": 118.79139212,
+        "latitude": 32.03691879
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1075,
+          343
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-046",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 1075,
+        "y_m": 456,
+        "source": "derived_from_road_centerlines",
+        "mapX": 1075,
+        "mapY": 456,
+        "s3mX": 30.65,
+        "s3mY": -88.601,
+        "longitude": 118.79139212,
+        "latitude": 32.0359037
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1075,
+          456
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-047",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 1075,
+        "y_m": 563,
+        "source": "derived_from_road_centerlines",
+        "mapX": 1075,
+        "mapY": 563,
+        "s3mX": 30.65,
+        "s3mY": -315.483,
+        "longitude": 118.79139212,
+        "latitude": 32.03494251
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1075,
+          563
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-048",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 1075,
+        "y_m": 678,
+        "source": "derived_from_road_centerlines",
+        "mapX": 1075,
+        "mapY": 678,
+        "s3mX": 30.65,
+        "s3mY": -559.329,
+        "longitude": 118.79139212,
+        "latitude": 32.03390945
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1075,
+          678
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-049",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 229,
+        "y_m": 343,
+        "source": "derived_from_road_centerlines",
+        "mapX": 229,
+        "mapY": 343,
+        "s3mX": -1257.29,
+        "s3mY": 151.004,
+        "longitude": 118.78242679,
+        "latitude": 32.03691879
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          229,
+          343
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-050",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 255,
+        "y_m": 343,
+        "source": "derived_from_road_centerlines",
+        "mapX": 255,
+        "mapY": 343,
+        "s3mX": -1217.708,
+        "s3mY": 151.004,
+        "longitude": 118.78270232,
+        "latitude": 32.03691879
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          255,
+          343
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-051",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 589,
+        "y_m": 343,
+        "source": "derived_from_road_centerlines",
+        "mapX": 589,
+        "mapY": 343,
+        "s3mX": -709.23,
+        "s3mY": 151.004,
+        "longitude": 118.78624182,
+        "latitude": 32.03691879
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          589,
+          343
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-052",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 991,
+        "y_m": 343,
+        "source": "derived_from_road_centerlines",
+        "mapX": 991,
+        "mapY": 343,
+        "s3mX": -97.231,
+        "s3mY": 151.004,
+        "longitude": 118.79050194,
+        "latitude": 32.03691879
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          991,
+          343
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-053",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 1238,
+        "y_m": 343,
+        "source": "derived_from_road_centerlines",
+        "mapX": 1238,
+        "mapY": 343,
+        "s3mX": 278.799,
+        "s3mY": 151.004,
+        "longitude": 118.79311948,
+        "latitude": 32.03691879
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1238,
+          343
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-054",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 229,
+        "y_m": 456,
+        "source": "derived_from_road_centerlines",
+        "mapX": 229,
+        "mapY": 456,
+        "s3mX": -1257.29,
+        "s3mY": -88.601,
+        "longitude": 118.78242679,
+        "latitude": 32.0359037
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          229,
+          456
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-055",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 255,
+        "y_m": 456,
+        "source": "derived_from_road_centerlines",
+        "mapX": 255,
+        "mapY": 456,
+        "s3mX": -1217.708,
+        "s3mY": -88.601,
+        "longitude": 118.78270232,
+        "latitude": 32.0359037
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          255,
+          456
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-056",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 589,
+        "y_m": 456,
+        "source": "derived_from_road_centerlines",
+        "mapX": 589,
+        "mapY": 456,
+        "s3mX": -709.23,
+        "s3mY": -88.601,
+        "longitude": 118.78624182,
+        "latitude": 32.0359037
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          589,
+          456
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-057",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 991,
+        "y_m": 456,
+        "source": "derived_from_road_centerlines",
+        "mapX": 991,
+        "mapY": 456,
+        "s3mX": -97.231,
+        "s3mY": -88.601,
+        "longitude": 118.79050194,
+        "latitude": 32.0359037
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          991,
+          456
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-058",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 1238,
+        "y_m": 456,
+        "source": "derived_from_road_centerlines",
+        "mapX": 1238,
+        "mapY": 456,
+        "s3mX": 278.799,
+        "s3mY": -88.601,
+        "longitude": 118.79311948,
+        "latitude": 32.0359037
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1238,
+          456
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-059",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 229,
+        "y_m": 563,
+        "source": "derived_from_road_centerlines",
+        "mapX": 229,
+        "mapY": 563,
+        "s3mX": -1257.29,
+        "s3mY": -315.483,
+        "longitude": 118.78242679,
+        "latitude": 32.03494251
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          229,
+          563
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-060",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 255,
+        "y_m": 563,
+        "source": "derived_from_road_centerlines",
+        "mapX": 255,
+        "mapY": 563,
+        "s3mX": -1217.708,
+        "s3mY": -315.483,
+        "longitude": 118.78270232,
+        "latitude": 32.03494251
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          255,
+          563
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-061",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 589,
+        "y_m": 563,
+        "source": "derived_from_road_centerlines",
+        "mapX": 589,
+        "mapY": 563,
+        "s3mX": -709.23,
+        "s3mY": -315.483,
+        "longitude": 118.78624182,
+        "latitude": 32.03494251
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          589,
+          563
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-062",
+        "type": "intersection",
+        "degree": 4,
+        "x_m": 991,
+        "y_m": 563,
+        "source": "derived_from_road_centerlines",
+        "mapX": 991,
+        "mapY": 563,
+        "s3mX": -97.231,
+        "s3mY": -315.483,
+        "longitude": 118.79050194,
+        "latitude": 32.03494251
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          991,
+          563
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-063",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 1238,
+        "y_m": 563,
+        "source": "derived_from_road_centerlines",
+        "mapX": 1238,
+        "mapY": 563,
+        "s3mX": 278.799,
+        "s3mY": -315.483,
+        "longitude": 118.79311948,
+        "latitude": 32.03494251
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1238,
+          563
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-064",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 255,
+        "y_m": 246,
+        "source": "derived_from_road_centerlines",
+        "mapX": 255,
+        "mapY": 246,
+        "s3mX": -1217.708,
+        "s3mY": 356.683,
+        "longitude": 118.78270232,
+        "latitude": 32.03779015
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          255,
+          246
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-065",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 255,
+        "y_m": 678,
+        "source": "derived_from_road_centerlines",
+        "mapX": 255,
+        "mapY": 678,
+        "s3mX": -1217.708,
+        "s3mY": -559.329,
+        "longitude": 118.78270232,
+        "latitude": 32.03390945
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          255,
+          678
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-066",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 589,
+        "y_m": 246,
+        "source": "derived_from_road_centerlines",
+        "mapX": 589,
+        "mapY": 246,
+        "s3mX": -709.23,
+        "s3mY": 356.683,
+        "longitude": 118.78624182,
+        "latitude": 32.03779015
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          589,
+          246
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-067",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 589,
+        "y_m": 678,
+        "source": "derived_from_road_centerlines",
+        "mapX": 589,
+        "mapY": 678,
+        "s3mX": -709.23,
+        "s3mY": -559.329,
+        "longitude": 118.78624182,
+        "latitude": 32.03390945
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          589,
+          678
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-068",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 991,
+        "y_m": 246,
+        "source": "derived_from_road_centerlines",
+        "mapX": 991,
+        "mapY": 246,
+        "s3mX": -97.231,
+        "s3mY": 356.683,
+        "longitude": 118.79050194,
+        "latitude": 32.03779015
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          991,
+          246
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_node",
+        "id": "node-069",
+        "type": "endpoint_or_junction",
+        "degree": 1,
+        "x_m": 991,
+        "y_m": 678,
+        "source": "derived_from_road_centerlines",
+        "mapX": 991,
+        "mapY": 678,
+        "s3mX": -97.231,
+        "s3mY": -559.329,
+        "longitude": 118.79050194,
+        "latitude": 32.03390945
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          991,
+          678
+        ]
+      }
+    }
+  ]
+}

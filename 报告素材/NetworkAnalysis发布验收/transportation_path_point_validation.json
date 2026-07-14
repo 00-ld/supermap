@@ -1,0 +1,690 @@
+{"pathList": [{
+    "pathGuideItems": [
+        {
+            "sideType": "LEFT",
+            "distance": 7,
+            "isStop": true,
+            "isEdge": false,
+            "length": 0,
+            "turnType": "AHEAD",
+            "description": "从此处出发",
+            "index": 1,
+            "weight": 0,
+            "directionType": "NONE",
+            "bounds": {
+                "top": 3855563.172,
+                "left": 458970.343,
+                "bottom": 3855563.172,
+                "leftBottom": {
+                    "x": 458970.343,
+                    "y": 3855563.172,
+                    "m": null
+                },
+                "right": 458970.343,
+                "rightTop": {
+                    "x": 458970.343,
+                    "y": 3855563.172,
+                    "m": null
+                }
+            },
+            "name": "",
+            "turnAngle": 0,
+            "geometry": {
+                "center": {
+                    "x": 458970.343,
+                    "y": 3855563.172,
+                    "m": null
+                },
+                "parts": [1],
+                "style": null,
+                "prjCoordSys": {
+                    "distanceUnit": "METER",
+                    "projectionParam": {
+                        "centralParallel": 0,
+                        "firstPointLongitude": 0,
+                        "rectifiedAngle": 0,
+                        "scaleFactor": 1,
+                        "falseNorthing": 0,
+                        "centralMeridian": 114,
+                        "secondStandardParallel": 0,
+                        "secondPointLongitude": 0,
+                        "azimuth": 0,
+                        "falseEasting": 500000,
+                        "firstStandardParallel": 0,
+                        "projectionPlaneOriginHeight": 0
+                    },
+                    "epsgCode": 4547,
+                    "coordUnit": "METER",
+                    "name": "China_2000_3_DEGREE_GK_Zone_38N",
+                    "projection": {
+                        "name": "Gauss_Kruger",
+                        "type": "PRJ_GAUSS_KRUGER"
+                    },
+                    "type": "PCS_CHINA_2000_3_DEGREE_GK_38N",
+                    "coordSystem": {
+                        "datum": {
+                            "name": "D_China_2000",
+                            "type": "DATUM_CHINA_2000",
+                            "spheroid": {
+                                "flatten": 0.003352810681182319,
+                                "name": "CGCS2000",
+                                "axis": 6378137,
+                                "type": "SPHEROID_CHINA_2000"
+                            }
+                        },
+                        "unit": "DEGREE",
+                        "spatialRefType": "SPATIALREF_EARTH_LONGITUDE_LATITUDE",
+                        "name": "GCS_China_2000",
+                        "type": "GCS_CHINA_2000",
+                        "primeMeridian": {
+                            "longitudeValue": 0,
+                            "name": "Greenwich",
+                            "type": "PRIMEMERIDIAN_GREENWICH"
+                        }
+                    }
+                },
+                "id": 0,
+                "type": "POINT",
+                "partTopo": null,
+                "points": [{
+                    "x": 458970.343,
+                    "y": 3855563.172,
+                    "m": null
+                }]
+            },
+            "id": -1
+        },
+        {
+            "sideType": "NONE",
+            "distance": 0,
+            "isStop": false,
+            "isEdge": true,
+            "length": 7,
+            "turnType": "NONE",
+            "description": "向南",
+            "index": -1,
+            "weight": 0,
+            "directionType": "SOURTH",
+            "bounds": {
+                "top": 3855563.172,
+                "left": 458970.343,
+                "bottom": 3855556.172,
+                "leftBottom": {
+                    "x": 458970.343,
+                    "y": 3855556.172,
+                    "m": null
+                },
+                "right": 458970.343,
+                "rightTop": {
+                    "x": 458970.343,
+                    "y": 3855563.172,
+                    "m": null
+                }
+            },
+            "name": "",
+            "turnAngle": -1,
+            "geometry": {
+                "center": {
+                    "x": 458970.343,
+                    "y": 3855559.672,
+                    "m": null
+                },
+                "parts": [2],
+                "style": null,
+                "prjCoordSys": {
+                    "distanceUnit": "METER",
+                    "projectionParam": {
+                        "centralParallel": 0,
+                        "firstPointLongitude": 0,
+                        "rectifiedAngle": 0,
+                        "scaleFactor": 1,
+                        "falseNorthing": 0,
+                        "centralMeridian": 114,
+                        "secondStandardParallel": 0,
+                        "secondPointLongitude": 0,
+                        "azimuth": 0,
+                        "falseEasting": 500000,
+                        "firstStandardParallel": 0,
+                        "projectionPlaneOriginHeight": 0
+                    },
+                    "epsgCode": 4547,
+                    "coordUnit": "METER",
+                    "name": "China_2000_3_DEGREE_GK_Zone_38N",
+                    "projection": {
+                        "name": "Gauss_Kruger",
+                        "type": "PRJ_GAUSS_KRUGER"
+                    },
+                    "type": "PCS_CHINA_2000_3_DEGREE_GK_38N",
+                    "coordSystem": {
+                        "datum": {
+                            "name": "D_China_2000",
+                            "type": "DATUM_CHINA_2000",
+                            "spheroid": {
+                                "flatten": 0.003352810681182319,
+                                "name": "CGCS2000",
+                                "axis": 6378137,
+                                "type": "SPHEROID_CHINA_2000"
+                            }
+                        },
+                        "unit": "DEGREE",
+                        "spatialRefType": "SPATIALREF_EARTH_LONGITUDE_LATITUDE",
+                        "name": "GCS_China_2000",
+                        "type": "GCS_CHINA_2000",
+                        "primeMeridian": {
+                            "longitudeValue": 0,
+                            "name": "Greenwich",
+                            "type": "PRIMEMERIDIAN_GREENWICH"
+                        }
+                    }
+                },
+                "id": 0,
+                "type": "LINE",
+                "partTopo": null,
+                "points": [
+                    {
+                        "x": 458970.343,
+                        "y": 3855563.172,
+                        "m": null
+                    },
+                    {
+                        "x": 458970.343,
+                        "y": 3855556.172,
+                        "m": null
+                    }
+                ]
+            },
+            "id": -1
+        },
+        {
+            "sideType": "NONE",
+            "distance": 0,
+            "isStop": false,
+            "isEdge": false,
+            "length": 0,
+            "turnType": "RIGHT",
+            "description": "右转",
+            "index": -1,
+            "weight": 0,
+            "directionType": "NONE",
+            "bounds": {
+                "top": 3855556.172,
+                "left": 458970.343,
+                "bottom": 3855556.172,
+                "leftBottom": {
+                    "x": 458970.343,
+                    "y": 3855556.172,
+                    "m": null
+                },
+                "right": 458970.343,
+                "rightTop": {
+                    "x": 458970.343,
+                    "y": 3855556.172,
+                    "m": null
+                }
+            },
+            "name": "",
+            "turnAngle": 90,
+            "geometry": {
+                "center": {
+                    "x": 458970.343,
+                    "y": 3855556.172,
+                    "m": null
+                },
+                "parts": [1],
+                "style": null,
+                "prjCoordSys": {
+                    "distanceUnit": "METER",
+                    "projectionParam": {
+                        "centralParallel": 0,
+                        "firstPointLongitude": 0,
+                        "rectifiedAngle": 0,
+                        "scaleFactor": 1,
+                        "falseNorthing": 0,
+                        "centralMeridian": 114,
+                        "secondStandardParallel": 0,
+                        "secondPointLongitude": 0,
+                        "azimuth": 0,
+                        "falseEasting": 500000,
+                        "firstStandardParallel": 0,
+                        "projectionPlaneOriginHeight": 0
+                    },
+                    "epsgCode": 4547,
+                    "coordUnit": "METER",
+                    "name": "China_2000_3_DEGREE_GK_Zone_38N",
+                    "projection": {
+                        "name": "Gauss_Kruger",
+                        "type": "PRJ_GAUSS_KRUGER"
+                    },
+                    "type": "PCS_CHINA_2000_3_DEGREE_GK_38N",
+                    "coordSystem": {
+                        "datum": {
+                            "name": "D_China_2000",
+                            "type": "DATUM_CHINA_2000",
+                            "spheroid": {
+                                "flatten": 0.003352810681182319,
+                                "name": "CGCS2000",
+                                "axis": 6378137,
+                                "type": "SPHEROID_CHINA_2000"
+                            }
+                        },
+                        "unit": "DEGREE",
+                        "spatialRefType": "SPATIALREF_EARTH_LONGITUDE_LATITUDE",
+                        "name": "GCS_China_2000",
+                        "type": "GCS_CHINA_2000",
+                        "primeMeridian": {
+                            "longitudeValue": 0,
+                            "name": "Greenwich",
+                            "type": "PRIMEMERIDIAN_GREENWICH"
+                        }
+                    }
+                },
+                "id": 0,
+                "type": "POINT",
+                "partTopo": null,
+                "points": [{
+                    "x": 458970.343,
+                    "y": 3855556.172,
+                    "m": null
+                }]
+            },
+            "id": -1
+        },
+        {
+            "sideType": "NONE",
+            "distance": 0,
+            "isStop": false,
+            "isEdge": true,
+            "length": 980,
+            "turnType": "NONE",
+            "description": "向西980.0米",
+            "index": -1,
+            "weight": 980,
+            "directionType": "WEST",
+            "bounds": {
+                "top": 3855556.172,
+                "left": 457990.343,
+                "bottom": 3855556.172,
+                "leftBottom": {
+                    "x": 457990.343,
+                    "y": 3855556.172,
+                    "m": null
+                },
+                "right": 458970.343,
+                "rightTop": {
+                    "x": 458970.343,
+                    "y": 3855556.172,
+                    "m": null
+                }
+            },
+            "name": "10",
+            "turnAngle": -1,
+            "geometry": {
+                "center": {
+                    "x": 458480.343,
+                    "y": 3855556.172,
+                    "m": null
+                },
+                "parts": [2],
+                "style": null,
+                "prjCoordSys": {
+                    "distanceUnit": "METER",
+                    "projectionParam": {
+                        "centralParallel": 0,
+                        "firstPointLongitude": 0,
+                        "rectifiedAngle": 0,
+                        "scaleFactor": 1,
+                        "falseNorthing": 0,
+                        "centralMeridian": 114,
+                        "secondStandardParallel": 0,
+                        "secondPointLongitude": 0,
+                        "azimuth": 0,
+                        "falseEasting": 500000,
+                        "firstStandardParallel": 0,
+                        "projectionPlaneOriginHeight": 0
+                    },
+                    "epsgCode": 4547,
+                    "coordUnit": "METER",
+                    "name": "China_2000_3_DEGREE_GK_Zone_38N",
+                    "projection": {
+                        "name": "Gauss_Kruger",
+                        "type": "PRJ_GAUSS_KRUGER"
+                    },
+                    "type": "PCS_CHINA_2000_3_DEGREE_GK_38N",
+                    "coordSystem": {
+                        "datum": {
+                            "name": "D_China_2000",
+                            "type": "DATUM_CHINA_2000",
+                            "spheroid": {
+                                "flatten": 0.003352810681182319,
+                                "name": "CGCS2000",
+                                "axis": 6378137,
+                                "type": "SPHEROID_CHINA_2000"
+                            }
+                        },
+                        "unit": "DEGREE",
+                        "spatialRefType": "SPATIALREF_EARTH_LONGITUDE_LATITUDE",
+                        "name": "GCS_China_2000",
+                        "type": "GCS_CHINA_2000",
+                        "primeMeridian": {
+                            "longitudeValue": 0,
+                            "name": "Greenwich",
+                            "type": "PRIMEMERIDIAN_GREENWICH"
+                        }
+                    }
+                },
+                "id": 10,
+                "type": "LINE",
+                "partTopo": null,
+                "points": [
+                    {
+                        "x": 458970.343,
+                        "y": 3855556.172,
+                        "m": null
+                    },
+                    {
+                        "x": 457990.343,
+                        "y": 3855556.172,
+                        "m": null
+                    }
+                ]
+            },
+            "id": 10
+        },
+        {
+            "sideType": "NONE",
+            "distance": 0,
+            "isStop": false,
+            "isEdge": false,
+            "length": 0,
+            "turnType": "RIGHT",
+            "description": "右转",
+            "index": 1,
+            "weight": 0,
+            "directionType": "NONE",
+            "bounds": {
+                "top": 3855556.172,
+                "left": 457990.343,
+                "bottom": 3855556.172,
+                "leftBottom": {
+                    "x": 457990.343,
+                    "y": 3855556.172,
+                    "m": null
+                },
+                "right": 457990.343,
+                "rightTop": {
+                    "x": 457990.343,
+                    "y": 3855556.172,
+                    "m": null
+                }
+            },
+            "name": "",
+            "turnAngle": 90,
+            "geometry": {
+                "center": {
+                    "x": 457990.343,
+                    "y": 3855556.172,
+                    "m": null
+                },
+                "parts": [1],
+                "style": null,
+                "prjCoordSys": {
+                    "distanceUnit": "METER",
+                    "projectionParam": {
+                        "centralParallel": 0,
+                        "firstPointLongitude": 0,
+                        "rectifiedAngle": 0,
+                        "scaleFactor": 1,
+                        "falseNorthing": 0,
+                        "centralMeridian": 114,
+                        "secondStandardParallel": 0,
+                        "secondPointLongitude": 0,
+                        "azimuth": 0,
+                        "falseEasting": 500000,
+                        "firstStandardParallel": 0,
+                        "projectionPlaneOriginHeight": 0
+                    },
+                    "epsgCode": 4547,
+                    "coordUnit": "METER",
+                    "name": "China_2000_3_DEGREE_GK_Zone_38N",
+                    "projection": {
+                        "name": "Gauss_Kruger",
+                        "type": "PRJ_GAUSS_KRUGER"
+                    },
+                    "type": "PCS_CHINA_2000_3_DEGREE_GK_38N",
+                    "coordSystem": {
+                        "datum": {
+                            "name": "D_China_2000",
+                            "type": "DATUM_CHINA_2000",
+                            "spheroid": {
+                                "flatten": 0.003352810681182319,
+                                "name": "CGCS2000",
+                                "axis": 6378137,
+                                "type": "SPHEROID_CHINA_2000"
+                            }
+                        },
+                        "unit": "DEGREE",
+                        "spatialRefType": "SPATIALREF_EARTH_LONGITUDE_LATITUDE",
+                        "name": "GCS_China_2000",
+                        "type": "GCS_CHINA_2000",
+                        "primeMeridian": {
+                            "longitudeValue": 0,
+                            "name": "Greenwich",
+                            "type": "PRIMEMERIDIAN_GREENWICH"
+                        }
+                    }
+                },
+                "id": 0,
+                "type": "POINT",
+                "partTopo": null,
+                "points": [{
+                    "x": 457990.343,
+                    "y": 3855556.172,
+                    "m": null
+                }]
+            },
+            "id": 57
+        },
+        {
+            "sideType": "NONE",
+            "distance": 0,
+            "isStop": false,
+            "isEdge": true,
+            "length": 5,
+            "turnType": "NONE",
+            "description": "向北5.0米",
+            "index": -1,
+            "weight": 4.999999999999991,
+            "directionType": "NORTH",
+            "bounds": {
+                "top": 3855561.172,
+                "left": 457990.343,
+                "bottom": 3855556.172,
+                "leftBottom": {
+                    "x": 457990.343,
+                    "y": 3855556.172,
+                    "m": null
+                },
+                "right": 457990.343,
+                "rightTop": {
+                    "x": 457990.343,
+                    "y": 3855561.172,
+                    "m": null
+                }
+            },
+            "name": "16",
+            "turnAngle": -1,
+            "geometry": {
+                "center": {
+                    "x": 457990.343,
+                    "y": 3855558.672,
+                    "m": null
+                },
+                "parts": [2],
+                "style": null,
+                "prjCoordSys": {
+                    "distanceUnit": "METER",
+                    "projectionParam": {
+                        "centralParallel": 0,
+                        "firstPointLongitude": 0,
+                        "rectifiedAngle": 0,
+                        "scaleFactor": 1,
+                        "falseNorthing": 0,
+                        "centralMeridian": 114,
+                        "secondStandardParallel": 0,
+                        "secondPointLongitude": 0,
+                        "azimuth": 0,
+                        "falseEasting": 500000,
+                        "firstStandardParallel": 0,
+                        "projectionPlaneOriginHeight": 0
+                    },
+                    "epsgCode": 4547,
+                    "coordUnit": "METER",
+                    "name": "China_2000_3_DEGREE_GK_Zone_38N",
+                    "projection": {
+                        "name": "Gauss_Kruger",
+                        "type": "PRJ_GAUSS_KRUGER"
+                    },
+                    "type": "PCS_CHINA_2000_3_DEGREE_GK_38N",
+                    "coordSystem": {
+                        "datum": {
+                            "name": "D_China_2000",
+                            "type": "DATUM_CHINA_2000",
+                            "spheroid": {
+                                "flatten": 0.003352810681182319,
+                                "name": "CGCS2000",
+                                "axis": 6378137,
+                                "type": "SPHEROID_CHINA_2000"
+                            }
+                        },
+                        "unit": "DEGREE",
+                        "spatialRefType": "SPATIALREF_EARTH_LONGITUDE_LATITUDE",
+                        "name": "GCS_China_2000",
+                        "type": "GCS_CHINA_2000",
+                        "primeMeridian": {
+                            "longitudeValue": 0,
+                            "name": "Greenwich",
+                            "type": "PRIMEMERIDIAN_GREENWICH"
+                        }
+                    }
+                },
+                "id": 16,
+                "type": "LINE",
+                "partTopo": null,
+                "points": [
+                    {
+                        "x": 457990.343,
+                        "y": 3855556.172,
+                        "m": null
+                    },
+                    {
+                        "x": 457990.343,
+                        "y": 3855561.172,
+                        "m": null
+                    }
+                ]
+            },
+            "id": 16
+        },
+        {
+            "sideType": "LEFT",
+            "distance": 0,
+            "isStop": true,
+            "isEdge": false,
+            "length": 0,
+            "turnType": "AHEAD",
+            "description": "到达终点",
+            "index": 2,
+            "weight": 0,
+            "directionType": "NONE",
+            "bounds": {
+                "top": 3855561.172,
+                "left": 457990.343,
+                "bottom": 3855561.172,
+                "leftBottom": {
+                    "x": 457990.343,
+                    "y": 3855561.172,
+                    "m": null
+                },
+                "right": 457990.343,
+                "rightTop": {
+                    "x": 457990.343,
+                    "y": 3855561.172,
+                    "m": null
+                }
+            },
+            "name": "",
+            "turnAngle": 0,
+            "geometry": {
+                "center": {
+                    "x": 457990.343,
+                    "y": 3855561.172,
+                    "m": null
+                },
+                "parts": [1],
+                "style": null,
+                "prjCoordSys": {
+                    "distanceUnit": "METER",
+                    "projectionParam": {
+                        "centralParallel": 0,
+                        "firstPointLongitude": 0,
+                        "rectifiedAngle": 0,
+                        "scaleFactor": 1,
+                        "falseNorthing": 0,
+                        "centralMeridian": 114,
+                        "secondStandardParallel": 0,
+                        "secondPointLongitude": 0,
+                        "azimuth": 0,
+                        "falseEasting": 500000,
+                        "firstStandardParallel": 0,
+                        "projectionPlaneOriginHeight": 0
+                    },
+                    "epsgCode": 4547,
+                    "coordUnit": "METER",
+                    "name": "China_2000_3_DEGREE_GK_Zone_38N",
+                    "projection": {
+                        "name": "Gauss_Kruger",
+                        "type": "PRJ_GAUSS_KRUGER"
+                    },
+                    "type": "PCS_CHINA_2000_3_DEGREE_GK_38N",
+                    "coordSystem": {
+                        "datum": {
+                            "name": "D_China_2000",
+                            "type": "DATUM_CHINA_2000",
+                            "spheroid": {
+                                "flatten": 0.003352810681182319,
+                                "name": "CGCS2000",
+                                "axis": 6378137,
+                                "type": "SPHEROID_CHINA_2000"
+                            }
+                        },
+                        "unit": "DEGREE",
+                        "spatialRefType": "SPATIALREF_EARTH_LONGITUDE_LATITUDE",
+                        "name": "GCS_China_2000",
+                        "type": "GCS_CHINA_2000",
+                        "primeMeridian": {
+                            "longitudeValue": 0,
+                            "name": "Greenwich",
+                            "type": "PRIMEMERIDIAN_GREENWICH"
+                        }
+                    }
+                },
+                "id": 0,
+                "type": "POINT",
+                "partTopo": null,
+                "points": [{
+                    "x": 457990.343,
+                    "y": 3855561.172,
+                    "m": null
+                }]
+            },
+            "id": -1
+        }
+    ],
+    "nodeIDs": [],
+    "route": null,
+    "edgeFeatures": null,
+    "weight": 985,
+    "nodeFeatures": null,
+    "stopWeights": [985],
+    "edgeIDs": []
+}]}

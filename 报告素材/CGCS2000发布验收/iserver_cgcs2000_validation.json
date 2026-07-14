@@ -1,0 +1,288 @@
+{
+  "datasets": {
+    "datasetCount": 7,
+    "datasetNames": [
+      "Park_RoadPolygon_R",
+      "Park_RoadNetworkNode_P",
+      "Park_RoadNetworkEdge_L",
+      "Park_BuildingFacilityPolygon_R",
+      "Park_BuildingFootprint_R",
+      "Park_EntrancePoint_P",
+      "Park_S3MObjectFootprint_R"
+    ],
+    "childUriList": [
+      "http://8.130.175.232:18090/iserver/services/data-chemical_park_vectors_cgcs2000/rest/data/datasources/name/chemical_park_vectors_cgcs2000/datasets/name/Park_RoadPolygon_R",
+      "http://8.130.175.232:18090/iserver/services/data-chemical_park_vectors_cgcs2000/rest/data/datasources/name/chemical_park_vectors_cgcs2000/datasets/name/Park_RoadNetworkNode_P",
+      "http://8.130.175.232:18090/iserver/services/data-chemical_park_vectors_cgcs2000/rest/data/datasources/name/chemical_park_vectors_cgcs2000/datasets/name/Park_RoadNetworkEdge_L",
+      "http://8.130.175.232:18090/iserver/services/data-chemical_park_vectors_cgcs2000/rest/data/datasources/name/chemical_park_vectors_cgcs2000/datasets/name/Park_BuildingFacilityPolygon_R",
+      "http://8.130.175.232:18090/iserver/services/data-chemical_park_vectors_cgcs2000/rest/data/datasources/name/chemical_park_vectors_cgcs2000/datasets/name/Park_BuildingFootprint_R",
+      "http://8.130.175.232:18090/iserver/services/data-chemical_park_vectors_cgcs2000/rest/data/datasources/name/chemical_park_vectors_cgcs2000/datasets/name/Park_EntrancePoint_P",
+      "http://8.130.175.232:18090/iserver/services/data-chemical_park_vectors_cgcs2000/rest/data/datasources/name/chemical_park_vectors_cgcs2000/datasets/name/Park_S3MObjectFootprint_R"
+    ]
+  },
+  "road": {
+    "schema": null,
+    "charset": "UTF8",
+    "recordCount": 93,
+    "supportTransaction": false,
+    "isFileCache": false,
+    "description": "NULL",
+    "type": "LINE",
+    "dataSourceName": "chemical_park_vectors_cgcs2000",
+    "tableName": "Park_RoadNetworkEdge_L",
+    "isReadOnly": true,
+    "encodeType": "NONE",
+    "bounds": {
+      "top": 3856245.172,
+      "left": 457752.343,
+      "bottom": 3855297.972,
+      "leftBottom": {
+        "x": 457752.343,
+        "y": 3855297.972,
+        "m": null
+      },
+      "right": 459339.543,
+      "rightTop": {
+        "x": 459339.543,
+        "y": 3856245.172,
+        "m": null
+      }
+    },
+    "name": "Park_RoadNetworkEdge_L",
+    "prjCoordSys": {
+      "distanceUnit": "METER",
+      "projectionParam": {
+        "centralParallel": 0,
+        "firstPointLongitude": 0,
+        "rectifiedAngle": 0,
+        "scaleFactor": 1,
+        "falseNorthing": 0,
+        "centralMeridian": 114,
+        "secondStandardParallel": 0,
+        "secondPointLongitude": 0,
+        "azimuth": 0,
+        "falseEasting": 500000,
+        "firstStandardParallel": 0,
+        "projectionPlaneOriginHeight": 0
+      },
+      "epsgCode": 4547,
+      "coordUnit": "METER",
+      "name": "China_2000_3_DEGREE_GK_Zone_38N",
+      "projection": {
+        "name": "Gauss_Kruger",
+        "type": "PRJ_GAUSS_KRUGER"
+      },
+      "type": "PCS_CHINA_2000_3_DEGREE_GK_38N",
+      "coordSystem": {
+        "datum": {
+          "name": "D_China_2000",
+          "type": "DATUM_CHINA_2000",
+          "spheroid": {
+            "flatten": 0.003352810681182319,
+            "name": "CGCS2000",
+            "axis": 6378137,
+            "type": "SPHEROID_CHINA_2000"
+          }
+        },
+        "unit": "DEGREE",
+        "spatialRefType": "SPATIALREF_EARTH_LONGITUDE_LATITUDE",
+        "name": "GCS_China_2000",
+        "type": "GCS_CHINA_2000",
+        "primeMeridian": {
+          "longitudeValue": 0,
+          "name": "Greenwich",
+          "type": "PRIMEMERIDIAN_GREENWICH"
+        }
+      }
+    },
+    "datasourceConnectionInfo": null
+  },
+  "buildings": {
+    "schema": null,
+    "charset": "UTF8",
+    "recordCount": 29,
+    "supportTransaction": false,
+    "isFileCache": false,
+    "description": "NULL",
+    "type": "REGION",
+    "dataSourceName": "chemical_park_vectors_cgcs2000",
+    "tableName": "Park_BuildingFootprint_R",
+    "isReadOnly": true,
+    "encodeType": "NONE",
+    "bounds": {
+      "top": 3855979.092,
+      "left": 458020.383,
+      "bottom": 3855603.332,
+      "leftBottom": {
+        "x": 458020.383,
+        "y": 3855603.332,
+        "m": null
+      },
+      "right": 458954.343,
+      "rightTop": {
+        "x": 458954.343,
+        "y": 3855979.092,
+        "m": null
+      }
+    },
+    "name": "Park_BuildingFootprint_R",
+    "prjCoordSys": {
+      "distanceUnit": "METER",
+      "projectionParam": {
+        "centralParallel": 0,
+        "firstPointLongitude": 0,
+        "rectifiedAngle": 0,
+        "scaleFactor": 1,
+        "falseNorthing": 0,
+        "centralMeridian": 114,
+        "secondStandardParallel": 0,
+        "secondPointLongitude": 0,
+        "azimuth": 0,
+        "falseEasting": 500000,
+        "firstStandardParallel": 0,
+        "projectionPlaneOriginHeight": 0
+      },
+      "epsgCode": 4547,
+      "coordUnit": "METER",
+      "name": "China_2000_3_DEGREE_GK_Zone_38N",
+      "projection": {
+        "name": "Gauss_Kruger",
+        "type": "PRJ_GAUSS_KRUGER"
+      },
+      "type": "PCS_CHINA_2000_3_DEGREE_GK_38N",
+      "coordSystem": {
+        "datum": {
+          "name": "D_China_2000",
+          "type": "DATUM_CHINA_2000",
+          "spheroid": {
+            "flatten": 0.003352810681182319,
+            "name": "CGCS2000",
+            "axis": 6378137,
+            "type": "SPHEROID_CHINA_2000"
+          }
+        },
+        "unit": "DEGREE",
+        "spatialRefType": "SPATIALREF_EARTH_LONGITUDE_LATITUDE",
+        "name": "GCS_China_2000",
+        "type": "GCS_CHINA_2000",
+        "primeMeridian": {
+          "longitudeValue": 0,
+          "name": "Greenwich",
+          "type": "PRIMEMERIDIAN_GREENWICH"
+        }
+      }
+    },
+    "datasourceConnectionInfo": null
+  },
+  "entrances": {
+    "schema": null,
+    "charset": "UTF8",
+    "recordCount": 14,
+    "supportTransaction": false,
+    "isFileCache": false,
+    "description": "NULL",
+    "type": "POINT",
+    "dataSourceName": "chemical_park_vectors_cgcs2000",
+    "tableName": "Park_EntrancePoint_P",
+    "isReadOnly": true,
+    "encodeType": "NONE",
+    "bounds": {
+      "top": 3856015.172,
+      "left": 457990.343,
+      "bottom": 3855561.172,
+      "leftBottom": {
+        "x": 457990.343,
+        "y": 3855561.172,
+        "m": null
+      },
+      "right": 458980.343,
+      "rightTop": {
+        "x": 458980.343,
+        "y": 3856015.172,
+        "m": null
+      }
+    },
+    "name": "Park_EntrancePoint_P",
+    "prjCoordSys": {
+      "distanceUnit": "METER",
+      "projectionParam": {
+        "centralParallel": 0,
+        "firstPointLongitude": 0,
+        "rectifiedAngle": 0,
+        "scaleFactor": 1,
+        "falseNorthing": 0,
+        "centralMeridian": 114,
+        "secondStandardParallel": 0,
+        "secondPointLongitude": 0,
+        "azimuth": 0,
+        "falseEasting": 500000,
+        "firstStandardParallel": 0,
+        "projectionPlaneOriginHeight": 0
+      },
+      "epsgCode": 4547,
+      "coordUnit": "METER",
+      "name": "China_2000_3_DEGREE_GK_Zone_38N",
+      "projection": {
+        "name": "Gauss_Kruger",
+        "type": "PRJ_GAUSS_KRUGER"
+      },
+      "type": "PCS_CHINA_2000_3_DEGREE_GK_38N",
+      "coordSystem": {
+        "datum": {
+          "name": "D_China_2000",
+          "type": "DATUM_CHINA_2000",
+          "spheroid": {
+            "flatten": 0.003352810681182319,
+            "name": "CGCS2000",
+            "axis": 6378137,
+            "type": "SPHEROID_CHINA_2000"
+          }
+        },
+        "unit": "DEGREE",
+        "spatialRefType": "SPATIALREF_EARTH_LONGITUDE_LATITUDE",
+        "name": "GCS_China_2000",
+        "type": "GCS_CHINA_2000",
+        "primeMeridian": {
+          "longitudeValue": 0,
+          "name": "Greenwich",
+          "type": "PRIMEMERIDIAN_GREENWICH"
+        }
+      }
+    },
+    "datasourceConnectionInfo": null
+  },
+  "maps": {
+    "resourceConfigID": "map",
+    "supportedMediaTypes": [
+      "application/xml",
+      "text/xml",
+      "application/json",
+      "application/fastjson",
+      "application/rjson",
+      "text/html",
+      "application/jsonp",
+      "application/x-java-serialized-object",
+      "application/ajax",
+      "application/kml",
+      "application/ifx",
+      "application/flex",
+      "application/flash",
+      "application/flash3d",
+      "application/ijs",
+      "application/javascript",
+      "application/html5",
+      "application/ol3",
+      "application/vt",
+      "application/vectortile",
+      "application/smc",
+      "application/supermapcloud",
+      "application/ilt",
+      "application/leaflet",
+      "application/mbgl",
+      "application/webgl3d"
+    ],
+    "path": "http://8.130.175.232:18090/iserver/services/map-chemical_park_vectors_cgcs2000/rest/maps/%E5%BB%BA%E7%AD%91%E5%8D%95%E4%BD%93%E6%A0%A1%E6%A0%B8%E5%9B%BE_CGCS2000",
+    "name": "建筑单体校核图_CGCS2000",
+    "resourceType": "StaticResource"
+  }
+}

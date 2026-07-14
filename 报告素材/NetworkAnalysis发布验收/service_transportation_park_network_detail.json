@@ -1,0 +1,95 @@
+{
+    "isStreamingService": false,
+    "interfaceTypes": "com.supermap.services.rest.RestServlet",
+    "isSet": false,
+    "instances": [{
+        "interfaceType": "com.supermap.services.rest.RestServlet",
+        "componentType": "com.supermap.services.components.impl.TransportationAnalystImpl",
+        "name": "transportationAnalyst-chemical_park_vectors_cgcs2000_network/rest",
+        "componentSetName": null,
+        "authorizeSetting": {
+            "permittedRoles": [],
+            "deniedRoles": [],
+            "type": "PUBLIC"
+        },
+        "id": null,
+        "componentName": "transportationAnalyst-chemical_park_vectors_cgcs2000_network",
+        "interfaceName": "rest",
+        "isDisabled": false,
+        "enabled": true,
+        "status": "FAILED"
+    }],
+    "isClusterService": false,
+    "type": "com.supermap.services.components.impl.TransportationAnalystImpl",
+    "interfaceNames": "rest",
+    "clusterInterfaceNames": "",
+    "isDataflowService": false,
+    "component": {
+        "isScSet": false,
+        "scSetSetting": null,
+        "scSetting": {
+            "disabledInterfaceNames": "",
+            "initPriority": 0,
+            "initOnCreate": false,
+            "instanceCount": 0,
+            "name": "transportationAnalyst-chemical_park_vectors_cgcs2000_network",
+            "alias": "transportationAnalyst-chemical_park_vectors_cgcs2000_network",
+            "interfaceNames": "rest",
+            "type": "com.supermap.services.components.impl.TransportationAnalystImpl",
+            "config": {},
+            "providers": "transportationAnalyst-chemical_park_vectors_cgcs2000_network",
+            "enabled": true
+        }
+    },
+    "providerNames": "transportationAnalyst-chemical_park_vectors_cgcs2000_network",
+    "name": "transportationAnalyst-chemical_park_vectors_cgcs2000_network",
+    "alias": "transportationAnalyst-chemical_park_vectors_cgcs2000_network",
+    "isDistributedanalystService": false,
+    "providers": [{
+        "spsetSetting": null,
+        "isSPSet": false,
+        "spSetting": {
+            "name": "transportationAnalyst-chemical_park_vectors_cgcs2000_network",
+            "alias": null,
+            "innerProviders": null,
+            "type": "com.supermap.services.providers.UGCTransportationAnalystProvider",
+            "config": {
+                "DEFAULT_POOLSIZE": 10,
+                "workspaceConnectString": null,
+                "edgeIDField": "SmEdgeID",
+                "initFacilityAnalyst": false,
+                "pathGuideDescriptionLanguage": null,
+                "multiInstance": false,
+                "barrierEdges": null,
+                "forwardSingleWayRuleValues": null,
+                "weightFieldInfos": [{
+                    "unit": null,
+                    "name": "length",
+                    "forwardWeightField": "SmLength",
+                    "backWeightField": "SmLength"
+                }],
+                "toNodeIDField": "SmTNode",
+                "edgeNameField": "SmEdgeID",
+                "datasourceName": "chemical_park_vectors_cgcs2000",
+                "tolerance": 50,
+                "analystModeSetting": null,
+                "turnDatasetInfo": null,
+                "poolSize": 10,
+                "datasetName": "Park_RoadNetwork_N",
+                "fromNodeIDField": "SmFNode",
+                "backwardSingleWayRuleValues": null,
+                "prohibitedWayRuleValues": null,
+                "workspaceType": null,
+                "directionField": "SmResistanceA",
+                "barrierNodes": null,
+                "nodeIDField": "SmNodeID",
+                "nodeNameField": null,
+                "ruleField": null,
+                "twoWayRuleValues": null,
+                "nodeIDFilterField": null,
+                "autoCheckNetwork": true
+            },
+            "enabled": true
+        }
+    }]
+}

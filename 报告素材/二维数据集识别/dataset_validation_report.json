@@ -1,0 +1,317 @@
+{
+  "generatedAt": "2026-07-13T15:32:11.004Z",
+  "dataSource": {
+    "udbx": "G:\\竞赛\\超图杯\\报告素材\\二维数据集识别\\supermap_udbx\\chemical_park_vectors.udbx",
+    "geojsonDirectory": "G:\\竞赛\\超图杯\\报告素材\\二维数据集识别\\supermap_import"
+  },
+  "counts": {
+    "roadPolygons": 15,
+    "roadNetworkNodes": 69,
+    "roadNetworkEdges": 93,
+    "buildingFacilityPolygons": 10,
+    "entrances": 14,
+    "s3mObjectFootprints": 6
+  },
+  "network": {
+    "componentCount": 1,
+    "largestComponentNodeCount": 69,
+    "isolatedNodeCount": 0,
+    "deadEndNodeCount": 30,
+    "totalEdgeLengthM": 11651.8,
+    "edgeIssueCount": 0,
+    "edgeIssues": [],
+    "components": [
+      {
+        "index": 1,
+        "nodeCount": 69,
+        "nodes": [
+          "node-001",
+          "node-002",
+          "node-003",
+          "node-004",
+          "node-005",
+          "node-006",
+          "node-007",
+          "node-008",
+          "node-009",
+          "node-010",
+          "node-011",
+          "node-012",
+          "node-013",
+          "node-014",
+          "node-015",
+          "node-016",
+          "node-017",
+          "node-018",
+          "node-019",
+          "node-020",
+          "node-021",
+          "node-022",
+          "node-023",
+          "node-024",
+          "node-025",
+          "node-026",
+          "node-027",
+          "node-028",
+          "node-029",
+          "node-030",
+          "node-031",
+          "node-032",
+          "node-033",
+          "node-034",
+          "node-035",
+          "node-036",
+          "node-037",
+          "node-038",
+          "node-039",
+          "node-040",
+          "node-041",
+          "node-042",
+          "node-043",
+          "node-044",
+          "node-045",
+          "node-046",
+          "node-047",
+          "node-048",
+          "node-049",
+          "node-050",
+          "node-051",
+          "node-052",
+          "node-053",
+          "node-054",
+          "node-055",
+          "node-056",
+          "node-057",
+          "node-058",
+          "node-059",
+          "node-060",
+          "node-061",
+          "node-062",
+          "node-063",
+          "node-064",
+          "node-065",
+          "node-066",
+          "node-067",
+          "node-068",
+          "node-069"
+        ]
+      }
+    ]
+  },
+  "buildingRoadChecks": [
+    {
+      "id": "pa-west-north",
+      "name": "西北生产装置区",
+      "facilityType": "production",
+      "nearestRoadId": "road-row-north-edge-04",
+      "nearestRoadDistanceM": 3,
+      "needsDesktopRefinement": true
+    },
+    {
+      "id": "pa-west-south",
+      "name": "西南储罐与泵区",
+      "facilityType": "production",
+      "nearestRoadId": "road-row-south-edge-04",
+      "nearestRoadDistanceM": 12,
+      "needsDesktopRefinement": true
+    },
+    {
+      "id": "pa-center-north",
+      "name": "中北厂房装置区",
+      "facilityType": "production",
+      "nearestRoadId": "road-mid-service-edge-02",
+      "nearestRoadDistanceM": 3,
+      "needsDesktopRefinement": true
+    },
+    {
+      "id": "pa-center-south",
+      "name": "中南反应装置区",
+      "facilityType": "production",
+      "nearestRoadId": "road-mid-service-edge-04",
+      "nearestRoadDistanceM": 3,
+      "needsDesktopRefinement": true
+    },
+    {
+      "id": "tw-center",
+      "name": "中东塔器与罐组区",
+      "facilityType": "tower",
+      "nearestRoadId": "road-row-middle-edge-07",
+      "nearestRoadDistanceM": 6,
+      "needsDesktopRefinement": true
+    },
+    {
+      "id": "ut-center",
+      "name": "公用工程与管廊区",
+      "facilityType": "utility",
+      "nearestRoadId": "road-row-middle-edge-07",
+      "nearestRoadDistanceM": 6,
+      "needsDesktopRefinement": true
+    },
+    {
+      "id": "pb-north-tank",
+      "name": "东北罐组与管汇区",
+      "facilityType": "tank",
+      "nearestRoadId": "road-row-north-edge-10",
+      "nearestRoadDistanceM": 6,
+      "needsDesktopRefinement": true
+    },
+    {
+      "id": "pb-mid-process",
+      "name": "东中生产与污水装置区",
+      "facilityType": "production",
+      "nearestRoadId": "road-east-yard-service-edge-04",
+      "nearestRoadDistanceM": 11,
+      "needsDesktopRefinement": true
+    },
+    {
+      "id": "wh-logistics",
+      "name": "东南仓储物流区",
+      "facilityType": "warehouse",
+      "nearestRoadId": "road-row-south-edge-10",
+      "nearestRoadDistanceM": 36,
+      "needsDesktopRefinement": true
+    },
+    {
+      "id": "fs-east-yard",
+      "name": "东侧应急与装卸边界区",
+      "facilityType": "utility",
+      "nearestRoadId": "road-row-south-edge-09",
+      "nearestRoadDistanceM": 36,
+      "needsDesktopRefinement": true
+    }
+  ],
+  "entranceChecks": [
+    {
+      "id": "park-west",
+      "kind": "park",
+      "parentId": "",
+      "label": "西侧道路入口",
+      "nearestRoadId": "road-west-main-edge-01",
+      "nearestRoadDistanceM": 0,
+      "status": "ok"
+    },
+    {
+      "id": "park-east",
+      "kind": "park",
+      "parentId": "",
+      "label": "东侧道路入口",
+      "nearestRoadId": "road-east-main-edge-05",
+      "nearestRoadDistanceM": 1,
+      "status": "ok"
+    },
+    {
+      "id": "park-north",
+      "kind": "park",
+      "parentId": "",
+      "label": "北侧道路入口",
+      "nearestRoadId": "road-north-main-edge-07",
+      "nearestRoadDistanceM": 6,
+      "status": "ok"
+    },
+    {
+      "id": "park-south",
+      "kind": "park",
+      "parentId": "",
+      "label": "南侧道路入口",
+      "nearestRoadId": "road-south-main-edge-02",
+      "nearestRoadDistanceM": 7,
+      "status": "ok"
+    },
+    {
+      "id": "building-pa-west-north",
+      "kind": "building",
+      "parentId": "pa-west-north",
+      "label": "西北生产装置区 边界点",
+      "nearestRoadId": "road-row-north-edge-02",
+      "nearestRoadDistanceM": 3,
+      "status": "ok"
+    },
+    {
+      "id": "building-pa-west-south",
+      "kind": "building",
+      "parentId": "pa-west-south",
+      "label": "西南储罐与泵区 边界点",
+      "nearestRoadId": "road-west-loop-edge-03",
+      "nearestRoadDistanceM": 7,
+      "status": "ok"
+    },
+    {
+      "id": "building-pa-center-north",
+      "kind": "building",
+      "parentId": "pa-center-north",
+      "label": "中北厂房装置区 边界点",
+      "nearestRoadId": "road-tank-loop-edge-01",
+      "nearestRoadDistanceM": 1,
+      "status": "ok"
+    },
+    {
+      "id": "building-pa-center-south",
+      "kind": "building",
+      "parentId": "pa-center-south",
+      "label": "中南反应装置区 边界点",
+      "nearestRoadId": "road-tank-loop-edge-03",
+      "nearestRoadDistanceM": 1,
+      "status": "ok"
+    },
+    {
+      "id": "building-tw-center",
+      "kind": "building",
+      "parentId": "tw-center",
+      "label": "中东塔器与罐组区 边界点",
+      "nearestRoadId": "road-row-middle-edge-07",
+      "nearestRoadDistanceM": 6,
+      "status": "ok"
+    },
+    {
+      "id": "building-ut-center",
+      "kind": "building",
+      "parentId": "ut-center",
+      "label": "公用工程与管廊区 边界点",
+      "nearestRoadId": "road-row-middle-edge-06",
+      "nearestRoadDistanceM": 6,
+      "status": "ok"
+    },
+    {
+      "id": "building-pb-north-tank",
+      "kind": "building",
+      "parentId": "pb-north-tank",
+      "label": "东北罐组与管汇区 边界点",
+      "nearestRoadId": "road-row-north-edge-08",
+      "nearestRoadDistanceM": 6,
+      "status": "ok"
+    },
+    {
+      "id": "building-pb-mid-process",
+      "kind": "building",
+      "parentId": "pb-mid-process",
+      "label": "东中生产与污水装置区 边界点",
+      "nearestRoadId": "road-center-east-edge-04",
+      "nearestRoadDistanceM": 8,
+      "status": "ok"
+    },
+    {
+      "id": "building-wh-logistics",
+      "kind": "building",
+      "parentId": "wh-logistics",
+      "label": "东南仓储物流区 边界点",
+      "nearestRoadId": "road-east-yard-service-edge-05",
+      "nearestRoadDistanceM": 1,
+      "status": "ok"
+    },
+    {
+      "id": "building-fs-east-yard",
+      "kind": "building",
+      "parentId": "fs-east-yard",
+      "label": "东侧应急与装卸边界区 边界点",
+      "nearestRoadId": "road-logistics-loop-edge-04",
+      "nearestRoadDistanceM": 7,
+      "status": "ok"
+    }
+  ],
+  "conclusions": [
+    "Road network is topologically connected as a single component.",
+    "All road edges reference valid nodes and recorded lengths match geometry.",
+    "Building polygons are current facility-zone footprints and must be refined into single-building footprints in iDesktopX before final public data publication.",
+    "All entrances are within the 25 m snapping tolerance from the road centerline."
+  ]
+}

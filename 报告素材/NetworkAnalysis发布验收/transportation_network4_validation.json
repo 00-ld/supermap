@@ -1,0 +1,24 @@
+{
+  "createdAt": "2026-07-14T16:43:52",
+  "serviceName": "transportationAnalyst-chemical_park_vectors_cgcs2000_network-4",
+  "steps": [
+    {
+      "step": "managerDetail",
+      "instanceStatus": "OK",
+      "enabled": true,
+      "dataset": "Park_RoadNetwork_Auto_N",
+      "nodeID": "SmID",
+      "autoCheck": false,
+      "workspace": "D:\\6119_10_1supermap\\iserver\\supermap-iserver-2025u1a-windows-x64-all\\webapps\\iserver\\chemical_park_vectors_cgcs2000_network_sxwu_publish0\\chemical_park_vectors_cgcs2000_network.sxwu"
+    },
+    {
+      "step": "verifyRest",
+      "status": 200,
+      "body": "[\n    {\n        \"resourceConfigID\": \"networkanalyst\",\n        \"supportedMediaTypes\": [\n            \"application/xml\",\n            \"text/xml\",\n            \"application/json\",\n            \"application/fastjson\",\n            \"application/rjson\",\n            \"text/html\",\n            \"application/jsonp\",\n            \"application/x-java-serialized-object\"\n        ],\n        \"path\": \"http://8.130.175.232:18090/iserver/services/transportationAnalyst-chemical_park_vectors_cgcs2000_network-4/rest/networkanalyst\",\n        \"name\": \"networkanalyst\",\n        \"resourceType\": \"CatalogList\"\n    },\n    {\n        \"resourceConfigID\": \"search\",\n        \"supportedMediaTypes\": [\n            \"application/xml\",\n            \"text/xml\",\n            \"application/json\",\n            \"application/fastjson\",\n            \"application/rjson\",\n            \"text/html\",\n            \"application/jsonp\",\n            \"application/x-java-serialized-object\"\n        ],\n        \"path\": \"http://8.130.175.232:18090/iserver/services/transportationAnalyst-chemical_park_vectors_cgcs2000_network-4/rest/search\",\n        \"name\": \"search\",\n        \"resourceType\": \"ArithmeticResource\"\n    }\n]"
+    },
+    {
+      "step": "logsSaved",
+      "path": "G:\\竞赛\\超图杯\\报告素材\\NetworkAnalysis发布验收\\iserver_logs_after_network4.json"
+    }
+  ]
+}

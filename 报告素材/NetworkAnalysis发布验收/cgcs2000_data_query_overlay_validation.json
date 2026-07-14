@@ -1,0 +1,588 @@
+{
+  "serviceBase": "http://8.130.175.232:18090/iserver/services/data-chemical_park_vectors_cgcs2000/rest",
+  "datasource": "chemical_park_vectors_cgcs2000",
+  "generatedAt": "2026-07-14T09:08:10.903Z",
+  "datasets": {
+    "buildings": {
+      "datasetName": "Park_BuildingFootprint_R",
+      "featureCount": 29,
+      "geometryType": "REGION"
+    },
+    "roads": {
+      "datasetName": "Park_RoadNetworkEdge_L",
+      "featureCount": 93,
+      "geometryType": "LINE"
+    },
+    "entrances": {
+      "datasetName": "Park_EntrancePoint_P",
+      "featureCount": 14,
+      "geometryType": "POINT"
+    }
+  },
+  "queries": {
+    "byId": {
+      "building": {
+        "datasetName": "Park_BuildingFootprint_R",
+        "smId": "1",
+        "id": "BLD_A_001",
+        "name": "瑗块儴鐢熶骇瑁呯疆鍖鸿摑椤跺巶鎴",
+        "type": "production",
+        "isHazard": true,
+        "centroid": {
+          "x": 458087.18,
+          "y": 3855954.45
+        }
+      },
+      "road": {
+        "datasetName": "Park_RoadNetworkEdge_L",
+        "smId": "1",
+        "id": "road-north-main-edge-01",
+        "name": "",
+        "type": "",
+        "isHazard": false,
+        "centroid": {
+          "x": 457871.34,
+          "y": 3856009.17
+        }
+      },
+      "entrance": {
+        "datasetName": "Park_EntrancePoint_P",
+        "smId": "1",
+        "id": "park-west",
+        "name": "瑗夸晶閬撹矾鍏ュ彛",
+        "type": "park",
+        "isHazard": false,
+        "centroid": {
+          "x": 457990.34,
+          "y": 3856010.17
+        }
+      }
+    },
+    "point": {
+      "input": {
+        "x": 458970.343,
+        "y": 3855563.172,
+        "toleranceMeters": 35
+      },
+      "hits": [
+        {
+          "datasetName": "Park_RoadNetworkEdge_L",
+          "smId": "10",
+          "id": "road-south-main-edge-02",
+          "name": "",
+          "type": "",
+          "isHazard": false,
+          "centroid": {
+            "x": 458484.84,
+            "y": 3855556.17
+          },
+          "distanceMeters": 6
+        },
+        {
+          "datasetName": "Park_RoadNetworkEdge_L",
+          "smId": "22",
+          "id": "road-east-main-edge-05",
+          "name": "",
+          "type": "",
+          "isHazard": false,
+          "centroid": {
+            "x": 458979.34,
+            "y": 3855619.17
+          },
+          "distanceMeters": 9
+        },
+        {
+          "datasetName": "Park_RoadNetworkEdge_L",
+          "smId": "11",
+          "id": "road-south-main-edge-03",
+          "name": "",
+          "type": "",
+          "isHazard": false,
+          "centroid": {
+            "x": 459159.44,
+            "y": 3855556.17
+          },
+          "distanceMeters": 10.82
+        },
+        {
+          "datasetName": "Park_RoadNetworkEdge_L",
+          "smId": "23",
+          "id": "road-east-main-edge-06",
+          "name": "",
+          "type": "",
+          "isHazard": false,
+          "centroid": {
+            "x": 458979.34,
+            "y": 3855427.07
+          },
+          "distanceMeters": 11.4
+        },
+        {
+          "datasetName": "Park_EntrancePoint_P",
+          "smId": "4",
+          "id": "park-south",
+          "name": "鍗椾晶閬撹矾鍏ュ彛",
+          "type": "park",
+          "isHazard": false,
+          "centroid": {
+            "x": 458970.34,
+            "y": 3855563.17
+          },
+          "distanceMeters": 0
+        },
+        {
+          "datasetName": "Park_EntrancePoint_P",
+          "smId": "2",
+          "id": "park-east",
+          "name": "涓滀晶閬撹矾鍏ュ彛",
+          "type": "park",
+          "isHazard": false,
+          "centroid": {
+            "x": 458980.34,
+            "y": 3855561.17
+          },
+          "distanceMeters": 10.05
+        }
+      ],
+      "totalHits": 6
+    }
+  },
+  "overlay": {
+    "executor": "iclient2d-overlay",
+    "note": "当前验收为 SuperMap iServer Data 几何读取后的前端/iClient2D 叠加分析，不等同于已发布 iServer Spatial Analyst 或 Transportation Analyst 服务。",
+    "coordinateSystem": {
+      "coordSys": "CGCS2000_3GK_CM_114E",
+      "epsg": 4547,
+      "geographicEpsg": 4490
+    },
+    "summary": {
+      "affectedFacilityCount": 12,
+      "blockedRoadCount": 4,
+      "candidateExitCount": 12,
+      "dangerCellCount": 9,
+      "affectedCellCount": 77
+    },
+    "affectedFacilities": [
+      {
+        "datasetName": "Park_BuildingFootprint_R",
+        "smId": "12",
+        "id": "BLD_C_001",
+        "name": "涓ぎ涓诲巶鎴",
+        "type": "production",
+        "isHazard": true,
+        "centroid": {
+          "x": 458554.58,
+          "y": 3855879.77
+        },
+        "maxConcentration": 49.09,
+        "maxLevel": "warning"
+      },
+      {
+        "datasetName": "Park_BuildingFootprint_R",
+        "smId": "13",
+        "id": "BLD_C_002",
+        "name": "涓ぎ濉斿櫒鍖",
+        "type": "tower",
+        "isHazard": true,
+        "centroid": {
+          "x": 458554.58,
+          "y": 3855766.37
+        },
+        "maxConcentration": 64,
+        "maxLevel": "warning"
+      },
+      {
+        "datasetName": "Park_BuildingFootprint_R",
+        "smId": "14",
+        "id": "BLD_C_003",
+        "name": "涓ぎ鍏敤宸ョ▼鍖",
+        "type": "utility",
+        "isHazard": false,
+        "centroid": {
+          "x": 458556.34,
+          "y": 3855652.97
+        },
+        "maxConcentration": 49.09,
+        "maxLevel": "warning"
+      },
+      {
+        "datasetName": "Park_BuildingFootprint_R",
+        "smId": "15",
+        "id": "BLD_E_001",
+        "name": "涓笢瑁呯疆妗嗘灦鍖",
+        "type": "production",
+        "isHazard": true,
+        "centroid": {
+          "x": 458653.34,
+          "y": 3855909.17
+        },
+        "maxConcentration": 64,
+        "maxLevel": "warning"
+      },
+      {
+        "datasetName": "Park_BuildingFootprint_R",
+        "smId": "16",
+        "id": "BLD_E_002",
+        "name": "涓笢濉斿櫒缃愮粍",
+        "type": "tank",
+        "isHazard": true,
+        "centroid": {
+          "x": 458653.34,
+          "y": 3855791.57
+        },
+        "maxConcentration": 100,
+        "maxLevel": "danger"
+      },
+      {
+        "datasetName": "Park_BuildingFootprint_R",
+        "smId": "17",
+        "id": "BLD_E_003",
+        "name": "涓笢鍗椾晶鍘傛埧",
+        "type": "production",
+        "isHazard": true,
+        "centroid": {
+          "x": 458653.34,
+          "y": 3855665.57
+        },
+        "maxConcentration": 64,
+        "maxLevel": "warning"
+      },
+      {
+        "datasetName": "Park_BuildingFootprint_R",
+        "smId": "18",
+        "id": "BLD_G_001",
+        "name": "涓滃寳瑗夸晶鍌ㄧ綈缁",
+        "type": "tank",
+        "isHazard": true,
+        "centroid": {
+          "x": 458768.14,
+          "y": 3855926.87
+        },
+        "maxConcentration": 35.1,
+        "maxLevel": "warning"
+      },
+      {
+        "datasetName": "Park_BuildingFootprint_R",
+        "smId": "20",
+        "id": "BLD_G_003",
+        "name": "涓滃寳绠℃眹瑁呭嵏鍖",
+        "type": "utility",
+        "isHazard": true,
+        "centroid": {
+          "x": 458838.34,
+          "y": 3855858.87
+        },
+        "maxConcentration": 35.1,
+        "maxLevel": "warning"
+      },
+      {
+        "datasetName": "Park_BuildingFootprint_R",
+        "smId": "21",
+        "id": "BLD_F_001",
+        "name": "涓滃崡涓荤敓浜у巶鎴",
+        "type": "production",
+        "isHazard": true,
+        "centroid": {
+          "x": 458838.34,
+          "y": 3855792.69
+        },
+        "maxConcentration": 64,
+        "maxLevel": "warning"
+      },
+      {
+        "datasetName": "Park_BuildingFootprint_R",
+        "smId": "22",
+        "id": "BLD_F_002",
+        "name": "涓滃崡璁惧鍖",
+        "type": "utility",
+        "isHazard": true,
+        "centroid": {
+          "x": 458786.34,
+          "y": 3855743.97
+        },
+        "maxConcentration": 64,
+        "maxLevel": "warning"
+      },
+      {
+        "datasetName": "Park_BuildingFootprint_R",
+        "smId": "24",
+        "id": "BLD_J_001",
+        "name": "鍗椾晶灏忕綈缁",
+        "type": "tank",
+        "isHazard": true,
+        "centroid": {
+          "x": 458782.34,
+          "y": 3855673.89
+        },
+        "maxConcentration": 35.1,
+        "maxLevel": "warning"
+      },
+      {
+        "datasetName": "Park_BuildingFootprint_R",
+        "smId": "25",
+        "id": "BLD_J_002",
+        "name": "鍗椾晶瑁呯疆鍖",
+        "type": "production",
+        "isHazard": true,
+        "centroid": {
+          "x": 458782.34,
+          "y": 3855619.71
+        },
+        "maxConcentration": 10,
+        "maxLevel": "affected"
+      }
+    ],
+    "blockedRoads": [
+      {
+        "datasetName": "Park_RoadNetworkEdge_L",
+        "smId": "31",
+        "id": "road-center-east-edge-03",
+        "name": "",
+        "type": "",
+        "isHazard": false,
+        "centroid": {
+          "x": 458700.34,
+          "y": 3855845.67
+        },
+        "reason": "diffusion-danger-overlay"
+      },
+      {
+        "datasetName": "Park_RoadNetworkEdge_L",
+        "smId": "32",
+        "id": "road-center-east-edge-04",
+        "name": "",
+        "type": "",
+        "isHazard": false,
+        "centroid": {
+          "x": 458700.34,
+          "y": 3855735.67
+        },
+        "reason": "diffusion-danger-overlay"
+      },
+      {
+        "datasetName": "Park_RoadNetworkEdge_L",
+        "smId": "66",
+        "id": "road-row-middle-edge-07",
+        "name": "",
+        "type": "",
+        "isHazard": false,
+        "centroid": {
+          "x": 458610.34,
+          "y": 3855789.17
+        },
+        "reason": "diffusion-danger-overlay"
+      },
+      {
+        "datasetName": "Park_RoadNetworkEdge_L",
+        "smId": "67",
+        "id": "road-row-middle-edge-08",
+        "name": "",
+        "type": "",
+        "isHazard": false,
+        "centroid": {
+          "x": 458721.84,
+          "y": 3855789.17
+        },
+        "reason": "diffusion-danger-overlay"
+      }
+    ],
+    "candidateExits": [
+      {
+        "datasetName": "Park_EntrancePoint_P",
+        "smId": "1",
+        "id": "park-west",
+        "name": "瑗夸晶閬撹矾鍏ュ彛",
+        "type": "park",
+        "isHazard": false,
+        "centroid": {
+          "x": 457990.34,
+          "y": 3856010.17
+        },
+        "score": 654.44,
+        "status": "candidate"
+      },
+      {
+        "datasetName": "Park_EntrancePoint_P",
+        "smId": "5",
+        "id": "building-pa-west-north",
+        "name": "瑗垮寳鐢熶骇瑁呯疆鍖",
+        "type": "building",
+        "isHazard": false,
+        "centroid": {
+          "x": 458000.34,
+          "y": 3855905.17
+        },
+        "score": 621.24,
+        "status": "candidate"
+      },
+      {
+        "datasetName": "Park_EntrancePoint_P",
+        "smId": "6",
+        "id": "building-pa-west-south",
+        "name": "瑗垮崡鍌ㄧ綈涓庢车鍖",
+        "type": "building",
+        "isHazard": false,
+        "centroid": {
+          "x": 458000.34,
+          "y": 3855694.17
+        },
+        "score": 616.75,
+        "status": "candidate"
+      },
+      {
+        "datasetName": "Park_EntrancePoint_P",
+        "smId": "3",
+        "id": "park-north",
+        "name": "鍖椾晶閬撹矾鍏ュ彛",
+        "type": "park",
+        "isHazard": false,
+        "centroid": {
+          "x": 458970.34,
+          "y": 3856015.17
+        },
+        "score": 348.55,
+        "status": "candidate"
+      },
+      {
+        "datasetName": "Park_EntrancePoint_P",
+        "smId": "2",
+        "id": "park-east",
+        "name": "涓滀晶閬撹矾鍏ュ彛",
+        "type": "park",
+        "isHazard": false,
+        "centroid": {
+          "x": 458980.34,
+          "y": 3855561.17
+        },
+        "score": 347.88,
+        "status": "candidate"
+      },
+      {
+        "datasetName": "Park_EntrancePoint_P",
+        "smId": "4",
+        "id": "park-south",
+        "name": "鍗椾晶閬撹矾鍏ュ彛",
+        "type": "park",
+        "isHazard": false,
+        "centroid": {
+          "x": 458970.34,
+          "y": 3855563.17
+        },
+        "score": 338.35,
+        "status": "candidate"
+      },
+      {
+        "datasetName": "Park_EntrancePoint_P",
+        "smId": "7",
+        "id": "building-pa-center-north",
+        "name": "涓寳鍘傛埧瑁呯疆鍖",
+        "type": "building",
+        "isHazard": false,
+        "centroid": {
+          "x": 458340.34,
+          "y": 3855905.17
+        },
+        "score": 289.08,
+        "status": "candidate"
+      },
+      {
+        "datasetName": "Park_EntrancePoint_P",
+        "smId": "8",
+        "id": "building-pa-center-south",
+        "name": "涓崡鍙嶅簲瑁呯疆鍖",
+        "type": "building",
+        "isHazard": false,
+        "centroid": {
+          "x": 458340.34,
+          "y": 3855694.17
+        },
+        "score": 279.32,
+        "status": "candidate"
+      },
+      {
+        "datasetName": "Park_EntrancePoint_P",
+        "smId": "13",
+        "id": "building-wh-logistics",
+        "name": "涓滃崡浠撳偍鐗╂祦鍖",
+        "type": "building",
+        "isHazard": false,
+        "centroid": {
+          "x": 458828.34,
+          "y": 3855646.17
+        },
+        "score": 174.11,
+        "status": "candidate"
+      },
+      {
+        "datasetName": "Park_EntrancePoint_P",
+        "smId": "14",
+        "id": "building-fs-east-yard",
+        "name": "涓滀晶搴旀",
+        "type": "building",
+        "isHazard": false,
+        "centroid": {
+          "x": 458736.34,
+          "y": 3855646.17
+        },
+        "score": 111.37,
+        "status": "candidate"
+      },
+      {
+        "datasetName": "Park_EntrancePoint_P",
+        "smId": "10",
+        "id": "building-ut-center",
+        "name": "鍏敤宸ョ▼涓庣寤婂尯 杈圭晫鐐",
+        "type": "building",
+        "isHazard": false,
+        "centroid": {
+          "x": 458512.34,
+          "y": 3855783.17
+        },
+        "score": 102.71,
+        "status": "candidate"
+      },
+      {
+        "datasetName": "Park_EntrancePoint_P",
+        "smId": "11",
+        "id": "building-pb-north-tank",
+        "name": "涓滃寳缃愮粍涓庣姹囧尯 杈圭晫鐐",
+        "type": "building",
+        "isHazard": false,
+        "centroid": {
+          "x": 458708.34,
+          "y": 3855908.17
+        },
+        "score": 96.05,
+        "status": "candidate"
+      },
+      {
+        "datasetName": "Park_EntrancePoint_P",
+        "smId": "12",
+        "id": "building-pb-mid-process",
+        "name": "涓滀腑鐢熶骇涓庢薄姘磋缃尯 杈圭晫鐐",
+        "type": "building",
+        "isHazard": false,
+        "centroid": {
+          "x": 458708.34,
+          "y": 3855767.17
+        },
+        "score": 26.64,
+        "status": "risk-adjacent"
+      },
+      {
+        "datasetName": "Park_EntrancePoint_P",
+        "smId": "9",
+        "id": "building-tw-center",
+        "name": "涓笢濉斿櫒涓庣綈缁勫尯 杈圭晫鐐",
+        "type": "building",
+        "isHazard": false,
+        "centroid": {
+          "x": 458608.34,
+          "y": 3855783.17
+        },
+        "score": 7.37,
+        "status": "risk-adjacent"
+      }
+    ]
+  }
+}

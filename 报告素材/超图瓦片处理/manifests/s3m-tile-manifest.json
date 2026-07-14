@@ -1,0 +1,56 @@
+[
+  {
+    "name": "result_ImportFBX",
+    "scp": "G:\\竞赛\\超图杯\\园区大屏部署\\瓦片\\厂房三维瓦片\\加工厂房\\result_ImportFBX\\result_ImportFBX.scp",
+    "directory": "G:\\竞赛\\超图杯\\园区大屏部署\\瓦片\\厂房三维瓦片\\加工厂房\\result_ImportFBX",
+    "scpBytes": 8763,
+    "s3mbCount": 590,
+    "jsonCount": 21,
+    "lastWriteTime": "2026-05-05 12:53:44"
+  },
+  {
+    "name": "result_ImportFBX",
+    "scp": "G:\\竞赛\\超图杯\\园区大屏部署\\瓦片\\厂房三维瓦片\\原材料仓库\\result_ImportFBX.scp",
+    "directory": "G:\\竞赛\\超图杯\\园区大屏部署\\瓦片\\厂房三维瓦片\\原材料仓库",
+    "scpBytes": 10628,
+    "s3mbCount": 608,
+    "jsonCount": 27,
+    "lastWriteTime": "2026-05-05 19:44:42"
+  },
+  {
+    "name": "result_ImportFBX",
+    "scp": "G:\\竞赛\\超图杯\\园区大屏部署\\瓦片\\厂房三维瓦片\\生产装置厂房\\result_ImportFBX\\result_ImportFBX.scp",
+    "directory": "G:\\竞赛\\超图杯\\园区大屏部署\\瓦片\\厂房三维瓦片\\生产装置厂房\\result_ImportFBX",
+    "scpBytes": 6797,
+    "s3mbCount": 82,
+    "jsonCount": 15,
+    "lastWriteTime": "2026-05-05 12:28:30"
+  },
+  {
+    "name": "换热器",
+    "scp": "G:\\竞赛\\超图杯\\园区大屏部署\\瓦片\\设备三维瓦片\\换热器\\换热器.scp",
+    "directory": "G:\\竞赛\\超图杯\\园区大屏部署\\瓦片\\设备三维瓦片\\换热器",
+    "scpBytes": 7662,
+    "s3mbCount": 32,
+    "jsonCount": 17,
+    "lastWriteTime": "2026-05-04 12:16:02"
+  },
+  {
+    "name": "罐子",
+    "scp": "G:\\竞赛\\超图杯\\园区大屏部署\\瓦片\\设备三维瓦片\\立式罐子\\罐子.scp",
+    "directory": "G:\\竞赛\\超图杯\\园区大屏部署\\瓦片\\设备三维瓦片\\立式罐子",
+    "scpBytes": 5758,
+    "s3mbCount": 16,
+    "jsonCount": 11,
+    "lastWriteTime": "2026-05-04 13:04:02"
+  },
+  {
+    "name": "蒸馏塔",
+    "scp": "G:\\竞赛\\超图杯\\园区大屏部署\\瓦片\\设备三维瓦片\\蒸馏塔\\蒸馏塔.scp",
+    "directory": "G:\\竞赛\\超图杯\\园区大屏部署\\瓦片\\设备三维瓦片\\蒸馏塔",
+    "scpBytes": 6263,
+    "s3mbCount": 34,
+    "jsonCount": 13,
+    "lastWriteTime": "2026-05-04 11:50:02"
+  }
+]

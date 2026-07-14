@@ -1,0 +1,1753 @@
+{
+  "type": "FeatureCollection",
+  "name": "building_footprints_map",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "EPSG:4547",
+      "coordSys": "CGCS2000_3GK_CM_114E"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_A_001",
+        "name": "西部生产装置区蓝顶厂房",
+        "zone_code": "A",
+        "source_facility_id": "pa-west-north",
+        "source_facility_name": "西北生产装置区",
+        "type": "production",
+        "is_hazard": 1,
+        "personnel": 24,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 334.84,
+        "mapY": 290.72,
+        "s3mX": -1096.16,
+        "s3mY": 261.858,
+        "longitude": 113.54182327,
+        "latitude": 34.83115491,
+        "localMapX": 334.84,
+        "localMapY": 290.72,
+        "cgcs2000E": 458087.183,
+        "cgcs2000N": 3855954.452,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458020.383,
+              3855975.572
+            ],
+            [
+              458153.983,
+              3855975.572
+            ],
+            [
+              458153.983,
+              3855933.332
+            ],
+            [
+              458020.383,
+              3855933.332
+            ],
+            [
+              458020.383,
+              3855975.572
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_A_002",
+        "name": "西部生产装置框架区",
+        "zone_code": "A",
+        "source_facility_id": "pa-west-north",
+        "source_facility_name": "西北生产装置区",
+        "type": "production",
+        "is_hazard": 1,
+        "personnel": 8,
+        "confidence": "low",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 481.8,
+        "mapY": 292.48,
+        "s3mX": -872.43,
+        "s3mY": 258.127,
+        "longitude": 113.5434315,
+        "latitude": 34.8311391,
+        "localMapX": 481.8,
+        "localMapY": 292.48,
+        "cgcs2000E": 458234.143,
+        "cgcs2000N": 3855952.692,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458174.023,
+              3855979.092
+            ],
+            [
+              458294.263,
+              3855979.092
+            ],
+            [
+              458294.263,
+              3855926.292
+            ],
+            [
+              458174.023,
+              3855926.292
+            ],
+            [
+              458174.023,
+              3855979.092
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_A_003",
+        "name": "西部北侧辅助厂房",
+        "zone_code": "A",
+        "source_facility_id": "pa-west-north",
+        "source_facility_name": "西北生产装置区",
+        "type": "utility",
+        "is_hazard": 0,
+        "personnel": 4,
+        "confidence": "low",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 338.18,
+        "mapY": 375.2,
+        "s3mX": -1091.076,
+        "s3mY": 82.727,
+        "longitude": 113.54185982,
+        "latitude": 34.83039602,
+        "localMapX": 338.18,
+        "localMapY": 375.2,
+        "cgcs2000E": 458090.523,
+        "cgcs2000N": 3855869.972,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458033.743,
+              3855894.612
+            ],
+            [
+              458147.303,
+              3855894.612
+            ],
+            [
+              458147.303,
+              3855845.332
+            ],
+            [
+              458033.743,
+              3855845.332
+            ],
+            [
+              458033.743,
+              3855894.612
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_I_001",
+        "name": "西南罐组一",
+        "zone_code": "I",
+        "source_facility_id": "pa-west-south",
+        "source_facility_name": "西南储罐与泵区",
+        "type": "tank",
+        "is_hazard": 1,
+        "personnel": 2,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 318.14,
+        "mapY": 492.92,
+        "s3mX": -1121.584,
+        "s3mY": -166.886,
+        "longitude": 113.54164051,
+        "latitude": 34.82933853,
+        "localMapX": 318.14,
+        "localMapY": 492.92,
+        "cgcs2000E": 458070.483,
+        "cgcs2000N": 3855752.252,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458027.063,
+              3855786.132
+            ],
+            [
+              458113.903,
+              3855786.132
+            ],
+            [
+              458113.903,
+              3855718.372
+            ],
+            [
+              458027.063,
+              3855718.372
+            ],
+            [
+              458027.063,
+              3855786.132
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_I_002",
+        "name": "西南泵区",
+        "zone_code": "I",
+        "source_facility_id": "pa-west-south",
+        "source_facility_name": "西南储罐与泵区",
+        "type": "pump",
+        "is_hazard": 1,
+        "personnel": 4,
+        "confidence": "low",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 428.36,
+        "mapY": 494.13,
+        "s3mX": -953.787,
+        "s3mY": -169.451,
+        "longitude": 113.54284669,
+        "latitude": 34.82932766,
+        "localMapX": 428.36,
+        "localMapY": 494.13,
+        "cgcs2000E": 458180.703,
+        "cgcs2000N": 3855751.042,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458133.943,
+              3855778.872
+            ],
+            [
+              458227.463,
+              3855778.872
+            ],
+            [
+              458227.463,
+              3855723.212
+            ],
+            [
+              458133.943,
+              3855723.212
+            ],
+            [
+              458133.943,
+              3855778.872
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_I_003",
+        "name": "西南辅助厂房",
+        "zone_code": "I",
+        "source_facility_id": "pa-west-south",
+        "source_facility_name": "西南储罐与泵区",
+        "type": "utility",
+        "is_hazard": 0,
+        "personnel": 8,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 361.56,
+        "mapY": 604.24,
+        "s3mX": -1055.482,
+        "s3mY": -402.928,
+        "longitude": 113.54211567,
+        "latitude": 34.82833853,
+        "localMapX": 361.56,
+        "localMapY": 604.24,
+        "cgcs2000E": 458113.903,
+        "cgcs2000N": 3855640.932,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458047.103,
+              3855674.812
+            ],
+            [
+              458180.703,
+              3855674.812
+            ],
+            [
+              458180.703,
+              3855607.052
+            ],
+            [
+              458047.103,
+              3855607.052
+            ],
+            [
+              458047.103,
+              3855674.812
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_B_001",
+        "name": "西中长条生产厂房",
+        "zone_code": "B",
+        "source_facility_id": "pa-center-north",
+        "source_facility_name": "中北厂房装置区",
+        "type": "production",
+        "is_hazard": 1,
+        "personnel": 36,
+        "confidence": "high",
+        "status": "confirmed",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": false,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 672,
+        "mapY": 299.52,
+        "s3mX": -582.872,
+        "s3mY": 243.199,
+        "longitude": 113.54551293,
+        "latitude": 34.83107586,
+        "localMapX": 672,
+        "localMapY": 299.52,
+        "cgcs2000E": 458424.343,
+        "cgcs2000N": 3855945.652,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458357.143,
+              3855972.052
+            ],
+            [
+              458491.543,
+              3855972.052
+            ],
+            [
+              458491.543,
+              3855919.252
+            ],
+            [
+              458357.143,
+              3855919.252
+            ],
+            [
+              458357.143,
+              3855972.052
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_B_002",
+        "name": "西中装置区",
+        "zone_code": "B",
+        "source_facility_id": "pa-center-north",
+        "source_facility_name": "中北厂房装置区",
+        "type": "production",
+        "is_hazard": 1,
+        "personnel": 10,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 668.64,
+        "mapY": 376.96,
+        "s3mX": -587.988,
+        "s3mY": 78.996,
+        "longitude": 113.54547616,
+        "latitude": 34.83038021,
+        "localMapX": 668.64,
+        "localMapY": 376.96,
+        "cgcs2000E": 458420.983,
+        "cgcs2000N": 3855868.212,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458363.863,
+              3855894.612
+            ],
+            [
+              458478.103,
+              3855894.612
+            ],
+            [
+              458478.103,
+              3855841.812
+            ],
+            [
+              458363.863,
+              3855841.812
+            ],
+            [
+              458363.863,
+              3855894.612
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_D_001",
+        "name": "中南蓝顶厂房",
+        "zone_code": "D",
+        "source_facility_id": "pa-center-south",
+        "source_facility_name": "中南反应装置区",
+        "type": "production",
+        "is_hazard": 1,
+        "personnel": 24,
+        "confidence": "high",
+        "status": "confirmed",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": false,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 668.64,
+        "mapY": 488.08,
+        "s3mX": -587.988,
+        "s3mY": -156.623,
+        "longitude": 113.54547616,
+        "latitude": 34.82938201,
+        "localMapX": 668.64,
+        "localMapY": 488.08,
+        "cgcs2000E": 458420.983,
+        "cgcs2000N": 3855757.092,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458353.783,
+              3855786.132
+            ],
+            [
+              458488.183,
+              3855786.132
+            ],
+            [
+              458488.183,
+              3855728.052
+            ],
+            [
+              458353.783,
+              3855728.052
+            ],
+            [
+              458353.783,
+              3855786.132
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_D_002",
+        "name": "中南罐组",
+        "zone_code": "D",
+        "source_facility_id": "pa-center-south",
+        "source_facility_name": "中南反应装置区",
+        "type": "tank",
+        "is_hazard": 1,
+        "personnel": 4,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 636.72,
+        "mapY": 587.3,
+        "s3mX": -636.582,
+        "s3mY": -367.009,
+        "longitude": 113.54512685,
+        "latitude": 34.8284907,
+        "localMapX": 636.72,
+        "localMapY": 587.3,
+        "cgcs2000E": 458389.063,
+        "cgcs2000N": 3855657.872,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458360.503,
+              3855694.172
+            ],
+            [
+              458417.623,
+              3855694.172
+            ],
+            [
+              458417.623,
+              3855621.572
+            ],
+            [
+              458360.503,
+              3855621.572
+            ],
+            [
+              458360.503,
+              3855694.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_D_003",
+        "name": "中南装置框架",
+        "zone_code": "D",
+        "source_facility_id": "pa-center-south",
+        "source_facility_name": "中南反应装置区",
+        "type": "production",
+        "is_hazard": 1,
+        "personnel": 6,
+        "confidence": "low",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 707.28,
+        "mapY": 589.72,
+        "s3mX": -529.163,
+        "s3mY": -372.14,
+        "longitude": 113.54589901,
+        "latitude": 34.82846896,
+        "localMapX": 707.28,
+        "localMapY": 589.72,
+        "cgcs2000E": 458459.623,
+        "cgcs2000N": 3855655.452,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458431.063,
+              3855694.172
+            ],
+            [
+              458488.183,
+              3855694.172
+            ],
+            [
+              458488.183,
+              3855616.732
+            ],
+            [
+              458431.063,
+              3855616.732
+            ],
+            [
+              458431.063,
+              3855694.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_C_001",
+        "name": "中央主厂房",
+        "zone_code": "C",
+        "source_facility_id": "ut-center",
+        "source_facility_name": "公用工程与管廊区",
+        "type": "production",
+        "is_hazard": 1,
+        "personnel": 28,
+        "confidence": "high",
+        "status": "confirmed",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": false,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 802.24,
+        "mapY": 365.4,
+        "s3mX": -384.597,
+        "s3mY": 103.507,
+        "longitude": 113.54693819,
+        "latitude": 34.83048405,
+        "localMapX": 802.24,
+        "localMapY": 365.4,
+        "cgcs2000E": 458554.583,
+        "cgcs2000N": 3855879.772,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458519.383,
+              3855917.572
+            ],
+            [
+              458589.783,
+              3855917.572
+            ],
+            [
+              458589.783,
+              3855841.972
+            ],
+            [
+              458519.383,
+              3855841.972
+            ],
+            [
+              458519.383,
+              3855917.572
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_C_002",
+        "name": "中央塔器区",
+        "zone_code": "C",
+        "source_facility_id": "ut-center",
+        "source_facility_name": "公用工程与管廊区",
+        "type": "tower",
+        "is_hazard": 1,
+        "personnel": 4,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 802.24,
+        "mapY": 478.8,
+        "s3mX": -384.597,
+        "s3mY": -136.946,
+        "longitude": 113.54693819,
+        "latitude": 34.82946537,
+        "localMapX": 802.24,
+        "localMapY": 478.8,
+        "cgcs2000E": 458554.583,
+        "cgcs2000N": 3855766.372,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458529.943,
+              3855808.372
+            ],
+            [
+              458579.223,
+              3855808.372
+            ],
+            [
+              458579.223,
+              3855724.372
+            ],
+            [
+              458529.943,
+              3855724.372
+            ],
+            [
+              458529.943,
+              3855808.372
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_C_003",
+        "name": "中央公用工程区",
+        "zone_code": "C",
+        "source_facility_id": "ut-center",
+        "source_facility_name": "公用工程与管廊区",
+        "type": "utility",
+        "is_hazard": 0,
+        "personnel": 6,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 804,
+        "mapY": 592.2,
+        "s3mX": -381.917,
+        "s3mY": -377.399,
+        "longitude": 113.54695745,
+        "latitude": 34.82844668,
+        "localMapX": 804,
+        "localMapY": 592.2,
+        "cgcs2000E": 458556.343,
+        "cgcs2000N": 3855652.972,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458528.183,
+              3855690.772
+            ],
+            [
+              458584.503,
+              3855690.772
+            ],
+            [
+              458584.503,
+              3855615.172
+            ],
+            [
+              458528.183,
+              3855615.172
+            ],
+            [
+              458528.183,
+              3855690.772
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_E_001",
+        "name": "中东装置框架区",
+        "zone_code": "E",
+        "source_facility_id": "tw-center",
+        "source_facility_name": "中东塔器与罐组区",
+        "type": "production",
+        "is_hazard": 1,
+        "personnel": 14,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 901,
+        "mapY": 336,
+        "s3mX": -234.246,
+        "s3mY": 165.847,
+        "longitude": 113.54801896,
+        "latitude": 34.83074816,
+        "localMapX": 901,
+        "localMapY": 336,
+        "cgcs2000E": 458653.343,
+        "cgcs2000N": 3855909.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458617.343,
+              3855951.172
+            ],
+            [
+              458689.343,
+              3855951.172
+            ],
+            [
+              458689.343,
+              3855867.172
+            ],
+            [
+              458617.343,
+              3855867.172
+            ],
+            [
+              458617.343,
+              3855951.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_E_002",
+        "name": "中东塔器罐组",
+        "zone_code": "E",
+        "source_facility_id": "tw-center",
+        "source_facility_name": "中东塔器与罐组区",
+        "type": "tank",
+        "is_hazard": 1,
+        "personnel": 4,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 901,
+        "mapY": 453.6,
+        "s3mX": -234.246,
+        "s3mY": -83.512,
+        "longitude": 113.54801896,
+        "latitude": 34.82969174,
+        "localMapX": 901,
+        "localMapY": 453.6,
+        "cgcs2000E": 458653.343,
+        "cgcs2000N": 3855791.572,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458620.943,
+              3855833.572
+            ],
+            [
+              458685.743,
+              3855833.572
+            ],
+            [
+              458685.743,
+              3855749.572
+            ],
+            [
+              458620.943,
+              3855749.572
+            ],
+            [
+              458620.943,
+              3855833.572
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_E_003",
+        "name": "中东南侧厂房",
+        "zone_code": "E",
+        "source_facility_id": "tw-center",
+        "source_facility_name": "中东塔器与罐组区",
+        "type": "production",
+        "is_hazard": 1,
+        "personnel": 16,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 901,
+        "mapY": 579.6,
+        "s3mX": -234.246,
+        "s3mY": -350.682,
+        "longitude": 113.54801896,
+        "latitude": 34.82855987,
+        "localMapX": 901,
+        "localMapY": 579.6,
+        "cgcs2000E": 458653.343,
+        "cgcs2000N": 3855665.572,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458617.343,
+              3855707.572
+            ],
+            [
+              458689.343,
+              3855707.572
+            ],
+            [
+              458689.343,
+              3855623.572
+            ],
+            [
+              458617.343,
+              3855623.572
+            ],
+            [
+              458617.343,
+              3855707.572
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_G_001",
+        "name": "东北西侧储罐组",
+        "zone_code": "G",
+        "source_facility_id": "pb-north-tank",
+        "source_facility_name": "东北罐组与管汇区",
+        "type": "tank",
+        "is_hazard": 1,
+        "personnel": 2,
+        "confidence": "high",
+        "status": "confirmed",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": false,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 1015.8,
+        "mapY": 318.3,
+        "s3mX": -59.476,
+        "s3mY": 203.378,
+        "longitude": 113.54927525,
+        "latitude": 34.83090716,
+        "localMapX": 1015.8,
+        "localMapY": 318.3,
+        "cgcs2000E": 458768.143,
+        "cgcs2000N": 3855926.872,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458729.143,
+              3855965.972
+            ],
+            [
+              458807.143,
+              3855965.972
+            ],
+            [
+              458807.143,
+              3855887.772
+            ],
+            [
+              458729.143,
+              3855887.772
+            ],
+            [
+              458729.143,
+              3855965.972
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_G_002",
+        "name": "东北东侧储罐组",
+        "zone_code": "G",
+        "source_facility_id": "pb-north-tank",
+        "source_facility_name": "东北罐组与管汇区",
+        "type": "tank",
+        "is_hazard": 1,
+        "personnel": 2,
+        "confidence": "high",
+        "status": "confirmed",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": false,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 1135.4,
+        "mapY": 318.3,
+        "s3mX": 122.602,
+        "s3mY": 203.378,
+        "longitude": 113.55058408,
+        "latitude": 34.83090716,
+        "localMapX": 1135.4,
+        "localMapY": 318.3,
+        "cgcs2000E": 458887.743,
+        "cgcs2000N": 3855926.872,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458843.543,
+              3855965.972
+            ],
+            [
+              458931.943,
+              3855965.972
+            ],
+            [
+              458931.943,
+              3855887.772
+            ],
+            [
+              458843.543,
+              3855887.772
+            ],
+            [
+              458843.543,
+              3855965.972
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_G_003",
+        "name": "东北管汇装卸区",
+        "zone_code": "G",
+        "source_facility_id": "pb-north-tank",
+        "source_facility_name": "东北罐组与管汇区",
+        "type": "utility",
+        "is_hazard": 1,
+        "personnel": 4,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 1086,
+        "mapY": 386.3,
+        "s3mX": 47.396,
+        "s3mY": 59.191,
+        "longitude": 113.55004348,
+        "latitude": 34.83029631,
+        "localMapX": 1086,
+        "localMapY": 386.3,
+        "cgcs2000E": 458838.343,
+        "cgcs2000N": 3855858.872,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458755.143,
+              3855874.172
+            ],
+            [
+              458921.543,
+              3855874.172
+            ],
+            [
+              458921.543,
+              3855843.572
+            ],
+            [
+              458755.143,
+              3855843.572
+            ],
+            [
+              458755.143,
+              3855874.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_F_001",
+        "name": "东南主生产厂房",
+        "zone_code": "F",
+        "source_facility_id": "pb-mid-process",
+        "source_facility_name": "东中生产与污水装置区",
+        "type": "production",
+        "is_hazard": 1,
+        "personnel": 28,
+        "confidence": "high",
+        "status": "confirmed",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": false,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 1086,
+        "mapY": 452.48,
+        "s3mX": 47.396,
+        "s3mY": -81.137,
+        "longitude": 113.55004348,
+        "latitude": 34.8297018,
+        "localMapX": 1086,
+        "localMapY": 452.48,
+        "cgcs2000E": 458838.343,
+        "cgcs2000N": 3855792.692,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458729.143,
+              3855808.932
+            ],
+            [
+              458947.543,
+              3855808.932
+            ],
+            [
+              458947.543,
+              3855776.452
+            ],
+            [
+              458729.143,
+              3855776.452
+            ],
+            [
+              458729.143,
+              3855808.932
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_F_002",
+        "name": "东南设备区",
+        "zone_code": "F",
+        "source_facility_id": "pb-mid-process",
+        "source_facility_name": "东中生产与污水装置区",
+        "type": "utility",
+        "is_hazard": 1,
+        "personnel": 8,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 1034,
+        "mapY": 501.2,
+        "s3mX": -31.768,
+        "s3mY": -184.443,
+        "longitude": 113.54947442,
+        "latitude": 34.82926415,
+        "localMapX": 1034,
+        "localMapY": 501.2,
+        "cgcs2000E": 458786.343,
+        "cgcs2000N": 3855743.972,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458739.543,
+              3855760.212
+            ],
+            [
+              458833.143,
+              3855760.212
+            ],
+            [
+              458833.143,
+              3855727.732
+            ],
+            [
+              458739.543,
+              3855727.732
+            ],
+            [
+              458739.543,
+              3855760.212
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_F_003",
+        "name": "东南辅助厂房",
+        "zone_code": "F",
+        "source_facility_id": "pb-mid-process",
+        "source_facility_name": "东中生产与污水装置区",
+        "type": "warehouse",
+        "is_hazard": 0,
+        "personnel": 16,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 1148.4,
+        "mapY": 501.2,
+        "s3mX": 142.393,
+        "s3mY": -184.443,
+        "longitude": 113.55072634,
+        "latitude": 34.82926415,
+        "localMapX": 1148.4,
+        "localMapY": 501.2,
+        "cgcs2000E": 458900.743,
+        "cgcs2000N": 3855743.972,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458859.143,
+              3855760.212
+            ],
+            [
+              458942.343,
+              3855760.212
+            ],
+            [
+              458942.343,
+              3855727.732
+            ],
+            [
+              458859.143,
+              3855727.732
+            ],
+            [
+              458859.143,
+              3855760.212
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_J_001",
+        "name": "南侧小罐组",
+        "zone_code": "J",
+        "source_facility_id": "fs-east-yard",
+        "source_facility_name": "东侧应急与装卸边界区",
+        "type": "tank",
+        "is_hazard": 1,
+        "personnel": 2,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 1030,
+        "mapY": 571.28,
+        "s3mX": -37.858,
+        "s3mY": -333.04,
+        "longitude": 113.54943065,
+        "latitude": 34.82863461,
+        "localMapX": 1030,
+        "localMapY": 571.28,
+        "cgcs2000E": 458782.343,
+        "cgcs2000N": 3855673.892,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458747.383,
+              3855691.532
+            ],
+            [
+              458817.303,
+              3855691.532
+            ],
+            [
+              458817.303,
+              3855656.252
+            ],
+            [
+              458747.383,
+              3855656.252
+            ],
+            [
+              458747.383,
+              3855691.532
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_J_002",
+        "name": "南侧装置区",
+        "zone_code": "J",
+        "source_facility_id": "fs-east-yard",
+        "source_facility_name": "东侧应急与装卸边界区",
+        "type": "production",
+        "is_hazard": 1,
+        "personnel": 8,
+        "confidence": "low",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 1030,
+        "mapY": 625.46,
+        "s3mX": -37.858,
+        "s3mY": -447.923,
+        "longitude": 113.54943065,
+        "latitude": 34.82814791,
+        "localMapX": 1030,
+        "localMapY": 625.46,
+        "cgcs2000E": 458782.343,
+        "cgcs2000N": 3855619.712,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458751.063,
+              3855636.092
+            ],
+            [
+              458813.623,
+              3855636.092
+            ],
+            [
+              458813.623,
+              3855603.332
+            ],
+            [
+              458751.063,
+              3855603.332
+            ],
+            [
+              458751.063,
+              3855636.092
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_H_001",
+        "name": "东侧仓储建筑一",
+        "zone_code": "H",
+        "source_facility_id": "wh-logistics",
+        "source_facility_name": "东南仓储物流区",
+        "type": "warehouse",
+        "is_hazard": 0,
+        "personnel": 24,
+        "confidence": "high",
+        "status": "confirmed",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": false,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 1112.4,
+        "mapY": 562.46,
+        "s3mX": 87.587,
+        "s3mY": -314.338,
+        "longitude": 113.55033238,
+        "latitude": 34.82871384,
+        "localMapX": 1112.4,
+        "localMapY": 562.46,
+        "cgcs2000E": 458864.743,
+        "cgcs2000N": 3855682.712,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458842.343,
+              3855696.572
+            ],
+            [
+              458887.143,
+              3855696.572
+            ],
+            [
+              458887.143,
+              3855668.852
+            ],
+            [
+              458842.343,
+              3855668.852
+            ],
+            [
+              458842.343,
+              3855696.572
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_H_002",
+        "name": "东侧仓储建筑二",
+        "zone_code": "H",
+        "source_facility_id": "wh-logistics",
+        "source_facility_name": "东南仓储物流区",
+        "type": "warehouse",
+        "is_hazard": 0,
+        "personnel": 18,
+        "confidence": "high",
+        "status": "confirmed",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": false,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 1179.6,
+        "mapY": 562.46,
+        "s3mX": 189.891,
+        "s3mY": -314.338,
+        "longitude": 113.55106778,
+        "latitude": 34.82871384,
+        "localMapX": 1179.6,
+        "localMapY": 562.46,
+        "cgcs2000E": 458931.943,
+        "cgcs2000N": 3855682.712,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458909.543,
+              3855696.572
+            ],
+            [
+              458954.343,
+              3855696.572
+            ],
+            [
+              458954.343,
+              3855668.852
+            ],
+            [
+              458909.543,
+              3855668.852
+            ],
+            [
+              458909.543,
+              3855696.572
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_H_003",
+        "name": "东侧辅助建筑一",
+        "zone_code": "H",
+        "source_facility_id": "wh-logistics",
+        "source_facility_name": "东南仓储物流区",
+        "type": "office",
+        "is_hazard": 0,
+        "personnel": 20,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 1112.4,
+        "mapY": 616.64,
+        "s3mX": 87.587,
+        "s3mY": -429.221,
+        "longitude": 113.55033238,
+        "latitude": 34.82822714,
+        "localMapX": 1112.4,
+        "localMapY": 616.64,
+        "cgcs2000E": 458864.743,
+        "cgcs2000N": 3855628.532,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458842.343,
+              3855643.652
+            ],
+            [
+              458887.143,
+              3855643.652
+            ],
+            [
+              458887.143,
+              3855613.412
+            ],
+            [
+              458842.343,
+              3855613.412
+            ],
+            [
+              458842.343,
+              3855643.652
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_H_004",
+        "name": "东侧辅助建筑二",
+        "zone_code": "H",
+        "source_facility_id": "wh-logistics",
+        "source_facility_name": "东南仓储物流区",
+        "type": "utility",
+        "is_hazard": 0,
+        "personnel": 12,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 1179.6,
+        "mapY": 616.64,
+        "s3mX": 189.891,
+        "s3mY": -429.221,
+        "longitude": 113.55106778,
+        "latitude": 34.82822714,
+        "localMapX": 1179.6,
+        "localMapY": 616.64,
+        "cgcs2000E": 458931.943,
+        "cgcs2000N": 3855628.532,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458909.543,
+              3855643.652
+            ],
+            [
+              458954.343,
+              3855643.652
+            ],
+            [
+              458954.343,
+              3855613.412
+            ],
+            [
+              458909.543,
+              3855613.412
+            ],
+            [
+              458909.543,
+              3855643.652
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

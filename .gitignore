@@ -1,0 +1,54 @@
+# ===== 私密文件（账号密码/服务器凭据，绝不入库）=====
+私密文件/
+
+# ===== SuperMap 商业 License（不外传）=====
+supermap_bslicense/
+
+# ===== 三维瓦片数据（887M 二进制产物，非源码，不托管）=====
+园区大屏部署/瓦片/
+
+# ===== Python 虚拟环境与缓存 =====
+.venv/
+venv/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pt
+*.pth
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage/
+
+# ===== Node =====
+node_modules/
+dist/
+npm-debug.log*
+.pnpm-store/
+
+# ===== Java =====
+target/
+*.class
+*.jar
+*.war
+
+# ===== IDE / OS =====
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
+
+# ===== 日志 =====
+*.log
+iobjectspy.log
+hs_err_pid*.log
+
+# ===== 环境变量与密钥 =====
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+*.p12

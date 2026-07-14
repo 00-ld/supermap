@@ -1,0 +1,20 @@
+{
+  "createdAt": "2026-07-14T16:23:52",
+  "workspace": "D:\\6119_10_1supermap\\iserver\\supermap-iserver-2025u1a-windows-x64-all\\webapps\\iserver\\chemical_park_vectors_cgcs2000_network_sxwu_publish\\chemical_park_vectors_cgcs2000_network.sxwu",
+  "steps": [
+    {
+      "step": "publishWorkspace",
+      "error": "Response status code does not indicate success: 400 ().",
+      "detail": "{\n    \"succeed\": false,\n    \"error\": {\n        \"code\": 400,\n        \"errorMsg\": \"TransportationAnalystSetting cannot be null when publish TransportationAnalyst service !\"\n    }\n}"
+    },
+    {
+      "step": "listServices",
+      "status": 200,
+      "bytes": 22551,
+      "transportationMatches": [
+        "transportationanalyst-sample",
+        "transportationanalyst-chemical_park_cgcs2000"
+      ]
+    }
+  ]
+}

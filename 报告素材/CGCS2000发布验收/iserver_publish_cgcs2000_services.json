@@ -1,0 +1,24 @@
+[
+  {
+    "serviceType": "MapService",
+    "address": "D:\\6119_10_1supermap\\iserver\\supermap-iserver-2025u1a-windows-x64-all\\webapps\\iserver\\chemical_park_vectors_cgcs2000_publish\\chemical_park_vectors_cgcs2000.smwu",
+    "initOnCreate": true,
+    "name": "chemical_park_vectors_cgcs2000.smwu",
+    "available": true,
+    "isDisabled": false,
+    "serviceName": "map-chemical_park_vectors_cgcs2000/rest",
+    "message": null,
+    "enabled": true
+  },
+  {
+    "serviceType": "DataService",
+    "address": "D:\\6119_10_1supermap\\iserver\\supermap-iserver-2025u1a-windows-x64-all\\webapps\\iserver\\chemical_park_vectors_cgcs2000_publish\\chemical_park_vectors_cgcs2000.smwu",
+    "initOnCreate": true,
+    "name": "chemical_park_vectors_cgcs2000.smwu",
+    "available": true,
+    "isDisabled": false,
+    "serviceName": "data-chemical_park_vectors_cgcs2000/rest",
+    "message": null,
+    "enabled": true
+  }
+]

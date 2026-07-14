@@ -1,0 +1,18 @@
+Output datasource: G:\竞赛\超图杯\报告素材\二维数据集识别\supermap_udbx\chemical_park_vectors_cgcs2000.udbx
+Source data root: G:\竞赛\超图杯\报告素材\二维数据集识别\supermap_import_cgcs2000
+Source charset: UTF-8
+Imported datasets:
+- Park_RoadPolygon <= road_polygons_map.geojson -> Park_RoadPolygon_R
+- Park_RoadNetworkNode <= road_network_nodes_map.geojson -> Park_RoadNetworkNode_P
+- Park_RoadNetworkEdge <= road_network_edges_map.geojson -> Park_RoadNetworkEdge_L
+- Park_BuildingFacilityPolygon <= building_facility_polygons_map.geojson -> Park_BuildingFacilityPolygon_R
+- Park_BuildingFootprint <= building_footprints_map.geojson -> Park_BuildingFootprint_R
+- Park_EntrancePoint <= entrance_points_map.geojson -> Park_EntrancePoint_P
+- Park_S3MObjectFootprint <= s3m_object_footprints_map.geojson -> Park_S3MObjectFootprint_R
+
+Next iDesktopX steps:
+1. Open the datasource in iDesktopX.
+2. Verify Park_RoadNetworkEdge and Park_RoadNetworkNode topology.
+3. Build a network dataset from road edge/node datasets.
+4. Verify Park_BuildingFootprint against the S3M scene and refine pending/low-confidence polygons.
+5. Publish the datasource through iServer as Data/Map service.

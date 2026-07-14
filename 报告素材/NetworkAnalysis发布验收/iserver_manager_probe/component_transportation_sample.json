@@ -1,0 +1,13 @@
+{
+    "disabledInterfaceNames": "",
+    "initPriority": 0,
+    "initOnCreate": false,
+    "instanceCount": 0,
+    "name": "transportationanalyst-sample",
+    "alias": "",
+    "interfaceNames": "rest,wps100",
+    "type": "com.supermap.services.components.impl.TransportationAnalystImpl",
+    "config": null,
+    "providers": "transportationAnalystProvider-Changchun",
+    "enabled": false
+}

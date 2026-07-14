@@ -1,0 +1,793 @@
+{
+  "type": "FeatureCollection",
+  "name": "road_polygons_map",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "EPSG:4547",
+      "coordSys": "CGCS2000_3GK_CM_114E"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-north-main",
+        "type": "road",
+        "main": true,
+        "width_m": 20,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 793.6,
+        "mapY": 236,
+        "s3mX": -397.75,
+        "s3mY": 377.887,
+        "longitude": 113.54684364,
+        "latitude": 34.83164647,
+        "localMapX": 793.6,
+        "localMapY": 236,
+        "cgcs2000E": 458545.943,
+        "cgcs2000N": 3856009.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              457752.343,
+              3856019.172
+            ],
+            [
+              459339.543,
+              3856019.172
+            ],
+            [
+              459339.543,
+              3855999.172
+            ],
+            [
+              457752.343,
+              3855999.172
+            ],
+            [
+              457752.343,
+              3856019.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-south-main",
+        "type": "road",
+        "main": true,
+        "width_m": 22,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 793.6,
+        "mapY": 689,
+        "s3mX": -397.75,
+        "s3mY": -582.653,
+        "longitude": 113.54684364,
+        "latitude": 34.82757712,
+        "localMapX": 793.6,
+        "localMapY": 689,
+        "cgcs2000E": 458545.943,
+        "cgcs2000N": 3855556.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              457752.343,
+              3855567.172
+            ],
+            [
+              459339.543,
+              3855567.172
+            ],
+            [
+              459339.543,
+              3855545.172
+            ],
+            [
+              457752.343,
+              3855545.172
+            ],
+            [
+              457752.343,
+              3855567.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-west-main",
+        "type": "road",
+        "main": true,
+        "width_m": 18,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 238,
+        "mapY": 473.6,
+        "s3mX": -1243.588,
+        "s3mY": -125.92,
+        "longitude": 113.54076351,
+        "latitude": 34.82951208,
+        "localMapX": 238,
+        "localMapY": 473.6,
+        "cgcs2000E": 457990.343,
+        "cgcs2000N": 3855771.572,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              457981.343,
+              3856245.172
+            ],
+            [
+              457999.343,
+              3856245.172
+            ],
+            [
+              457999.343,
+              3855297.972
+            ],
+            [
+              457981.343,
+              3855297.972
+            ],
+            [
+              457981.343,
+              3856245.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-east-main",
+        "type": "road",
+        "main": true,
+        "width_m": 22,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 1227,
+        "mapY": 473.6,
+        "s3mX": 262.053,
+        "s3mY": -125.92,
+        "longitude": 113.55158649,
+        "latitude": 34.82951208,
+        "localMapX": 1227,
+        "localMapY": 473.6,
+        "cgcs2000E": 458979.343,
+        "cgcs2000N": 3855771.572,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458968.343,
+              3856245.172
+            ],
+            [
+              458990.343,
+              3856245.172
+            ],
+            [
+              458990.343,
+              3855297.972
+            ],
+            [
+              458968.343,
+              3855297.972
+            ],
+            [
+              458968.343,
+              3856245.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-center-west",
+        "type": "road",
+        "main": false,
+        "width_m": 16,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 768,
+        "mapY": 452,
+        "s3mX": -436.723,
+        "s3mY": -80.119,
+        "longitude": 113.54656349,
+        "latitude": 34.82970612,
+        "localMapX": 768,
+        "localMapY": 452,
+        "cgcs2000E": 458520.343,
+        "cgcs2000N": 3855793.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458512.343,
+              3856019.172
+            ],
+            [
+              458528.343,
+              3856019.172
+            ],
+            [
+              458528.343,
+              3855567.172
+            ],
+            [
+              458512.343,
+              3855567.172
+            ],
+            [
+              458512.343,
+              3856019.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-center-east",
+        "type": "road",
+        "main": false,
+        "width_m": 16,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 948,
+        "mapY": 452,
+        "s3mX": -162.693,
+        "s3mY": -80.119,
+        "longitude": 113.54853329,
+        "latitude": 34.82970612,
+        "localMapX": 948,
+        "localMapY": 452,
+        "cgcs2000E": 458700.343,
+        "cgcs2000N": 3855793.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458692.343,
+              3856019.172
+            ],
+            [
+              458708.343,
+              3856019.172
+            ],
+            [
+              458708.343,
+              3855567.172
+            ],
+            [
+              458692.343,
+              3855567.172
+            ],
+            [
+              458692.343,
+              3856019.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-west-service",
+        "type": "road",
+        "main": false,
+        "width_m": 14,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 399,
+        "mapY": 452,
+        "s3mX": -998.484,
+        "s3mY": -80.119,
+        "longitude": 113.54252539,
+        "latitude": 34.82970612,
+        "localMapX": 399,
+        "localMapY": 452,
+        "cgcs2000E": 458151.343,
+        "cgcs2000N": 3855793.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458144.343,
+              3856019.172
+            ],
+            [
+              458158.343,
+              3856019.172
+            ],
+            [
+              458158.343,
+              3855567.172
+            ],
+            [
+              458144.343,
+              3855567.172
+            ],
+            [
+              458144.343,
+              3856019.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-mid-service",
+        "type": "road",
+        "main": false,
+        "width_m": 14,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 675,
+        "mapY": 452,
+        "s3mX": -578.305,
+        "s3mY": -80.119,
+        "longitude": 113.54554576,
+        "latitude": 34.82970612,
+        "localMapX": 675,
+        "localMapY": 452,
+        "cgcs2000E": 458427.343,
+        "cgcs2000N": 3855793.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458420.343,
+              3856019.172
+            ],
+            [
+              458434.343,
+              3856019.172
+            ],
+            [
+              458434.343,
+              3855567.172
+            ],
+            [
+              458420.343,
+              3855567.172
+            ],
+            [
+              458420.343,
+              3856019.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-east-yard-service",
+        "type": "road",
+        "main": false,
+        "width_m": 14,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 1075,
+        "mapY": 452,
+        "s3mX": 30.65,
+        "s3mY": -80.119,
+        "longitude": 113.5499231,
+        "latitude": 34.82970612,
+        "localMapX": 1075,
+        "localMapY": 452,
+        "cgcs2000E": 458827.343,
+        "cgcs2000N": 3855793.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458820.343,
+              3856019.172
+            ],
+            [
+              458834.343,
+              3856019.172
+            ],
+            [
+              458834.343,
+              3855567.172
+            ],
+            [
+              458820.343,
+              3855567.172
+            ],
+            [
+              458820.343,
+              3856019.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-row-north",
+        "type": "road",
+        "main": false,
+        "width_m": 14,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 733.5,
+        "mapY": 343,
+        "s3mX": -489.246,
+        "s3mY": 151.004,
+        "longitude": 113.54618595,
+        "latitude": 34.83068527,
+        "localMapX": 733.5,
+        "localMapY": 343,
+        "cgcs2000E": 458485.843,
+        "cgcs2000N": 3855902.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              457981.343,
+              3855909.172
+            ],
+            [
+              458990.343,
+              3855909.172
+            ],
+            [
+              458990.343,
+              3855895.172
+            ],
+            [
+              457981.343,
+              3855895.172
+            ],
+            [
+              457981.343,
+              3855909.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-row-middle",
+        "type": "road",
+        "main": false,
+        "width_m": 16,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 733.5,
+        "mapY": 456,
+        "s3mX": -489.246,
+        "s3mY": -88.601,
+        "longitude": 113.54618595,
+        "latitude": 34.82967018,
+        "localMapX": 733.5,
+        "localMapY": 456,
+        "cgcs2000E": 458485.843,
+        "cgcs2000N": 3855789.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              457981.343,
+              3855797.172
+            ],
+            [
+              458990.343,
+              3855797.172
+            ],
+            [
+              458990.343,
+              3855781.172
+            ],
+            [
+              457981.343,
+              3855781.172
+            ],
+            [
+              457981.343,
+              3855797.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-row-south",
+        "type": "road",
+        "main": false,
+        "width_m": 14,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 733.5,
+        "mapY": 563,
+        "s3mX": -489.246,
+        "s3mY": -315.483,
+        "longitude": 113.54618595,
+        "latitude": 34.82870899,
+        "localMapX": 733.5,
+        "localMapY": 563,
+        "cgcs2000E": 458485.843,
+        "cgcs2000N": 3855682.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              457981.343,
+              3855689.172
+            ],
+            [
+              458990.343,
+              3855689.172
+            ],
+            [
+              458990.343,
+              3855675.172
+            ],
+            [
+              457981.343,
+              3855675.172
+            ],
+            [
+              457981.343,
+              3855689.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-west-loop",
+        "type": "road",
+        "main": false,
+        "width_m": 16,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 255,
+        "mapY": 462,
+        "s3mX": -1217.708,
+        "s3mY": -101.323,
+        "longitude": 113.54094955,
+        "latitude": 34.82961628,
+        "localMapX": 255,
+        "localMapY": 462,
+        "cgcs2000E": 458007.343,
+        "cgcs2000N": 3855783.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              457999.343,
+              3855999.172
+            ],
+            [
+              458015.343,
+              3855999.172
+            ],
+            [
+              458015.343,
+              3855567.172
+            ],
+            [
+              457999.343,
+              3855567.172
+            ],
+            [
+              457999.343,
+              3855999.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-tank-loop",
+        "type": "road",
+        "main": false,
+        "width_m": 14,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 589,
+        "mapY": 462,
+        "s3mX": -709.23,
+        "s3mY": -101.323,
+        "longitude": 113.54460463,
+        "latitude": 34.82961628,
+        "localMapX": 589,
+        "localMapY": 462,
+        "cgcs2000E": 458341.343,
+        "cgcs2000N": 3855783.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458334.343,
+              3855999.172
+            ],
+            [
+              458348.343,
+              3855999.172
+            ],
+            [
+              458348.343,
+              3855567.172
+            ],
+            [
+              458334.343,
+              3855567.172
+            ],
+            [
+              458334.343,
+              3855999.172
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-logistics-loop",
+        "type": "road",
+        "main": false,
+        "width_m": 14,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 991,
+        "mapY": 462,
+        "s3mX": -97.231,
+        "s3mY": -101.323,
+        "longitude": 113.54900386,
+        "latitude": 34.82961628,
+        "localMapX": 991,
+        "localMapY": 462,
+        "cgcs2000E": 458743.343,
+        "cgcs2000N": 3855783.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              458736.343,
+              3855999.172
+            ],
+            [
+              458750.343,
+              3855999.172
+            ],
+            [
+              458750.343,
+              3855567.172
+            ],
+            [
+              458736.343,
+              3855567.172
+            ],
+            [
+              458736.343,
+              3855999.172
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

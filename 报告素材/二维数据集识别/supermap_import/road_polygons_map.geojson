@@ -1,0 +1,687 @@
+{
+  "type": "FeatureCollection",
+  "name": "road_polygons_map",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "local-planar-meter-current-epsg0"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-north-main",
+        "type": "road",
+        "main": true,
+        "width_m": 20,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 793.6,
+        "mapY": 236,
+        "s3mX": -397.75,
+        "s3mY": 377.887,
+        "longitude": 118.78841003,
+        "latitude": 32.03787999
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              0,
+              226
+            ],
+            [
+              1587.2,
+              226
+            ],
+            [
+              1587.2,
+              246
+            ],
+            [
+              0,
+              246
+            ],
+            [
+              0,
+              226
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-south-main",
+        "type": "road",
+        "main": true,
+        "width_m": 22,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 793.6,
+        "mapY": 689,
+        "s3mX": -397.75,
+        "s3mY": -582.653,
+        "longitude": 118.78841003,
+        "latitude": 32.03381064
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              0,
+              678
+            ],
+            [
+              1587.2,
+              678
+            ],
+            [
+              1587.2,
+              700
+            ],
+            [
+              0,
+              700
+            ],
+            [
+              0,
+              678
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-west-main",
+        "type": "road",
+        "main": true,
+        "width_m": 18,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 238,
+        "mapY": 473.6,
+        "s3mX": -1243.588,
+        "s3mY": -125.92,
+        "longitude": 118.78252216,
+        "latitude": 32.0357456
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              229,
+              0
+            ],
+            [
+              247,
+              0
+            ],
+            [
+              247,
+              947.2
+            ],
+            [
+              229,
+              947.2
+            ],
+            [
+              229,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-east-main",
+        "type": "road",
+        "main": true,
+        "width_m": 22,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 1227,
+        "mapY": 473.6,
+        "s3mX": 262.053,
+        "s3mY": -125.92,
+        "longitude": 118.79300291,
+        "latitude": 32.0357456
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1216,
+              0
+            ],
+            [
+              1238,
+              0
+            ],
+            [
+              1238,
+              947.2
+            ],
+            [
+              1216,
+              947.2
+            ],
+            [
+              1216,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-center-west",
+        "type": "road",
+        "main": false,
+        "width_m": 16,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 768,
+        "mapY": 452,
+        "s3mX": -436.723,
+        "s3mY": -80.119,
+        "longitude": 118.78813874,
+        "latitude": 32.03593963
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              760,
+              226
+            ],
+            [
+              776,
+              226
+            ],
+            [
+              776,
+              678
+            ],
+            [
+              760,
+              678
+            ],
+            [
+              760,
+              226
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-center-east",
+        "type": "road",
+        "main": false,
+        "width_m": 16,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 948,
+        "mapY": 452,
+        "s3mX": -162.693,
+        "s3mY": -80.119,
+        "longitude": 118.79004626,
+        "latitude": 32.03593963
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              940,
+              226
+            ],
+            [
+              956,
+              226
+            ],
+            [
+              956,
+              678
+            ],
+            [
+              940,
+              678
+            ],
+            [
+              940,
+              226
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-west-service",
+        "type": "road",
+        "main": false,
+        "width_m": 14,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 399,
+        "mapY": 452,
+        "s3mX": -998.484,
+        "s3mY": -80.119,
+        "longitude": 118.78422833,
+        "latitude": 32.03593963
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              392,
+              226
+            ],
+            [
+              406,
+              226
+            ],
+            [
+              406,
+              678
+            ],
+            [
+              392,
+              678
+            ],
+            [
+              392,
+              226
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-mid-service",
+        "type": "road",
+        "main": false,
+        "width_m": 14,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 675,
+        "mapY": 452,
+        "s3mX": -578.305,
+        "s3mY": -80.119,
+        "longitude": 118.78715319,
+        "latitude": 32.03593963
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              668,
+              226
+            ],
+            [
+              682,
+              226
+            ],
+            [
+              682,
+              678
+            ],
+            [
+              668,
+              678
+            ],
+            [
+              668,
+              226
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-east-yard-service",
+        "type": "road",
+        "main": false,
+        "width_m": 14,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 1075,
+        "mapY": 452,
+        "s3mX": 30.65,
+        "s3mY": -80.119,
+        "longitude": 118.79139212,
+        "latitude": 32.03593963
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1068,
+              226
+            ],
+            [
+              1082,
+              226
+            ],
+            [
+              1082,
+              678
+            ],
+            [
+              1068,
+              678
+            ],
+            [
+              1068,
+              226
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-row-north",
+        "type": "road",
+        "main": false,
+        "width_m": 14,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 733.5,
+        "mapY": 343,
+        "s3mX": -489.246,
+        "s3mY": 151.004,
+        "longitude": 118.78777313,
+        "latitude": 32.03691879
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              229,
+              336
+            ],
+            [
+              1238,
+              336
+            ],
+            [
+              1238,
+              350
+            ],
+            [
+              229,
+              350
+            ],
+            [
+              229,
+              336
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-row-middle",
+        "type": "road",
+        "main": false,
+        "width_m": 16,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 733.5,
+        "mapY": 456,
+        "s3mX": -489.246,
+        "s3mY": -88.601,
+        "longitude": 118.78777313,
+        "latitude": 32.0359037
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              229,
+              448
+            ],
+            [
+              1238,
+              448
+            ],
+            [
+              1238,
+              464
+            ],
+            [
+              229,
+              464
+            ],
+            [
+              229,
+              448
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-row-south",
+        "type": "road",
+        "main": false,
+        "width_m": 14,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 733.5,
+        "mapY": 563,
+        "s3mX": -489.246,
+        "s3mY": -315.483,
+        "longitude": 118.78777313,
+        "latitude": 32.03494251
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              229,
+              556
+            ],
+            [
+              1238,
+              556
+            ],
+            [
+              1238,
+              570
+            ],
+            [
+              229,
+              570
+            ],
+            [
+              229,
+              556
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-west-loop",
+        "type": "road",
+        "main": false,
+        "width_m": 16,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 255,
+        "mapY": 462,
+        "s3mX": -1217.708,
+        "s3mY": -101.323,
+        "longitude": 118.78270232,
+        "latitude": 32.0358498
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              247,
+              246
+            ],
+            [
+              263,
+              246
+            ],
+            [
+              263,
+              678
+            ],
+            [
+              247,
+              678
+            ],
+            [
+              247,
+              246
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-tank-loop",
+        "type": "road",
+        "main": false,
+        "width_m": 14,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 589,
+        "mapY": 462,
+        "s3mX": -709.23,
+        "s3mY": -101.323,
+        "longitude": 118.78624182,
+        "latitude": 32.0358498
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              582,
+              246
+            ],
+            [
+              596,
+              246
+            ],
+            [
+              596,
+              678
+            ],
+            [
+              582,
+              678
+            ],
+            [
+              582,
+              246
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_polygon",
+        "id": "road-logistics-loop",
+        "type": "road",
+        "main": false,
+        "width_m": 14,
+        "source": "frontend.realMapAssets.roads",
+        "precisionLevel": "manual_dom_annotation",
+        "mapX": 991,
+        "mapY": 462,
+        "s3mX": -97.231,
+        "s3mY": -101.323,
+        "longitude": 118.79050194,
+        "latitude": 32.0358498
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              984,
+              246
+            ],
+            [
+              998,
+              246
+            ],
+            [
+              998,
+              678
+            ],
+            [
+              984,
+              678
+            ],
+            [
+              984,
+              246
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

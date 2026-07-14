@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.at.mapper.SensorReadingMapper">
+    <insert id="insert" parameterType="com.at.pojo.SensorReading" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO sensor_reading
+            (scenario_id, sensor_id, gas_type, concentration, unit, sampled_at, source, quality_status, raw_payload)
+        VALUES
+            (#{scenarioId}, #{sensorId}, #{gasType}, #{concentration}, #{unit}, #{sampledAt}, #{source}, #{qualityStatus}, #{rawPayload})
+    </insert>
+
+    <select id="selectLatest" resultType="com.at.pojo.SensorReading">
+        SELECT id,
+               scenario_id as scenarioId,
+               sensor_id as sensorId,
+               gas_type as gasType,
+               concentration,
+               unit,
+               sampled_at as sampledAt,
+               received_at as receivedAt,
+               source,
+               quality_status as qualityStatus,
+               raw_payload as rawPayload
+        FROM sensor_reading
+        ORDER BY sampled_at DESC, id DESC
+        LIMIT 1
+    </select>
+
+    <select id="selectRecent" resultType="com.at.pojo.SensorReading">
+        SELECT id,
+               scenario_id as scenarioId,
+               sensor_id as sensorId,
+               gas_type as gasType,
+               concentration,
+               unit,
+               sampled_at as sampledAt,
+               received_at as receivedAt,
+               source,
+               quality_status as qualityStatus,
+               raw_payload as rawPayload
+        FROM sensor_reading
+        ORDER BY sampled_at DESC, id DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectRecentBySensor" resultType="com.at.pojo.SensorReading">
+        SELECT id,
+               scenario_id as scenarioId,
+               sensor_id as sensorId,
+               gas_type as gasType,
+               concentration,
+               unit,
+               sampled_at as sampledAt,
+               received_at as receivedAt,
+               source,
+               quality_status as qualityStatus,
+               raw_payload as rawPayload
+        FROM sensor_reading
+        WHERE sensor_id = #{sensorId}
+        ORDER BY sampled_at DESC, id DESC
+        LIMIT #{limit}
+    </select>
+</mapper>

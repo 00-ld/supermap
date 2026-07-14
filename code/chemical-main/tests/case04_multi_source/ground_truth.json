@@ -1,0 +1,33 @@
+{
+  "true_sources": [
+    {
+      "name": "S1",
+      "x": 100.0,
+      "y": 100.0,
+      "H": 40.0,
+      "Q": 80.0
+    },
+    {
+      "name": "S2",
+      "x": 100.0,
+      "y": -150.0,
+      "H": 60.0,
+      "Q": 120.0
+    },
+    {
+      "name": "S3",
+      "x": 600.0,
+      "y": 50.0,
+      "H": 30.0,
+      "Q": 60.0
+    }
+  ],
+  "stability": "C",
+  "wind_field_mean_speed_m_s": 3.999999999999943,
+  "noise": {
+    "snr_db": 18.0,
+    "min_floor": 0.001
+  },
+  "unit": "mg/m^3",
+  "note": "高难度多源辨识: 反演仅可用 conc_observed; contrib_* 与 conc_true_total 仅供评估"
+}

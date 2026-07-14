@@ -1,0 +1,129 @@
+﻿services:
+  # Nginx - 前端静态文件 + 反向代理
+  nginx:
+    image: nginx:1.27.5-alpine
+    container_name: chemical-nginx
+    ports:
+      - "80:80"
+    environment:
+      # 仅替换 ALGORITHM_API_KEY，避免 envsubst 破坏 nginx 自身的 $host/$remote_addr 等变量
+      - ALGORITHM_API_KEY=${ALGORITHM_API_KEY}
+      - NGINX_ENVSUBST_FILTER=ALGORITHM_API_KEY
+    volumes:
+      # 以模板方式挂载，容器启动时 envsubst 注入密钥后生成最终配置
+      - ./nginx/default.conf:/etc/nginx/templates/default.conf.template:ro
+      - ../frontend/dist:/usr/share/nginx/html:ro
+    depends_on:
+      backend:
+        condition: service_healthy
+      algorithm:
+        condition: service_healthy
+      yolo:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost/"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+    restart: always
+
+  # Java 后端（使用 deploy/backend/Dockerfile 非 root 加固镜像）
+  backend:
+    build:
+      context: ..
+      dockerfile: deploy/backend/Dockerfile
+    container_name: chemical-backend
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/chemical?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=appuser
+      - SPRING_DATASOURCE_PASSWORD=${MYSQL_APP_PASSWORD}
+      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE:-docker}
+      - JWT_SECRET=${JWT_SECRET}
+      - ALGORITHM_API_KEY=${ALGORITHM_API_KEY}
+      - ANALYSIS_SERVICE_URL=${ANALYSIS_SERVICE_URL:-http://yolo:8001/api/analysis/person}
+      - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS}
+      - INSPECTION_DEFAULT_LOCATION=${INSPECTION_DEFAULT_LOCATION:-核心作业区 A7}
+    depends_on:
+      mysql:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8081/healthz"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    restart: always
+
+  # Python 算法服务
+  algorithm:
+    build:
+      context: ..
+      dockerfile: deploy/algorithm/Dockerfile
+    container_name: chemical-algorithm
+    environment:
+      - ALGORITHM_API_KEY=${ALGORITHM_API_KEY}
+      - ALGORITHM_REQUIRE_AUTH=${ALGORITHM_REQUIRE_AUTH:-true}
+      - ALGORITHM_CORS_ORIGINS=${ALGORITHM_CORS_ORIGINS:-http://www.cip.lab6119.xyz,https://www.cip.lab6119.xyz}
+    ports:
+      - "127.0.0.1:8000:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    restart: always
+
+  # YOLO 人员识别服务（Java 后端通过内网 URL 调用）
+  yolo:
+    build:
+      context: ..
+      dockerfile: deploy/algorithm/Dockerfile
+      args:
+        UV_EXTRAS: yolo
+    container_name: chemical-yolo
+    command: ["uvicorn", "algorithm.polo:app", "--host", "0.0.0.0", "--port", "8001"]
+    environment:
+      - ALGORITHM_API_KEY=${ALGORITHM_API_KEY}
+      - ALGORITHM_REQUIRE_AUTH=${ALGORITHM_REQUIRE_AUTH:-true}
+      - ALGORITHM_CORS_ORIGINS=${ALGORITHM_CORS_ORIGINS:-http://www.cip.lab6119.xyz,https://www.cip.lab6119.xyz}
+      - YOLO_MODEL_PATH=${YOLO_MODEL_PATH:-/app/models/yolo11m.pt}
+      - YOLO_DEVICE=${YOLO_DEVICE:-cpu}
+      - YOLO_IMAGE_SIZE=${YOLO_IMAGE_SIZE:-1024}
+      - YOLO_CONFIDENCE=${YOLO_CONFIDENCE:-0.35}
+    volumes:
+      - ../models:/app/models:ro
+    ports:
+      - "127.0.0.1:8001:8001"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8001/api/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    restart: always
+
+  # MySQL 数据库
+  mysql:
+    image: mysql:8.0.42
+    container_name: chemical-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      # 由官方镜像原生创建最小权限应用账号，密码完全来自 .env，
+      # 轮换密码只需改 .env 重建容器，无需改 SQL。
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: ${MYSQL_APP_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/01_init.sql:ro
+      - ./mysql/init_appuser.sql:/docker-entrypoint-initdb.d/02_appuser.sql:ro
+    ports:
+      - "127.0.0.1:3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+
+volumes:
+  mysql_data:
+

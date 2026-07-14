@@ -1,0 +1,324 @@
+{
+  "type": "FeatureCollection",
+  "name": "s3m_object_footprints_map",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "local-planar-meter-current-epsg0"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "s3m_object_footprint",
+        "id": "factory_processing",
+        "name": "加工厂房",
+        "crs": "epsg:0",
+        "dataType": "ArtificialModel",
+        "s3mLeft": -305.860501231482,
+        "s3mRight": -174.99067206302325,
+        "s3mBottom": -48.6409556515574,
+        "s3mTop": 44.4084095275819,
+        "minHeight": -2.5983145065819175,
+        "maxHeight": 89.39735650061778,
+        "sourceScp": "G:\\竞赛\\超图杯\\园区大屏部署\\瓦片\\厂房三维瓦片\\加工厂房\\result_ImportFBX\\result_ImportFBX.scp",
+        "source": "scp.geoBounds",
+        "precisionLevel": "s3m_object_bounds",
+        "mapX": 896.94,
+        "mapY": 415.214,
+        "s3mX": -240.426,
+        "s3mY": -2.117,
+        "longitude": 118.78950516,
+        "latitude": 32.03627009
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              853.959,
+              393.272
+            ],
+            [
+              939.922,
+              393.272
+            ],
+            [
+              939.922,
+              437.155
+            ],
+            [
+              853.959,
+              437.155
+            ],
+            [
+              853.959,
+              393.272
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "s3m_object_footprint",
+        "id": "factory_production",
+        "name": "生产装置厂房",
+        "crs": "epsg:0",
+        "dataType": "ArtificialModel",
+        "s3mLeft": -9.082141762277615,
+        "s3mRight": 17.615633205502263,
+        "s3mBottom": -24.757209111848397,
+        "s3mTop": 0.6751753495931692,
+        "minHeight": -0.2733395245159045,
+        "maxHeight": 41.08860457481418,
+        "sourceScp": "G:\\竞赛\\超图杯\\园区大屏部署\\瓦片\\厂房三维瓦片\\生产装置厂房\\result_ImportFBX\\result_ImportFBX.scp",
+        "source": "scp.geoBounds",
+        "precisionLevel": "s3m_object_bounds",
+        "mapX": 1057.67,
+        "mapY": 419.894,
+        "s3mX": 4.267,
+        "s3mY": -12.042,
+        "longitude": 118.79120846,
+        "latitude": 32.03622805
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1048.902,
+              413.897
+            ],
+            [
+              1066.438,
+              413.897
+            ],
+            [
+              1066.438,
+              425.891
+            ],
+            [
+              1048.902,
+              425.891
+            ],
+            [
+              1048.902,
+              413.897
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "s3m_object_footprint",
+        "id": "warehouse_raw_material",
+        "name": "原材料仓库",
+        "crs": "epsg:0",
+        "dataType": "ArtificialModel",
+        "s3mLeft": -47.56125239924586,
+        "s3mRight": 33.93018225989244,
+        "s3mBottom": -32.44537676372511,
+        "s3mTop": 42.7845109700989,
+        "minHeight": 21.63696602009303,
+        "maxHeight": 32.24212001869593,
+        "sourceScp": "G:\\竞赛\\超图杯\\园区大屏部署\\瓦片\\厂房三维瓦片\\原材料仓库\\result_ImportFBX.scp",
+        "source": "scp.geoBounds",
+        "precisionLevel": "s3m_object_bounds",
+        "mapX": 1050.39,
+        "mapY": 411.777,
+        "s3mX": -6.816,
+        "s3mY": 5.17,
+        "longitude": 118.79113132,
+        "latitude": 32.03630096
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1023.626,
+              394.037
+            ],
+            [
+              1077.155,
+              394.037
+            ],
+            [
+              1077.155,
+              429.517
+            ],
+            [
+              1023.626,
+              429.517
+            ],
+            [
+              1023.626,
+              394.037
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "s3m_object_footprint",
+        "id": "equipment_heat_exchanger",
+        "name": "换热器",
+        "crs": "epsg:0",
+        "dataType": "ArtificialModel",
+        "s3mLeft": 1.9432581482921487,
+        "s3mRight": 5.453381399505014,
+        "s3mBottom": -0.2010394275013869,
+        "s3mTop": 0.790961733619748,
+        "minHeight": 0.005845611448664412,
+        "maxHeight": 0.26366215340812343,
+        "sourceScp": "G:\\竞赛\\超图杯\\园区大屏部署\\瓦片\\设备三维瓦片\\换热器\\换热器.scp",
+        "source": "scp.geoBounds",
+        "precisionLevel": "s3m_object_bounds",
+        "mapX": 1057.296,
+        "mapY": 414.076,
+        "s3mX": 3.698,
+        "s3mY": 0.295,
+        "longitude": 118.79120451,
+        "latitude": 32.03628031
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1056.144,
+              413.842
+            ],
+            [
+              1058.449,
+              413.842
+            ],
+            [
+              1058.449,
+              414.31
+            ],
+            [
+              1056.144,
+              414.31
+            ],
+            [
+              1056.144,
+              413.842
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "s3m_object_footprint",
+        "id": "equipment_vertical_tank",
+        "name": "立式罐子",
+        "crs": "epsg:0",
+        "dataType": "ArtificialModel",
+        "s3mLeft": -3.9295759516535327,
+        "s3mRight": 7.547342578708677,
+        "s3mBottom": -3.9932274000999226,
+        "s3mTop": 2.427329931195946,
+        "minHeight": -0.8642206658143512,
+        "maxHeight": 1.3112671907312154,
+        "sourceScp": "G:\\竞赛\\超图杯\\园区大屏部署\\瓦片\\设备三维瓦片\\立式罐子\\罐子.scp",
+        "source": "scp.geoBounds",
+        "precisionLevel": "s3m_object_bounds",
+        "mapX": 1056.055,
+        "mapY": 414.584,
+        "s3mX": 1.809,
+        "s3mY": -0.782,
+        "longitude": 118.79119135,
+        "latitude": 32.03627575
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1052.286,
+              413.07
+            ],
+            [
+              1059.825,
+              413.07
+            ],
+            [
+              1059.825,
+              416.098
+            ],
+            [
+              1052.286,
+              416.098
+            ],
+            [
+              1052.286,
+              413.07
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "s3m_object_footprint",
+        "id": "equipment_distillation_tower",
+        "name": "蒸馏塔",
+        "crs": "epsg:0",
+        "dataType": "ArtificialModel",
+        "s3mLeft": -13.381490090537199,
+        "s3mRight": 24.537562571771957,
+        "s3mBottom": 9.687175899934427,
+        "s3mTop": 13.10337445703428,
+        "minHeight": 1.7020767964816788,
+        "maxHeight": 36.49673222003898,
+        "sourceScp": "G:\\竞赛\\超图杯\\园区大屏部署\\瓦片\\设备三维瓦片\\蒸馏塔\\蒸馏塔.scp",
+        "source": "scp.geoBounds",
+        "precisionLevel": "s3m_object_bounds",
+        "mapX": 1058.532,
+        "mapY": 408.841,
+        "s3mX": 5.578,
+        "s3mY": 11.395,
+        "longitude": 118.79121759,
+        "latitude": 32.03632734
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1046.078,
+              408.035
+            ],
+            [
+              1070.985,
+              408.035
+            ],
+            [
+              1070.985,
+              409.647
+            ],
+            [
+              1046.078,
+              409.647
+            ],
+            [
+              1046.078,
+              408.035
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "createdAt": "2026-07-14T16:17:50",
+  "workspace": "D:\\6119_10_1supermap\\iserver\\supermap-iserver-2025u1a-windows-x64-all\\webapps\\iserver\\chemical_park_vectors_cgcs2000_network_publish\\chemical_park_vectors_cgcs2000_network.smwu",
+  "attempts": [
+    {
+      "serviceType": "RESTTRANSPORTATIONANALYST",
+      "error": "Response status code does not indicate success: 400 ().",
+      "detail": "{\n    \"succeed\": false,\n    \"error\": {\n        \"code\": 400,\n        \"errorMsg\": \"工作空间中没有网络数据集。\"\n    }\n}"
+    },
+    {
+      "serviceType": "RESTTRANSPORTATION",
+      "error": "Response status code does not indicate success: 500 ().",
+      "detail": "{\n    \"succeed\": false,\n    \"error\": {\n        \"code\": 500,\n        \"errorMsg\": \"Cannot invoke \\\"com.supermap.services.rest.management.ServiceType.ordinal()\\\" because \\\"serviceType\\\" is null\"\n    }\n}"
+    },
+    {
+      "serviceType": "RESTNETWORKANALYST",
+      "error": "Response status code does not indicate success: 500 ().",
+      "detail": "{\n    \"succeed\": false,\n    \"error\": {\n        \"code\": 500,\n        \"errorMsg\": \"Cannot invoke \\\"com.supermap.services.rest.management.ServiceType.ordinal()\\\" because \\\"serviceType\\\" is null\"\n    }\n}"
+    },
+    {
+      "serviceType": "RESTNETWORKANALYSIS",
+      "error": "Response status code does not indicate success: 500 ().",
+      "detail": "{\n    \"succeed\": false,\n    \"error\": {\n        \"code\": 500,\n        \"errorMsg\": \"Cannot invoke \\\"com.supermap.services.rest.management.ServiceType.ordinal()\\\" because \\\"serviceType\\\" is null\"\n    }\n}"
+    },
+    {
+      "serviceType": "RESTTRANSPORTATIONANALYSIS",
+      "error": "Response status code does not indicate success: 500 ().",
+      "detail": "{\n    \"succeed\": false,\n    \"error\": {\n        \"code\": 500,\n        \"errorMsg\": \"Cannot invoke \\\"com.supermap.services.rest.management.ServiceType.ordinal()\\\" because \\\"serviceType\\\" is null\"\n    }\n}"
+    }
+  ]
+}

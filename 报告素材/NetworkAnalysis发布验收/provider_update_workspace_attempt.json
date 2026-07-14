@@ -1,0 +1,43 @@
+{
+  "createdAt": "2026-07-14T16:31:22",
+  "steps": [
+    {
+      "step": "putProvider",
+      "status": 200,
+      "body": [
+        123,
+        34,
+        115,
+        117,
+        99,
+        99,
+        101,
+        101,
+        100,
+        34,
+        58,
+        32,
+        116,
+        114,
+        117,
+        101,
+        125
+      ]
+    },
+    {
+      "step": "get_providers",
+      "status": 200,
+      "body": "{\n    \"name\": \"transportationAnalyst-chemical_park_vectors_cgcs2000_network\",\n    \"alias\": null,\n    \"innerProviders\": null,\n    \"type\": \"com.supermap.services.providers.UGCTransportationAnalystProvider\",\n    \"config\": {\n        \"DEFAULT_POOLSIZE\": 10,\n        \"workspaceConnectString\": \"D:\\\\6119_10_1supermap\\\\iserver\\\\supermap-iserver-2025u1a-windows-x64-all\\\\webapps\\\\iserver\\\\chemical_park_vectors_cgcs2000_network_sxwu_publish\\\\chemical_park_vectors_cgcs2000_network.sxwu\",\n        \"edgeIDField\": \"SmEdgeID\",\n        \"initFacilityAnalyst\": true,\n        \"pathGuideDescriptionLanguage\": null,\n        \"multiInstance\": false,\n        \"barrierEdges\": null,\n        \"forwardSingleWayRuleValues\": null,\n        \"weightFieldInfos\": [{\n            \"unit\": null,\n            \"name\": \"length\",\n            \"forwardWeightField\": \"SmLength\",\n            \"backWeightField\": \"SmLength\"\n        }],\n        \"toNodeIDField\": \"SmTNode\",\n        \"edgeNameField\": \"SmEdgeID\",\n        \"datasourceName\": \"chemical_park_vectors_cgcs2000\",\n        \"tolerance\": 50,\n        \"analystModeSetting\": null,\n        \"turnDatasetInfo\": null,\n        \"poolSize\": 10,\n        \"datasetName\": \"Park_RoadNetwork_N\",\n        \"fromNodeIDField\": \"SmFNode\",\n        \"backwardSingleWayRuleValues\": null,\n        \"prohibitedWayRuleValues\": null,\n        \"workspaceType\": null,\n        \"directionField\": \"SmResistanceA\",\n        \"barrierNodes\": null,\n        \"nodeIDField\": \"SmNodeID\",\n        \"nodeNameField\": \"SmNodeID\",\n        \"ruleField\": null,\n        \"twoWayRuleValues\": null,\n        \"nodeIDFilterField\": null,\n        \"autoCheckNetwork\": true\n    },\n    \"enabled\": true\n}"
+    },
+    {
+      "step": "get_services",
+      "status": 200,
+      "body": "{\n    \"isStreamingService\": false,\n    \"interfaceTypes\": \"com.supermap.services.rest.RestServlet\",\n    \"isSet\": false,\n    \"instances\": [{\n        \"interfaceType\": \"com.supermap.services.rest.RestServlet\",\n        \"componentType\": \"com.supermap.services.components.impl.TransportationAnalystImpl\",\n        \"name\": \"transportationAnalyst-chemical_park_vectors_cgcs2000_network/rest\",\n        \"componentSetName\": null,\n        \"authorizeSetting\": {\n            \"permittedRoles\": [],\n            \"deniedRoles\": [],\n            \"type\": \"PUBLIC\"\n        },\n        \"id\": null,\n        \"componentName\": \"transportationAnalyst-chemical_park_vectors_cgcs2000_network\",\n        \"interfaceName\": \"rest\",\n        \"isDisabled\": false,\n        \"enabled\": true,\n        \"status\": \"FAILED\"\n    }],\n    \"isClusterService\": false,\n    \"type\": \"com.supermap.services.components.impl.TransportationAnalystImpl\",\n    \"interfaceNames\": \"rest\",\n    \"clusterInterfaceNames\": \"\",\n    \"isDataflowService\": false,\n    \"component\": {\n        \"isScSet\": false,\n        \"scSetSetting\": null,\n        \"scSetting\": {\n            \"disabledInterfaceNames\": \"\",\n            \"initPriority\": 0,\n            \"initOnCreate\": false,\n            \"instanceCount\": 0,\n            \"name\": \"transportationAnalyst-chemical_park_vectors_cgcs2000_network\",\n            \"alias\": \"transportationAnalyst-chemical_park_vectors_cgcs2000_network\",\n            \"interfaceNames\": \"rest\",\n            \"type\": \"com.supermap.services.components.impl.TransportationAnalystImpl\",\n            \"config\": {},\n            \"providers\": \"transportationAnalyst-chemical_park_vectors_cgcs2000_network\",\n            \"enabled\": true\n        }\n    },\n    \"providerNames\": \"transportationAnalyst-chemical_park_vectors_cgcs2000_network\",\n    \"name\": \"transportationAnalyst-chemical_park_vectors_cgcs2000_network\",\n    \"alias\": \"transportationAnalyst-chemical_park_vectors_cgcs2000_network\",\n    \"isDistributedanalystService\": false,\n    \"providers\": [{\n        \"spsetSettin"
+    },
+    {
+      "step": "verifyRest",
+      "error": "Response status code does not indicate success: 404 ().",
+      "detail": "HTTP状态 404 - 未找到body {font-family:Tahoma,Arial,sans-serif;} h1, h2, h3, b {color:white;background-color:#525D76;} h1 {font-size:22px;} h2 {font-size:16px;} h3 {font-size:14px;} p {font-size:12px;} a {color:black;} .line {height:1px;background-color:#525D76;border:none;}HTTP状态 404 - 未找到"
+    }
+  ]
+}

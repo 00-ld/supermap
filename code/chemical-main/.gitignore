@@ -1,0 +1,120 @@
+﻿# Java
+target/
+*.class
+*.jar
+*.war
+!.mvn/wrapper/maven-wrapper.jar
+
+# Node
+node_modules/
+dist/
+npm-debug.log*
+
+# Python
+algorithm/.venv/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pt
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+.env.*.local
+*.log
+hs_err_pid*.log
+replay_pid*.log
+
+# Project temp
+omc/
+.claude/
+.claude.md
+.omc/
+.codegraph/
+.codex-run-logs/
+.codex-runlogs/
+Back/
+Manage/
+GasModelTest/
+algorithm_tests/
+chemical-park-monitor/
+img/
+python/
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# Runtime data
+uploads/*
+!uploads/README.md
+!uploads/.gitignore
+logs/*
+!logs/README.md
+!logs/.gitignore
+
+# Build artifacts (large)
+frontend/dist2/
+
+# Large frontend media must be reviewed before being tracked
+*.mp4
+!frontend/public/gas_video/*.mp4
+*.glb
+
+# Assets — ChatGPT/AI 生成图不得提交（见 assets/README.md 规则）
+assets/equipment-images/ChatGPT*
+# assets/equipment-images 与 frontend/public/sensor-devices 重复文件已去重，
+# 规范副本在 frontend/public/sensor-devices/，以下文件不再跟踪
+assets/equipment-images/丙烯传感器.jpg
+assets/equipment-images/传感器.jpg
+assets/equipment-images/冷凝器管.png
+assets/equipment-images/工业数显压力变送器.png
+assets/equipment-images/排管式液体分布器.png
+assets/equipment-images/智能电磁流量计.png
+assets/equipment-images/直管式科里奥利质量流量计（也叫直管型质量流量计）.png
+assets/equipment-images/U 型管科里奥利质量流量计.png
+
+# Sensitive configs
+.codex/
+deploy/upload.py
+deploy/.env
+deploy/migrate_passwords.py
+backend/src/main/resources/application-local.properties
+
+# ML models
+*.pt
+*.pth
+*.onnx
+yolo11m.pt
+models/*
+!models/README.md
+!models/manifest.json
+
+# Generated datasets (large binary)
+*.npy
+*.npz
+datasets/raw/
+datasets/external/
+datasets/processed/
+
+# Third-party reference docs (large, not source)
+化工园区设备文献/
+
+# 调试/冒烟测试产物（playwright 截图等）
+output/
+*.bundle

@@ -1,0 +1,3826 @@
+{
+  "type": "FeatureCollection",
+  "name": "road_network_edges_map",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "EPSG:4547",
+      "coordSys": "CGCS2000_3GK_CM_114E"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-north-main-edge-01",
+        "roadId": "road-north-main",
+        "fromNode": "node-001",
+        "toNode": "node-002",
+        "main": true,
+        "length_m": 238,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 119,
+        "mapY": 236,
+        "s3mX": -1424.752,
+        "s3mY": 377.887,
+        "longitude": 113.53946126,
+        "latitude": 34.83164647,
+        "localMapX": 119,
+        "localMapY": 236,
+        "cgcs2000E": 457871.343,
+        "cgcs2000N": 3856009.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            457752.343,
+            3856009.172
+          ],
+          [
+            457990.343,
+            3856009.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-north-main-edge-02",
+        "roadId": "road-north-main",
+        "fromNode": "node-002",
+        "toNode": "node-003",
+        "main": true,
+        "length_m": 161,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 318.5,
+        "mapY": 236,
+        "s3mX": -1121.036,
+        "s3mY": 377.887,
+        "longitude": 113.54164445,
+        "latitude": 34.83164647,
+        "localMapX": 318.5,
+        "localMapY": 236,
+        "cgcs2000E": 458070.843,
+        "cgcs2000N": 3856009.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            457990.343,
+            3856009.172
+          ],
+          [
+            458151.343,
+            3856009.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-north-main-edge-03",
+        "roadId": "road-north-main",
+        "fromNode": "node-003",
+        "toNode": "node-004",
+        "main": true,
+        "length_m": 276,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 537,
+        "mapY": 236,
+        "s3mX": -788.395,
+        "s3mY": 377.887,
+        "longitude": 113.54403558,
+        "latitude": 34.83164647,
+        "localMapX": 537,
+        "localMapY": 236,
+        "cgcs2000E": 458289.343,
+        "cgcs2000N": 3856009.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458151.343,
+            3856009.172
+          ],
+          [
+            458427.343,
+            3856009.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-north-main-edge-04",
+        "roadId": "road-north-main",
+        "fromNode": "node-004",
+        "toNode": "node-005",
+        "main": true,
+        "length_m": 93,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 721.5,
+        "mapY": 236,
+        "s3mX": -507.514,
+        "s3mY": 377.887,
+        "longitude": 113.54605463,
+        "latitude": 34.83164647,
+        "localMapX": 721.5,
+        "localMapY": 236,
+        "cgcs2000E": 458473.843,
+        "cgcs2000N": 3856009.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458427.343,
+            3856009.172
+          ],
+          [
+            458520.343,
+            3856009.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-north-main-edge-05",
+        "roadId": "road-north-main",
+        "fromNode": "node-005",
+        "toNode": "node-006",
+        "main": true,
+        "length_m": 180,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 858,
+        "mapY": 236,
+        "s3mX": -299.708,
+        "s3mY": 377.887,
+        "longitude": 113.54754839,
+        "latitude": 34.83164647,
+        "localMapX": 858,
+        "localMapY": 236,
+        "cgcs2000E": 458610.343,
+        "cgcs2000N": 3856009.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458520.343,
+            3856009.172
+          ],
+          [
+            458700.343,
+            3856009.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-north-main-edge-06",
+        "roadId": "road-north-main",
+        "fromNode": "node-006",
+        "toNode": "node-007",
+        "main": true,
+        "length_m": 127,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1011.5,
+        "mapY": 236,
+        "s3mX": -66.022,
+        "s3mY": 377.887,
+        "longitude": 113.5492282,
+        "latitude": 34.83164647,
+        "localMapX": 1011.5,
+        "localMapY": 236,
+        "cgcs2000E": 458763.843,
+        "cgcs2000N": 3856009.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458700.343,
+            3856009.172
+          ],
+          [
+            458827.343,
+            3856009.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-north-main-edge-07",
+        "roadId": "road-north-main",
+        "fromNode": "node-007",
+        "toNode": "node-008",
+        "main": true,
+        "length_m": 152,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1151,
+        "mapY": 236,
+        "s3mX": 146.351,
+        "s3mY": 377.887,
+        "longitude": 113.5507548,
+        "latitude": 34.83164647,
+        "localMapX": 1151,
+        "localMapY": 236,
+        "cgcs2000E": 458903.343,
+        "cgcs2000N": 3856009.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458827.343,
+            3856009.172
+          ],
+          [
+            458979.343,
+            3856009.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-north-main-edge-08",
+        "roadId": "road-north-main",
+        "fromNode": "node-008",
+        "toNode": "node-009",
+        "main": true,
+        "length_m": 360.2,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1407.1,
+        "mapY": 236,
+        "s3mX": 536.234,
+        "s3mY": 377.887,
+        "longitude": 113.55355739,
+        "latitude": 34.83164647,
+        "localMapX": 1407.1,
+        "localMapY": 236,
+        "cgcs2000E": 459159.443,
+        "cgcs2000N": 3856009.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458979.343,
+            3856009.172
+          ],
+          [
+            459339.543,
+            3856009.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-south-main-edge-01",
+        "roadId": "road-south-main",
+        "fromNode": "node-010",
+        "toNode": "node-011",
+        "main": true,
+        "length_m": 238,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 119,
+        "mapY": 689,
+        "s3mX": -1424.752,
+        "s3mY": -582.653,
+        "longitude": 113.53946126,
+        "latitude": 34.82757712,
+        "localMapX": 119,
+        "localMapY": 689,
+        "cgcs2000E": 457871.343,
+        "cgcs2000N": 3855556.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            457752.343,
+            3855556.172
+          ],
+          [
+            457990.343,
+            3855556.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-south-main-edge-02",
+        "roadId": "road-south-main",
+        "fromNode": "node-011",
+        "toNode": "node-012",
+        "main": true,
+        "length_m": 989,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 732.5,
+        "mapY": 689,
+        "s3mX": -490.768,
+        "s3mY": -582.653,
+        "longitude": 113.546175,
+        "latitude": 34.82757712,
+        "localMapX": 732.5,
+        "localMapY": 689,
+        "cgcs2000E": 458484.843,
+        "cgcs2000N": 3855556.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            457990.343,
+            3855556.172
+          ],
+          [
+            458979.343,
+            3855556.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-south-main-edge-03",
+        "roadId": "road-south-main",
+        "fromNode": "node-012",
+        "toNode": "node-013",
+        "main": true,
+        "length_m": 360.2,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1407.1,
+        "mapY": 689,
+        "s3mX": 536.234,
+        "s3mY": -582.653,
+        "longitude": 113.55355739,
+        "latitude": 34.82757712,
+        "localMapX": 1407.1,
+        "localMapY": 689,
+        "cgcs2000E": 459159.443,
+        "cgcs2000N": 3855556.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458979.343,
+            3855556.172
+          ],
+          [
+            459339.543,
+            3855556.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-main-edge-01",
+        "roadId": "road-west-main",
+        "fromNode": "node-014",
+        "toNode": "node-002",
+        "main": true,
+        "length_m": 236,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 238,
+        "mapY": 118,
+        "s3mX": -1243.588,
+        "s3mY": 628.093,
+        "longitude": 113.54076351,
+        "latitude": 34.83270648,
+        "localMapX": 238,
+        "localMapY": 118,
+        "cgcs2000E": 457990.343,
+        "cgcs2000N": 3856127.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            457990.343,
+            3856245.172
+          ],
+          [
+            457990.343,
+            3856009.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-main-edge-02",
+        "roadId": "road-west-main",
+        "fromNode": "node-002",
+        "toNode": "node-015",
+        "main": true,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 238,
+        "mapY": 289.5,
+        "s3mX": -1243.588,
+        "s3mY": 264.445,
+        "longitude": 113.54076351,
+        "latitude": 34.83116587,
+        "localMapX": 238,
+        "localMapY": 289.5,
+        "cgcs2000E": 457990.343,
+        "cgcs2000N": 3855955.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            457990.343,
+            3856009.172
+          ],
+          [
+            457990.343,
+            3855902.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-main-edge-03",
+        "roadId": "road-west-main",
+        "fromNode": "node-015",
+        "toNode": "node-016",
+        "main": true,
+        "length_m": 113,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 238,
+        "mapY": 399.5,
+        "s3mX": -1243.588,
+        "s3mY": 31.202,
+        "longitude": 113.54076351,
+        "latitude": 34.83017773,
+        "localMapX": 238,
+        "localMapY": 399.5,
+        "cgcs2000E": 457990.343,
+        "cgcs2000N": 3855845.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            457990.343,
+            3855902.172
+          ],
+          [
+            457990.343,
+            3855789.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-main-edge-04",
+        "roadId": "road-west-main",
+        "fromNode": "node-016",
+        "toNode": "node-017",
+        "main": true,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 238,
+        "mapY": 509.5,
+        "s3mX": -1243.588,
+        "s3mY": -202.042,
+        "longitude": 113.54076351,
+        "latitude": 34.82918959,
+        "localMapX": 238,
+        "localMapY": 509.5,
+        "cgcs2000E": 457990.343,
+        "cgcs2000N": 3855735.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            457990.343,
+            3855789.172
+          ],
+          [
+            457990.343,
+            3855682.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-main-edge-05",
+        "roadId": "road-west-main",
+        "fromNode": "node-017",
+        "toNode": "node-011",
+        "main": true,
+        "length_m": 126,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 238,
+        "mapY": 626,
+        "s3mX": -1243.588,
+        "s3mY": -449.068,
+        "longitude": 113.54076351,
+        "latitude": 34.82814305,
+        "localMapX": 238,
+        "localMapY": 626,
+        "cgcs2000E": 457990.343,
+        "cgcs2000N": 3855619.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            457990.343,
+            3855682.172
+          ],
+          [
+            457990.343,
+            3855556.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-main-edge-06",
+        "roadId": "road-west-main",
+        "fromNode": "node-011",
+        "toNode": "node-018",
+        "main": true,
+        "length_m": 258.2,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 238,
+        "mapY": 818.1,
+        "s3mX": -1243.588,
+        "s3mY": -856.396,
+        "longitude": 113.54076351,
+        "latitude": 34.8264174,
+        "localMapX": 238,
+        "localMapY": 818.1,
+        "cgcs2000E": 457990.343,
+        "cgcs2000N": 3855427.072,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            457990.343,
+            3855556.172
+          ],
+          [
+            457990.343,
+            3855297.972
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-east-main-edge-01",
+        "roadId": "road-east-main",
+        "fromNode": "node-019",
+        "toNode": "node-008",
+        "main": true,
+        "length_m": 236,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1227,
+        "mapY": 118,
+        "s3mX": 262.053,
+        "s3mY": 628.093,
+        "longitude": 113.55158649,
+        "latitude": 34.83270648,
+        "localMapX": 1227,
+        "localMapY": 118,
+        "cgcs2000E": 458979.343,
+        "cgcs2000N": 3856127.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458979.343,
+            3856245.172
+          ],
+          [
+            458979.343,
+            3856009.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-east-main-edge-02",
+        "roadId": "road-east-main",
+        "fromNode": "node-008",
+        "toNode": "node-020",
+        "main": true,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1227,
+        "mapY": 289.5,
+        "s3mX": 262.053,
+        "s3mY": 264.445,
+        "longitude": 113.55158649,
+        "latitude": 34.83116587,
+        "localMapX": 1227,
+        "localMapY": 289.5,
+        "cgcs2000E": 458979.343,
+        "cgcs2000N": 3855955.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458979.343,
+            3856009.172
+          ],
+          [
+            458979.343,
+            3855902.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-east-main-edge-03",
+        "roadId": "road-east-main",
+        "fromNode": "node-020",
+        "toNode": "node-021",
+        "main": true,
+        "length_m": 113,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1227,
+        "mapY": 399.5,
+        "s3mX": 262.053,
+        "s3mY": 31.202,
+        "longitude": 113.55158649,
+        "latitude": 34.83017773,
+        "localMapX": 1227,
+        "localMapY": 399.5,
+        "cgcs2000E": 458979.343,
+        "cgcs2000N": 3855845.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458979.343,
+            3855902.172
+          ],
+          [
+            458979.343,
+            3855789.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-east-main-edge-04",
+        "roadId": "road-east-main",
+        "fromNode": "node-021",
+        "toNode": "node-022",
+        "main": true,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1227,
+        "mapY": 509.5,
+        "s3mX": 262.053,
+        "s3mY": -202.042,
+        "longitude": 113.55158649,
+        "latitude": 34.82918959,
+        "localMapX": 1227,
+        "localMapY": 509.5,
+        "cgcs2000E": 458979.343,
+        "cgcs2000N": 3855735.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458979.343,
+            3855789.172
+          ],
+          [
+            458979.343,
+            3855682.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-east-main-edge-05",
+        "roadId": "road-east-main",
+        "fromNode": "node-022",
+        "toNode": "node-012",
+        "main": true,
+        "length_m": 126,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1227,
+        "mapY": 626,
+        "s3mX": 262.053,
+        "s3mY": -449.068,
+        "longitude": 113.55158649,
+        "latitude": 34.82814305,
+        "localMapX": 1227,
+        "localMapY": 626,
+        "cgcs2000E": 458979.343,
+        "cgcs2000N": 3855619.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458979.343,
+            3855682.172
+          ],
+          [
+            458979.343,
+            3855556.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-east-main-edge-06",
+        "roadId": "road-east-main",
+        "fromNode": "node-012",
+        "toNode": "node-023",
+        "main": true,
+        "length_m": 258.2,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1227,
+        "mapY": 818.1,
+        "s3mX": 262.053,
+        "s3mY": -856.396,
+        "longitude": 113.55158649,
+        "latitude": 34.8264174,
+        "localMapX": 1227,
+        "localMapY": 818.1,
+        "cgcs2000E": 458979.343,
+        "cgcs2000N": 3855427.072,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458979.343,
+            3855556.172
+          ],
+          [
+            458979.343,
+            3855297.972
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-center-west-edge-01",
+        "roadId": "road-center-west",
+        "fromNode": "node-024",
+        "toNode": "node-005",
+        "main": false,
+        "length_m": 10,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 768,
+        "mapY": 231,
+        "s3mX": -436.723,
+        "s3mY": 388.489,
+        "longitude": 113.54656349,
+        "latitude": 34.83169138,
+        "localMapX": 768,
+        "localMapY": 231,
+        "cgcs2000E": 458520.343,
+        "cgcs2000N": 3856014.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458520.343,
+            3856019.172
+          ],
+          [
+            458520.343,
+            3856009.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-center-west-edge-02",
+        "roadId": "road-center-west",
+        "fromNode": "node-005",
+        "toNode": "node-025",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 768,
+        "mapY": 289.5,
+        "s3mX": -436.723,
+        "s3mY": 264.445,
+        "longitude": 113.54656349,
+        "latitude": 34.83116587,
+        "localMapX": 768,
+        "localMapY": 289.5,
+        "cgcs2000E": 458520.343,
+        "cgcs2000N": 3855955.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458520.343,
+            3856009.172
+          ],
+          [
+            458520.343,
+            3855902.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-center-west-edge-03",
+        "roadId": "road-center-west",
+        "fromNode": "node-025",
+        "toNode": "node-026",
+        "main": false,
+        "length_m": 113,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 768,
+        "mapY": 399.5,
+        "s3mX": -436.723,
+        "s3mY": 31.202,
+        "longitude": 113.54656349,
+        "latitude": 34.83017773,
+        "localMapX": 768,
+        "localMapY": 399.5,
+        "cgcs2000E": 458520.343,
+        "cgcs2000N": 3855845.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458520.343,
+            3855902.172
+          ],
+          [
+            458520.343,
+            3855789.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-center-west-edge-04",
+        "roadId": "road-center-west",
+        "fromNode": "node-026",
+        "toNode": "node-027",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 768,
+        "mapY": 509.5,
+        "s3mX": -436.723,
+        "s3mY": -202.042,
+        "longitude": 113.54656349,
+        "latitude": 34.82918959,
+        "localMapX": 768,
+        "localMapY": 509.5,
+        "cgcs2000E": 458520.343,
+        "cgcs2000N": 3855735.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458520.343,
+            3855789.172
+          ],
+          [
+            458520.343,
+            3855682.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-center-west-edge-05",
+        "roadId": "road-center-west",
+        "fromNode": "node-027",
+        "toNode": "node-028",
+        "main": false,
+        "length_m": 115,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 768,
+        "mapY": 620.5,
+        "s3mX": -436.723,
+        "s3mY": -437.406,
+        "longitude": 113.54656349,
+        "latitude": 34.82819246,
+        "localMapX": 768,
+        "localMapY": 620.5,
+        "cgcs2000E": 458520.343,
+        "cgcs2000N": 3855624.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458520.343,
+            3855682.172
+          ],
+          [
+            458520.343,
+            3855567.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-center-east-edge-01",
+        "roadId": "road-center-east",
+        "fromNode": "node-029",
+        "toNode": "node-006",
+        "main": false,
+        "length_m": 10,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 948,
+        "mapY": 231,
+        "s3mX": -162.693,
+        "s3mY": 388.489,
+        "longitude": 113.54853329,
+        "latitude": 34.83169138,
+        "localMapX": 948,
+        "localMapY": 231,
+        "cgcs2000E": 458700.343,
+        "cgcs2000N": 3856014.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458700.343,
+            3856019.172
+          ],
+          [
+            458700.343,
+            3856009.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-center-east-edge-02",
+        "roadId": "road-center-east",
+        "fromNode": "node-006",
+        "toNode": "node-030",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 948,
+        "mapY": 289.5,
+        "s3mX": -162.693,
+        "s3mY": 264.445,
+        "longitude": 113.54853329,
+        "latitude": 34.83116587,
+        "localMapX": 948,
+        "localMapY": 289.5,
+        "cgcs2000E": 458700.343,
+        "cgcs2000N": 3855955.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458700.343,
+            3856009.172
+          ],
+          [
+            458700.343,
+            3855902.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-center-east-edge-03",
+        "roadId": "road-center-east",
+        "fromNode": "node-030",
+        "toNode": "node-031",
+        "main": false,
+        "length_m": 113,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 948,
+        "mapY": 399.5,
+        "s3mX": -162.693,
+        "s3mY": 31.202,
+        "longitude": 113.54853329,
+        "latitude": 34.83017773,
+        "localMapX": 948,
+        "localMapY": 399.5,
+        "cgcs2000E": 458700.343,
+        "cgcs2000N": 3855845.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458700.343,
+            3855902.172
+          ],
+          [
+            458700.343,
+            3855789.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-center-east-edge-04",
+        "roadId": "road-center-east",
+        "fromNode": "node-031",
+        "toNode": "node-032",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 948,
+        "mapY": 509.5,
+        "s3mX": -162.693,
+        "s3mY": -202.042,
+        "longitude": 113.54853329,
+        "latitude": 34.82918959,
+        "localMapX": 948,
+        "localMapY": 509.5,
+        "cgcs2000E": 458700.343,
+        "cgcs2000N": 3855735.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458700.343,
+            3855789.172
+          ],
+          [
+            458700.343,
+            3855682.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-center-east-edge-05",
+        "roadId": "road-center-east",
+        "fromNode": "node-032",
+        "toNode": "node-033",
+        "main": false,
+        "length_m": 115,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 948,
+        "mapY": 620.5,
+        "s3mX": -162.693,
+        "s3mY": -437.406,
+        "longitude": 113.54853329,
+        "latitude": 34.82819246,
+        "localMapX": 948,
+        "localMapY": 620.5,
+        "cgcs2000E": 458700.343,
+        "cgcs2000N": 3855624.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458700.343,
+            3855682.172
+          ],
+          [
+            458700.343,
+            3855567.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-service-edge-01",
+        "roadId": "road-west-service",
+        "fromNode": "node-034",
+        "toNode": "node-003",
+        "main": false,
+        "length_m": 10,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 399,
+        "mapY": 231,
+        "s3mX": -998.484,
+        "s3mY": 388.489,
+        "longitude": 113.54252539,
+        "latitude": 34.83169138,
+        "localMapX": 399,
+        "localMapY": 231,
+        "cgcs2000E": 458151.343,
+        "cgcs2000N": 3856014.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458151.343,
+            3856019.172
+          ],
+          [
+            458151.343,
+            3856009.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-service-edge-02",
+        "roadId": "road-west-service",
+        "fromNode": "node-003",
+        "toNode": "node-035",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 399,
+        "mapY": 289.5,
+        "s3mX": -998.484,
+        "s3mY": 264.445,
+        "longitude": 113.54252539,
+        "latitude": 34.83116587,
+        "localMapX": 399,
+        "localMapY": 289.5,
+        "cgcs2000E": 458151.343,
+        "cgcs2000N": 3855955.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458151.343,
+            3856009.172
+          ],
+          [
+            458151.343,
+            3855902.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-service-edge-03",
+        "roadId": "road-west-service",
+        "fromNode": "node-035",
+        "toNode": "node-036",
+        "main": false,
+        "length_m": 113,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 399,
+        "mapY": 399.5,
+        "s3mX": -998.484,
+        "s3mY": 31.202,
+        "longitude": 113.54252539,
+        "latitude": 34.83017773,
+        "localMapX": 399,
+        "localMapY": 399.5,
+        "cgcs2000E": 458151.343,
+        "cgcs2000N": 3855845.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458151.343,
+            3855902.172
+          ],
+          [
+            458151.343,
+            3855789.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-service-edge-04",
+        "roadId": "road-west-service",
+        "fromNode": "node-036",
+        "toNode": "node-037",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 399,
+        "mapY": 509.5,
+        "s3mX": -998.484,
+        "s3mY": -202.042,
+        "longitude": 113.54252539,
+        "latitude": 34.82918959,
+        "localMapX": 399,
+        "localMapY": 509.5,
+        "cgcs2000E": 458151.343,
+        "cgcs2000N": 3855735.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458151.343,
+            3855789.172
+          ],
+          [
+            458151.343,
+            3855682.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-service-edge-05",
+        "roadId": "road-west-service",
+        "fromNode": "node-037",
+        "toNode": "node-038",
+        "main": false,
+        "length_m": 115,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 399,
+        "mapY": 620.5,
+        "s3mX": -998.484,
+        "s3mY": -437.406,
+        "longitude": 113.54252539,
+        "latitude": 34.82819246,
+        "localMapX": 399,
+        "localMapY": 620.5,
+        "cgcs2000E": 458151.343,
+        "cgcs2000N": 3855624.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458151.343,
+            3855682.172
+          ],
+          [
+            458151.343,
+            3855567.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-mid-service-edge-01",
+        "roadId": "road-mid-service",
+        "fromNode": "node-039",
+        "toNode": "node-004",
+        "main": false,
+        "length_m": 10,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 675,
+        "mapY": 231,
+        "s3mX": -578.305,
+        "s3mY": 388.489,
+        "longitude": 113.54554576,
+        "latitude": 34.83169138,
+        "localMapX": 675,
+        "localMapY": 231,
+        "cgcs2000E": 458427.343,
+        "cgcs2000N": 3856014.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458427.343,
+            3856019.172
+          ],
+          [
+            458427.343,
+            3856009.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-mid-service-edge-02",
+        "roadId": "road-mid-service",
+        "fromNode": "node-004",
+        "toNode": "node-040",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 675,
+        "mapY": 289.5,
+        "s3mX": -578.305,
+        "s3mY": 264.445,
+        "longitude": 113.54554576,
+        "latitude": 34.83116587,
+        "localMapX": 675,
+        "localMapY": 289.5,
+        "cgcs2000E": 458427.343,
+        "cgcs2000N": 3855955.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458427.343,
+            3856009.172
+          ],
+          [
+            458427.343,
+            3855902.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-mid-service-edge-03",
+        "roadId": "road-mid-service",
+        "fromNode": "node-040",
+        "toNode": "node-041",
+        "main": false,
+        "length_m": 113,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 675,
+        "mapY": 399.5,
+        "s3mX": -578.305,
+        "s3mY": 31.202,
+        "longitude": 113.54554576,
+        "latitude": 34.83017773,
+        "localMapX": 675,
+        "localMapY": 399.5,
+        "cgcs2000E": 458427.343,
+        "cgcs2000N": 3855845.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458427.343,
+            3855902.172
+          ],
+          [
+            458427.343,
+            3855789.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-mid-service-edge-04",
+        "roadId": "road-mid-service",
+        "fromNode": "node-041",
+        "toNode": "node-042",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 675,
+        "mapY": 509.5,
+        "s3mX": -578.305,
+        "s3mY": -202.042,
+        "longitude": 113.54554576,
+        "latitude": 34.82918959,
+        "localMapX": 675,
+        "localMapY": 509.5,
+        "cgcs2000E": 458427.343,
+        "cgcs2000N": 3855735.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458427.343,
+            3855789.172
+          ],
+          [
+            458427.343,
+            3855682.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-mid-service-edge-05",
+        "roadId": "road-mid-service",
+        "fromNode": "node-042",
+        "toNode": "node-043",
+        "main": false,
+        "length_m": 115,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 675,
+        "mapY": 620.5,
+        "s3mX": -578.305,
+        "s3mY": -437.406,
+        "longitude": 113.54554576,
+        "latitude": 34.82819246,
+        "localMapX": 675,
+        "localMapY": 620.5,
+        "cgcs2000E": 458427.343,
+        "cgcs2000N": 3855624.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458427.343,
+            3855682.172
+          ],
+          [
+            458427.343,
+            3855567.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-east-yard-service-edge-01",
+        "roadId": "road-east-yard-service",
+        "fromNode": "node-044",
+        "toNode": "node-007",
+        "main": false,
+        "length_m": 10,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1075,
+        "mapY": 231,
+        "s3mX": 30.65,
+        "s3mY": 388.489,
+        "longitude": 113.5499231,
+        "latitude": 34.83169138,
+        "localMapX": 1075,
+        "localMapY": 231,
+        "cgcs2000E": 458827.343,
+        "cgcs2000N": 3856014.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458827.343,
+            3856019.172
+          ],
+          [
+            458827.343,
+            3856009.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-east-yard-service-edge-02",
+        "roadId": "road-east-yard-service",
+        "fromNode": "node-007",
+        "toNode": "node-045",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1075,
+        "mapY": 289.5,
+        "s3mX": 30.65,
+        "s3mY": 264.445,
+        "longitude": 113.5499231,
+        "latitude": 34.83116587,
+        "localMapX": 1075,
+        "localMapY": 289.5,
+        "cgcs2000E": 458827.343,
+        "cgcs2000N": 3855955.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458827.343,
+            3856009.172
+          ],
+          [
+            458827.343,
+            3855902.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-east-yard-service-edge-03",
+        "roadId": "road-east-yard-service",
+        "fromNode": "node-045",
+        "toNode": "node-046",
+        "main": false,
+        "length_m": 113,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1075,
+        "mapY": 399.5,
+        "s3mX": 30.65,
+        "s3mY": 31.202,
+        "longitude": 113.5499231,
+        "latitude": 34.83017773,
+        "localMapX": 1075,
+        "localMapY": 399.5,
+        "cgcs2000E": 458827.343,
+        "cgcs2000N": 3855845.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458827.343,
+            3855902.172
+          ],
+          [
+            458827.343,
+            3855789.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-east-yard-service-edge-04",
+        "roadId": "road-east-yard-service",
+        "fromNode": "node-046",
+        "toNode": "node-047",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1075,
+        "mapY": 509.5,
+        "s3mX": 30.65,
+        "s3mY": -202.042,
+        "longitude": 113.5499231,
+        "latitude": 34.82918959,
+        "localMapX": 1075,
+        "localMapY": 509.5,
+        "cgcs2000E": 458827.343,
+        "cgcs2000N": 3855735.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458827.343,
+            3855789.172
+          ],
+          [
+            458827.343,
+            3855682.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-east-yard-service-edge-05",
+        "roadId": "road-east-yard-service",
+        "fromNode": "node-047",
+        "toNode": "node-048",
+        "main": false,
+        "length_m": 115,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1075,
+        "mapY": 620.5,
+        "s3mX": 30.65,
+        "s3mY": -437.406,
+        "longitude": 113.5499231,
+        "latitude": 34.82819246,
+        "localMapX": 1075,
+        "localMapY": 620.5,
+        "cgcs2000E": 458827.343,
+        "cgcs2000N": 3855624.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458827.343,
+            3855682.172
+          ],
+          [
+            458827.343,
+            3855567.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-north-edge-01",
+        "roadId": "road-row-north",
+        "fromNode": "node-049",
+        "toNode": "node-015",
+        "main": false,
+        "length_m": 9,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 233.5,
+        "mapY": 343,
+        "s3mX": -1250.439,
+        "s3mY": 151.004,
+        "longitude": 113.54071427,
+        "latitude": 34.83068527,
+        "localMapX": 233.5,
+        "localMapY": 343,
+        "cgcs2000E": 457985.843,
+        "cgcs2000N": 3855902.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            457981.343,
+            3855902.172
+          ],
+          [
+            457990.343,
+            3855902.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-north-edge-02",
+        "roadId": "road-row-north",
+        "fromNode": "node-015",
+        "toNode": "node-050",
+        "main": false,
+        "length_m": 17,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 246.5,
+        "mapY": 343,
+        "s3mX": -1230.648,
+        "s3mY": 151.004,
+        "longitude": 113.54085653,
+        "latitude": 34.83068527,
+        "localMapX": 246.5,
+        "localMapY": 343,
+        "cgcs2000E": 457998.843,
+        "cgcs2000N": 3855902.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            457990.343,
+            3855902.172
+          ],
+          [
+            458007.343,
+            3855902.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-north-edge-03",
+        "roadId": "road-row-north",
+        "fromNode": "node-050",
+        "toNode": "node-035",
+        "main": false,
+        "length_m": 144,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 327,
+        "mapY": 343,
+        "s3mX": -1108.096,
+        "s3mY": 151.004,
+        "longitude": 113.54173747,
+        "latitude": 34.83068527,
+        "localMapX": 327,
+        "localMapY": 343,
+        "cgcs2000E": 458079.343,
+        "cgcs2000N": 3855902.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458007.343,
+            3855902.172
+          ],
+          [
+            458151.343,
+            3855902.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-north-edge-04",
+        "roadId": "road-row-north",
+        "fromNode": "node-035",
+        "toNode": "node-051",
+        "main": false,
+        "length_m": 190,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 494,
+        "mapY": 343,
+        "s3mX": -853.857,
+        "s3mY": 151.004,
+        "longitude": 113.54356501,
+        "latitude": 34.83068527,
+        "localMapX": 494,
+        "localMapY": 343,
+        "cgcs2000E": 458246.343,
+        "cgcs2000N": 3855902.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458151.343,
+            3855902.172
+          ],
+          [
+            458341.343,
+            3855902.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-north-edge-05",
+        "roadId": "road-row-north",
+        "fromNode": "node-051",
+        "toNode": "node-040",
+        "main": false,
+        "length_m": 86,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 632,
+        "mapY": 343,
+        "s3mX": -643.768,
+        "s3mY": 151.004,
+        "longitude": 113.5450752,
+        "latitude": 34.83068527,
+        "localMapX": 632,
+        "localMapY": 343,
+        "cgcs2000E": 458384.343,
+        "cgcs2000N": 3855902.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458341.343,
+            3855902.172
+          ],
+          [
+            458427.343,
+            3855902.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-north-edge-06",
+        "roadId": "road-row-north",
+        "fromNode": "node-040",
+        "toNode": "node-025",
+        "main": false,
+        "length_m": 93,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 721.5,
+        "mapY": 343,
+        "s3mX": -507.514,
+        "s3mY": 151.004,
+        "longitude": 113.54605463,
+        "latitude": 34.83068527,
+        "localMapX": 721.5,
+        "localMapY": 343,
+        "cgcs2000E": 458473.843,
+        "cgcs2000N": 3855902.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458427.343,
+            3855902.172
+          ],
+          [
+            458520.343,
+            3855902.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-north-edge-07",
+        "roadId": "road-row-north",
+        "fromNode": "node-025",
+        "toNode": "node-030",
+        "main": false,
+        "length_m": 180,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 858,
+        "mapY": 343,
+        "s3mX": -299.708,
+        "s3mY": 151.004,
+        "longitude": 113.54754839,
+        "latitude": 34.83068527,
+        "localMapX": 858,
+        "localMapY": 343,
+        "cgcs2000E": 458610.343,
+        "cgcs2000N": 3855902.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458520.343,
+            3855902.172
+          ],
+          [
+            458700.343,
+            3855902.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-north-edge-08",
+        "roadId": "road-row-north",
+        "fromNode": "node-030",
+        "toNode": "node-052",
+        "main": false,
+        "length_m": 43,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 969.5,
+        "mapY": 343,
+        "s3mX": -129.962,
+        "s3mY": 151.004,
+        "longitude": 113.54876858,
+        "latitude": 34.83068527,
+        "localMapX": 969.5,
+        "localMapY": 343,
+        "cgcs2000E": 458721.843,
+        "cgcs2000N": 3855902.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458700.343,
+            3855902.172
+          ],
+          [
+            458743.343,
+            3855902.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-north-edge-09",
+        "roadId": "road-row-north",
+        "fromNode": "node-052",
+        "toNode": "node-045",
+        "main": false,
+        "length_m": 84,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1033,
+        "mapY": 343,
+        "s3mX": -33.291,
+        "s3mY": 151.004,
+        "longitude": 113.54946348,
+        "latitude": 34.83068527,
+        "localMapX": 1033,
+        "localMapY": 343,
+        "cgcs2000E": 458785.343,
+        "cgcs2000N": 3855902.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458743.343,
+            3855902.172
+          ],
+          [
+            458827.343,
+            3855902.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-north-edge-10",
+        "roadId": "road-row-north",
+        "fromNode": "node-045",
+        "toNode": "node-020",
+        "main": false,
+        "length_m": 152,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1151,
+        "mapY": 343,
+        "s3mX": 146.351,
+        "s3mY": 151.004,
+        "longitude": 113.5507548,
+        "latitude": 34.83068527,
+        "localMapX": 1151,
+        "localMapY": 343,
+        "cgcs2000E": 458903.343,
+        "cgcs2000N": 3855902.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458827.343,
+            3855902.172
+          ],
+          [
+            458979.343,
+            3855902.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-north-edge-11",
+        "roadId": "road-row-north",
+        "fromNode": "node-020",
+        "toNode": "node-053",
+        "main": false,
+        "length_m": 11,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1232.5,
+        "mapY": 343,
+        "s3mX": 270.426,
+        "s3mY": 151.004,
+        "longitude": 113.55164668,
+        "latitude": 34.83068527,
+        "localMapX": 1232.5,
+        "localMapY": 343,
+        "cgcs2000E": 458984.843,
+        "cgcs2000N": 3855902.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458979.343,
+            3855902.172
+          ],
+          [
+            458990.343,
+            3855902.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-middle-edge-01",
+        "roadId": "road-row-middle",
+        "fromNode": "node-054",
+        "toNode": "node-016",
+        "main": false,
+        "length_m": 9,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 233.5,
+        "mapY": 456,
+        "s3mX": -1250.439,
+        "s3mY": -88.601,
+        "longitude": 113.54071427,
+        "latitude": 34.82967018,
+        "localMapX": 233.5,
+        "localMapY": 456,
+        "cgcs2000E": 457985.843,
+        "cgcs2000N": 3855789.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            457981.343,
+            3855789.172
+          ],
+          [
+            457990.343,
+            3855789.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-middle-edge-02",
+        "roadId": "road-row-middle",
+        "fromNode": "node-016",
+        "toNode": "node-055",
+        "main": false,
+        "length_m": 17,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 246.5,
+        "mapY": 456,
+        "s3mX": -1230.648,
+        "s3mY": -88.601,
+        "longitude": 113.54085653,
+        "latitude": 34.82967018,
+        "localMapX": 246.5,
+        "localMapY": 456,
+        "cgcs2000E": 457998.843,
+        "cgcs2000N": 3855789.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            457990.343,
+            3855789.172
+          ],
+          [
+            458007.343,
+            3855789.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-middle-edge-03",
+        "roadId": "road-row-middle",
+        "fromNode": "node-055",
+        "toNode": "node-036",
+        "main": false,
+        "length_m": 144,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 327,
+        "mapY": 456,
+        "s3mX": -1108.096,
+        "s3mY": -88.601,
+        "longitude": 113.54173747,
+        "latitude": 34.82967018,
+        "localMapX": 327,
+        "localMapY": 456,
+        "cgcs2000E": 458079.343,
+        "cgcs2000N": 3855789.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458007.343,
+            3855789.172
+          ],
+          [
+            458151.343,
+            3855789.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-middle-edge-04",
+        "roadId": "road-row-middle",
+        "fromNode": "node-036",
+        "toNode": "node-056",
+        "main": false,
+        "length_m": 190,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 494,
+        "mapY": 456,
+        "s3mX": -853.857,
+        "s3mY": -88.601,
+        "longitude": 113.54356501,
+        "latitude": 34.82967018,
+        "localMapX": 494,
+        "localMapY": 456,
+        "cgcs2000E": 458246.343,
+        "cgcs2000N": 3855789.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458151.343,
+            3855789.172
+          ],
+          [
+            458341.343,
+            3855789.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-middle-edge-05",
+        "roadId": "road-row-middle",
+        "fromNode": "node-056",
+        "toNode": "node-041",
+        "main": false,
+        "length_m": 86,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 632,
+        "mapY": 456,
+        "s3mX": -643.768,
+        "s3mY": -88.601,
+        "longitude": 113.5450752,
+        "latitude": 34.82967018,
+        "localMapX": 632,
+        "localMapY": 456,
+        "cgcs2000E": 458384.343,
+        "cgcs2000N": 3855789.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458341.343,
+            3855789.172
+          ],
+          [
+            458427.343,
+            3855789.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-middle-edge-06",
+        "roadId": "road-row-middle",
+        "fromNode": "node-041",
+        "toNode": "node-026",
+        "main": false,
+        "length_m": 93,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 721.5,
+        "mapY": 456,
+        "s3mX": -507.514,
+        "s3mY": -88.601,
+        "longitude": 113.54605463,
+        "latitude": 34.82967018,
+        "localMapX": 721.5,
+        "localMapY": 456,
+        "cgcs2000E": 458473.843,
+        "cgcs2000N": 3855789.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458427.343,
+            3855789.172
+          ],
+          [
+            458520.343,
+            3855789.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-middle-edge-07",
+        "roadId": "road-row-middle",
+        "fromNode": "node-026",
+        "toNode": "node-031",
+        "main": false,
+        "length_m": 180,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 858,
+        "mapY": 456,
+        "s3mX": -299.708,
+        "s3mY": -88.601,
+        "longitude": 113.54754839,
+        "latitude": 34.82967018,
+        "localMapX": 858,
+        "localMapY": 456,
+        "cgcs2000E": 458610.343,
+        "cgcs2000N": 3855789.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458520.343,
+            3855789.172
+          ],
+          [
+            458700.343,
+            3855789.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-middle-edge-08",
+        "roadId": "road-row-middle",
+        "fromNode": "node-031",
+        "toNode": "node-057",
+        "main": false,
+        "length_m": 43,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 969.5,
+        "mapY": 456,
+        "s3mX": -129.962,
+        "s3mY": -88.601,
+        "longitude": 113.54876858,
+        "latitude": 34.82967018,
+        "localMapX": 969.5,
+        "localMapY": 456,
+        "cgcs2000E": 458721.843,
+        "cgcs2000N": 3855789.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458700.343,
+            3855789.172
+          ],
+          [
+            458743.343,
+            3855789.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-middle-edge-09",
+        "roadId": "road-row-middle",
+        "fromNode": "node-057",
+        "toNode": "node-046",
+        "main": false,
+        "length_m": 84,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1033,
+        "mapY": 456,
+        "s3mX": -33.291,
+        "s3mY": -88.601,
+        "longitude": 113.54946348,
+        "latitude": 34.82967018,
+        "localMapX": 1033,
+        "localMapY": 456,
+        "cgcs2000E": 458785.343,
+        "cgcs2000N": 3855789.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458743.343,
+            3855789.172
+          ],
+          [
+            458827.343,
+            3855789.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-middle-edge-10",
+        "roadId": "road-row-middle",
+        "fromNode": "node-046",
+        "toNode": "node-021",
+        "main": false,
+        "length_m": 152,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1151,
+        "mapY": 456,
+        "s3mX": 146.351,
+        "s3mY": -88.601,
+        "longitude": 113.5507548,
+        "latitude": 34.82967018,
+        "localMapX": 1151,
+        "localMapY": 456,
+        "cgcs2000E": 458903.343,
+        "cgcs2000N": 3855789.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458827.343,
+            3855789.172
+          ],
+          [
+            458979.343,
+            3855789.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-middle-edge-11",
+        "roadId": "road-row-middle",
+        "fromNode": "node-021",
+        "toNode": "node-058",
+        "main": false,
+        "length_m": 11,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1232.5,
+        "mapY": 456,
+        "s3mX": 270.426,
+        "s3mY": -88.601,
+        "longitude": 113.55164668,
+        "latitude": 34.82967018,
+        "localMapX": 1232.5,
+        "localMapY": 456,
+        "cgcs2000E": 458984.843,
+        "cgcs2000N": 3855789.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458979.343,
+            3855789.172
+          ],
+          [
+            458990.343,
+            3855789.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-south-edge-01",
+        "roadId": "road-row-south",
+        "fromNode": "node-059",
+        "toNode": "node-017",
+        "main": false,
+        "length_m": 9,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 233.5,
+        "mapY": 563,
+        "s3mX": -1250.439,
+        "s3mY": -315.483,
+        "longitude": 113.54071427,
+        "latitude": 34.82870899,
+        "localMapX": 233.5,
+        "localMapY": 563,
+        "cgcs2000E": 457985.843,
+        "cgcs2000N": 3855682.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            457981.343,
+            3855682.172
+          ],
+          [
+            457990.343,
+            3855682.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-south-edge-02",
+        "roadId": "road-row-south",
+        "fromNode": "node-017",
+        "toNode": "node-060",
+        "main": false,
+        "length_m": 17,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 246.5,
+        "mapY": 563,
+        "s3mX": -1230.648,
+        "s3mY": -315.483,
+        "longitude": 113.54085653,
+        "latitude": 34.82870899,
+        "localMapX": 246.5,
+        "localMapY": 563,
+        "cgcs2000E": 457998.843,
+        "cgcs2000N": 3855682.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            457990.343,
+            3855682.172
+          ],
+          [
+            458007.343,
+            3855682.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-south-edge-03",
+        "roadId": "road-row-south",
+        "fromNode": "node-060",
+        "toNode": "node-037",
+        "main": false,
+        "length_m": 144,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 327,
+        "mapY": 563,
+        "s3mX": -1108.096,
+        "s3mY": -315.483,
+        "longitude": 113.54173747,
+        "latitude": 34.82870899,
+        "localMapX": 327,
+        "localMapY": 563,
+        "cgcs2000E": 458079.343,
+        "cgcs2000N": 3855682.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458007.343,
+            3855682.172
+          ],
+          [
+            458151.343,
+            3855682.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-south-edge-04",
+        "roadId": "road-row-south",
+        "fromNode": "node-037",
+        "toNode": "node-061",
+        "main": false,
+        "length_m": 190,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 494,
+        "mapY": 563,
+        "s3mX": -853.857,
+        "s3mY": -315.483,
+        "longitude": 113.54356501,
+        "latitude": 34.82870899,
+        "localMapX": 494,
+        "localMapY": 563,
+        "cgcs2000E": 458246.343,
+        "cgcs2000N": 3855682.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458151.343,
+            3855682.172
+          ],
+          [
+            458341.343,
+            3855682.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-south-edge-05",
+        "roadId": "road-row-south",
+        "fromNode": "node-061",
+        "toNode": "node-042",
+        "main": false,
+        "length_m": 86,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 632,
+        "mapY": 563,
+        "s3mX": -643.768,
+        "s3mY": -315.483,
+        "longitude": 113.5450752,
+        "latitude": 34.82870899,
+        "localMapX": 632,
+        "localMapY": 563,
+        "cgcs2000E": 458384.343,
+        "cgcs2000N": 3855682.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458341.343,
+            3855682.172
+          ],
+          [
+            458427.343,
+            3855682.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-south-edge-06",
+        "roadId": "road-row-south",
+        "fromNode": "node-042",
+        "toNode": "node-027",
+        "main": false,
+        "length_m": 93,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 721.5,
+        "mapY": 563,
+        "s3mX": -507.514,
+        "s3mY": -315.483,
+        "longitude": 113.54605463,
+        "latitude": 34.82870899,
+        "localMapX": 721.5,
+        "localMapY": 563,
+        "cgcs2000E": 458473.843,
+        "cgcs2000N": 3855682.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458427.343,
+            3855682.172
+          ],
+          [
+            458520.343,
+            3855682.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-south-edge-07",
+        "roadId": "road-row-south",
+        "fromNode": "node-027",
+        "toNode": "node-032",
+        "main": false,
+        "length_m": 180,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 858,
+        "mapY": 563,
+        "s3mX": -299.708,
+        "s3mY": -315.483,
+        "longitude": 113.54754839,
+        "latitude": 34.82870899,
+        "localMapX": 858,
+        "localMapY": 563,
+        "cgcs2000E": 458610.343,
+        "cgcs2000N": 3855682.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458520.343,
+            3855682.172
+          ],
+          [
+            458700.343,
+            3855682.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-south-edge-08",
+        "roadId": "road-row-south",
+        "fromNode": "node-032",
+        "toNode": "node-062",
+        "main": false,
+        "length_m": 43,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 969.5,
+        "mapY": 563,
+        "s3mX": -129.962,
+        "s3mY": -315.483,
+        "longitude": 113.54876858,
+        "latitude": 34.82870899,
+        "localMapX": 969.5,
+        "localMapY": 563,
+        "cgcs2000E": 458721.843,
+        "cgcs2000N": 3855682.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458700.343,
+            3855682.172
+          ],
+          [
+            458743.343,
+            3855682.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-south-edge-09",
+        "roadId": "road-row-south",
+        "fromNode": "node-062",
+        "toNode": "node-047",
+        "main": false,
+        "length_m": 84,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1033,
+        "mapY": 563,
+        "s3mX": -33.291,
+        "s3mY": -315.483,
+        "longitude": 113.54946348,
+        "latitude": 34.82870899,
+        "localMapX": 1033,
+        "localMapY": 563,
+        "cgcs2000E": 458785.343,
+        "cgcs2000N": 3855682.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458743.343,
+            3855682.172
+          ],
+          [
+            458827.343,
+            3855682.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-south-edge-10",
+        "roadId": "road-row-south",
+        "fromNode": "node-047",
+        "toNode": "node-022",
+        "main": false,
+        "length_m": 152,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1151,
+        "mapY": 563,
+        "s3mX": 146.351,
+        "s3mY": -315.483,
+        "longitude": 113.5507548,
+        "latitude": 34.82870899,
+        "localMapX": 1151,
+        "localMapY": 563,
+        "cgcs2000E": 458903.343,
+        "cgcs2000N": 3855682.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458827.343,
+            3855682.172
+          ],
+          [
+            458979.343,
+            3855682.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-row-south-edge-11",
+        "roadId": "road-row-south",
+        "fromNode": "node-022",
+        "toNode": "node-063",
+        "main": false,
+        "length_m": 11,
+        "direction": "horizontal",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 1232.5,
+        "mapY": 563,
+        "s3mX": 270.426,
+        "s3mY": -315.483,
+        "longitude": 113.55164668,
+        "latitude": 34.82870899,
+        "localMapX": 1232.5,
+        "localMapY": 563,
+        "cgcs2000E": 458984.843,
+        "cgcs2000N": 3855682.172,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458979.343,
+            3855682.172
+          ],
+          [
+            458990.343,
+            3855682.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-loop-edge-01",
+        "roadId": "road-west-loop",
+        "fromNode": "node-064",
+        "toNode": "node-050",
+        "main": false,
+        "length_m": 97,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 255,
+        "mapY": 294.5,
+        "s3mX": -1217.708,
+        "s3mY": 253.843,
+        "longitude": 113.54094955,
+        "latitude": 34.83112096,
+        "localMapX": 255,
+        "localMapY": 294.5,
+        "cgcs2000E": 458007.343,
+        "cgcs2000N": 3855950.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458007.343,
+            3855999.172
+          ],
+          [
+            458007.343,
+            3855902.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-loop-edge-02",
+        "roadId": "road-west-loop",
+        "fromNode": "node-050",
+        "toNode": "node-055",
+        "main": false,
+        "length_m": 113,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 255,
+        "mapY": 399.5,
+        "s3mX": -1217.708,
+        "s3mY": 31.202,
+        "longitude": 113.54094955,
+        "latitude": 34.83017773,
+        "localMapX": 255,
+        "localMapY": 399.5,
+        "cgcs2000E": 458007.343,
+        "cgcs2000N": 3855845.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458007.343,
+            3855902.172
+          ],
+          [
+            458007.343,
+            3855789.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-loop-edge-03",
+        "roadId": "road-west-loop",
+        "fromNode": "node-055",
+        "toNode": "node-060",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 255,
+        "mapY": 509.5,
+        "s3mX": -1217.708,
+        "s3mY": -202.042,
+        "longitude": 113.54094955,
+        "latitude": 34.82918959,
+        "localMapX": 255,
+        "localMapY": 509.5,
+        "cgcs2000E": 458007.343,
+        "cgcs2000N": 3855735.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458007.343,
+            3855789.172
+          ],
+          [
+            458007.343,
+            3855682.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-west-loop-edge-04",
+        "roadId": "road-west-loop",
+        "fromNode": "node-060",
+        "toNode": "node-065",
+        "main": false,
+        "length_m": 115,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 255,
+        "mapY": 620.5,
+        "s3mX": -1217.708,
+        "s3mY": -437.406,
+        "longitude": 113.54094955,
+        "latitude": 34.82819246,
+        "localMapX": 255,
+        "localMapY": 620.5,
+        "cgcs2000E": 458007.343,
+        "cgcs2000N": 3855624.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458007.343,
+            3855682.172
+          ],
+          [
+            458007.343,
+            3855567.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-tank-loop-edge-01",
+        "roadId": "road-tank-loop",
+        "fromNode": "node-066",
+        "toNode": "node-051",
+        "main": false,
+        "length_m": 97,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 589,
+        "mapY": 294.5,
+        "s3mX": -709.23,
+        "s3mY": 253.843,
+        "longitude": 113.54460463,
+        "latitude": 34.83112096,
+        "localMapX": 589,
+        "localMapY": 294.5,
+        "cgcs2000E": 458341.343,
+        "cgcs2000N": 3855950.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458341.343,
+            3855999.172
+          ],
+          [
+            458341.343,
+            3855902.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-tank-loop-edge-02",
+        "roadId": "road-tank-loop",
+        "fromNode": "node-051",
+        "toNode": "node-056",
+        "main": false,
+        "length_m": 113,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 589,
+        "mapY": 399.5,
+        "s3mX": -709.23,
+        "s3mY": 31.202,
+        "longitude": 113.54460463,
+        "latitude": 34.83017773,
+        "localMapX": 589,
+        "localMapY": 399.5,
+        "cgcs2000E": 458341.343,
+        "cgcs2000N": 3855845.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458341.343,
+            3855902.172
+          ],
+          [
+            458341.343,
+            3855789.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-tank-loop-edge-03",
+        "roadId": "road-tank-loop",
+        "fromNode": "node-056",
+        "toNode": "node-061",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 589,
+        "mapY": 509.5,
+        "s3mX": -709.23,
+        "s3mY": -202.042,
+        "longitude": 113.54460463,
+        "latitude": 34.82918959,
+        "localMapX": 589,
+        "localMapY": 509.5,
+        "cgcs2000E": 458341.343,
+        "cgcs2000N": 3855735.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458341.343,
+            3855789.172
+          ],
+          [
+            458341.343,
+            3855682.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-tank-loop-edge-04",
+        "roadId": "road-tank-loop",
+        "fromNode": "node-061",
+        "toNode": "node-067",
+        "main": false,
+        "length_m": 115,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 589,
+        "mapY": 620.5,
+        "s3mX": -709.23,
+        "s3mY": -437.406,
+        "longitude": 113.54460463,
+        "latitude": 34.82819246,
+        "localMapX": 589,
+        "localMapY": 620.5,
+        "cgcs2000E": 458341.343,
+        "cgcs2000N": 3855624.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458341.343,
+            3855682.172
+          ],
+          [
+            458341.343,
+            3855567.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-logistics-loop-edge-01",
+        "roadId": "road-logistics-loop",
+        "fromNode": "node-068",
+        "toNode": "node-052",
+        "main": false,
+        "length_m": 97,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 991,
+        "mapY": 294.5,
+        "s3mX": -97.231,
+        "s3mY": 253.843,
+        "longitude": 113.54900386,
+        "latitude": 34.83112096,
+        "localMapX": 991,
+        "localMapY": 294.5,
+        "cgcs2000E": 458743.343,
+        "cgcs2000N": 3855950.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458743.343,
+            3855999.172
+          ],
+          [
+            458743.343,
+            3855902.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-logistics-loop-edge-02",
+        "roadId": "road-logistics-loop",
+        "fromNode": "node-052",
+        "toNode": "node-057",
+        "main": false,
+        "length_m": 113,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 991,
+        "mapY": 399.5,
+        "s3mX": -97.231,
+        "s3mY": 31.202,
+        "longitude": 113.54900386,
+        "latitude": 34.83017773,
+        "localMapX": 991,
+        "localMapY": 399.5,
+        "cgcs2000E": 458743.343,
+        "cgcs2000N": 3855845.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458743.343,
+            3855902.172
+          ],
+          [
+            458743.343,
+            3855789.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-logistics-loop-edge-03",
+        "roadId": "road-logistics-loop",
+        "fromNode": "node-057",
+        "toNode": "node-062",
+        "main": false,
+        "length_m": 107,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 991,
+        "mapY": 509.5,
+        "s3mX": -97.231,
+        "s3mY": -202.042,
+        "longitude": 113.54900386,
+        "latitude": 34.82918959,
+        "localMapX": 991,
+        "localMapY": 509.5,
+        "cgcs2000E": 458743.343,
+        "cgcs2000N": 3855735.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458743.343,
+            3855789.172
+          ],
+          [
+            458743.343,
+            3855682.172
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_road_network_edge",
+        "id": "road-logistics-loop-edge-04",
+        "roadId": "road-logistics-loop",
+        "fromNode": "node-062",
+        "toNode": "node-069",
+        "main": false,
+        "length_m": 115,
+        "direction": "vertical",
+        "source": "derived_from_road_centerlines",
+        "networkReady": true,
+        "mapX": 991,
+        "mapY": 620.5,
+        "s3mX": -97.231,
+        "s3mY": -437.406,
+        "longitude": 113.54900386,
+        "latitude": 34.82819246,
+        "localMapX": 991,
+        "localMapY": 620.5,
+        "cgcs2000E": 458743.343,
+        "cgcs2000N": 3855624.672,
+        "coordSys": "CGCS2000_3GK_CM_114E",
+        "epsg": 4547,
+        "anchor": "HAUT_Lianhua_SouthGate_CP0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            458743.343,
+            3855682.172
+          ],
+          [
+            458743.343,
+            3855567.172
+          ]
+        ]
+      }
+    }
+  ]
+}

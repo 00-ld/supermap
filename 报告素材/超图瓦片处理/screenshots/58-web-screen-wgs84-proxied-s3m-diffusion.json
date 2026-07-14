@@ -1,0 +1,685 @@
+{
+  "url": "http://127.0.0.1:5173/index.html#/screen",
+  "title": "基于时空智能和数字孪生的化工园区危险气体监测和溯源系统",
+  "text": "SUPERMAP DIGITAL TWIN\n化工园区三维应急态势入口\n原生三维已加载\n三维场景\n默认场景\n\niServer Realspace + iClient3D WebGL\n\niServer 图层\n1\n\n化工园区场景\n\n算法封装\n在线\n\nchemical-algorithm 3.0.0\n\n球面坐标\nWGS84\n\n源点 118.784398E, 32.036946N / 插入点 118.788410E, 32.035746N\n\n扩散模拟\n泄漏源反演\n粒子滤波溯源\n疏散路径规划\n气体类型目录\n定位园区\n定位经纬度\n重新加载\n算法空间化闭环\n已落图\n清除图层\n\n扩散结果已转为 WGS84 风险云团，峰值 85.01 ppm\n\n运行扩散\n粒子溯源\n疏散规划\n扩散模拟\n12 帧 / 峰值 85.01 ppm\n\nWGS84 源点 118.784398E, 32.036946N · 203.92ms · 3385001b-32ff-4f3a-aa18-0a1e43ecde9f",
+  "canvases": [
+    {
+      "width": 1440,
+      "height": 900,
+      "clientWidth": 1440,
+      "clientHeight": 900
+    }
+  ],
+  "consoleMessages": [
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x63c001b8e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x63c001b8e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x63c001b8e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x63c001b8e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+    },
+    {
+      "type": "warning",
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently"
+    },
+    {
+      "type": "warning",
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently"
+    },
+    {
+      "type": "warning",
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently"
+    }
+  ],
+  "responses": [
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createTaskProcessorWorker.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseOutlineGeometry-250975e3.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/Plane-bb24c718.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometryLibrary-c180fd57.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createTaskProcessorWorker.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometry-50dcf414.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EncodedCartesian3-b86c8d65.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/WebMercatorProjection-39906b85.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createEllipseOutlineGeometry.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometry-50dcf414.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createEllipseOutlineGeometry.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/Plane-bb24c718.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/IntersectionTests-2832d79b.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/VertexFormat-f496a3f1.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometryLibrary-c180fd57.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/arrayFill-0358accf.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/IntersectionTests-2832d79b.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryInstance-4c6c391a.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseOutlineGeometry-250975e3.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createEllipseOutlineGeometry.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createTaskProcessorWorker.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryInstance-4c6c391a.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/Plane-bb24c718.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/WebMercatorProjection-39906b85.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryOffsetAttribute-b4d599f5.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/IndexDatatype-4c0e98b8.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryOffsetAttribute-b4d599f5.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseOutlineGeometry-250975e3.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/WebMercatorProjection-39906b85.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/Plane-bb24c718.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseOutlineGeometry-250975e3.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometryLibrary-c180fd57.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/VertexFormat-f496a3f1.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createEllipseGeometry.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createTaskProcessorWorker.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/WebMercatorProjection-39906b85.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createEllipseOutlineGeometry.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/arrayFill-0358accf.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/arrayFill-0358accf.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/IntersectionTests-2832d79b.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/WebMercatorProjection-39906b85.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createEllipseGeometry.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createTaskProcessorWorker.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/VertexFormat-f496a3f1.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/arrayFill-0358accf.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryOffsetAttribute-b4d599f5.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createEllipseOutlineGeometry.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createTaskProcessorWorker.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseOutlineGeometry-250975e3.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometryLibrary-c180fd57.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometry-50dcf414.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/Plane-bb24c718.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometry-50dcf414.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createTaskProcessorWorker.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createEllipseOutlineGeometry.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometryLibrary-c180fd57.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createEllipseGeometry.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseOutlineGeometry-250975e3.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/arrayFill-0358accf.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryInstance-4c6c391a.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createEllipseOutlineGeometry.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometryLibrary-c180fd57.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/WebMercatorProjection-39906b85.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseOutlineGeometry-250975e3.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createEllipseOutlineGeometry.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryInstance-4c6c391a.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/arrayFill-0358accf.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometry-50dcf414.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryOffsetAttribute-b4d599f5.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryOffsetAttribute-b4d599f5.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometryLibrary-c180fd57.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseOutlineGeometry-250975e3.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createEllipseGeometry.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/arrayFill-0358accf.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryInstance-4c6c391a.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createTaskProcessorWorker.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometryLibrary-c180fd57.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createEllipseGeometry.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseOutlineGeometry-250975e3.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/VertexFormat-f496a3f1.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryOffsetAttribute-b4d599f5.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/arrayFill-0358accf.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryOffsetAttribute-b4d599f5.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/VertexFormat-f496a3f1.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometry-50dcf414.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createEllipseGeometry.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createEllipseOutlineGeometry.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/arrayFill-0358accf.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createEllipseGeometry.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometryLibrary-c180fd57.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometry-50dcf414.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryOffsetAttribute-b4d599f5.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometryLibrary-c180fd57.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryInstance-4c6c391a.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometry-50dcf414.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometryLibrary-c180fd57.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/VertexFormat-f496a3f1.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseOutlineGeometry-250975e3.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createEllipseGeometry.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometry-50dcf414.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryInstance-4c6c391a.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryOffsetAttribute-b4d599f5.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/arrayFill-0358accf.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryInstance-4c6c391a.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/VertexFormat-f496a3f1.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryOffsetAttribute-b4d599f5.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryInstance-4c6c391a.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometry-50dcf414.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryOffsetAttribute-b4d599f5.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/VertexFormat-f496a3f1.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometryLibrary-c180fd57.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createEllipseGeometry.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryInstance-4c6c391a.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createEllipseGeometry.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createEllipseGeometry.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/VertexFormat-f496a3f1.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometry-50dcf414.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometry-50dcf414.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/VertexFormat-f496a3f1.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/VertexFormat-f496a3f1.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryOffsetAttribute-b4d599f5.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryInstance-4c6c391a.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometry-50dcf414.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryInstance-4c6c391a.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createEllipseGeometry.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryInstance-4c6c391a.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EllipseGeometry-50dcf414.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/VertexFormat-f496a3f1.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/VertexFormat-f496a3f1.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryInstance-4c6c391a.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/VertexFormat-f496a3f1.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/VertexFormat-f496a3f1.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/cesiumWorkerBootstrapper.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/combineGeometry.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/PrimitivePipeline-65abee6b.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/buildModuleUrl-ca316ab7.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/Cartographic-67e73ef9.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/Check-52a7d806.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/when-92c6cf3c.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/Math-92c3b5f7.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/Rectangle-bab7abf0.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/Intersect-b97e930a.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/PrimitiveType-05fc2409.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/Cartesian4-ad128b5d.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/RuntimeError-c6a62a80.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/WebGLConstants-71f10989.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/Event-3390cd7d.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/ComponentDatatype-81047f82.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryAttribute-964689f3.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/Cartesian2-6033fa5d.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/FeatureDetection-067cb23c.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryAttributes-7f66ea53.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/GeometryPipeline-a71b5e86.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/AttributeCompression-49f7b62a.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/EncodedCartesian3-b86c8d65.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/IndexDatatype-4c0e98b8.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/IntersectionTests-2832d79b.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/Plane-bb24c718.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/WebMercatorProjection-39906b85.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d/Workers/createTaskProcessorWorker.js"
+    }
+  ]
+}

@@ -1,0 +1,512 @@
+{
+  "type": "FeatureCollection",
+  "name": "building_facility_polygons_map",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "local-planar-meter-current-epsg0"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_facility_polygon",
+        "id": "pa-west-north",
+        "name": "西北生产装置区",
+        "facilityType": "production",
+        "zone": "prod_a",
+        "status": "运行中",
+        "personnel": 36,
+        "hazardLevel": 0.75,
+        "source": "frontend.realMapAssets.facilities",
+        "precisionLevel": "facility_zone",
+        "needsDesktopRefinement": true,
+        "note": "Current feature is a manually interpreted facility/building zone. Refine into single-building footprints in iDesktopX before final publication when necessary.",
+        "mapX": 415,
+        "mapY": 340,
+        "s3mX": -974.126,
+        "s3mY": 157.365,
+        "longitude": 118.78439789,
+        "latitude": 32.03694574
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              248,
+              252
+            ],
+            [
+              582,
+              252
+            ],
+            [
+              582,
+              428
+            ],
+            [
+              248,
+              428
+            ],
+            [
+              248,
+              252
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_facility_polygon",
+        "id": "pa-west-south",
+        "name": "西南储罐与泵区",
+        "facilityType": "production",
+        "zone": "tank_farm",
+        "status": "运行中",
+        "personnel": 18,
+        "hazardLevel": 0.85,
+        "source": "frontend.realMapAssets.facilities",
+        "precisionLevel": "facility_zone",
+        "needsDesktopRefinement": true,
+        "note": "Current feature is a manually interpreted facility/building zone. Refine into single-building footprints in iDesktopX before final publication when necessary.",
+        "mapX": 415,
+        "mapY": 551,
+        "s3mX": -974.126,
+        "s3mY": -290.038,
+        "longitude": 118.78439789,
+        "latitude": 32.03505031
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              248,
+              430
+            ],
+            [
+              582,
+              430
+            ],
+            [
+              582,
+              672
+            ],
+            [
+              248,
+              672
+            ],
+            [
+              248,
+              430
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_facility_polygon",
+        "id": "pa-center-north",
+        "name": "中北厂房装置区",
+        "facilityType": "production",
+        "zone": "prod_a",
+        "status": "运行中",
+        "personnel": 26,
+        "hazardLevel": 0.65,
+        "source": "frontend.realMapAssets.facilities",
+        "precisionLevel": "facility_zone",
+        "needsDesktopRefinement": true,
+        "note": "Current feature is a manually interpreted facility/building zone. Refine into single-building footprints in iDesktopX before final publication when necessary.",
+        "mapX": 672,
+        "mapY": 340,
+        "s3mX": -582.872,
+        "s3mY": 157.365,
+        "longitude": 118.7871214,
+        "latitude": 32.03694574
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              588,
+              252
+            ],
+            [
+              756,
+              252
+            ],
+            [
+              756,
+              428
+            ],
+            [
+              588,
+              428
+            ],
+            [
+              588,
+              252
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_facility_polygon",
+        "id": "pa-center-south",
+        "name": "中南反应装置区",
+        "facilityType": "production",
+        "zone": "prod_a",
+        "status": "运行中",
+        "personnel": 24,
+        "hazardLevel": 0.7,
+        "source": "frontend.realMapAssets.facilities",
+        "precisionLevel": "facility_zone",
+        "needsDesktopRefinement": true,
+        "note": "Current feature is a manually interpreted facility/building zone. Refine into single-building footprints in iDesktopX before final publication when necessary.",
+        "mapX": 672,
+        "mapY": 551,
+        "s3mX": -582.872,
+        "s3mY": -290.038,
+        "longitude": 118.7871214,
+        "latitude": 32.03505031
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              588,
+              430
+            ],
+            [
+              756,
+              430
+            ],
+            [
+              756,
+              672
+            ],
+            [
+              588,
+              672
+            ],
+            [
+              588,
+              430
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_facility_polygon",
+        "id": "tw-center",
+        "name": "中东塔器与罐组区",
+        "facilityType": "tower",
+        "zone": "tower_area",
+        "status": "运行中",
+        "personnel": 12,
+        "hazardLevel": 0.8,
+        "source": "frontend.realMapAssets.facilities",
+        "precisionLevel": "facility_zone",
+        "needsDesktopRefinement": true,
+        "note": "Current feature is a manually interpreted facility/building zone. Refine into single-building footprints in iDesktopX before final publication when necessary.",
+        "mapX": 901,
+        "mapY": 462,
+        "s3mX": -234.246,
+        "s3mY": -101.323,
+        "longitude": 118.78954818,
+        "latitude": 32.0358498
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              856,
+              252
+            ],
+            [
+              946,
+              252
+            ],
+            [
+              946,
+              672
+            ],
+            [
+              856,
+              672
+            ],
+            [
+              856,
+              252
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_facility_polygon",
+        "id": "ut-center",
+        "name": "公用工程与管廊区",
+        "facilityType": "utility",
+        "zone": "utility",
+        "status": "运行中",
+        "personnel": 8,
+        "hazardLevel": 0.45,
+        "source": "frontend.realMapAssets.facilities",
+        "precisionLevel": "facility_zone",
+        "needsDesktopRefinement": true,
+        "note": "Current feature is a manually interpreted facility/building zone. Refine into single-building footprints in iDesktopX before final publication when necessary.",
+        "mapX": 804,
+        "mapY": 462,
+        "s3mX": -381.917,
+        "s3mY": -101.323,
+        "longitude": 118.78852024,
+        "latitude": 32.0358498
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              760,
+              252
+            ],
+            [
+              848,
+              252
+            ],
+            [
+              848,
+              672
+            ],
+            [
+              760,
+              672
+            ],
+            [
+              760,
+              252
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_facility_polygon",
+        "id": "pb-north-tank",
+        "name": "东北罐组与管汇区",
+        "facilityType": "tank",
+        "zone": "prod_b",
+        "status": "运行中",
+        "personnel": 14,
+        "hazardLevel": 0.75,
+        "source": "frontend.realMapAssets.facilities",
+        "precisionLevel": "facility_zone",
+        "needsDesktopRefinement": true,
+        "note": "Current feature is a manually interpreted facility/building zone. Refine into single-building footprints in iDesktopX before final publication when necessary.",
+        "mapX": 1086,
+        "mapY": 337,
+        "s3mX": 47.396,
+        "s3mY": 163.727,
+        "longitude": 118.79150869,
+        "latitude": 32.03697269
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              956,
+              252
+            ],
+            [
+              1216,
+              252
+            ],
+            [
+              1216,
+              422
+            ],
+            [
+              956,
+              422
+            ],
+            [
+              956,
+              252
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_facility_polygon",
+        "id": "pb-mid-process",
+        "name": "东中生产与污水装置区",
+        "facilityType": "production",
+        "zone": "prod_b2",
+        "status": "运行中",
+        "personnel": 18,
+        "hazardLevel": 0.6,
+        "source": "frontend.realMapAssets.facilities",
+        "precisionLevel": "facility_zone",
+        "needsDesktopRefinement": true,
+        "note": "Current feature is a manually interpreted facility/building zone. Refine into single-building footprints in iDesktopX before final publication when necessary.",
+        "mapX": 1086,
+        "mapY": 478,
+        "s3mX": 47.396,
+        "s3mY": -135.249,
+        "longitude": 118.79150869,
+        "latitude": 32.03570607
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              956,
+              420
+            ],
+            [
+              1216,
+              420
+            ],
+            [
+              1216,
+              536
+            ],
+            [
+              956,
+              536
+            ],
+            [
+              956,
+              420
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_facility_polygon",
+        "id": "wh-logistics",
+        "name": "东南仓储物流区",
+        "facilityType": "warehouse",
+        "zone": "warehouse",
+        "status": "正常",
+        "personnel": 10,
+        "hazardLevel": 0.45,
+        "source": "frontend.realMapAssets.facilities",
+        "precisionLevel": "facility_zone",
+        "needsDesktopRefinement": true,
+        "note": "Current feature is a manually interpreted facility/building zone. Refine into single-building footprints in iDesktopX before final publication when necessary.",
+        "mapX": 1146,
+        "mapY": 599,
+        "s3mX": 138.739,
+        "s3mY": -391.817,
+        "longitude": 118.79214453,
+        "latitude": 32.03461912
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1076,
+              536
+            ],
+            [
+              1216,
+              536
+            ],
+            [
+              1216,
+              662
+            ],
+            [
+              1076,
+              662
+            ],
+            [
+              1076,
+              536
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_facility_polygon",
+        "id": "fs-east-yard",
+        "name": "东侧应急与装卸边界区",
+        "facilityType": "utility",
+        "zone": "fire_safety",
+        "status": "正常",
+        "personnel": 4,
+        "hazardLevel": 0.35,
+        "source": "frontend.realMapAssets.facilities",
+        "precisionLevel": "facility_zone",
+        "needsDesktopRefinement": true,
+        "note": "Current feature is a manually interpreted facility/building zone. Refine into single-building footprints in iDesktopX before final publication when necessary.",
+        "mapX": 1030,
+        "mapY": 599,
+        "s3mX": -37.858,
+        "s3mY": -391.817,
+        "longitude": 118.79091524,
+        "latitude": 32.03461912
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              984,
+              536
+            ],
+            [
+              1076,
+              536
+            ],
+            [
+              1076,
+              662
+            ],
+            [
+              984,
+              662
+            ],
+            [
+              984,
+              536
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

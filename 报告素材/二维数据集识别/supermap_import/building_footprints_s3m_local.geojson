@@ -1,0 +1,1549 @@
+{
+  "type": "FeatureCollection",
+  "name": "building_footprints_s3m_local",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "s3m-local-epsg0"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_A_001",
+        "name": "西部生产装置区蓝顶厂房",
+        "zone_code": "A",
+        "source_facility_id": "pa-west-north",
+        "source_facility_name": "西北生产装置区",
+        "type": "production",
+        "is_hazard": 1,
+        "personnel": 24,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 334.84,
+        "mapY": 290.72,
+        "s3mX": -1096.16,
+        "s3mY": 261.858,
+        "longitude": 118.78354841,
+        "latitude": 32.03738843
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -1197.856,
+              306.641
+            ],
+            [
+              -994.465,
+              306.641
+            ],
+            [
+              -994.465,
+              217.076
+            ],
+            [
+              -1197.856,
+              217.076
+            ],
+            [
+              -1197.856,
+              306.641
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_A_002",
+        "name": "西部生产装置框架区",
+        "zone_code": "A",
+        "source_facility_id": "pa-west-north",
+        "source_facility_name": "西北生产装置区",
+        "type": "production",
+        "is_hazard": 1,
+        "personnel": 8,
+        "confidence": "low",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 481.8,
+        "mapY": 292.48,
+        "s3mX": -872.43,
+        "s3mY": 258.127,
+        "longitude": 118.78510579,
+        "latitude": 32.03737262
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -963.956,
+              314.105
+            ],
+            [
+              -780.904,
+              314.105
+            ],
+            [
+              -780.904,
+              202.148
+            ],
+            [
+              -963.956,
+              202.148
+            ],
+            [
+              -963.956,
+              314.105
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_A_003",
+        "name": "西部北侧辅助厂房",
+        "zone_code": "A",
+        "source_facility_id": "pa-west-north",
+        "source_facility_name": "西北生产装置区",
+        "type": "utility",
+        "is_hazard": 0,
+        "personnel": 4,
+        "confidence": "low",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 338.18,
+        "mapY": 375.2,
+        "s3mX": -1091.076,
+        "s3mY": 82.727,
+        "longitude": 118.7835838,
+        "latitude": 32.03662954
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -1177.517,
+              134.974
+            ],
+            [
+              -1004.634,
+              134.974
+            ],
+            [
+              -1004.634,
+              30.481
+            ],
+            [
+              -1177.517,
+              30.481
+            ],
+            [
+              -1177.517,
+              134.974
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_I_001",
+        "name": "西南罐组一",
+        "zone_code": "I",
+        "source_facility_id": "pa-west-south",
+        "source_facility_name": "西南储罐与泵区",
+        "type": "tank",
+        "is_hazard": 1,
+        "personnel": 2,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 318.14,
+        "mapY": 492.92,
+        "s3mX": -1121.584,
+        "s3mY": -166.886,
+        "longitude": 118.78337143,
+        "latitude": 32.03557204
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -1187.686,
+              -95.047
+            ],
+            [
+              -1055.482,
+              -95.047
+            ],
+            [
+              -1055.482,
+              -238.725
+            ],
+            [
+              -1187.686,
+              -238.725
+            ],
+            [
+              -1187.686,
+              -95.047
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_I_002",
+        "name": "西南泵区",
+        "zone_code": "I",
+        "source_facility_id": "pa-west-south",
+        "source_facility_name": "西南储罐与泵区",
+        "type": "pump",
+        "is_hazard": 1,
+        "personnel": 4,
+        "confidence": "low",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 428.36,
+        "mapY": 494.13,
+        "s3mX": -953.787,
+        "s3mY": -169.451,
+        "longitude": 118.78453947,
+        "latitude": 32.03556117
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -1024.974,
+              -110.441
+            ],
+            [
+              -882.6,
+              -110.441
+            ],
+            [
+              -882.6,
+              -228.462
+            ],
+            [
+              -1024.974,
+              -228.462
+            ],
+            [
+              -1024.974,
+              -110.441
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_I_003",
+        "name": "西南辅助厂房",
+        "zone_code": "I",
+        "source_facility_id": "pa-west-south",
+        "source_facility_name": "西南储罐与泵区",
+        "type": "utility",
+        "is_hazard": 0,
+        "personnel": 8,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 361.56,
+        "mapY": 604.24,
+        "s3mX": -1055.482,
+        "s3mY": -402.928,
+        "longitude": 118.78383157,
+        "latitude": 32.03457204
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -1157.178,
+              -331.089
+            ],
+            [
+              -953.787,
+              -331.089
+            ],
+            [
+              -953.787,
+              -474.767
+            ],
+            [
+              -1157.178,
+              -474.767
+            ],
+            [
+              -1157.178,
+              -331.089
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_B_001",
+        "name": "西中长条生产厂房",
+        "zone_code": "B",
+        "source_facility_id": "pa-center-north",
+        "source_facility_name": "中北厂房装置区",
+        "type": "production",
+        "is_hazard": 1,
+        "personnel": 36,
+        "confidence": "high",
+        "status": "confirmed",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": false,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 672,
+        "mapY": 299.52,
+        "s3mX": -582.872,
+        "s3mY": 243.199,
+        "longitude": 118.7871214,
+        "latitude": 32.03730938
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -685.177,
+              299.177
+            ],
+            [
+              -480.568,
+              299.177
+            ],
+            [
+              -480.568,
+              187.221
+            ],
+            [
+              -685.177,
+              187.221
+            ],
+            [
+              -685.177,
+              299.177
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_B_002",
+        "name": "西中装置区",
+        "zone_code": "B",
+        "source_facility_id": "pa-center-north",
+        "source_facility_name": "中北厂房装置区",
+        "type": "production",
+        "is_hazard": 1,
+        "personnel": 10,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 668.64,
+        "mapY": 376.96,
+        "s3mX": -587.988,
+        "s3mY": 78.996,
+        "longitude": 118.78708579,
+        "latitude": 32.03661373
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -674.946,
+              134.974
+            ],
+            [
+              -501.029,
+              134.974
+            ],
+            [
+              -501.029,
+              23.017
+            ],
+            [
+              -674.946,
+              23.017
+            ],
+            [
+              -674.946,
+              134.974
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_D_001",
+        "name": "中南蓝顶厂房",
+        "zone_code": "D",
+        "source_facility_id": "pa-center-south",
+        "source_facility_name": "中南反应装置区",
+        "type": "production",
+        "is_hazard": 1,
+        "personnel": 24,
+        "confidence": "high",
+        "status": "confirmed",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": false,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 668.64,
+        "mapY": 488.08,
+        "s3mX": -587.988,
+        "s3mY": -156.623,
+        "longitude": 118.78708579,
+        "latitude": 32.03561552
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -690.292,
+              -95.047
+            ],
+            [
+              -485.683,
+              -95.047
+            ],
+            [
+              -485.683,
+              -218.199
+            ],
+            [
+              -690.292,
+              -218.199
+            ],
+            [
+              -690.292,
+              -95.047
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_D_002",
+        "name": "中南罐组",
+        "zone_code": "D",
+        "source_facility_id": "pa-center-south",
+        "source_facility_name": "中南反应装置区",
+        "type": "tank",
+        "is_hazard": 1,
+        "personnel": 4,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 636.72,
+        "mapY": 587.3,
+        "s3mX": -636.582,
+        "s3mY": -367.009,
+        "longitude": 118.78674752,
+        "latitude": 32.03472422
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -680.062,
+              -290.038
+            ],
+            [
+              -593.103,
+              -290.038
+            ],
+            [
+              -593.103,
+              -443.979
+            ],
+            [
+              -680.062,
+              -443.979
+            ],
+            [
+              -680.062,
+              -290.038
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_D_003",
+        "name": "中南装置框架",
+        "zone_code": "D",
+        "source_facility_id": "pa-center-south",
+        "source_facility_name": "中南反应装置区",
+        "type": "production",
+        "is_hazard": 1,
+        "personnel": 6,
+        "confidence": "low",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 707.28,
+        "mapY": 589.72,
+        "s3mX": -529.163,
+        "s3mY": -372.14,
+        "longitude": 118.78749527,
+        "latitude": 32.03470248
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -572.642,
+              -290.038
+            ],
+            [
+              -485.683,
+              -290.038
+            ],
+            [
+              -485.683,
+              -454.242
+            ],
+            [
+              -572.642,
+              -454.242
+            ],
+            [
+              -572.642,
+              -290.038
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_C_001",
+        "name": "中央主厂房",
+        "zone_code": "C",
+        "source_facility_id": "ut-center",
+        "source_facility_name": "公用工程与管廊区",
+        "type": "production",
+        "is_hazard": 1,
+        "personnel": 28,
+        "confidence": "high",
+        "status": "confirmed",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": false,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 802.24,
+        "mapY": 365.4,
+        "s3mX": -384.597,
+        "s3mY": 103.507,
+        "longitude": 118.78850159,
+        "latitude": 32.03671757
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -438.185,
+              183.658
+            ],
+            [
+              -331.009,
+              183.658
+            ],
+            [
+              -331.009,
+              23.356
+            ],
+            [
+              -438.185,
+              23.356
+            ],
+            [
+              -438.185,
+              183.658
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_C_002",
+        "name": "中央塔器区",
+        "zone_code": "C",
+        "source_facility_id": "ut-center",
+        "source_facility_name": "公用工程与管廊区",
+        "type": "tower",
+        "is_hazard": 1,
+        "personnel": 4,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 802.24,
+        "mapY": 478.8,
+        "s3mX": -384.597,
+        "s3mY": -136.946,
+        "longitude": 118.78850159,
+        "latitude": 32.03569889
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -422.108,
+              -47.889
+            ],
+            [
+              -347.085,
+              -47.889
+            ],
+            [
+              -347.085,
+              -226.002
+            ],
+            [
+              -422.108,
+              -226.002
+            ],
+            [
+              -422.108,
+              -47.889
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_C_003",
+        "name": "中央公用工程区",
+        "zone_code": "C",
+        "source_facility_id": "ut-center",
+        "source_facility_name": "公用工程与管廊区",
+        "type": "utility",
+        "is_hazard": 0,
+        "personnel": 6,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 804,
+        "mapY": 592.2,
+        "s3mX": -381.917,
+        "s3mY": -377.399,
+        "longitude": 118.78852024,
+        "latitude": 32.0346802
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -424.788,
+              -297.248
+            ],
+            [
+              -339.047,
+              -297.248
+            ],
+            [
+              -339.047,
+              -457.55
+            ],
+            [
+              -424.788,
+              -457.55
+            ],
+            [
+              -424.788,
+              -297.248
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_E_001",
+        "name": "中东装置框架区",
+        "zone_code": "E",
+        "source_facility_id": "tw-center",
+        "source_facility_name": "中东塔器与罐组区",
+        "type": "production",
+        "is_hazard": 1,
+        "personnel": 14,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 901,
+        "mapY": 336,
+        "s3mX": -234.246,
+        "s3mY": 165.847,
+        "longitude": 118.78954818,
+        "latitude": 32.03698167
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -289.052,
+              254.904
+            ],
+            [
+              -179.44,
+              254.904
+            ],
+            [
+              -179.44,
+              76.79
+            ],
+            [
+              -289.052,
+              76.79
+            ],
+            [
+              -289.052,
+              254.904
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_E_002",
+        "name": "中东塔器罐组",
+        "zone_code": "E",
+        "source_facility_id": "tw-center",
+        "source_facility_name": "中东塔器与罐组区",
+        "type": "tank",
+        "is_hazard": 1,
+        "personnel": 4,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 901,
+        "mapY": 453.6,
+        "s3mX": -234.246,
+        "s3mY": -83.512,
+        "longitude": 118.78954818,
+        "latitude": 32.03592526
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -283.571,
+              5.545
+            ],
+            [
+              -184.92,
+              5.545
+            ],
+            [
+              -184.92,
+              -172.568
+            ],
+            [
+              -283.571,
+              -172.568
+            ],
+            [
+              -283.571,
+              5.545
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_E_003",
+        "name": "中东南侧厂房",
+        "zone_code": "E",
+        "source_facility_id": "tw-center",
+        "source_facility_name": "中东塔器与罐组区",
+        "type": "production",
+        "is_hazard": 1,
+        "personnel": 16,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 901,
+        "mapY": 579.6,
+        "s3mX": -234.246,
+        "s3mY": -350.682,
+        "longitude": 118.78954818,
+        "latitude": 32.03479339
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -289.052,
+              -261.625
+            ],
+            [
+              -179.44,
+              -261.625
+            ],
+            [
+              -179.44,
+              -439.738
+            ],
+            [
+              -289.052,
+              -439.738
+            ],
+            [
+              -289.052,
+              -261.625
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_G_001",
+        "name": "东北西侧储罐组",
+        "zone_code": "G",
+        "source_facility_id": "pb-north-tank",
+        "source_facility_name": "东北罐组与管汇区",
+        "type": "tank",
+        "is_hazard": 1,
+        "personnel": 2,
+        "confidence": "high",
+        "status": "confirmed",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": false,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 1015.8,
+        "mapY": 318.3,
+        "s3mX": -59.476,
+        "s3mY": 203.378,
+        "longitude": 118.79076475,
+        "latitude": 32.03714068
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.849,
+              286.285
+            ],
+            [
+              -0.103,
+              286.285
+            ],
+            [
+              -0.103,
+              120.47
+            ],
+            [
+              -118.849,
+              120.47
+            ],
+            [
+              -118.849,
+              286.285
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_G_002",
+        "name": "东北东侧储罐组",
+        "zone_code": "G",
+        "source_facility_id": "pb-north-tank",
+        "source_facility_name": "东北罐组与管汇区",
+        "type": "tank",
+        "is_hazard": 1,
+        "personnel": 2,
+        "confidence": "high",
+        "status": "confirmed",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": false,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 1135.4,
+        "mapY": 318.3,
+        "s3mX": 122.602,
+        "s3mY": 203.378,
+        "longitude": 118.79203219,
+        "latitude": 32.03714068
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              55.312,
+              286.285
+            ],
+            [
+              189.891,
+              286.285
+            ],
+            [
+              189.891,
+              120.47
+            ],
+            [
+              55.312,
+              120.47
+            ],
+            [
+              55.312,
+              286.285
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_G_003",
+        "name": "东北管汇装卸区",
+        "zone_code": "G",
+        "source_facility_id": "pb-north-tank",
+        "source_facility_name": "东北罐组与管汇区",
+        "type": "utility",
+        "is_hazard": 1,
+        "personnel": 4,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 1086,
+        "mapY": 386.3,
+        "s3mX": 47.396,
+        "s3mY": 59.191,
+        "longitude": 118.79150869,
+        "latitude": 32.03652982
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.267,
+              91.633
+            ],
+            [
+              174.059,
+              91.633
+            ],
+            [
+              174.059,
+              26.749
+            ],
+            [
+              -79.267,
+              26.749
+            ],
+            [
+              -79.267,
+              91.633
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_F_001",
+        "name": "东南主生产厂房",
+        "zone_code": "F",
+        "source_facility_id": "pb-mid-process",
+        "source_facility_name": "东中生产与污水装置区",
+        "type": "production",
+        "is_hazard": 1,
+        "personnel": 28,
+        "confidence": "high",
+        "status": "confirmed",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": false,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 1086,
+        "mapY": 452.48,
+        "s3mX": 47.396,
+        "s3mY": -81.137,
+        "longitude": 118.79150869,
+        "latitude": 32.03593532
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.849,
+              -46.702
+            ],
+            [
+              213.641,
+              -46.702
+            ],
+            [
+              213.641,
+              -115.572
+            ],
+            [
+              -118.849,
+              -115.572
+            ],
+            [
+              -118.849,
+              -46.702
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_F_002",
+        "name": "东南设备区",
+        "zone_code": "F",
+        "source_facility_id": "pb-mid-process",
+        "source_facility_name": "东中生产与污水装置区",
+        "type": "utility",
+        "is_hazard": 1,
+        "personnel": 8,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 1034,
+        "mapY": 501.2,
+        "s3mX": -31.768,
+        "s3mY": -184.443,
+        "longitude": 118.79095763,
+        "latitude": 32.03549766
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -103.016,
+              -150.007
+            ],
+            [
+              39.48,
+              -150.007
+            ],
+            [
+              39.48,
+              -218.878
+            ],
+            [
+              -103.016,
+              -218.878
+            ],
+            [
+              -103.016,
+              -150.007
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_F_003",
+        "name": "东南辅助厂房",
+        "zone_code": "F",
+        "source_facility_id": "pb-mid-process",
+        "source_facility_name": "东中生产与污水装置区",
+        "type": "warehouse",
+        "is_hazard": 0,
+        "personnel": 16,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 1148.4,
+        "mapY": 501.2,
+        "s3mX": 142.393,
+        "s3mY": -184.443,
+        "longitude": 118.79216996,
+        "latitude": 32.03549766
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.062,
+              -150.007
+            ],
+            [
+              205.724,
+              -150.007
+            ],
+            [
+              205.724,
+              -218.878
+            ],
+            [
+              79.062,
+              -218.878
+            ],
+            [
+              79.062,
+              -150.007
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_J_001",
+        "name": "南侧小罐组",
+        "zone_code": "J",
+        "source_facility_id": "fs-east-yard",
+        "source_facility_name": "东侧应急与装卸边界区",
+        "type": "tank",
+        "is_hazard": 1,
+        "personnel": 2,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 1030,
+        "mapY": 571.28,
+        "s3mX": -37.858,
+        "s3mY": -333.04,
+        "longitude": 118.79091524,
+        "latitude": 32.03486813
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.08,
+              -295.636
+            ],
+            [
+              15.365,
+              -295.636
+            ],
+            [
+              15.365,
+              -370.444
+            ],
+            [
+              -91.08,
+              -370.444
+            ],
+            [
+              -91.08,
+              -295.636
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_J_002",
+        "name": "南侧装置区",
+        "zone_code": "J",
+        "source_facility_id": "fs-east-yard",
+        "source_facility_name": "东侧应急与装卸边界区",
+        "type": "production",
+        "is_hazard": 1,
+        "personnel": 8,
+        "confidence": "low",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 1030,
+        "mapY": 625.46,
+        "s3mX": -37.858,
+        "s3mY": -447.923,
+        "longitude": 118.79091524,
+        "latitude": 32.03438142
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.478,
+              -413.191
+            ],
+            [
+              9.763,
+              -413.191
+            ],
+            [
+              9.763,
+              -482.655
+            ],
+            [
+              -85.478,
+              -482.655
+            ],
+            [
+              -85.478,
+              -413.191
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_H_001",
+        "name": "东侧仓储建筑一",
+        "zone_code": "H",
+        "source_facility_id": "wh-logistics",
+        "source_facility_name": "东南仓储物流区",
+        "type": "warehouse",
+        "is_hazard": 0,
+        "personnel": 24,
+        "confidence": "high",
+        "status": "confirmed",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": false,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 1112.4,
+        "mapY": 562.46,
+        "s3mX": 87.587,
+        "s3mY": -314.338,
+        "longitude": 118.79178846,
+        "latitude": 32.03494736
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              53.485,
+              -284.949
+            ],
+            [
+              121.688,
+              -284.949
+            ],
+            [
+              121.688,
+              -343.727
+            ],
+            [
+              53.485,
+              -343.727
+            ],
+            [
+              53.485,
+              -284.949
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_H_002",
+        "name": "东侧仓储建筑二",
+        "zone_code": "H",
+        "source_facility_id": "wh-logistics",
+        "source_facility_name": "东南仓储物流区",
+        "type": "warehouse",
+        "is_hazard": 0,
+        "personnel": 18,
+        "confidence": "high",
+        "status": "confirmed",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": false,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 1179.6,
+        "mapY": 562.46,
+        "s3mX": 189.891,
+        "s3mY": -314.338,
+        "longitude": 118.7925006,
+        "latitude": 32.03494736
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              155.79,
+              -284.949
+            ],
+            [
+              223.993,
+              -284.949
+            ],
+            [
+              223.993,
+              -343.727
+            ],
+            [
+              155.79,
+              -343.727
+            ],
+            [
+              155.79,
+              -284.949
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_H_003",
+        "name": "东侧辅助建筑一",
+        "zone_code": "H",
+        "source_facility_id": "wh-logistics",
+        "source_facility_name": "东南仓储物流区",
+        "type": "office",
+        "is_hazard": 0,
+        "personnel": 20,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 1112.4,
+        "mapY": 616.64,
+        "s3mX": 87.587,
+        "s3mY": -429.221,
+        "longitude": 118.79178846,
+        "latitude": 32.03446065
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              53.485,
+              -397.161
+            ],
+            [
+              121.688,
+              -397.161
+            ],
+            [
+              121.688,
+              -461.281
+            ],
+            [
+              53.485,
+              -461.281
+            ],
+            [
+              53.485,
+              -397.161
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "dataset": "park_building_footprint",
+        "building_id": "BLD_H_004",
+        "name": "东侧辅助建筑二",
+        "zone_code": "H",
+        "source_facility_id": "wh-logistics",
+        "source_facility_name": "东南仓储物流区",
+        "type": "utility",
+        "is_hazard": 0,
+        "personnel": 12,
+        "confidence": "medium",
+        "status": "pending",
+        "source": "s3m_oblique_manual_interpretation_draft",
+        "precisionLevel": "building_footprint_draft",
+        "needsDesktopRefinement": true,
+        "remark": "基于三维斜视图和设施区底稿自动切分的建筑单体草稿，需在 iDesktopX 中对照三维瓦片最终校核。",
+        "mapX": 1179.6,
+        "mapY": 616.64,
+        "s3mX": 189.891,
+        "s3mY": -429.221,
+        "longitude": 118.7925006,
+        "latitude": 32.03446065
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              155.79,
+              -397.161
+            ],
+            [
+              223.993,
+              -397.161
+            ],
+            [
+              223.993,
+              -461.281
+            ],
+            [
+              155.79,
+              -461.281
+            ],
+            [
+              155.79,
+              -397.161
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

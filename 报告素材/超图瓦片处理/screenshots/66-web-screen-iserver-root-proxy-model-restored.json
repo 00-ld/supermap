@@ -1,0 +1,304 @@
+{
+  "capturedAt": "2026-07-13T12:33:09.090Z",
+  "url": "http://127.0.0.1:5173/#/screen",
+  "state": {
+    "statusText": "正在加载",
+    "bodyText": "SUPERMAP DIGITAL TWIN\n化工园区三维应急态势入口\n正在加载\n三维场景\n默认场景\n\niServer Realspace + iClient3D WebGL / EPSG:0 原生缓存\n\niServer 图层\n0\n\n等待三维图层返回\n\n算法封装\n在线\n\nchemical-algorithm 3.0.0\n\n球面坐标\nWGS84\n\n源点 118.784398E, 32.036946N / 插入点 118.788410E, 32.035746N\n\n扩散模拟\n泄漏源反演\n粒子滤波溯源\n疏散路径规划\n气体类型目录\n定位园区\n定位经纬度\n重新加载\n算法空间化闭环\n待运行\n清除图层\n\n等待运行算法\n\n运行扩散\n粒子溯源\n疏散规划",
+    "canvas": {
+      "width": 1440,
+      "height": 900,
+      "clientWidth": 1440,
+      "clientHeight": 900
+    },
+    "panelText": "SuperMap Digital Twin化工园区三维应急态势入口正在加载三维场景默认场景iServer Realspace + iClient3D WebGL / EPSG:0 原生缓存iServer 图层0等待三维图层返回算法封装在线chemical-algorithm 3.0.0球面坐标WGS84源点 118.784398E, 32.036946N / 插入点 118.788410E, 32.035746N扩散模拟泄漏源反演粒子滤波溯源疏散路径规划气体类型目录定位园区定位经纬度重新加载算法空间化闭环待运行清除图层等待运行算法 运行扩散  粒子溯源  疏散规划 ",
+    "debug": {
+      "runtimeName": "SuperMap3D",
+      "layerCount": 0,
+      "messages": []
+    },
+    "cameraPosition": {
+      "x": -2965138.3022524016,
+      "y": 2295860.2530825767,
+      "z": -5142139.018009378
+    }
+  },
+  "s3mbCount": 8,
+  "s3mbSamples": [
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap-iserver/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing/rest/realspace/datas/%E5%8C%96%E5%B7%A5%E5%9B%AD%E5%8C%BA%E5%9C%BA%E6%99%AF/data/path/Tile_0000_-0002_0000/Tile_0000_-0002_0000.s3mb"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap-iserver/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing/rest/realspace/datas/%E5%8C%96%E5%B7%A5%E5%9B%AD%E5%8C%BA%E5%9C%BA%E6%99%AF/data/path/Tile_0000_-0001_0000/Tile_0000_-0001_0000.s3mb"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap-iserver/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing/rest/realspace/datas/%E5%8C%96%E5%B7%A5%E5%9B%AD%E5%8C%BA%E5%9C%BA%E6%99%AF/data/path/Tile_-0001_-0001_0000/Tile_-0001_-0001_0000.s3mb"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap-iserver/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing/rest/realspace/datas/%E5%8C%96%E5%B7%A5%E5%9B%AD%E5%8C%BA%E5%9C%BA%E6%99%AF/data/path/Tile_0000_0000_0000/Tile_0000_0000_0000.s3mb"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap-iserver/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing/rest/realspace/datas/%E5%8C%96%E5%B7%A5%E5%9B%AD%E5%8C%BA%E5%9C%BA%E6%99%AF/data/path/Tile_-0001_0000_0000/Tile_-0001_0000_0000.s3mb"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap-iserver/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing/rest/realspace/datas/%E5%8C%96%E5%B7%A5%E5%9B%AD%E5%8C%BA%E5%9C%BA%E6%99%AF/data/path/Tile_0000_-0002_0000/Tile_0000_-0002_0000_0002_0000.s3mb"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap-iserver/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing/rest/realspace/datas/%E5%8C%96%E5%B7%A5%E5%9B%AD%E5%8C%BA%E5%9C%BA%E6%99%AF/data/path/Tile_-0001_0000_0000/Tile_-0001_0000_0000_0002_0001.s3mb"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap-iserver/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing/rest/realspace/datas/%E5%8C%96%E5%B7%A5%E5%9B%AD%E5%8C%BA%E5%9C%BA%E6%99%AF/data/path/Tile_0000_0000_0000/Tile_0000_0000_0000_0002_0000.s3mb"
+    }
+  ],
+  "supermapSamples": [
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/src/data/supermapCupScenario.ts"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/algorithm-api/api/health"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Widgets/widgets.css"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/SuperMap3D.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Widgets/Images/ZoomIndicator/zoom_Identifiers.png"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Widgets/Images/Navigation/tiltbar.png"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Widgets/Images/Navigation/tilt.png"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Widgets/Images/Navigation/compass_active.png"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Widgets/Images/Navigation/ring.png"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Widgets/Images/Navigation/zoombar.png"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Widgets/Images/Navigation/zoom.png"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Widgets/Images/cur/Pan.cur"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Assets/approximateTerrainHeights.json"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap-iserver/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing/rest/realspace/scenes.json"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Assets/IAU2006_XYS/IAU2006_XYS_18.json"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Assets/Images/logo.png"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing/rest/realspace/scenes/%E9%BB%98%E8%AE%A4%E5%9C%BA%E6%99%AF/layers.json"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing/rest/realspace/scenes/%E9%BB%98%E8%AE%A4%E5%9C%BA%E6%99%AF.json"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Assets/Textures/GlobalBkLayer.jpg"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Assets/Textures/SkyBox/tycho2t3_80_px.jpg"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Assets/Textures/SkyBox/tycho2t3_80_mx.jpg"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Assets/Textures/SkyBox/tycho2t3_80_py.jpg"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Assets/Textures/SkyBox/tycho2t3_80_pz.jpg"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Assets/Textures/SkyBox/tycho2t3_80_my.jpg"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Assets/Textures/SkyBox/tycho2t3_80_mz.jpg"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing/rest/realspace/scenes/%E9%BB%98%E8%AE%A4%E5%9C%BA%E6%99%AF/layers/%E5%8C%96%E5%B7%A5%E5%9B%AD%E5%8C%BA%E5%9C%BA%E6%99%AF/extendxml.xml"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap-iserver/iserver/manager/license.json"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap-iserver/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing.rjson"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap-iserver/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing/rest/realspace/datas/%E5%8C%96%E5%B7%A5%E5%9B%AD%E5%8C%BA%E5%9C%BA%E6%99%AF/config"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap-iserver/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing/rest/realspace/datas/%E5%8C%96%E5%B7%A5%E5%9B%AD%E5%8C%BA%E5%9C%BA%E6%99%AF/config"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap-iserver/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing/rest/realspace/datas/%E5%8C%96%E5%B7%A5%E5%9B%AD%E5%8C%BA%E5%9C%BA%E6%99%AF/data/path/attribute.json"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/ThirdParty/crunch.wasm"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Workers/transcodeCRNToDXT.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Workers/chunk-36VVQUSW.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Workers/chunk-AMRCVYIA.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Workers/chunk-S7TKXIWS.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Workers/chunk-6ZA5VAZ6.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Workers/chunk-6S43R6PL.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Workers/chunk-EHDXVZQM.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Workers/chunk-UBHQMGET.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Workers/chunk-NUC3LT2W.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Workers/chunk-SFC4FDPW.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Workers/transferTypedArrayTest.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap-iserver/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing/rest/realspace/datas/%E5%8C%96%E5%B7%A5%E5%9B%AD%E5%8C%BA%E5%9C%BA%E6%99%AF/data/path/Tile_0000_-0002_0000/Tile_0000_-0002_0000.s3mb"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap-iserver/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing/rest/realspace/datas/%E5%8C%96%E5%B7%A5%E5%9B%AD%E5%8C%BA%E5%9C%BA%E6%99%AF/data/path/Tile_0000_-0001_0000/Tile_0000_-0001_0000.s3mb"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap-iserver/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing/rest/realspace/datas/%E5%8C%96%E5%B7%A5%E5%9B%AD%E5%8C%BA%E5%9C%BA%E6%99%AF/data/path/Tile_-0001_-0001_0000/Tile_-0001_-0001_0000.s3mb"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap-iserver/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing/rest/realspace/datas/%E5%8C%96%E5%B7%A5%E5%9B%AD%E5%8C%BA%E5%9C%BA%E6%99%AF/data/path/Tile_0000_0000_0000/Tile_0000_0000_0000.s3mb"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap-iserver/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing/rest/realspace/datas/%E5%8C%96%E5%B7%A5%E5%9B%AD%E5%8C%BA%E5%9C%BA%E6%99%AF/data/path/Tile_-0001_0000_0000/Tile_-0001_0000_0000.s3mb"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Workers/S3MBTilesParser.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Workers/chunk-AMRCVYIA.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Workers/chunk-NUC3LT2W.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Workers/chunk-SFC4FDPW.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Workers/chunk-WKTF3ZDD.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Workers/chunk-QTHV2KP6.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/Workers/chunk-6NA2GRXE.js"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap-iserver/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing/rest/realspace/datas/%E5%8C%96%E5%B7%A5%E5%9B%AD%E5%8C%BA%E5%9C%BA%E6%99%AF/data/path/Tile_0000_-0002_0000/Tile_0000_-0002_0000_0002_0000.s3mb"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap-iserver/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing.rjson"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap-iserver/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing/rest/realspace/datas/%E5%8C%96%E5%B7%A5%E5%9B%AD%E5%8C%BA%E5%9C%BA%E6%99%AF/data/path/Tile_-0001_0000_0000/Tile_-0001_0000_0000_0002_0001.s3mb"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap-iserver/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing/rest/realspace/datas/%E5%8C%96%E5%B7%A5%E5%9B%AD%E5%8C%BA%E5%9C%BA%E6%99%AF/data/path/Tile_0000_0000_0000/Tile_0000_0000_0000_0002_0000.s3mb"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5173/supermap-iserver/iserver/services/3D-local3DCache-HuaGongYuanQuChangJing/rest/realspace/datas/%E5%8C%96%E5%B7%A5%E5%9B%AD%E5%8C%BA%E5%9C%BA%E6%99%AF/config"
+    }
+  ],
+  "failed": [],
+  "logs": []
+}

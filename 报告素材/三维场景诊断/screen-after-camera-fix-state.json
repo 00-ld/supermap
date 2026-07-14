@@ -1,0 +1,89 @@
+{
+  "stateReload": {
+    "canvasCount": 1,
+    "canvases": [
+      {
+        "clientHeight": 751,
+        "clientWidth": 816,
+        "height": 751,
+        "width": 816
+      }
+    ],
+    "text": "SUPERMAP DIGITAL TWIN\n化工园区三维应急态势入口\n原生三维已加载\n三维场景\n默认场景\n\niServer Realspace + iClient3D WebGL / EPSG:0 原生缓存\n\niServer 图层\n7\n\n3D-local3DCache-HuaGongYuanQuChangJing_1 / 3D-local3DCache-result_ImportFBX_2 / 3D-local3DCache-result_ImportFBX2_3\n\n算法封装\n在线\n\nchemical-algorithm 3.0.0\n\n场景坐标\nEPSG:0\n\nS3M 本地米制中心 (-397.8, -125.9) / 业务经纬度 113.542700E, 34.830712N\n\n扩散模拟\n泄漏源反演\n粒子滤波溯源\n疏散路径规划\n气体类型目录\niServer Realspace 场景未快速返回，改用 S3M config 图层加载\n定位园区\n定位经纬度\n重新加载\n算法空间化闭环\n待运行\n清除图层\n\n等待运行算法\n\n运行扩散\n粒子溯源\n疏散规划",
+    "url": "http://127.0.0.1:5174/#/screen"
+  },
+  "logsReload": [
+    {
+      "level": "error",
+      "message": "DeveloperError",
+      "timestamp": "2026-07-14T14:02:31.346Z",
+      "url": "http://127.0.0.1:5174/#/screen"
+    },
+    {
+      "level": "warn",
+      "message": "[Vue warn]: Unhandled error during execution of beforeUnmount hook \n  at <SuperMapSceneViewer> \n  at <SuperMapScreenEntry onVnodeUnmounted=fn<onVnodeUnmounted> ref=Ref< Proxy(Object) > > \n  at <RouterView> \n  at <App>",
+      "timestamp": "2026-07-14T14:04:57.108Z",
+      "url": "http://127.0.0.1:5174/node_modules/.vite/deps/chunk-X3QCHAKX.js?v=7f8847dc"
+    },
+    {
+      "level": "warn",
+      "message": "[Vue warn]: Unhandled error during execution of scheduler flush \n  at <SuperMapScreenEntry onVnodeUnmounted=fn<onVnodeUnmounted> ref=Ref< Proxy(Object) > > \n  at <RouterView> \n  at <App>",
+      "timestamp": "2026-07-14T14:04:57.108Z",
+      "url": "http://127.0.0.1:5174/node_modules/.vite/deps/chunk-X3QCHAKX.js?v=7f8847dc"
+    },
+    {
+      "level": "error",
+      "message": "TypeError: 'get' on proxy: property '__accessor__' is a read-only and non-configurable data property on the proxy target but the proxy did not return its actual value (expected '#<xf>' but got '#<xf>')\n    at Proxy.<anonymous> (http://127.0.0.1:5174/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/SuperMap3D.js:22846:54379)\n    at MutableReactiveHandler.get (http://127.0.0.1:5174/node_modules/.vite/deps/chunk-X3QCHAKX.js?v=7f8847dc:1240:25)\n    at destroyObject (http://127.0.0.1:5174/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/SuperMap3D.js:571:83103)\n    at ri.destroy (http://127.0.0.1:5174/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/SuperMap3D.js:30271:142666)\n    at wl.removeAll (http://127.0.0.1:5174/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/SuperMap3D.js:40289:14726)\n    at Gn.destroy (http://127.0.0.1:5174/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/SuperMap3D.js:44972:90406)\n    at LO.destroy (http://127.0.0.1:5174/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/SuperMap3D.js:46298:122)\n    at Ou.destroy (http://127.0.0.1:5174/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/SuperMap3D.js:46298:29157)\n    at destroyScene (http://127.0.0.1:5174/src/components/SuperMapSceneViewer.vue:840:30)\n    at http://127.0.0.1:5174/src/components/SuperMapSceneViewer.vue:152:7",
+      "timestamp": "2026-07-14T14:04:57.113Z",
+      "url": "http://127.0.0.1:5174/supermap3d-remote/iportal/apps/earth/v2/SuperMap3D/SuperMap3D.js"
+    },
+    {
+      "level": "error",
+      "message": "DeveloperError",
+      "timestamp": "2026-07-14T14:06:21.056Z",
+      "url": "http://127.0.0.1:5174/#/screen"
+    },
+    {
+      "level": "error",
+      "message": "DeveloperError",
+      "timestamp": "2026-07-14T14:06:31.795Z",
+      "url": "http://127.0.0.1:5174/#/screen"
+    },
+    {
+      "level": "error",
+      "message": "DeveloperError",
+      "timestamp": "2026-07-14T14:06:31.820Z",
+      "url": "http://127.0.0.1:5174/#/screen"
+    },
+    {
+      "level": "error",
+      "message": "DeveloperError",
+      "timestamp": "2026-07-14T14:06:31.820Z",
+      "url": "http://127.0.0.1:5174/#/screen"
+    },
+    {
+      "level": "error",
+      "message": "DeveloperError",
+      "timestamp": "2026-07-14T14:06:31.822Z",
+      "url": "http://127.0.0.1:5174/#/screen"
+    },
+    {
+      "level": "error",
+      "message": "DeveloperError",
+      "timestamp": "2026-07-14T14:06:31.825Z",
+      "url": "http://127.0.0.1:5174/#/screen"
+    },
+    {
+      "level": "error",
+      "message": "DeveloperError",
+      "timestamp": "2026-07-14T14:06:31.825Z",
+      "url": "http://127.0.0.1:5174/#/screen"
+    },
+    {
+      "level": "error",
+      "message": "DeveloperError",
+      "timestamp": "2026-07-14T14:06:31.825Z",
+      "url": "http://127.0.0.1:5174/#/screen"
+    }
+  ]
+}
