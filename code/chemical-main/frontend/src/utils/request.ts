@@ -26,6 +26,8 @@ interface ErrorResponseBody {
   message?: string
 }
 
+const publicDemoRoutes = new Set(['/screen', '/smart-map'])
+
 const attachAuthToken = (config: InternalAxiosRequestConfig) => {
   const userStore = useUserStore()
   const token = userStore.token || GET_TOKEN()
@@ -41,12 +43,15 @@ const handleDefaultError = (error: unknown) => {
   const status = axiosError?.response?.status
   const url: string = axiosError?.config?.url || ''
   const isAuthEntry = /\/(login|register)\b/.test(url)
+  const isPublicDemoRoute = publicDemoRoutes.has(router.currentRoute.value.path)
   const responseMessage = axiosError?.response?.data?.message
 
   switch (status) {
     case 401:
       if (isAuthEntry) {
         message = responseMessage || '用户名或密码错误'
+      } else if (isPublicDemoRoute) {
+        message = '未登录，演示入口已降级为本地默认数据'
       } else {
         message = '登录已过期，请重新登录'
         REMOVE_TOKEN()

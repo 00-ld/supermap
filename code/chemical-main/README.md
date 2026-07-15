@@ -78,7 +78,7 @@ ALGORITHM_API_KEY=<本地随机字符串>
 - 逃生路径规划：结合危险浓度区域和道路拓扑进行动态路径规划。
 - 传感器点位：维护固定气体传感器点位和巡检小车监控点位；当前仓库没有真实硬件采集链路，读数来自仿真采样、手工观测或巡检图片识别结果。
 - 视觉识别：YOLO11m 用于识别小车摄像头上传图像中的人员位置。
-- 三维展示：`/screen` 入口优先使用 SuperMap3D / iClient3D 原生加载 iServer 三维场景，iPortal 大屏作为兜底入口；扩散、粒子滤波溯源和疏散规划可从入口页触发，并把结果转换为 WGS84 经纬度实体叠加到三维场景。
+- 三维展示：`/screen` 入口优先使用 SuperMap3D / iClient3D 原生加载 iServer 三维场景，iPortal 大屏作为兜底入口；扩散、粒子滤波溯源和疏散规划可从入口页触发，并把算法结果转换为 CGCS2000 经纬度备案坐标（EPSG:4490）实体叠加到球面场景。
 
 ## 技术栈
 
@@ -230,12 +230,12 @@ SuperMap 三维入口通过以下环境变量配置：
 - `VITE_SUPERMAP_ISERVER_PROXY_BASE`：iServer 同源代理前缀，开发环境默认 `/supermap-iserver`，用于避免 iClient3D 请求登录、许可、config、S3M 瓦片时被 CORS 拦截。
 - `VITE_SUPERMAP_3D_SCENE_URL`：iServer Realspace 服务地址。
 - `VITE_SUPERMAP_3D_LAYER_CONFIGS`：S3M config 地址列表，当前指向 `化工园区场景`。
-- `VITE_SUPERMAP_3D_LAYER_POSITION`：S3M 图层 WGS84 插入点，格式为 `longitude,latitude,height`。
-- `VITE_SUPERMAP_3D_APPLY_LAYER_POSITION`：是否把 S3M 图层强制插入 WGS84 球面坐标。当前三维瓦片 config 为 `epsg:0`，开发环境默认 `false`，避免模型不请求 `.s3mb`。
+- `VITE_SUPERMAP_3D_LAYER_POSITION`：球面演示锚点，格式为 `longitude,latitude,height`，当前开发环境使用河工大莲花街校区控制点 `113.551488,34.827640,220`。
+- `VITE_SUPERMAP_3D_APPLY_LAYER_POSITION`：是否启用 CGCS2000/EPSG:4490 球面算法叠加演示。当前开发环境为 `true`；旧 S3M config 仍是 `epsg:0` 缓存，Web 端只能请求旧 config 并叠加算法实体，不能替代 iDesktopX 重定位重缓存。
 - `VITE_SUPERMAP_3D_DEFAULT_CAMERA`：三维入口默认相机，格式为 `longitude,latitude,height,heading,pitch,roll`。
 - `VITE_IPORTAL_DASHBOARD_URL`：iPortal 大屏兜底地址。
 
-当前已验证的三维 S3M config 坐标系为 `epsg:0` 平面米制缓存。Web 端当前按 iServer Realspace 原生缓存加载三维模型，并通过 Vite `/supermap-iserver` 与 `/iserver` 两组代理保证 `scenes/layers/config/attribute/.s3mb` 请求都进入 iServer。三维叠加层当前按 EPSG:0 本地米制场景坐标落到 S3M 模型上；`frontend/src/data/coordinate.js` 的 `worldToGeo()` 只作为业务经纬度参考、证据摘要和未来真实 CRS 重缓存目标，不写成当前三维瓦片本体已具备真实坐标系。长期参赛交付仍需要用 iDesktopX 重新处理三维数据坐标系，使模型本身重缓存为真实 WGS84/CGCS2000 坐标。
+当前已验证的三维 S3M config 坐标系仍为 `epsg:0` 平面缓存。Web 端通过 iClient3D 请求旧 S3M config，并把扩散、溯源、疏散等算法结果按 CGCS2000 经纬度备案坐标（EPSG:4490）叠加到河工大莲花街校区球面位置；这只能证明算法结果已落球面，不能写成三维瓦片本体已经完成 CGCS2000 Realspace 发布。长期参赛交付仍需要用 iDesktopX 按 CP0-CP5 重新处理三维数据坐标系，使模型本身重缓存并发布为真实 `3D-chemical_park_cgcs2000/rest/realspace`。
 
 二维/三维职责边界固定为“二维地图做后台计算引擎，三维场景做前台投影仪”。疏散路径示例：三维点击建筑得到经纬度或投影坐标，传给二维道路网络分析；二维模块只基于道路线数据求解 Dijkstra/网络分析路径，返回 `[x,y]` 坐标串；三维端给路径点赋固定 Z 值后渲染为路线，不在三维瓦片里直接做网络求解。粒子滤波示例：Python 算法端对最终粒子群做 KDE，输出带 Z 值的规则栅格 GeoJSON；三维端只消费该 GeoJSON 叠加 S3M 形成“概率地形”。如果后端没有 KDE GeoJSON，三维只展示最终估计点和 95% 置信椭圆。
 

@@ -1,0 +1,8 @@
+{
+  "bodyText": "SUPERMAP DIGITAL TWIN\n化工园区三维应急态势入口\n原生三维已加载\n三维场景\n默认场景\n\niServer Realspace + iClient3D WebGL / EPSG:0 原生缓存\n\niServer 图层\n7\n\n默认场景 / 3D-local3DCache-result_ImportFBX_2 / 3D-local3DCache-result_ImportFBX2_3\n\n算法封装\n在线\n\nchemical-algorithm 3.0.0\n\n场景坐标\nEPSG:0\n\nS3M 本地米制中心 (-397.8, -125.9) / 业务经纬度 113.545513E, 34.830712N\n\n扩散模拟\n泄漏源反演\n粒子滤波溯源\n疏散路径规划\n气体类型目录\n当前 S3M config 标记为 epsg:0 平面米制缓存，Web 端先按原生缓存显示模型；经纬度用于业务算法坐标和后续 iDesktopX 重处理目标。\n定位园区\n定位经纬度\n重新加载\n算法空间化闭环\n已落图\n清除图层\n\n疏散路径已叠加到 SuperMap 三维场景：4 个 EPSG:0 本地米制场景坐标 路径点\n\n运行扩散\n粒子溯源\n疏散规划\n疏散规划\n4 个路径点 / 东侧道路入口\n\n首尾点均已转换为 EPSG:0 本地米制场景坐标 · 9.57ms · d15472b3-0a26-4fae-97a5-842f2d65f263\n\n三维监控点\nPA-01L · gas\n\nEPSG:4547 E=458024.343, N=3855959.172 · EPSG:4490 113.541136E, 34.831197N · H=0.5m",
+  "capturedAt": "2026-07-14T17:42:31.712Z",
+  "layerCount": 0,
+  "messages": [],
+  "title": "基于时空智能和数字孪生的化工园区危险气体监测和溯源系统",
+  "url": "http://127.0.0.1:5174/#/screen"
+}

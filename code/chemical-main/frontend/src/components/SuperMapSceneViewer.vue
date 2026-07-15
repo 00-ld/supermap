@@ -80,6 +80,15 @@
           <strong>{{ latestEvidence.outputSummary }}</strong>
           <p>{{ latestEvidence.geoSummary }} · {{ latestEvidence.costMs }}ms · {{ latestEvidence.requestId }}</p>
         </div>
+        <div v-if="selectedSensor" class="evidence-card sensor-card">
+          <span>三维监控点</span>
+          <strong>{{ selectedSensor.id }} · {{ selectedSensor.type }}</strong>
+          <p>
+            EPSG:4547 {{ sensorProjectedText(selectedSensor) }}
+            · EPSG:4490 {{ sensorGeoText(selectedSensor) }}
+            · H={{ selectedSensor.installationHeight.toFixed(1) }}m
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -100,6 +109,7 @@ import type {
 } from '@/types/supermap-scene-events'
 import {
   SUPERMAP_CUP_SCENARIO,
+  SUPERMAP_CUP_SENSORS,
   asRecord,
   buildSuperMapCupDiffusionPayload,
   buildSuperMapCupEvacuationPayload,
@@ -111,6 +121,7 @@ import {
   type SuperMapCupEvidence,
   type SuperMapCupGeoPoint,
   type SuperMapCupMapPoint,
+  type SuperMapCupSensor,
 } from '@/data/supermapCupScenario'
 
 defineOptions({
@@ -248,6 +259,11 @@ const LOCAL_S3M_CENTER = {
   y: -125.91957235375594,
   z: 0,
 }
+const GLOBE_ALGORITHM_ALTITUDE_LIFT = 180
+const GLOBE_DIFFUSION_CELL_LIMIT = 24
+const GLOBE_DIFFUSION_ELLIPSE_LIMIT = 8
+const GLOBE_DIFFUSION_MARKER_LIMIT = 18
+const NATIVE_DIFFUSION_CELL_LIMIT = 42
 
 const sceneContainer = ref<HTMLDivElement | null>(null)
 const renderMode = ref<'native' | 'fallback'>('native')
@@ -264,8 +280,10 @@ const diffusionResult = ref<AlgorithmRecord | null>(null)
 const particleResult = ref<AlgorithmRecord | null>(null)
 const evacuationResult = ref<AlgorithmRecord | null>(null)
 const overlayEntities = shallowRef<unknown[]>([])
+const sensorEntities = shallowRef<unknown[]>([])
 const evidenceRecords = ref<SuperMapCupEvidence[]>([])
 const primaryS3MLayer = shallowRef<unknown>(null)
+const selectedSensor = ref<SuperMapCupSensor | null>(SUPERMAP_CUP_SENSORS[0] || null)
 
 const dashboardUrl = computed(() => import.meta.env.VITE_IPORTAL_DASHBOARD_URL || DEFAULT_IPORTAL_URL)
 const statusPanelVisible = computed(() => sceneViewerProps.showStatusPanel)
@@ -290,7 +308,7 @@ const loadedLayerNames = computed(() => {
 const sceneSourceText = computed(() => {
   if (renderMode.value === 'fallback') return 'iPortal 大屏兜底展示'
   return shouldApplyLayerPosition.value
-    ? 'iServer Realspace + iClient3D WebGL / WGS84 插入'
+    ? 'iClient3D WebGL + S3M config / CGCS2000(EPSG:4490) 算法叠加'
     : 'iServer Realspace + iClient3D WebGL / EPSG:0 原生缓存'
 })
 const sceneStateText = computed(() => {
@@ -323,15 +341,15 @@ const coordinateSummary = computed(() => {
   return `${geo.longitude.toFixed(6)}E, ${geo.latitude.toFixed(6)}N`
 })
 const coordinateModeTitle = computed(() => shouldApplyLayerPosition.value ? '球面坐标' : '场景坐标')
-const coordinateModeName = computed(() => shouldApplyLayerPosition.value ? 'WGS84' : 'EPSG:0')
+const coordinateModeName = computed(() => shouldApplyLayerPosition.value ? 'CGCS2000 / EPSG:4490' : 'EPSG:0')
 const coordinateModeDetail = computed(() => shouldApplyLayerPosition.value
-  ? `源点 ${coordinateSummary.value} / 插入点 ${layerPositionSummary.value}`
+  ? `河工大莲花街锚点 ${layerPositionSummary.value} / 算法源点 ${coordinateSummary.value}`
   : `S3M 本地米制中心 (${LOCAL_S3M_CENTER.x.toFixed(1)}, ${LOCAL_S3M_CENTER.y.toFixed(1)}) / 业务经纬度 ${coordinateSummary.value}`)
 const layerPositionSummary = computed(() => {
   const position = s3mLayerPosition.value
   return `${position.longitude.toFixed(6)}E, ${position.latitude.toFixed(6)}N`
 })
-const overlayCoordinateLabel = computed(() => shouldApplyLayerPosition.value ? 'WGS84 经纬度' : 'EPSG:0 本地米制场景坐标')
+const overlayCoordinateLabel = computed(() => shouldApplyLayerPosition.value ? 'CGCS2000 EPSG:4490 经纬度' : 'EPSG:0 本地米制场景坐标')
 const demoTaskStateText = computed(() => {
   if (demoTaskState.value === 'running') return '运行中'
   if (demoTaskState.value === 'success') return '已落图'
@@ -392,6 +410,7 @@ async function bootstrapScene() {
         sceneMessage.value = '当前 S3M config 标记为 epsg:0 平面米制缓存，Web 端先按原生缓存显示模型；经纬度用于业务算法坐标和后续 iDesktopX 重处理目标。'
       }
     }
+    renderMonitoringSensors()
     setupPicking(runtime)
     sceneState.value = 'ready'
   } catch (error) {
@@ -405,6 +424,13 @@ async function openScene() {
   const currentViewer = viewer.value
   if (!currentViewer) throw new Error('三维 Viewer 初始化失败')
   if (!currentViewer.scene) throw new Error('当前 SuperMap3D Viewer 未暴露 scene，请检查 SDK 入口文件是否匹配 iClient3D WebGL')
+
+  if (shouldApplyLayerPosition.value && currentViewer.scene.addS3MTilesLayerByScp && layerConfigs.value.length) {
+    await openS3MConfigLayers(currentViewer, 0, true, 1)
+    if (layerConfigs.value.length > 1) void loadGlobeDetailLayers(currentViewer)
+    sceneMessage.value = `旧 S3M 主场景 config 已通过 iClient3D 请求；算法图层按河工大莲花街锚点 ${layerPositionSummary.value} 落球面。旧 S3M 仍需 iDesktopX 重定位后发布 CGCS2000 Realspace，才能保证厂房、管线和算法结果真实对齐。`
+    return
+  }
 
   if (currentViewer.scene.open && sceneUrl.value) {
     try {
@@ -434,11 +460,12 @@ async function openScene() {
   }
 }
 
-async function openS3MConfigLayers(currentViewer: SuperMapViewer, startIndex = 0, strict = true) {
+async function openS3MConfigLayers(currentViewer: SuperMapViewer, startIndex = 0, strict = true, maxCount?: number) {
   if (!currentViewer.scene.addS3MTilesLayerByScp) throw new Error('当前 SuperMap3D SDK 不支持 S3M config 图层加载')
-  const configs = layerConfigs.value
+  let configs = layerConfigs.value
     .map((configUrl, index) => ({ configUrl, index }))
     .slice(startIndex)
+  if (maxCount !== undefined) configs = configs.slice(0, maxCount)
   for (const { configUrl, index } of configs) {
     const layerName = resolveLayerName(configUrl, index)
     const shouldAutoFocusLayer = startIndex === 0 && index === 0
@@ -479,6 +506,18 @@ async function openS3MConfigLayers(currentViewer: SuperMapViewer, startIndex = 0
   }
 }
 
+async function loadGlobeDetailLayers(currentViewer: SuperMapViewer) {
+  await wait(1200)
+  try {
+    await openS3MConfigLayers(currentViewer, 1, false)
+    sceneMessage.value = `旧 S3M 主场景和细节图层 config 已请求完成；算法图层已按河工大莲花街锚点落球面。当前不是 CGCS2000 Realspace 重发布，模型主体不可见或不对齐时必须回到 iDesktopX 重定位重缓存。`
+  } catch (error) {
+    const message = error instanceof Error ? error.message : '细节图层后台加载异常'
+    sceneMessage.value = `${message}；主场景和算法图层保留显示，细节模型需在 iDesktopX 重定位重缓存后最终验收。`
+    pushDebugMessage(sceneMessage.value)
+  }
+}
+
 async function refreshAlgorithmHealth() {
   algorithmState.value = 'checking'
   try {
@@ -515,11 +554,11 @@ function focusGeoCenter() {
     return
   }
   const geo = SUPERMAP_CUP_SCENARIO.sourceGeoPoint
-  const destination = runtime.Cartesian3.fromDegrees(geo.longitude, geo.latitude, 1250)
+  const destination = runtime.Cartesian3.fromDegrees(geo.longitude, geo.latitude, 900)
   const orientation = runtime.Math
     ? {
         heading: runtime.Math.toRadians(0),
-        pitch: runtime.Math.toRadians(-62),
+        pitch: runtime.Math.toRadians(-90),
         roll: runtime.Math.toRadians(0),
       }
     : undefined
@@ -616,23 +655,28 @@ function drawDiffusionOverlay(result: AlgorithmRecord) {
   const cells = Array.isArray(frame.cells) ? frame.cells.map(asRecord).filter(cell => Number(cell.concentration) > 0) : []
   const peak = Math.max(...cells.map(cell => Number(cell.concentration || 0)), 1)
   addPointEntity(SUPERMAP_CUP_SCENARIO.sourceMapPoint, '泄漏源', '#ff6b4a', 18)
+  const cellLimit = shouldApplyLayerPosition.value ? GLOBE_DIFFUSION_CELL_LIMIT : NATIVE_DIFFUSION_CELL_LIMIT
+  const ellipseLimit = shouldApplyLayerPosition.value ? GLOBE_DIFFUSION_ELLIPSE_LIMIT : NATIVE_DIFFUSION_CELL_LIMIT
+  const markerLimit = shouldApplyLayerPosition.value ? GLOBE_DIFFUSION_MARKER_LIMIT : 24
   cells
     .sort((left, right) => Number(right.concentration || 0) - Number(left.concentration || 0))
-    .slice(0, 42)
+    .slice(0, cellLimit)
     .forEach((cell, index) => {
       const point = toMapPoint(cell)
       if (!point) return
       const ratio = Math.min(1, Number(cell.concentration || 0) / peak)
       const color = ratio > 0.65 ? '#ff3b30' : ratio > 0.35 ? '#ffb020' : '#35d2ff'
-      addEllipseEntity(point, {
-        title: `扩散浓度 ${Number(cell.concentration || 0).toFixed(2)} ppm`,
-        radius: Math.max(Number(cell.size || 20) * 0.7, 10),
-        color,
-        alpha: ratio > 0.65 ? 0.36 : 0.22,
-        altitudeOffset: 8,
-        verticalRadius: 8 + ratio * 42,
-      })
-      if (index < 24) {
+      if (index < ellipseLimit) {
+        addEllipseEntity(point, {
+          title: `扩散浓度 ${Number(cell.concentration || 0).toFixed(2)} ppm`,
+          radius: Math.max(Number(cell.size || 20) * 0.7, 10),
+          color,
+          alpha: ratio > 0.65 ? 0.36 : 0.22,
+          altitudeOffset: 8,
+          verticalRadius: 8 + ratio * 42,
+        })
+      }
+      if (index < markerLimit) {
         addDiffusionPlumeMarker(point, Number(cell.concentration || 0), color, ratio)
       }
     })
@@ -640,6 +684,63 @@ function drawDiffusionOverlay(result: AlgorithmRecord) {
   if (shouldApplyLayerPosition.value) {
     focusGeoCenter()
   }
+}
+
+function renderMonitoringSensors() {
+  clearMonitoringSensors()
+  SUPERMAP_CUP_SENSORS.forEach((sensor) => {
+    const position = mapPointToSceneCartesian(sensor.mapPoint, sensor.installationHeight + 10)
+    if (!position) return
+    const color = sensorColor(sensor)
+    const entity = viewer.value?.entities?.add({
+      name: `监控点 ${sensor.id}`,
+      superMapCupSensorId: sensor.id,
+      position,
+      point: {
+        pixelSize: sensor.priority >= 3 ? 13 : 10,
+        color: colorFromCss(color, 0.96),
+        outlineColor: colorFromCss('#ffffff', 0.9),
+        outlineWidth: 2,
+        disableDepthTestDistance: Number.POSITIVE_INFINITY,
+      },
+      billboard: shouldApplyLayerPosition.value
+        ? {
+            image: markerSvgDataUri(color, sensor.priority >= 3 ? 'S' : ''),
+            width: sensor.priority >= 3 ? 34 : 28,
+            height: sensor.priority >= 3 ? 34 : 28,
+            disableDepthTestDistance: Number.POSITIVE_INFINITY,
+          }
+        : undefined,
+      label: sensor.priority >= 3
+        ? {
+            text: sensor.id,
+            font: shouldApplyLayerPosition.value ? '700 15px sans-serif' : '12px sans-serif',
+            fillColor: colorFromCss('#ffffff', 0.96),
+            outlineColor: colorFromCss('#00111f', 0.86),
+            outlineWidth: 3,
+            disableDepthTestDistance: Number.POSITIVE_INFINITY,
+          }
+        : undefined,
+      description: [
+        `监控点 ${sensor.id}`,
+        `类型: ${sensor.type}`,
+        `EPSG:4547: ${sensorProjectedText(sensor)}`,
+        `EPSG:4490: ${sensorGeoText(sensor)}`,
+        `安装高度: ${sensor.installationHeight.toFixed(1)}m`,
+        `有效半径: ${sensor.effectiveRange.toFixed(1)}m`,
+      ].join('<br/>'),
+    })
+    if (entity) sensorEntities.value = [...sensorEntities.value, markExternalObject(entity)]
+  })
+  selectedSensor.value ||= SUPERMAP_CUP_SENSORS[0] || null
+}
+
+function clearMonitoringSensors() {
+  const entities = viewer.value?.entities
+  if (entities) {
+    sensorEntities.value.forEach(entity => entities.remove(entity))
+  }
+  sensorEntities.value = []
 }
 
 function drawParticleOverlay(result: AlgorithmRecord) {
@@ -660,7 +761,27 @@ function drawParticleOverlay(result: AlgorithmRecord) {
 function drawEvacuationOverlay(result: AlgorithmRecord) {
   const path = resolveRoutePath(result)
   if (!path.length) throw new Error('疏散规划结果缺少路径点')
-  addPolylineEntity(path, '疏散路线', '#52ffb8')
+  const candidateRoutes = Array.isArray(result.candidateRoutes)
+    ? result.candidateRoutes.map(asRecord).slice(0, 4)
+    : []
+  candidateRoutes.forEach((route, index) => {
+    const candidatePath = resolveRoutePath(route)
+    if (candidatePath.length >= 2) {
+      addPolylineEntity(candidatePath, `候选疏散路线 ${index + 1}`, '#7dd3fc', {
+        width: 4,
+        baseWidth: 7,
+        alpha: 0.42,
+        altitudeOffset: 118 + index * 5,
+      })
+    }
+  })
+  addPolylineEntity(path, '疏散路线', '#52ffb8', {
+    altitudeOffset: 145,
+  })
+  path.forEach((point, index) => {
+    addPointEntity(point, `路径节点 ${index + 1}`, '#52ffb8', index === 0 || index === path.length - 1 ? 13 : 10)
+  })
+  addRouteLabelEntity(path, '疏散路线')
   addPointEntity(path[0], '疏散起点', '#35d2ff', 15)
   addPointEntity(path[path.length - 1], '安全出口', '#52ffb8', 17)
 }
@@ -721,15 +842,23 @@ function addPointEntity(point: SuperMapCupMapPoint, title: string, color: string
     name: title,
     position,
     point: {
-      pixelSize,
+      pixelSize: shouldApplyLayerPosition.value ? Math.max(pixelSize, 32) : pixelSize,
       color: colorFromCss(color, 0.96),
       outlineColor: colorFromCss('#ffffff', 0.92),
       outlineWidth: 2,
       disableDepthTestDistance: Number.POSITIVE_INFINITY,
     },
+    billboard: shouldApplyLayerPosition.value
+      ? {
+          image: markerSvgDataUri(color, title.includes('泄漏') ? '!' : ''),
+          width: 52,
+          height: 52,
+          disableDepthTestDistance: Number.POSITIVE_INFINITY,
+        }
+      : undefined,
     label: {
       text: title,
-      font: '14px sans-serif',
+      font: shouldApplyLayerPosition.value ? '700 20px sans-serif' : '14px sans-serif',
       fillColor: colorFromCss('#ffffff', 0.96),
       outlineColor: colorFromCss('#00111f', 0.86),
       outlineWidth: 3,
@@ -747,12 +876,20 @@ function addDiffusionPlumeMarker(point: SuperMapCupMapPoint, concentration: numb
     name: `扩散三维风险柱 ${concentration.toFixed(2)} ppm`,
     position: top,
     point: {
-      pixelSize: 9 + ratio * 18,
+      pixelSize: shouldApplyLayerPosition.value ? 22 + ratio * 28 : 9 + ratio * 18,
       color: colorFromCss(color, 0.92),
       outlineColor: colorFromCss('#ffffff', 0.82),
       outlineWidth: 1.5,
       disableDepthTestDistance: Number.POSITIVE_INFINITY,
     },
+    billboard: shouldApplyLayerPosition.value && ratio > 0.45
+      ? {
+          image: markerSvgDataUri(color, concentration.toFixed(0)),
+          width: 34 + ratio * 30,
+          height: 34 + ratio * 30,
+          disableDepthTestDistance: Number.POSITIVE_INFINITY,
+        }
+      : undefined,
     polyline: {
       positions: [ground, top],
       width: 2 + ratio * 3,
@@ -784,7 +921,10 @@ function addEllipseEntity(
     })
     return
   }
-  const geo = mapPointToGeo(point, options.altitudeOffset)
+  const geo = mapPointToGeo(
+    point,
+    options.altitudeOffset + (shouldApplyLayerPosition.value ? GLOBE_ALGORITHM_ALTITUDE_LIFT : 0),
+  )
   addEntity({
     name: options.title,
     position,
@@ -800,19 +940,54 @@ function addEllipseEntity(
   })
 }
 
-function addPolylineEntity(points: SuperMapCupMapPoint[], title: string, color: string) {
+function addPolylineEntity(
+  points: SuperMapCupMapPoint[],
+  title: string,
+  color: string,
+  options: { width?: number; baseWidth?: number; alpha?: number; altitudeOffset?: number } = {},
+) {
+  const altitudeOffset = options.altitudeOffset ?? 28
   const positions = points
-    .map((point, index) => mapPointToSceneCartesian(point, 18 + index * 0.05))
+    .map((point, index) => mapPointToSceneCartesian(point, altitudeOffset + index * 0.05))
     .filter((item): item is unknown => Boolean(item))
   if (positions.length < 2) return
+  addEntity({
+    name: `${title}底色`,
+    polyline: {
+      positions,
+      width: options.baseWidth ?? 11,
+      material: colorFromCss('#001827', Math.min((options.alpha ?? 0.88) + 0.18, 0.95)),
+    },
+    description: `${title}底色: 用于增强三维疏散路径截图可读性`,
+  })
   addEntity({
     name: title,
     polyline: {
       positions,
-      width: 5,
-      material: colorFromCss(color, 0.92),
+      width: options.width ?? 8,
+      material: colorFromCss(color, options.alpha ?? 0.98),
     },
     description: `${title}: ${positions.length} 个 ${overlayCoordinateLabel.value}路径点`,
+  })
+}
+
+function addRouteLabelEntity(points: SuperMapCupMapPoint[], title: string) {
+  if (!points.length) return
+  const middle = points[Math.floor(points.length / 2)]
+  const position = mapPointToSceneCartesian(middle, 178)
+  if (!position) return
+  addEntity({
+    name: title,
+    position,
+    label: {
+      text: title,
+      font: '700 16px sans-serif',
+      fillColor: colorFromCss('#eafff6', 0.98),
+      outlineColor: colorFromCss('#001827', 0.96),
+      outlineWidth: 4,
+      disableDepthTestDistance: Number.POSITIVE_INFINITY,
+    },
+    description: `${title}: ${points.length} 个 ${overlayCoordinateLabel.value}路径点`,
   })
 }
 
@@ -846,7 +1021,7 @@ function geoToCartesian(geo: SuperMapCupGeoPoint) {
 }
 
 function mapPointToSceneCartesian(point: SuperMapCupMapPoint, altitudeOffset = 0) {
-  if (shouldApplyLayerPosition.value) return geoToCartesian(mapPointToGeo(point, altitudeOffset))
+  if (shouldApplyLayerPosition.value) return geoToCartesian(mapPointToGeo(point, altitudeOffset + GLOBE_ALGORITHM_ALTITUDE_LIFT))
   const runtime = getRuntime()
   const local = mapPointToS3MLocal(point, altitudeOffset)
   return runtime?.Cartesian3 ? new runtime.Cartesian3(local.x, local.y, local.z) : null
@@ -889,7 +1064,7 @@ function mapDistanceToSceneMeters(distance: number) {
 
 function describeMapPoint(point: SuperMapCupMapPoint, altitudeOffset = 0) {
   if (shouldApplyLayerPosition.value) {
-    const geo = mapPointToGeo(point, altitudeOffset)
+    const geo = mapPointToGeo(point, altitudeOffset + GLOBE_ALGORITHM_ALTITUDE_LIFT)
     return `${geo.longitude.toFixed(6)}E, ${geo.latitude.toFixed(6)}N, ${geo.altitude.toFixed(1)}m`
   }
   const local = mapPointToS3MLocal(point, altitudeOffset)
@@ -902,8 +1077,36 @@ function clamp(value: number, min: number, max: number) {
 }
 
 function colorFromCss(css: string, alpha: number) {
-  const color = getRuntime()?.Color?.fromCssColorString?.(css)
-  return color?.withAlpha ? color.withAlpha(alpha) : color
+  const runtime = getRuntime()
+  const color = runtime?.Color?.fromCssColorString?.(css)
+  if (color?.withAlpha) return color.withAlpha(alpha)
+  if (color) return color
+  return runtime?.Color?.YELLOW?.withAlpha ? runtime.Color.YELLOW.withAlpha(alpha) : undefined
+}
+
+function markerSvgDataUri(color: string, label: string) {
+  const safeColor = encodeURIComponent(color)
+  const safeLabel = encodeURIComponent(label)
+  return `data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Ccircle cx='48' cy='48' r='34' fill='${safeColor}' fill-opacity='0.92' stroke='white' stroke-width='7'/%3E%3Ccircle cx='48' cy='48' r='45' fill='none' stroke='${safeColor}' stroke-opacity='0.48' stroke-width='6'/%3E%3Ctext x='48' y='57' text-anchor='middle' font-family='Arial,sans-serif' font-size='28' font-weight='700' fill='white'%3E${safeLabel}%3C/text%3E%3C/svg%3E`
+}
+
+function sensorColor(sensor: SuperMapCupSensor) {
+  if (sensor.priority >= 4) return '#ff6b4a'
+  if (sensor.priority >= 3) return '#ffb020'
+  if (sensor.type.toLowerCase().includes('wind')) return '#35d2ff'
+  return '#52ffb8'
+}
+
+function sensorProjectedText(sensor: SuperMapCupSensor) {
+  const projected = mapPointToGeo(sensor.mapPoint, sensor.installationHeight) as SuperMapCupGeoPoint & {
+    easting?: number
+    northing?: number
+  }
+  return `E=${Number(projected.easting || 0).toFixed(3)}, N=${Number(projected.northing || 0).toFixed(3)}`
+}
+
+function sensorGeoText(sensor: SuperMapCupSensor) {
+  return `${sensor.geoPoint.longitude.toFixed(6)}E, ${sensor.geoPoint.latitude.toFixed(6)}N`
 }
 
 function getEstimatedSourcePoint(result: AlgorithmRecord | null): SuperMapCupMapPoint | null {
@@ -949,11 +1152,49 @@ function setupPicking(runtime: SuperMapRuntime) {
   clickHandler.value = markRaw(new runtime.ScreenSpaceEventHandler(currentViewer.scene.canvas))
   clickHandler.value.setInputAction((event) => {
     const picked = currentViewer.scene.pick?.(event.position) as PickedFeature | undefined
+    const sensor = resolvePickedSensor(picked)
+    if (sensor) {
+      selectedSensor.value = sensor
+      emit('facility-click', sensor.id)
+      emit('scene-object-pick', {
+        selectedObjectId: sensor.id,
+        selectedObjectName: `监控点 ${sensor.id}`,
+        projectedPoint: {
+          x: Number((mapPointToGeo(sensor.mapPoint, sensor.installationHeight) as SuperMapCupGeoPoint & { easting?: number }).easting || 0),
+          y: Number((mapPointToGeo(sensor.mapPoint, sensor.installationHeight) as SuperMapCupGeoPoint & { northing?: number }).northing || 0),
+          easting: Number((mapPointToGeo(sensor.mapPoint, sensor.installationHeight) as SuperMapCupGeoPoint & { easting?: number }).easting || 0),
+          northing: Number((mapPointToGeo(sensor.mapPoint, sensor.installationHeight) as SuperMapCupGeoPoint & { northing?: number }).northing || 0),
+          epsg: 4547,
+          coordSys: 'CGCS2000_3GK_CM_114E',
+        },
+        heightMeters: sensor.installationHeight,
+        source: 'supermap-iclient3d-monitoring-sensor',
+        rawProperties: {
+          id: sensor.id,
+          type: sensor.type,
+          priority: sensor.priority,
+          cgcs2000E: Number((mapPointToGeo(sensor.mapPoint, sensor.installationHeight) as SuperMapCupGeoPoint & { easting?: number }).easting || 0),
+          cgcs2000N: Number((mapPointToGeo(sensor.mapPoint, sensor.installationHeight) as SuperMapCupGeoPoint & { northing?: number }).northing || 0),
+        },
+      })
+      return
+    }
     const payload = buildScenePickPayload(picked)
     if (!payload) return
     emit('facility-click', payload.selectedObjectId)
     emit('scene-object-pick', payload)
   }, runtime.ScreenSpaceEventType.LEFT_CLICK)
+}
+
+function resolvePickedSensor(picked: PickedFeature | undefined) {
+  const entity = (picked?.id && typeof picked.id === 'object') ? picked.id as Record<string, unknown> : null
+  const sensorId = stringFromUnknown(
+    entity?.superMapCupSensorId
+    || entity?.id
+    || valueFromProperties(collectPickProperties(picked || {}), 'superMapCupSensorId', 'id', 'ID'),
+  )
+  if (!sensorId) return null
+  return SUPERMAP_CUP_SENSORS.find(sensor => sensor.id === sensorId) || null
 }
 
 function buildScenePickPayload(picked: PickedFeature | undefined): SuperMapScenePickEventPayload | null {
@@ -1154,6 +1395,7 @@ function waitForRuntime(timeoutMs = 6000) {
 
 function destroyScene() {
   clearAlgorithmOverlays()
+  clearMonitoringSensors()
   clickHandler.value?.destroy()
   clickHandler.value = null
   viewer.value?.destroy?.()
@@ -1225,6 +1467,10 @@ function withTimeout<T>(promise: Promise<T>, timeoutMs: number, message: string)
   return Promise.race([promise, timeout]).finally(() => {
     if (timer !== undefined) window.clearTimeout(timer)
   })
+}
+
+function wait(timeoutMs: number) {
+  return new Promise<void>(resolve => window.setTimeout(resolve, timeoutMs))
 }
 
 async function flyToPrimaryLayer() {

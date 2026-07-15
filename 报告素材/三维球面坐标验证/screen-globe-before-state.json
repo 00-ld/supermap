@@ -1,0 +1,11 @@
+{
+  "canvas": [
+    {
+      "clientHeight": 720,
+      "clientWidth": 1280,
+      "height": 720,
+      "width": 1280
+    }
+  ],
+  "text": "SUPERMAP DIGITAL TWIN\n化工园区三维应急态势入口\n原生三维已加载\n三维场景\n默认场景\n\niClient3D WebGL + S3M / CGCS2000(EPSG:4490) 球面插入\n\niServer 图层\n7\n\n3D-local3DCache-HuaGongYuanQuChangJing_1 / 3D-local3DCache-result_ImportFBX_2 / 3D-local3DCache-result_ImportFBX2_3\n\n算法封装\n在线\n\nchemical-algorithm 3.0.0\n\n球面坐标\nCGCS2000 / EPSG:4490\n\n河工大莲花街锚点 113.551488E, 34.827640N / 算法源点 113.545513E, 34.830712N\n\n扩散模拟\n泄漏源反演\n粒子滤波溯源\n疏散路径规划\n气体类型目录\n旧 S3M 缓存已通过 iClient3D 插入到河工大莲花街校区锚点 113.551488E, 34.827640N；最终仍需 iDesktopX 重定位后发布 CGCS2000 Realspace。\n定位园区\n定位经纬度\n重新加载\n算法空间化闭环\n待运行\n清除图层\n\n等待运行算法\n\n运行扩散\n粒子溯源\n疏散规划"
+}

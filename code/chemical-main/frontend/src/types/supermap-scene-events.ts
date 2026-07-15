@@ -12,6 +12,6 @@ export interface SuperMapScenePickEventPayload {
   selectedObjectName?: string
   projectedPoint: SuperMapProjectedPoint4547 | null
   heightMeters: number | null
-  source: 'supermap-iclient3d-pick'
+  source: 'supermap-iclient3d-pick' | 'supermap-iclient3d-monitoring-sensor'
   rawProperties: Record<string, string | number | boolean | null>
 }

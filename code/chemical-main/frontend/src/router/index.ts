@@ -12,7 +12,7 @@ const router = createRouter({
 })
 
 // 路由守卫：未登录时强制跳转到登录页。
-const whiteList = ['/login', '/register', '/404', '/screen']
+const whiteList = ['/login', '/register', '/404', '/screen', '/smart-map']
 router.beforeEach((to, _from, next) => {
   // 统一从 token 工具读取，和 store / 请求拦截器保持同一数据源。
   const token = GET_TOKEN()

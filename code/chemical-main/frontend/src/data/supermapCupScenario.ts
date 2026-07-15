@@ -6,6 +6,7 @@ import {
   SUPERMAP_CGCS2000_GEOGRAPHIC_EPSG,
   SUPERMAP_CGCS2000_TRANSFORM,
   SUPERMAP_LOCAL_COORD_SYS,
+  localToProjected,
 } from '@/data/supermapGeoreference'
 import {
   REAL_MAP,
@@ -23,6 +24,9 @@ export interface SuperMapCupGeoPoint {
   longitude: number
   latitude: number
   altitude: number
+  easting: number
+  northing: number
+  projectedEpsg: number
 }
 
 export interface SuperMapCupMapPoint {
@@ -53,8 +57,8 @@ export interface SuperMapCupEvidence {
   geoSummary: string
 }
 
-const DEFAULT_SOURCE_FACILITY_ID = 'pa-west-north'
-const DEFAULT_START_FACILITY_ID = 'wh-logistics'
+const DEFAULT_SOURCE_FACILITY_ID = 'pa-center-north'
+const DEFAULT_START_FACILITY_ID = 'pa-west-south'
 const MAX_DEMO_SENSORS = 28
 
 const sourceFacility = resolveFacility(DEFAULT_SOURCE_FACILITY_ID) || facilities[0]
@@ -103,10 +107,14 @@ export const SUPERMAP_CUP_SENSORS: SuperMapCupSensor[] = REAL_SENSOR_LAYOUT
 
 export function mapPointToGeo(point: SuperMapCupMapPoint, altitudeOffset = 0): SuperMapCupGeoPoint {
   const geo = worldToGeo(point.x, point.y)
+  const projected = localToProjected(point.x, point.y)
   return {
     longitude: Number(geo.longitude.toFixed(8)),
     latitude: Number(geo.latitude.toFixed(8)),
     altitude: Number((geo.altitude + altitudeOffset).toFixed(2)),
+    easting: projected.easting,
+    northing: projected.northing,
+    projectedEpsg: SUPERMAP_CGCS2000_EPSG,
   }
 }
 
