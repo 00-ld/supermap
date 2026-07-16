@@ -58,7 +58,8 @@ export interface SuperMapCupEvidence {
 }
 
 const DEFAULT_SOURCE_FACILITY_ID = 'pa-center-north'
-const DEFAULT_START_FACILITY_ID = 'pa-west-south'
+const DEFAULT_START_FACILITY_ID = 'pa-center-south'
+const DEFAULT_VISIBLE_EXIT_IDS = new Set(['park-south', 'park-east'])
 const MAX_DEMO_SENSORS = 28
 
 const sourceFacility = resolveFacility(DEFAULT_SOURCE_FACILITY_ID) || facilities[0]
@@ -193,7 +194,7 @@ export function buildSuperMapCupEvacuationPayload(diffusionResult: AlgorithmReco
   const startEntrance = buildingEntrances.find(item => item.parentId === startFacility.id) || buildingEntrances[0]
   return {
     roads: roads.map(toAlgorithmRoad),
-    parkEntrances,
+    parkEntrances: parkEntrances.filter(item => DEFAULT_VISIBLE_EXIT_IDS.has(item.id)),
     startPoint: {
       x: startEntrance.x,
       y: startEntrance.y,

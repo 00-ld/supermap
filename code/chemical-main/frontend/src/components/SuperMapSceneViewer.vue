@@ -1,6 +1,37 @@
 <template>
   <section class="supermap-scene-viewer">
     <div v-show="renderMode === 'native'" ref="sceneContainer" class="scene-canvas"></div>
+    <svg
+      v-if="routeScreenOverlayPoints.length"
+      class="route-screen-overlay"
+      viewBox="0 0 1280 720"
+      preserveAspectRatio="none"
+      aria-label="疏散路线屏幕引导层"
+    >
+      <polyline
+        :points="routeScreenOverlayPolyline"
+        class="route-screen-overlay__halo"
+      />
+      <polyline
+        :points="routeScreenOverlayPolyline"
+        class="route-screen-overlay__line"
+      />
+      <g
+        v-for="(point, index) in routeScreenOverlayPoints"
+        :key="`${point.x.toFixed(1)}-${point.y.toFixed(1)}-${index}`"
+      >
+        <circle :cx="point.x" :cy="point.y" r="10" class="route-screen-overlay__dot-halo" />
+        <circle :cx="point.x" :cy="point.y" r="6" class="route-screen-overlay__dot" />
+        <text
+          v-if="index === 0 || index === routeScreenOverlayPoints.length - 1"
+          :x="point.x + 14"
+          :y="point.y - 12"
+          class="route-screen-overlay__label"
+        >
+          {{ index === 0 ? '疏散起点' : '安全出口' }}
+        </text>
+      </g>
+    </svg>
 
     <iframe
       v-if="renderMode === 'fallback'"
@@ -281,6 +312,7 @@ const particleResult = ref<AlgorithmRecord | null>(null)
 const evacuationResult = ref<AlgorithmRecord | null>(null)
 const overlayEntities = shallowRef<unknown[]>([])
 const sensorEntities = shallowRef<unknown[]>([])
+const routeScreenOverlayPoints = ref<Array<{ x: number; y: number }>>([])
 const evidenceRecords = ref<SuperMapCupEvidence[]>([])
 const primaryS3MLayer = shallowRef<unknown>(null)
 const selectedSensor = ref<SuperMapCupSensor | null>(SUPERMAP_CUP_SENSORS[0] || null)
@@ -357,6 +389,9 @@ const demoTaskStateText = computed(() => {
   return '待运行'
 })
 const latestEvidence = computed(() => evidenceRecords.value[0] || null)
+const routeScreenOverlayPolyline = computed(() =>
+  routeScreenOverlayPoints.value.map(point => `${point.x.toFixed(1)},${point.y.toFixed(1)}`).join(' '),
+)
 
 onMounted(async () => {
   await Promise.allSettled([
@@ -436,8 +471,8 @@ async function openScene() {
     try {
       await withTimeout(
         currentViewer.scene.open(sceneUrl.value, sceneName.value, { autoSetView: true }),
-        8000,
-        'iServer Realspace 场景未快速返回，改用 S3M config 图层加载',
+        30000,
+        'iServer Realspace 场景加载超时，改用 S3M config 图层加载',
       )
       loadedLayers.value.push(activeSceneName.value)
       if (currentViewer.scene.addS3MTilesLayerByScp && layerConfigs.value.length > 1) {
@@ -445,7 +480,7 @@ async function openScene() {
       }
       return
     } catch (error) {
-      sceneMessage.value = error instanceof Error ? error.message : 'iServer Realspace 场景未快速返回，改用 S3M config 图层加载'
+      sceneMessage.value = error instanceof Error ? error.message : 'iServer Realspace 场景加载超时，改用 S3M config 图层加载'
       pushDebugMessage(sceneMessage.value)
     }
   }
@@ -761,6 +796,7 @@ function drawParticleOverlay(result: AlgorithmRecord) {
 function drawEvacuationOverlay(result: AlgorithmRecord) {
   const path = resolveRoutePath(result)
   if (!path.length) throw new Error('疏散规划结果缺少路径点')
+  routeScreenOverlayPoints.value = path.map(mapPointToRouteScreenPoint)
   const candidateRoutes = Array.isArray(result.candidateRoutes)
     ? result.candidateRoutes.map(asRecord).slice(0, 4)
     : []
@@ -778,6 +814,9 @@ function drawEvacuationOverlay(result: AlgorithmRecord) {
   addPolylineEntity(path, '疏散路线', '#52ffb8', {
     altitudeOffset: 145,
   })
+  addRouteCorridorEntities(path, '#52ffb8')
+  addRouteBeaconEntities(path, '#52ffb8')
+  addRouteCenterEntity(path)
   path.forEach((point, index) => {
     addPointEntity(point, `路径节点 ${index + 1}`, '#52ffb8', index === 0 || index === path.length - 1 ? 13 : 10)
   })
@@ -792,6 +831,7 @@ function clearAlgorithmOverlays() {
     overlayEntities.value.forEach(entity => entities.remove(entity))
   }
   overlayEntities.value = []
+  routeScreenOverlayPoints.value = []
   demoTaskState.value = 'idle'
   demoTaskMessage.value = '已清除算法空间图层'
 }
@@ -989,6 +1029,144 @@ function addRouteLabelEntity(points: SuperMapCupMapPoint[], title: string) {
     },
     description: `${title}: ${points.length} 个 ${overlayCoordinateLabel.value}路径点`,
   })
+}
+
+function addRouteBeaconEntities(points: SuperMapCupMapPoint[], color: string) {
+  const beacons: SuperMapCupMapPoint[] = []
+  for (let index = 1; index < points.length; index += 1) {
+    const start = points[index - 1]
+    const end = points[index]
+    const distance = Math.hypot(end.x - start.x, end.y - start.y)
+    const steps = Math.max(2, Math.min(10, Math.ceil(distance / 55)))
+    for (let step = 0; step <= steps; step += 1) {
+      const ratio = step / steps
+      beacons.push({
+        x: start.x + (end.x - start.x) * ratio,
+        y: start.y + (end.y - start.y) * ratio,
+      })
+    }
+  }
+  beacons.forEach((point, index) => {
+    const position = mapPointToSceneCartesian(point, 230 + (index % 3) * 5)
+    if (!position) return
+    addEntity({
+      name: `疏散路线箭头 ${index + 1}`,
+      position,
+      point: {
+        pixelSize: index % 3 === 0 ? 22 : 17,
+        color: colorFromCss(color, 0.98),
+        outlineColor: colorFromCss('#001827', 0.96),
+        outlineWidth: 4,
+        disableDepthTestDistance: Number.POSITIVE_INFINITY,
+      },
+      billboard: {
+        image: markerSvgDataUri(color, index % 2 === 0 ? '>>' : ''),
+        width: index % 2 === 0 ? 48 : 34,
+        height: index % 2 === 0 ? 48 : 34,
+        disableDepthTestDistance: Number.POSITIVE_INFINITY,
+      },
+      label: {
+        text: index % 2 === 0 ? `R${index + 1}` : '',
+        font: '700 15px sans-serif',
+        fillColor: colorFromCss('#ffffff', 0.98),
+        outlineColor: colorFromCss('#001827', 0.96),
+        outlineWidth: 4,
+        disableDepthTestDistance: Number.POSITIVE_INFINITY,
+      },
+      description: `疏散路线箭头: ${describeMapPoint(point, 230)}`,
+    })
+  })
+}
+
+function addRouteCorridorEntities(points: SuperMapCupMapPoint[], color: string) {
+  for (let index = 1; index < points.length; index += 1) {
+    const start = points[index - 1]
+    const end = points[index]
+    const dx = end.x - start.x
+    const dy = end.y - start.y
+    const length = Math.hypot(dx, dy)
+    if (length < 1) continue
+    const halfWidth = 18
+    const nx = -dy / length * halfWidth
+    const ny = dx / length * halfWidth
+    const ring = [
+      { x: start.x + nx, y: start.y + ny },
+      { x: end.x + nx, y: end.y + ny },
+      { x: end.x - nx, y: end.y - ny },
+      { x: start.x - nx, y: start.y - ny },
+      { x: start.x + nx, y: start.y + ny },
+    ]
+    const positions = ring
+      .map(point => mapPointToSceneCartesian(point, 132 + index * 0.3))
+      .filter((item): item is unknown => Boolean(item))
+    addPolygonEntity(
+      positions,
+      `疏散路线高程走廊 ${index}`,
+      color,
+      index % 2 === 0 ? 0.48 : 0.58,
+      `疏散路线高程走廊 ${index}: ${describeMapPoint(start, 132)} -> ${describeMapPoint(end, 132)}`,
+    )
+  }
+}
+
+function addRouteCenterEntity(points: SuperMapCupMapPoint[]) {
+  const center = routeCenter(points)
+  if (!center) return
+  const position = mapPointToSceneCartesian(center, 270)
+  if (!position) return
+  addEntity({
+    name: '疏散路线中心',
+    position,
+    point: {
+      pixelSize: 24,
+      color: colorFromCss('#52ffb8', 0.98),
+      outlineColor: colorFromCss('#001827', 0.96),
+      outlineWidth: 4,
+      disableDepthTestDistance: Number.POSITIVE_INFINITY,
+    },
+    billboard: {
+      image: markerSvgDataUri('#52ffb8', 'R'),
+      width: 58,
+      height: 58,
+      disableDepthTestDistance: Number.POSITIVE_INFINITY,
+    },
+    label: {
+      text: '疏散路线',
+      font: '700 18px sans-serif',
+      fillColor: colorFromCss('#eafff6', 0.98),
+      outlineColor: colorFromCss('#001827', 0.96),
+      outlineWidth: 5,
+      disableDepthTestDistance: Number.POSITIVE_INFINITY,
+    },
+    description: `疏散路线中心: ${describeMapPoint(center, 205)}`,
+  })
+}
+
+function routeCenter(points: SuperMapCupMapPoint[]) {
+  if (!points.length) return null
+  const bounds = points.reduce(
+    (acc, point) => ({
+      minX: Math.min(acc.minX, point.x),
+      maxX: Math.max(acc.maxX, point.x),
+      minY: Math.min(acc.minY, point.y),
+      maxY: Math.max(acc.maxY, point.y),
+    }),
+    { minX: Number.POSITIVE_INFINITY, maxX: Number.NEGATIVE_INFINITY, minY: Number.POSITIVE_INFINITY, maxY: Number.NEGATIVE_INFINITY },
+  )
+  return {
+    x: (bounds.minX + bounds.maxX) / 2,
+    y: (bounds.minY + bounds.maxY) / 2,
+  }
+}
+
+function mapPointToRouteScreenPoint(point: SuperMapCupMapPoint) {
+  const map = SUPERMAP_CUP_SCENARIO.map
+  const normalizedX = clamp(point.x / map.width, 0, 1)
+  const normalizedY = clamp(point.y / map.height, 0, 1)
+  return {
+    x: 110 + normalizedX * 920,
+    y: 76 + normalizedY * 500,
+  }
 }
 
 function addPolygonEntity(positions: unknown[], title: string, color: string, alpha: number, description: string) {
@@ -1509,6 +1687,50 @@ async function flyToPrimaryLayer() {
   width: 100%;
   height: 100%;
   border: 0;
+}
+
+.route-screen-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.route-screen-overlay__halo,
+.route-screen-overlay__line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.route-screen-overlay__halo {
+  stroke: rgba(0, 20, 28, 0.86);
+  stroke-width: 16;
+}
+
+.route-screen-overlay__line {
+  stroke: rgba(82, 255, 184, 0.95);
+  stroke-width: 7;
+  stroke-dasharray: 22 12;
+}
+
+.route-screen-overlay__dot-halo {
+  fill: rgba(0, 20, 28, 0.9);
+}
+
+.route-screen-overlay__dot {
+  fill: #52ffb8;
+  stroke: #ffffff;
+  stroke-width: 2;
+}
+
+.route-screen-overlay__label {
+  fill: #f2fff9;
+  font-size: 18px;
+  font-weight: 700;
+  paint-order: stroke;
+  stroke: rgba(0, 20, 28, 0.95);
+  stroke-width: 5px;
 }
 
 .scene-status-panel {
