@@ -2,6 +2,34 @@
   <section class="supermap-scene-viewer">
     <div v-show="renderMode === 'native'" ref="sceneContainer" class="scene-canvas"></div>
     <svg
+      v-if="diffusionScreenOverlayCells.length"
+      class="diffusion-screen-overlay"
+      viewBox="0 0 1280 720"
+      preserveAspectRatio="none"
+      aria-label="扩散云团屏幕引导层"
+    >
+      <g
+        v-for="(cell, index) in diffusionScreenOverlayCells"
+        :key="`${cell.x.toFixed(1)}-${cell.y.toFixed(1)}-${index}`"
+      >
+        <circle
+          :cx="cell.x"
+          :cy="cell.y"
+          :r="cell.radius"
+          :class="['diffusion-screen-overlay__cell', cell.level]"
+          :style="{ opacity: cell.opacity }"
+        />
+      </g>
+      <text
+        v-if="diffusionScreenOverlayCells.length"
+        :x="diffusionScreenOverlayCells[0].x + 18"
+        :y="diffusionScreenOverlayCells[0].y - 16"
+        class="diffusion-screen-overlay__label"
+      >
+        扩散云团
+      </text>
+    </svg>
+    <svg
       v-if="routeScreenOverlayPoints.length"
       class="route-screen-overlay"
       viewBox="0 0 1280 720"
@@ -312,6 +340,7 @@ const particleResult = ref<AlgorithmRecord | null>(null)
 const evacuationResult = ref<AlgorithmRecord | null>(null)
 const overlayEntities = shallowRef<unknown[]>([])
 const sensorEntities = shallowRef<unknown[]>([])
+const diffusionScreenOverlayCells = ref<Array<{ x: number; y: number; radius: number; opacity: number; level: string }>>([])
 const routeScreenOverlayPoints = ref<Array<{ x: number; y: number }>>([])
 const evidenceRecords = ref<SuperMapCupEvidence[]>([])
 const primaryS3MLayer = shallowRef<unknown>(null)
@@ -577,7 +606,7 @@ function focusScene() {
     setDefaultCamera(runtime)
     return
   }
-  if (primaryS3MLayer.value) void flyToPrimaryLayer()
+  sceneMessage.value = '当前为旧 epsg:0 三维缓存，已保持 iServer Realspace 原生视角；如视角异常请使用“重新加载”恢复模型。'
 }
 
 function focusGeoCenter() {
@@ -689,6 +718,7 @@ function drawDiffusionOverlay(result: AlgorithmRecord) {
   const frame = selectFinalDiffusionFrame(result)
   const cells = Array.isArray(frame.cells) ? frame.cells.map(asRecord).filter(cell => Number(cell.concentration) > 0) : []
   const peak = Math.max(...cells.map(cell => Number(cell.concentration || 0)), 1)
+  diffusionScreenOverlayCells.value = buildDiffusionScreenOverlay(cells, peak)
   addPointEntity(SUPERMAP_CUP_SCENARIO.sourceMapPoint, '泄漏源', '#ff6b4a', 18)
   const cellLimit = shouldApplyLayerPosition.value ? GLOBE_DIFFUSION_CELL_LIMIT : NATIVE_DIFFUSION_CELL_LIMIT
   const ellipseLimit = shouldApplyLayerPosition.value ? GLOBE_DIFFUSION_ELLIPSE_LIMIT : NATIVE_DIFFUSION_CELL_LIMIT
@@ -831,6 +861,7 @@ function clearAlgorithmOverlays() {
     overlayEntities.value.forEach(entity => entities.remove(entity))
   }
   overlayEntities.value = []
+  diffusionScreenOverlayCells.value = []
   routeScreenOverlayPoints.value = []
   demoTaskState.value = 'idle'
   demoTaskMessage.value = '已清除算法空间图层'
@@ -1167,6 +1198,27 @@ function mapPointToRouteScreenPoint(point: SuperMapCupMapPoint) {
     x: 110 + normalizedX * 920,
     y: 76 + normalizedY * 500,
   }
+}
+
+function buildDiffusionScreenOverlay(cells: AlgorithmRecord[], peak: number) {
+  return cells
+    .slice()
+    .sort((left, right) => Number(right.concentration || 0) - Number(left.concentration || 0))
+    .slice(0, 60)
+    .map((cell) => {
+      const point = toMapPoint(cell)
+      if (!point) return null
+      const screen = mapPointToRouteScreenPoint(point)
+      const ratio = clamp(Number(cell.concentration || 0) / Math.max(peak, 1), 0, 1)
+      return {
+        x: screen.x,
+        y: screen.y,
+        radius: 18 + ratio * 38,
+        opacity: 0.22 + ratio * 0.42,
+        level: ratio > 0.65 ? 'high' : ratio > 0.35 ? 'medium' : 'low',
+      }
+    })
+    .filter((item): item is { x: number; y: number; radius: number; opacity: number; level: string } => Boolean(item))
 }
 
 function addPolygonEntity(positions: unknown[], title: string, color: string, alpha: number, description: string) {
@@ -1687,6 +1739,40 @@ async function flyToPrimaryLayer() {
   width: 100%;
   height: 100%;
   border: 0;
+}
+
+.diffusion-screen-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.diffusion-screen-overlay__cell {
+  stroke: rgba(255, 255, 255, 0.32);
+  stroke-width: 2;
+}
+
+.diffusion-screen-overlay__cell.high {
+  fill: #ff3b30;
+}
+
+.diffusion-screen-overlay__cell.medium {
+  fill: #ffb020;
+}
+
+.diffusion-screen-overlay__cell.low {
+  fill: #35d2ff;
+}
+
+.diffusion-screen-overlay__label {
+  fill: #fff7ed;
+  font-size: 19px;
+  font-weight: 800;
+  paint-order: stroke;
+  stroke: rgba(30, 9, 0, 0.94);
+  stroke-width: 5px;
 }
 
 .route-screen-overlay {
