@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 登录页品牌头部渐变：主色蓝 → 深蓝，135° -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:startColor="#0066CC"
+        android:centerColor="#0055B8"
+        android:endColor="#003D80"
+        android:angle="135" />
+</shape>

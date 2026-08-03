@@ -1,0 +1,171 @@
+<resources>
+    <string name="app_name">化工园区应急</string>
+    <string name="app_subtitle">巡检 · 事故处置 · 任务指派</string>
+
+    <!-- 登录 -->
+    <string name="hint_username">用户名</string>
+    <string name="hint_password">密码</string>
+    <string name="btn_login">登录</string>
+    <string name="login_loading">登录中…</string>
+    <string name="login_empty">请输入用户名和密码</string>
+    <string name="login_fail">登录失败：%1$s</string>
+
+    <!-- 底部导航 -->
+    <string name="nav_home">首页</string>
+    <string name="nav_incident">事故告警</string>
+    <string name="nav_map">地图协同</string>
+    <string name="nav_mine">个人待办</string>
+
+    <!-- 地图 -->
+    <string name="map_loading">正在加载园区地图…</string>
+    <string name="map_load_fail">地图服务不可达，请检查网络后重试</string>
+    <string name="map_load_timeout">地图加载超时，请检查网络或 iServer 服务状态后重试</string>
+    <string name="map_overlay_task_fail">任务点位加载失败，仅显示底图</string>
+    <string name="btn_retry">重试</string>
+    <string name="license_invalid">SuperMap 许可未激活，地图功能不可用</string>
+
+    <!-- 通用 -->
+    <string name="btn_confirm">确定</string>
+    <string name="btn_cancel">取消</string>
+    <string name="loading">加载中…</string>
+    <string name="network_error">网络异常：%1$s</string>
+    <string name="empty_list">暂无数据</string>
+    <string name="session_expired">登录凭证已过期，请重新登录</string>
+    <string name="dashboard_load_fail">数据加载异常：%1$s</string>
+
+    <!-- 个人中心 & 我的待办 -->
+    <string name="my_task_title">个人中心 &amp; 我的待办</string>
+    <string name="my_task_section">我的指派与待办任务</string>
+    <string name="my_task_empty">暂无我的待办任务</string>
+    <string name="my_task_load_fail">加载我的任务失败：%1$s</string>
+    <string name="filter_all">全部</string>
+    <string name="filter_active">进行中</string>
+    <string name="filter_review">待验收</string>
+    <string name="filter_done">已完成</string>
+    <string name="default_username">应急处置员</string>
+    <string name="default_user_role">现场应急人员 / 管理员</string>
+    <string name="default_car_info">巡检车 #1 代班挂载 | 权限：全部</string>
+    <string name="role_admin">系统管理员 Admin</string>
+    <string name="role_field_worker">现场处置人员</string>
+    <string name="credential_valid">凭证有效 | 已绑定现场处置权限</string>
+    <string name="not_logged_in">未登录</string>
+    <string name="logout_confirm_title">退出登录确认</string>
+    <string name="logout_confirm_message">确定要退出当前账号并清除登录凭证吗？</string>
+    <string name="btn_confirm_logout">确定退出</string>
+    <string name="logout_success">已退出登录</string>
+    <string name="btn_logout">退出当前账号 🚪</string>
+
+    <!-- 事故列表 -->
+    <string name="incident_title">事故告警</string>
+    <string name="incident_empty">暂无事故告警记录</string>
+    <string name="incident_load_fail">事故列表加载失败：%1$s</string>
+    <string name="btn_create_task">创建处置任务</string>
+
+    <!-- 任务创建 -->
+    <string name="task_create_title">新建处置任务</string>
+    <string name="hint_task_title">任务标题</string>
+    <string name="hint_task_desc">任务描述（选填）</string>
+    <string name="label_assignee_type">指派对象</string>
+    <string name="assignee_car">巡检小车</string>
+    <string name="assignee_employee">工作人员</string>
+    <string name="label_select_car">选择巡检车</string>
+    <string name="label_select_employee">选择工作人员</string>
+    <string name="btn_submit_task">提交任务</string>
+    <string name="task_create_fail">创建失败：%1$s</string>
+    <string name="task_create_success">任务已创建</string>
+    <string name="task_title_empty">请填写任务标题</string>
+    <string name="assignee_empty">请选择指派对象</string>
+
+    <!-- 任务详情 -->
+    <string name="task_detail_title">任务详情</string>
+    <string name="label_status">状态</string>
+    <string name="label_gas_type">气体类型</string>
+    <string name="label_area">区域</string>
+    <string name="label_assignee">指派给</string>
+    <string name="label_checkin">打卡信息</string>
+    <string name="label_review">验收结果</string>
+    <string name="btn_accept">接单</string>
+    <string name="btn_checkin">现场打卡</string>
+    <string name="btn_review_pass">验收通过</string>
+    <string name="btn_review_reject">驳回重做</string>
+    <string name="btn_cancel_task">取消任务</string>
+    <string name="task_action_fail">操作失败：%1$s</string>
+    <string name="task_status_changed">任务状态已变更，请刷新</string>
+
+    <!-- 任务状态标签 -->
+    <string name="task_status_unknown">未知</string>
+    <string name="task_status_pending">待指派</string>
+    <string name="task_status_assigned">已指派</string>
+    <string name="task_status_processing">处置中</string>
+    <string name="task_status_pending_review">待验收</string>
+    <string name="task_status_completed">已完成</string>
+    <string name="task_status_canceled">已取消</string>
+    <string name="task_fallback_title">应急处置任务 #%1$d</string>
+    <string name="task_fallback_area">园区现场</string>
+    <string name="task_location_not_ready">任务位置尚未加载，请稍后重试</string>
+    <string name="assignee_unassigned">未指派</string>
+    <string name="assignee_car_detail">巡检车 #%1$d</string>
+    <string name="assignee_employee_detail">工作人员 #%1$d</string>
+    <string name="checkin_none">未打卡</string>
+    <string name="checkin_yolo_unavailable">（算法未识别）</string>
+    <string name="checkin_yolo_count">，YOLO 识别 %1$d 人</string>
+    <string name="checkin_remark_suffix">：%1$s</string>
+    <string name="review_none">未验收</string>
+    <string name="review_remark_suffix">：%1$s</string>
+
+    <!-- 现场打卡 -->
+    <string name="checkin_title">现场打卡</string>
+    <string name="checkin_locating">正在定位…</string>
+    <string name="checkin_location_ok">已定位：纬度 %1$.6f，经度 %2$.6f</string>
+    <string name="checkin_location_fail">定位失败：%1$s</string>
+    <string name="checkin_no_location">请先获取定位</string>
+    <string name="checkin_no_photo">请先拍摄现场照片</string>
+    <string name="checkin_photo">现场照片</string>
+    <string name="btn_locate">获取定位</string>
+    <string name="btn_take_photo">拍摄现场照片</string>
+    <string name="hint_remark">备注（选填）</string>
+    <string name="btn_submit_checkin">提交打卡</string>
+    <string name="btn_retry_checkin">重试提交</string>
+    <string name="checkin_submitting">正在提交打卡…</string>
+    <string name="checkin_compressing">正在处理照片…</string>
+    <string name="checkin_success">打卡成功，等待验收</string>
+    <string name="checkin_fail">打卡失败：%1$s</string>
+    <string name="checkin_permission_rationale">需要定位与相机权限才能完成现场打卡</string>
+    <string name="checkin_camera_fail">无法启动相机</string>
+
+    <!-- 气体危险度分级 -->
+    <string name="gas_level_extreme">剧毒</string>
+    <string name="gas_level_high">易燃易爆</string>
+    <string name="gas_level_medium">有害</string>
+    <string name="gas_level_low">一般</string>
+    <string name="gas_level_label">危险等级</string>
+
+    <!-- 事故耗时与超时 -->
+    <string name="incident_elapsed_label">已持续</string>
+    <string name="incident_elapsed_minutes">%1$d 分钟</string>
+    <string name="incident_elapsed_hours">%1$d 小时 %2$d 分</string>
+    <string name="incident_elapsed_days">%1$d 天 %2$d 小时</string>
+    <string name="incident_timeout_warning">⚠ 已持续 %1$s，请尽快处置</string>
+
+    <!-- 任务进度时间线 -->
+    <string name="timeline_created">创建</string>
+    <string name="timeline_assigned">指派</string>
+    <string name="timeline_accepted">接单</string>
+    <string name="timeline_checkin">打卡</string>
+    <string name="timeline_review">验收</string>
+    <string name="timeline_stage_duration">%1$s → %2$s（耗时 %3$s）</string>
+    <string name="timeline_pending">待执行</string>
+    <string name="timeline_skipped">—</string>
+
+    <!-- 打卡距离校验 -->
+    <string name="checkin_distance_ok">距任务点 %1$.0f 米，在有效范围内</string>
+    <string name="checkin_distance_warn">距任务点 %1$.0f 米，超出建议范围（%2$d 米）</string>
+    <string name="checkin_distance_far">距任务点 %1$.0f 米，距离过远，请靠近现场</string>
+    <string name="checkin_distance_unknown">任务点未设置，跳过距离校验</string>
+
+    <!-- 任务超时预警 -->
+    <string name="task_processing_timeout">处置已超 %1$s，请关注进度</string>
+
+    <!-- 事故统计 -->
+    <string name="incident_stats_format">%1$d 起告警 · %2$d 高危</string>
+</resources>

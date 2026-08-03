@@ -1,0 +1,9 @@
+// 顶层 build.gradle —— AGP 8.5.2 + Gradle 8.14.3
+// 仓库声明已移至 settings.gradle 的 dependencyResolutionManagement
+plugins {
+    id 'com.android.application' version '8.5.2' apply false
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

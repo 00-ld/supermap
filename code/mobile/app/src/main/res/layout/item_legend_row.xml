@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  图例行（苹果风格 · 2026-07-22 改造）
+  色块 + 文字标签，用于底部图例面板。
+  危险/处置中色从大红色 #D32F2F 改为玫红橙 #D70036（降饱和），
+  文字色统一苹果深灰 #1D1D1F。
+-->
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TableRow>
+        <View
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="#FF9800"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="建筑底面"
+            android:textColor="@color/textPrimary"
+            android:textSize="12sp" />
+    </TableRow>
+
+    <TableRow android:layout_marginTop="4dp">
+        <View
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="#FFCA28"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="建筑设施"
+            android:textColor="@color/textPrimary"
+            android:textSize="12sp" />
+    </TableRow>
+
+    <TableRow android:layout_marginTop="4dp">
+        <View
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="#DCDCDC"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="道路"
+            android:textColor="@color/textPrimary"
+            android:textSize="12sp" />
+    </TableRow>
+
+    <TableRow android:layout_marginTop="4dp">
+        <View
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="#9C27B0"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="三维对象底面"
+            android:textColor="@color/textPrimary"
+            android:textSize="12sp" />
+    </TableRow>
+
+    <TableRow android:layout_marginTop="4dp">
+        <View
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="#2196F3"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="出入口"
+            android:textColor="@color/textPrimary"
+            android:textSize="12sp" />
+    </TableRow>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp" />
+
+    <TableRow>
+        <View
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="#D70036"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="任务点(处置中)"
+            android:textColor="@color/textPrimary"
+            android:textSize="12sp" />
+    </TableRow>
+
+    <TableRow android:layout_marginTop="4dp">
+        <View
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="#0071E3"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="任务点(待指派)"
+            android:textColor="@color/textPrimary"
+            android:textSize="12sp" />
+    </TableRow>
+
+    <TableRow android:layout_marginTop="4dp">
+        <View
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="#34C759"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="巡检车(正常)"
+            android:textColor="@color/textPrimary"
+            android:textSize="12sp" />
+    </TableRow>
+
+    <TableRow android:layout_marginTop="4dp">
+        <View
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="#D70036"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="巡检车(告警)"
+            android:textColor="@color/textPrimary"
+            android:textSize="12sp" />
+    </TableRow>
+
+</TableLayout>

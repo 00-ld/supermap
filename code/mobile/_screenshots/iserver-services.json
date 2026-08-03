@@ -1,0 +1,950 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD xhtml 1.0 strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8"/>
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <title>SuperMap iServer Services</title>
+    <script language="JavaScript" type="text/javascript" src="http://8.130.175.232:18090/iserver/services/../manager/static/startupstatic/js/jquery-3.7.1.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="http://8.130.175.232:18090/iserver/services/../manager/static/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://8.130.175.232:18090/iserver/services/../manager/static/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="http://8.130.175.232:18090/iserver/services/../manager/static/js/jquery.browser.js" ></script>
+    <script type="text/javascript" src="http://8.130.175.232:18090/iserver/services/../manager/static/js/jquery.pagination.js"></script>
+    <script type="text/javascript" src="http://8.130.175.232:18090/iserver/services/../manager/static/js/jquery.dataTables.iserver.min.js"></script>
+    <script type="text/javascript" src="http://8.130.175.232:18090/iserver/services/../manager/static/js/resource_en_US.js"></script>
+    <link rel="stylesheet" media="screen" type="text/css" href="http://8.130.175.232:18090/iserver/services/../manager/static/css/iserver/iServerListPage.css" />
+    <link rel="stylesheet" media="screen" type="text/css" href="http://8.130.175.232:18090/iserver/services/../manager/static/css/iserver/indexTopBottom.css" />
+    <script>
+var Sys = {};
+var ua = navigator.userAgent.toLowerCase();
+var ieResult = ua.match(/msie ([\d.]+)/i);
+var ffResult = ua.match(/firefox\/([\d.]+)/i);
+var chromeResult = ua.match(/chrome\/([\d.]+)/i);
+var operaResult = ua.match(/opera.([\d.]+)/i);
+var safariResult = ua.match(/version\/([\d.]+)/i);
+setBrowser();
+function setBrowser() {
+    if(window.ActiveXObject && ieResult){
+        Sys.ie = ieResult[1]
+    }else if(document.getBoxObjectFor && ffResult){
+        Sys.firefox = ffResult[1]
+    }else if(window.MessageEvent && !document.getBoxObjectFor && chromeResult){
+        Sys.chrome = chromeResult[1]
+    }else if(window.opera && operaResult){
+        Sys.opera = operaResult[1]
+    }else if(window.openDatabase && safariResult){
+        Sys.safari = safariResult[1]
+    }
+}
+function correctPNG() {
+    for (var i = 0; i < document.images.length; i++) {
+        var img = document.images[i];
+        var imgName = img.src.toUpperCase();
+        if (imgName.substring(imgName.length - 3, imgName.length) === 'PNG') {
+            var imgID = (img.id) ? "id='" + img.id + "'" : "";
+            var imgClass = (img.className) ? "class='" + img.className + "'" : "";
+            var imgTitle = (img.title) ? "title='" + img.title + "'" : "title='" + img.alt + "'";
+            var imgStyle = "display:inline-block;" + img.style.cssText;
+            if (img.align === 'left') {
+                imgStyle = "float:left;" + imgStyle;
+            }
+            else if (img.align === 'right') {
+                imgStyle = "float:right;" + imgStyle;
+            }
+            if (img.parentElement.href) {
+                imgStyle = "cursor:hand;" + imgStyle;
+            }
+            var strNewHTML = "<span " + imgID + imgClass + imgTitle + "style=\"" + "width:" + img.width + "px; height:" + img.height + "px;"
+                + imgStyle + ";" + "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader" + "(src=\'" + img.src + "\', sizingMethod='scale');\"</span>";
+            img.outerHTML = strNewHTML;
+            i = i - 1; //tricks NOSONAR
+        }
+    }
+};
+
+function getUrlParam(name) {
+    //获取URL指定名字的查询字符串值
+    var reg = new RegExp("[?&]" + name + "=([^?&]*)[&]?", "i");
+    var match;
+    match = location.search.match(reg);
+    return match == null ? "" : match[1];
+};
+
+if (Sys.ie && Sys.ie < 7.0) {
+    window.attachEvent("onload", correctPNG);
+}
+//设置语言...开始
+function setCookie(c_name, value, expiredays) {
+    var exdate = new Date();
+    exdate.setDate(exdate.getDate() + expiredays);
+    var protocol = window.location.protocol;
+    var secure ="";
+    if(protocol === "https:"){
+        secure = ";secure=true";
+    }
+    var cookieVal = c_name + "=" + escape(value) + ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString()) + ";path=/" + secure;
+    document.cookie = cookieVal;
+};
+function delCookie(name) {
+    var date = new Date();
+    date.setTime(date.getTime() - 10000);
+    document.cookie = name + "=a;expires=" + date.toGMTString() + ";path=/";
+}
+function selectLanguage(language) {
+    delCookie("language");
+    setCookie("language", language, 3600 * 24 * 31);
+    window.location.reload();
+};
+function pareWidth() {
+    var instances = $(".serverList ul li.subServiceList a");
+    var menuWidth = $(".topWrapper").width();
+    var componentCount = 43;
+    var interfaceCount = 13;
+    if (menuWidth < 1600 && menuWidth > 1440) {
+        componentCount = 33;
+    } else if (menuWidth < 1440) {
+        componentCount = 24;
+    }
+    for (var i = 0; i < instances.length; i++) {
+        var instanceName = $(instances[i]).attr('title');
+        if (!instanceName || instanceName.length < componentCount + interfaceCount + 1) {
+            continue;
+        }
+        var componentName = instanceName.split("/")[0];
+        var interfaceName = instanceName.split("/")[1];
+        if (componentName.length > componentCount && interfaceName.length > interfaceCount) {
+            componentName = componentName.substring(0, componentCount - 3) + "...";
+            interfaceName = interfaceName.substring(0, interfaceCount - 3) + "...";
+        } else if (componentName.length > componentCount && interfaceName.length <= interfaceCount) {
+            componentName = componentName.substring(0, componentCount + (interfaceCount - interfaceName.length) - 3) + "...";
+        } else if (componentName.length <= componentCount && interfaceName.length > interfaceCount) {
+            interfaceName = interfaceName.substring(0, interfaceCount + (componentCount - componentName.length) - 3) + "...";
+        }
+        $(instances[i]).text(componentName + "/" + interfaceName);
+    }
+}    </script>
+    <script>
+			
+$(document).ready(function(){
+	var bindurl = 'http://8.130.175.232:18090/iserver/servicesservices/security/logout';
+	$("#logout").on("click",function(){
+		$.ajax({
+			type:"GET",
+			url:bindurl
+		});
+	});
+})    </script>
+    <style type="text/css">
+        html,body {
+            height:100%;
+        }
+        .tooltip.right .tooltip-arrow {
+            top: 50%;
+            left: 0;
+            margin-top: -5px;
+            border-width: 5px 5px 5px 0;
+            border-right-color: #ffffff;
+        }
+        #pageContentContainer {
+            min-height:100%;
+            position:relative;
+            border-right-width: 0px;
+        }
+        .menuComponent{
+            padding-left:21px;
+            padding-top: 12px;
+            padding-bottom: 10px;
+            text-decoration: none;
+            font-weight: normal;
+            line-height: 24px;
+            min-height: 48px;
+            font-size: 16px;
+            border:2px solid transparent;
+        }
+        .menuComponent:hover{
+            color:rgba(0,0,0,0.85);
+            background-color:rgba(0,0,0,0.04);
+            cursor: pointer;
+        }
+        td{
+            padding-left: 16px;
+            font-size: 14px;
+            margin-left: 0px;
+            color: #242424;
+            text-decoration: none;
+            font-weight: normal;
+            line-height: 22px;
+            height:48px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body id="listServiceBody" onload="pareWidth()" onresize="pareWidth()" class="light" style="min-width:900px">
+    <!--headline begin-->
+<div class="headclass">
+            <svg class="headlogo_white iServerLogo" width="110px" height="48px">
+        </svg>
+    <div class="headMenus">
+        <ul class="nav-main">
+            <li class="subHeadMenu home"><a href="http://8.130.175.232:18090/iserver/services/../">Home</a></li>
+            <li class="subHeadMenu services"><a href="services">Services</a></li>
+            <li class="subHeadMenu manager" id="servicesManageTop"><a href="admin-ui/home">Manager</a></li>
+            <li class="subHeadMenu sample dropdown">
+                <div class="btn-group samplecode" id="samplecode">
+                    <a  class="btn btnSample"
+                        data-toggle="dropdown">Sample Code
+                        <svg class="closesvg openclose" width="10px" height="10px"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 1024 1024">
+                            <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"/>
+                        </svg>
+                        <svg class="opensvg openclose" hidden width="10px" height="10px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 1024 1024">
+                            <path d="M890.5 755.3L537.9 269.2c-12.8-17.6-39-17.6-51.7 0L133.5 755.3A8 8 0 0 0 140 768h75c5.1 0 9.9-2.5 12.9-6.6L512 369.8l284.1 391.6c3 4.1 7.8 6.6 12.9 6.6h75c6.5 0 10.3-7.4 6.5-12.7z"/>
+                        </svg>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" style="margin-left: 0px;margin-top: 0px;">
+                        <li class="subboxlist01"><a class="subboxlist01A" href="./help/html/zh/GettingStarted/iServer_iClient_Start/Android/Android_getingstart.htm">for Android</a></li>
+                        <li class="subboxlist01"><a class="subboxlist01A" href="iClient/forJavaScript/examples/leaflet/examples.html">for Leaflet</a></li>
+                        <li class="subboxlist01"><a class="subboxlist01A" href="iClient/forJavaScript/examples/openlayers/examples.html">for OpenLayers</a></li>
+                        <li class="subboxlist01"><a class="subboxlist01A" href="iClient/forJavaScript/examples/mapboxgl/examples.html">for MapboxGL</a></li>
+                        <li class="subboxlist04"><a class="subboxlist04A" href="iClient/for3D/webgl/zh/examples/webgl/examples.html">3D for WebGL</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="subHeadMenu help"><a href="help">Help</a></li>
+            <li class="subHeadMenu new"><a href="help/index.htm#iS/what_s_new.htm">What's New</a></li>
+            <li class="subHeadMenu more">
+                <div class="btn-group">
+                    <a  class="btn btnSample"
+                        data-toggle="dropdown">More
+                    </a>
+                    <ul class="dropdown-menu" role="menu" style="margin-left: 0px;margin-top: 0px;">
+                        <li class="subboxhelp"><a href="help">Help</a></li>
+                        <li class="subboxnew"><a href="help/index.htm#iS/what_s_new.htm">What's New</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="head_right">
+        <div class="btn-group language" id="language">
+            <a  class="btn btnSample"
+                data-toggle="dropdown">English
+                <svg class="closesvg openclose" width="10px" height="10px"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 1024 1024">
+                    <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"/>
+                </svg>
+                <svg class="opensvg openclose" hidden width="10px" height="10px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 1024 1024">
+                    <path d="M890.5 755.3L537.9 269.2c-12.8-17.6-39-17.6-51.7 0L133.5 755.3A8 8 0 0 0 140 768h75c5.1 0 9.9-2.5 12.9-6.6L512 369.8l284.1 391.6c3 4.1 7.8 6.6 12.9 6.6h75c6.5 0 10.3-7.4 6.5-12.7z"/>
+                </svg>
+            </a>
+            <ul class="dropdown-menu" role="menu" style="margin-left: 0px;margin-top: 0px;">
+                <li id="dropdown-menuli" onclick="selectLanguage('en-US')"><a>English</a></li>
+                <li id="dropdown-menuli" onclick="selectLanguage('zh-CN')"><a>中文</a></li>
+            </ul>
+        </div>
+        <div class="btn-group theme" id="theme">
+            <a  class="btn btnSample" data-toggle="dropdown">
+                <svg class="themesvg" width="20px" height="20px" viewBox="0 0 24 24" fill="currentColor" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <path d="M7.60656642,2 C8.34176798,2.00287778 9.01323229,2.42702384 9.34446922,3.09778674 C9.89738584,3.94158501 10.8908358,4.46394755 11.9489004,4.46394755 C13.0581951,4.46394755 14.0384914,3.94252833 14.5717928,3.06995885 C14.9814034,2.39006214 15.631242,2 16.3551566,2 L17.1607626,2 C17.7411842,2.00351775 18.2931835,2.25726885 18.6808218,2.69876307 L21.872323,6.24210266 C22.2665349,6.66008142 22.4848225,7.21925501 22.480459,7.7997571 C22.4813269,8.38279459 22.2670739,8.9447476 21.8803999,9.37344795 L20.0095755,11.4487483 C19.62558,11.8744207 19.1160475,12.1090712 18.5744384,12.1090712 L18.5176699,12.1090712 L18.5176699,20.2923579 C18.5176699,21.2340255 17.797909,22 16.9133809,22 L7.04834216,22 C6.16381402,22 5.44405319,21.2340255 5.44405319,20.2923579 L5.44405319,12.1090712 L5.38728462,12.1090712 C4.86136768,12.1090712 4.32483548,11.8626293 3.95214752,11.4487483 L2.08870772,9.38146615 C1.69475517,8.96379375 1.47648603,8.4050906 1.48057973,7.82499086 C1.47964578,7.241872 1.69390269,6.67982433 2.08063089,6.25106418 L5.30028563,2.71244119 C5.68566575,2.23983869 6.22635175,2 6.90872841,2 Z M17.1612242,3.69726556 L16.3306463,3.69778051 C16.2632647,3.7013852 16.124217,3.73022274 15.9856994,3.96092304 C15.565586,4.64302793 14.9823545,5.19685973 14.29095,5.57234662 C13.5873428,5.95816383 12.7773522,6.1619206 11.9489004,6.1619206 C11.1301324,6.16278127 10.3240698,5.95504089 9.60362004,5.55748936 C8.92318295,5.18350752 8.34528503,4.64125332 7.92271657,3.98026106 C7.89958134,3.9431516 7.88100008,3.90840422 7.86479417,3.87248694 C7.8178532,3.76876575 7.71720961,3.70141799 7.60541258,3.69891636 L6.90826687,3.69891636 C6.67011581,3.69891636 6.60827037,3.76093955 6.57780919,3.79867228 L6.55473254,3.83050927 L6.52750208,3.85880882 L3.30230895,7.40332756 C3.09669596,7.63278975 3.08861913,7.99856144 3.28500146,8.20278986 L3.30323201,8.22259955 L5.17474864,10.2978999 C5.24444013,10.3750162 5.34228514,10.4108623 5.38774615,10.4108623 C5.43320716,10.4108623 5.52920604,10.3761954 5.60005137,10.2990791 C5.76128366,10.1239746 5.98599879,10.0245071 6.22127489,10.0241018 C6.71092372,10.0260515 7.10667359,10.4325938 7.1060338,10.932989 L7.1060338,20.3003761 L16.8570739,20.3003761 L16.8570739,10.932989 C16.8564341,10.4325938 17.2521839,10.0260515 17.7418328,10.0241018 C17.9770225,10.0243708 18.2016888,10.1237684 18.3628255,10.2988433 C18.4339016,10.3761954 18.5292082,10.4108623 18.5753615,10.4108623 C18.603515,10.4108623 18.6863602,10.4108623 18.7881283,10.2981358 L20.6573372,8.22165623 C20.8650271,7.99242987 20.8733347,7.62571486 20.6757985,7.42054312 L20.6573372,7.4004976 L17.4496823,3.8394708 C17.3777035,3.75229147 17.2727942,3.7005729 17.1612242,3.69726556 Z M12.1189753,10.3719504 C12.2420508,10.3719504 12.3035885,10.4348383 12.3035885,10.5606141 L12.3035885,14.1923898 C12.3035885,14.3181656 12.2420508,14.3810535 12.1189753,14.3810535 L9.34977685,14.3810535 C9.22670136,14.3810535 9.16516362,14.3181656 9.16516362,14.1923898 L9.16516362,10.5606141 C9.16516362,10.4348383 9.22670136,10.3719504 9.34977685,10.3719504 L12.1189753,10.3719504 Z" id="形状结合"></path>
+                </svg>
+                <svg class="closesvg openclose" width="10px" height="10px"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 1024 1024">
+                    <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"/>
+                </svg>
+                <svg class="opensvg openclose" hidden width="10px" height="10px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 1024 1024">
+                    <path d="M890.5 755.3L537.9 269.2c-12.8-17.6-39-17.6-51.7 0L133.5 755.3A8 8 0 0 0 140 768h75c5.1 0 9.9-2.5 12.9-6.6L512 369.8l284.1 391.6c3 4.1 7.8 6.6 12.9 6.6h75c6.5 0 10.3-7.4 6.5-12.7z"/>
+                </svg>
+            </a>
+            <ul class="dropdown-menu" role="menu" style="margin-left: 0px;margin-top: 0px;">
+                <li id="dropdown-menuli" onclick="selectTheme('dark')"><a>Dark Theme</a></li>
+                <li id="dropdown-menuli" onclick="selectTheme('light')"><a>Light Theme</a></li>
+            </ul>
+        </div>
+            <div class="divider" style="margin-bottom: 4px"></div>
+            <a href="http://8.130.175.232:18090/iserver/services/../services/security/login"><button class="btn-login" >Login</button></a>
+        <div style="float:right;height: 72px;width:24px;display:inline-block"></div>
+        <div class="sidemenuIcon" style="float: right">
+            <div class="divider"></div>
+            <div class="nav-btn" style="display:inline-block">
+                <a href="#" class="mobile-nav-taggle" id="mobile-nav-taggle">
+                    <svg class="menu-svg" width="24px" height="24px" viewBox="0 0 18 18" fill="currentColor"  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path d="M0.18375,7.56178977 C0.0816639937,7.56390152 0,7.65009449 0,7.75568182 L0,9.30681818 C0,9.41240551 0.0816639937,9.49859848 0.18375,9.50071023 L18.19125,9.50071023 C18.293336,9.49859848 18.375,9.41240551 18.375,9.30681818 L18.375,7.75568182 C18.375,7.65009449 18.293336,7.56390152 18.19125,7.56178977 L0.18375,7.56178977 Z M0.18375,15.1235795 C0.0816639937,15.1256913 0,15.2118843 0,15.3174716 L0,16.868608 C0,16.9741953 0.0816639937,17.0603883 0.18375,17.0625 L18.19125,17.0625 C18.293336,17.0603883 18.375,16.9741953 18.375,16.868608 L18.375,15.3174716 C18.375,15.2118843 18.293336,15.1256913 18.19125,15.1235795 L0.18375,15.1235795 Z M0.18375,0 C0.0816639937,0.0021117445 0,0.088304717 0,0.193892045 L0,1.74502841 C0,1.85061574 0.0816639937,1.93680871 0.18375,1.93892045 L18.19125,1.93892045 C18.293336,1.93680871 18.375,1.85061574 18.375,1.74502841 L18.375,0.193892045 C18.375,0.088304717 18.293336,0.0021117445 18.19125,0 L0.18375,0 Z"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+    <!--headline end-->
+    <div id="pageContentContainer">
+    <!--ContentBegin-->
+    <div class="content">
+        <div class="searchCon" style="height:136px">
+            <div class="search">
+                <input type="text" id="keywords" class="keywordsInput" placeholder="search service">
+                </input>
+                <svg onclick="search()" class="searchsvg" style='cursor: pointer;width:24px;height:24px;margin-left:-36px;vertical-align:middle' xmlns="http://www.w3.org/2000/svg" fill="#8e8e8e" viewBox="0 0 24 24">
+                    <path d="M22.0185,19.896 L17.64,15.5175 C20.4809189,11.8353861 19.9454972,6.57432575 16.4210438,3.54002007 C12.8965904,0.505714386 7.61438648,0.758209595 4.39542779,4.11485786 C1.17646909,7.47150612 1.14531109,12.7596496 4.32449261,16.153996 C7.50367412,19.5483424 12.782536,19.863064 16.3425,16.8705 L20.6925,21.2205 C20.7276766,21.2557656 20.7754398,21.2755852 20.82525,21.2755852 C20.8750602,21.2755852 20.9228234,21.2557656 20.958,21.2205 L22.0185,20.16 C22.09095,20.0869119 22.09095,19.9690881 22.0185,19.896 Z M10.734,17.0385289 C7.46856295,17.0385289 4.65786188,14.7318225 4.0208941,11.5291126 C3.38392631,8.32640259 5.09810777,5.11975799 8.11506186,3.87033125 C11.1320159,2.62090451 14.6114241,3.67670108 16.4253144,6.39200609 C18.2392046,9.10731109 17.8823503,12.725825 15.573,15.0345 C14.2924983,16.3221419 12.549951,17.0437919 10.734,17.0385289 L10.734,17.0385289 Z" id="形状"></path>
+                </svg>
+                <span id="searchErrMsg"></span>
+            </div>
+        </div>
+        <div class="con">
+            <div class="conLeftComponentTypes">
+                <ul>
+                    <li id="allComponent" class="menuComponent" onClick="setComponentType('')">
+                        <svg class="allIcon" data-toggle='tooltip' title="All Services" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                            <path d="M5.54056192,0 L1.31317831,0 C0.588303882,0.00107098838 0.00105054265,0.59975349 0,1.33873547 L0,5.64839269 C0.00105054265,6.38737467 0.588303882,6.98712816 1.31317831,6.98712816 L5.54056192,6.98712816 C6.26543635,6.98712816 6.85374023,6.38737467 6.85374023,5.64839269 L6.85374023,1.33873547 C6.85374023,0.59975349 6.26543635,0.00107098838 5.54056192,0 Z M5.54056192,5.64839269 L1.31317831,5.64839269 L1.31317831,1.33873547 L5.54056192,1.33873547 L5.54056192,5.64839269 Z M13.9868217,0 L9.76048862,0 C9.0356142,0.00107098838 8.44731031,0.59975349 8.44731031,1.33873547 L8.44731031,5.64839269 C8.44731031,6.38737467 9.0356142,6.98712816 9.76048862,6.98712816 L13.9868217,6.98712816 C14.7116961,6.98712816 15.3,6.38737467 15.3,5.64839269 L15.3,1.33873547 C15.3,0.59975349 14.7116961,0.00107098838 13.9868217,0 Z M13.9868217,5.64839269 L9.76048862,5.64839269 L9.76048862,1.33873547 L13.9868217,1.33873547 L13.9868217,5.64839269 Z M1.31317831,8.31287184 C0.588303882,8.31394283 0.00105054265,8.91262533 0,9.65160731 L0,13.9612645 C0.00105054265,14.7002465 0.588303882,15.3 1.31317831,15.3 L5.54056192,15.3 C6.26543635,15.3 6.85374023,14.7002465 6.85374023,13.9612645 L6.85374023,9.65160731 C6.85374023,8.91262533 6.26543635,8.31394283 5.54056192,8.31287184 L1.31317831,8.31287184 Z M5.54056192,13.9612645 L1.31317831,13.9612645 L1.31317831,9.65160731 L5.54056192,9.65160731 L5.54056192,13.9612645 Z M9.76048862,8.31287184 C9.0356142,8.31394283 8.44731031,8.91262533 8.44731031,9.65160731 L8.44731031,13.9612645 C8.44731031,14.7002465 9.0356142,15.3 9.76048862,15.3 L13.9868217,15.3 C14.7116961,15.3 15.3,14.7002465 15.3,13.9612645 L15.3,9.65160731 C15.3,8.91262533 14.7116961,8.31394283 13.9868217,8.31287184 L9.76048862,8.31287184 Z M13.9868217,13.9612645 L9.76048862,13.9612645 L9.76048862,9.65160731 L13.9868217,9.65160731 L13.9868217,13.9612645 Z"></path>
+                        </svg>
+                        <div class="componentText"><span>All Services</span></div>
+                    </li>
+                    <li id="MapImpl" class="menuComponent" onClick="setComponentType('com.supermap.services.components.impl.MapImpl')">
+                        <svg class="mapIcon" data-toggle='tooltip' title="Map Services" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                            <path d="M5.30712245,0.00888946766 C5.41173879,-0.00882060799 5.51920318,4.4408921e-15 5.61936735,0.0347379389 L10.160102,1.60533213 L14.5648367,0.82217481 C14.7468967,0.789821159 14.9341233,0.838784776 15.076051,0.955867896 C15.2179818,1.07295676 15.3,1.24611721 15.3,1.42867238 L15.3,11.1713207 C15.3,11.46954 15.0836044,11.7249671 14.7861837,11.7778182 L10.219602,12.5902477 C10.11349,12.6091236 10.0042307,12.6005122 9.9025,12.5652551 L5.35916327,10.993805 L0.730306122,11.7786741 C0.54883812,11.8094626 0.362850428,11.7596537 0.222051995,11.6425597 C0.0812535614,11.5254658 0,11.3530232 0,11.1713207 L0,1.42867238 C0.000417111524,1.12893448 0.219322123,0.872963498 0.518673469,0.82217481 L5.30712245,0.00888946766 Z M5.35916327,1.25115672 L1.24897959,1.94803835 L1.24897959,10.4402026 L5.30712245,9.75256484 C5.34208238,9.74669937 5.37747721,9.7437219 5.41293878,9.74366338 C5.48321403,9.74348702 5.55301152,9.755063 5.61936735,9.77789977 L10.160102,11.3479804 L14.0510204,10.6562342 L14.0510204,2.16578177 L10.219602,2.84708584 C10.1134873,2.86590677 10.0042422,2.85729656 9.9025,2.82209328 L5.35916327,1.25115672 Z M10.2173469,4.6737682 C10.3098639,4.6737682 10.3561224,4.71941672 10.3561224,4.81071374 L10.3561224,9.29568027 C10.3561224,9.3869773 10.3098639,9.43262582 10.2173469,9.43262582 L9.52346939,9.43262582 C9.43095238,9.43262582 9.38469388,9.3869773 9.38469388,9.29568027 L9.38469388,4.81071374 C9.38469388,4.71941672 9.43095238,4.6737682 9.52346939,4.6737682 L10.2173469,4.6737682 Z M5.82857143,3.30431277 C5.92108844,3.30431277 5.96734694,3.34996129 5.96734694,3.44125832 L5.96734694,7.92622484 C5.96734694,8.01752187 5.92108844,8.06317039 5.82857143,8.06317039 L5.13469388,8.06317039 C5.04217687,8.06317039 4.99591837,8.01752187 4.99591837,7.92622484 L4.99591837,3.44125832 C4.99591837,3.34996129 5.04217687,3.30431277 5.13469388,3.30431277 L5.82857143,3.30431277 Z"></path>
+                        </svg>
+                        <div class="componentText"><span>Map Services</span></div>
+                    </li>
+                    <li id="DataImpl" class="menuComponent" onClick="setComponentType('com.supermap.services.components.impl.DataImpl')">      
+                        <svg class="dataIcon"  data-toggle='tooltip' title="Data Services" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                            <path d="M15.3193577,5.25281927 C14.4399942,3.19688377 12.8020389,1.55896803 10.7460536,0.679625876 C9.69342934,0.229857081 8.56039417,-0.0013577234 7.41570303,5.99747619e-06 C7.05718407,5.99747619e-06 6.76654703,0.290642059 6.76654703,0.649152346 L6.76654703,1.20236413 C5.99813008,1.26950253 5.24523963,1.45817706 4.53597487,1.76134606 C2.76070727,2.52075639 1.34637124,3.93505821 0.586942526,5.71028287 C-0.195647509,7.54830051 -0.195647509,9.62581206 0.586942526,11.4638297 C1.34637124,13.2390544 2.76070727,14.6533562 4.53597487,15.4127665 C5.44524123,15.8013502 6.42399617,16.0010963 7.41281789,15.9998834 C9.83178401,15.9986438 12.0983546,14.818586 13.4865739,12.837663 L13.962261,13.1122854 C14.1113736,13.1983798 14.2885828,13.2217082 14.4548974,13.1771378 C14.6212121,13.1325674 14.7630059,13.0237498 14.8490802,12.874628 C15.6019116,11.5696261 15.9984648,10.0896606 15.998994,8.58308932 C16.0003578,7.43842587 15.7691374,6.30541812 15.3193577,5.25281927 L15.3193577,5.25281927 Z M7.41281789,14.7026837 C6.59878714,14.7036822 5.79304078,14.5392732 5.04448041,14.2194303 C3.57745104,13.5914928 2.40862094,12.422691 1.78066829,10.9556971 C1.13656317,9.44278278 1.13656317,7.73277233 1.78066829,6.219858 C2.40862094,4.75286412 3.57745104,3.5840623 5.04448041,2.95612484 C5.59199338,2.72214856 6.17127802,2.57094993 6.76330125,2.50749676 L6.76330125,8.58759724 C6.76328137,8.8195326 6.88701247,9.03385718 7.08787925,9.14982486 L12.3532557,12.1899653 C11.2002106,13.7660649 9.36569029,14.6991046 7.41281789,14.7026837 L7.41281789,14.7026837 Z M14.0244718,11.6488347 L8.06485903,8.20893206 L8.06485903,1.32714332 C8.81338053,1.3941785 9.54666331,1.57874222 10.2377284,1.87404402 C11.9852835,2.62188801 13.3775895,4.01416032 14.1254516,5.76167314 C14.5063179,6.65347758 14.7020177,7.61336488 14.7006828,8.58308932 C14.7004128,9.6419642 14.4696705,10.6880934 14.0244718,11.6488347 L14.0244718,11.6488347 Z"></path>
+                        </svg>                  
+                        <div class="componentText"><span>Data Services</span></div>
+                    </li>
+                    <li id="RealspaceImpl" class="menuComponent" onClick="setComponentType('com.supermap.services.components.impl.RealspaceImpl')">
+                        <svg class="realspaceIcon" data-toggle='tooltip' title="3D Services" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                            <path d="M14.4,4.31000338 C14.3791999,4.10099131 14.2573759,3.91351198 14.0706186,3.8071042 L7.53865979,0.0892424356 C7.32962229,-0.0297474785 7.07037771,-0.0297474785 6.86134021,0.0892424356 L0.329381443,3.8071042 C0.126111271,3.92280882 0.00092622027,4.1336688 0,4.36190976 L0,11.799609 C0.00628041013,12.0208123 0.129001498,12.2235437 0.325298969,12.3369927 L6.85725773,16.1087365 C7.06805948,16.2304212 7.33082712,16.2304212 7.54162887,16.1087365 L14.0735876,12.3369927 C14.2703124,12.2238058 14.3934822,12.0210272 14.4,11.799609 L14.4,4.31000338 Z M1.33608247,5.50259286 L6.53195876,8.50202723 L6.53195876,14.4146847 L1.33608247,11.4152503 L1.33608247,5.50259286 Z M7.86804124,8.50202723 L13.0639175,5.50259286 L13.0639175,11.4145319 L7.86804124,14.4139663 L7.86804124,8.50202723 Z M7.2,1.39606187 L12.4211134,4.36783679 L7.2,7.38271735 L1.9788866,4.36783679 L7.2,1.39606187 Z"></path>
+                        </svg>
+                        <div class="componentText"><span>3D Services</span></div>
+                    </li>
+                    <li id="DataHistoryImpl" class="menuComponent" onClick="setComponentType('com.supermap.services.components.impl.DataHistoryImpl')">
+                        <svg class="dataHistoryIcon" data-toggle='tooltip' title="Data History Services" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                            <path d="M0.484838364,4.84820447 C1.69817884,1.63760803 4.93645934,-0.339428815 8.34677893,0.048328055 C11.7570985,0.436084924 14.4688487,3.08964642 14.9304022,6.49068004 C15.2234709,8.62451006 14.582295,10.7810919 13.1710471,12.408235 L14.3445343,13.570834 C14.3824373,13.6083827 14.3957259,13.6641982 14.3788094,13.7147978 C14.3618929,13.7653973 14.3177073,13.8019989 14.2648423,13.8092035 L10.4208833,14.3337567 C10.377784,14.3395338 10.334445,14.3249736 10.3035768,14.2943463 C10.2727086,14.2637189 10.2578101,14.220496 10.2632507,14.177354 L10.7519118,10.3282373 C10.7585896,10.2752763 10.794781,10.2307105 10.8452459,10.2133067 C10.8957107,10.1959029 10.9516806,10.208685 10.9895868,10.2462704 L12.2231496,11.4687682 C13.8725998,9.50739958 14.1378189,6.73061414 12.8894757,4.4924824 C11.6411325,2.25435067 9.13916763,1.02091576 6.60363831,1.39364938 C4.06810899,1.766383 2.026985,3.66767132 1.47559919,6.17037089 C0.924213387,8.67307047 1.97738008,11.2560476 4.12153351,12.6597403 C4.15664073,12.682928 4.1794698,12.7206638 4.18371345,12.7625221 C4.1879571,12.8043804 4.17316609,12.84593 4.14342693,12.8756916 L3.38679036,13.632134 C3.33871286,13.6802784 3.26299632,13.6869265 3.20726432,13.6478969 C0.392846846,11.6833351 -0.728502114,8.05880091 0.484838364,4.84820447 Z M8.2047438,3.72342137 C8.28212877,3.72342137 8.34486174,3.78615271 8.34486174,3.86353573 L8.34486174,8.1720524 C8.3449003,8.33929005 8.27849492,8.49969218 8.16025637,8.61796636 L6.36762319,10.4103794 C6.3129112,10.4650541 6.22424354,10.4650541 6.16953154,10.4103794 L5.47594801,9.71681326 C5.42127186,9.66210263 5.42127186,9.5734372 5.47594801,9.51872657 L7.08380073,7.91091426 L7.08380073,3.86353573 C7.08380073,3.78615271 7.14653364,3.72342137 7.22391861,3.72342137 L8.2047438,3.72342137 Z"></path>
+                        </svg>
+                        <div class="componentText"><span>Data History Services</span></div>
+                    </li>
+                    <li id="PlotImpl" class="menuComponent" onClick="setComponentType('com.supermap.services.components.impl.PlotImpl')">
+                        <svg class="plotIcon" data-toggle='tooltip' title="Plotting Services" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                            <path d="M6.39780993,1.73626916e-06 C8.9552294,-0.0018818364 11.2647686,1.52890965 12.2591909,3.88500368 C12.5908722,4.66841907 12.7610212,5.51071661 12.7594684,6.36144737 L12.7594684,10.1385526 C12.7606948,11.8260938 12.0908536,13.4448761 10.8975446,14.6381483 C9.76704136,15.7686166 8.25462788,16.4292835 6.66364859,16.4946393 L6.36166426,16.5000017 C4.67407098,16.5012409 3.05523856,15.8314204 1.86192959,14.6381483 C0.668620607,13.4448761 -0.00122062365,11.8260938 1.66985025e-06,10.1385526 L1.66985025e-06,6.36144737 C-0.00122062365,4.67390624 0.668620607,3.05512385 1.86192959,1.86185174 C2.99243283,0.731383429 4.5048463,0.0707165308 6.0958256,0.00536367299 L6.39780993,1.73626916e-06 Z M6.39780993,1.51807797 L6.36166426,1.51807797 C3.68666254,1.51807797 1.51814519,3.68652832 1.51814519,6.36144737 L1.51814519,10.1385526 C1.51814519,12.7497831 3.58462913,14.8783754 6.17147651,14.9782566 L6.39780993,14.981922 C9.07281164,14.981922 11.241329,12.8134717 11.241329,10.1385526 L11.241329,6.36144737 C11.241329,3.68652832 9.07281164,1.51807797 6.39780993,1.51807797 Z M6.37973709,4.38253338 C6.77899108,4.38253338 7.10265039,4.70618269 7.10265039,5.10542434 L7.10265039,6.73192899 C7.10265039,7.13117064 6.77899108,7.45481995 6.37973709,7.45481995 C5.98048311,7.45481995 5.6568238,7.13117064 5.6568238,6.73192899 L5.6568238,5.10542434 C5.6568238,4.70618269 5.98048311,4.38253338 6.37973709,4.38253338 Z"></path>
+                        </svg>
+                        <div class="componentText"><span>Plotting Services</span></div>
+                    </li>
+                    <li id="TransportationAnalystImpl" class="menuComponent" onClick="setComponentType('com.supermap.services.components.impl.TransportationAnalystImpl')">
+                        <svg class="transportationAnalystIcon" data-toggle='tooltip' title="Transportation Analysis Services" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                            <path d="M4.72396907,1.64826719e-05 C5.94510531,-0.00325991778 7.11682614,0.482043056 7.97801001,1.34780763 C8.84377384,2.20899223 9.3290764,3.38071407 9.3258,4.60185135 L9.3258,13.3982151 C9.3258,14.6186887 8.84093569,15.7891749 7.97793126,16.6521801 C7.11492683,17.5151852 5.94444164,18.0000165 4.72396907,18.0000165 L4.60179746,18.0000165 C2.0602949,18.0000165 0,15.9397198 0,13.3982151 L0,4.60185135 C0,2.06034662 2.0602949,1.64826719e-05 4.60179746,1.64826719e-05 L4.72396907,1.64826719e-05 Z M4.72396907,1.46611058 L4.60179746,1.46611058 C2.87266188,1.46611058 1.46605937,2.87271429 1.46605937,4.60185135 L1.46605937,13.3982151 C1.46605937,15.1273521 2.87266188,16.5339559 4.60179746,16.5339559 L4.72396907,16.5339559 C6.45310465,16.5339559 7.85970716,15.1273521 7.85970716,13.3982151 L7.85970716,4.60185135 C7.85970716,2.87271429 6.45310465,1.46611058 4.72396907,1.46611058 Z M4.66288326,11.9525164 C5.29263611,11.9525164 5.80315166,12.4630324 5.80315166,13.0927858 C5.80315166,13.7225392 5.29263611,14.2330552 4.66288326,14.2330552 C4.03313042,14.2330552 3.52261487,13.7225392 3.52261487,13.0927858 C3.52261487,12.4630324 4.03313042,11.9525164 4.66288326,11.9525164 Z M4.66288326,7.85976384 C5.29263611,7.85976384 5.80315166,8.37027983 5.80315166,9.00003322 C5.80315166,9.6297866 5.29263611,10.1403026 4.66288326,10.1403026 C4.03313042,10.1403026 3.52261487,9.6297866 3.52261487,9.00003322 C3.52261487,8.37027983 4.03313042,7.85976384 4.66288326,7.85976384 Z M4.66288326,3.76701127 C5.29263611,3.76701127 5.80315166,4.27752726 5.80315166,4.90728065 C5.80315166,5.53703403 5.29263611,6.04755002 4.66288326,6.04755002 C4.03313042,6.04755002 3.52261487,5.53703403 3.52261487,4.90728065 C3.52261487,4.27752726 4.03313042,3.76701127 4.66288326,3.76701127 Z"></path>
+                        </svg>
+                        <div class="componentText"><span>Transportation Analysis Services</span></div>
+                    </li>
+                    <li id="NetworkAnalyst3DImpl" class="menuComponent" onClick="setComponentType('com.supermap.services.components.impl.NetworkAnalyst3DImpl')">
+                        <svg class="networkAnalyst3DIcon" data-toggle='tooltip' title="3D Network Analysis Services" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                            <path d="M14.4,2.52 L14.4,1.224 L13.176,1.224 L13.176,0 L11.88,0 L11.88,1.224 L7.848,1.224 L7.848,0 L6.552,0 L6.552,1.224 L2.52,1.224 L2.52,0 L1.224,0 L1.224,1.224 L0,1.224 L0,2.52 L1.224,2.52 L1.224,6.552 L0,6.552 L0,7.848 L1.224,7.848 L1.224,11.88 L0,11.88 L0,13.176 L1.224,13.176 L1.224,14.4 L2.52,14.4 L2.52,13.176 L6.552,13.176 L6.552,14.4 L7.848,14.4 L7.848,13.176 L11.88,13.176 L11.88,14.4 L13.176,14.4 L13.176,13.176 L14.4,13.176 L14.4,11.88 L13.176,11.88 L13.176,7.848 L14.4,7.848 L14.4,6.552 L13.176,6.552 L13.176,2.52 L14.4,2.52 Z M2.52,2.52 L6.552,2.52 L6.552,6.552 L2.52,6.552 L2.52,2.52 Z M2.52,11.88 L2.52,7.848 L6.552,7.848 L6.552,11.88 L2.52,11.88 Z M11.88,11.88 L7.848,11.88 L7.848,7.848 L11.88,7.848 L11.88,11.88 Z M11.88,6.552 L7.848,6.552 L7.848,2.52 L11.88,2.52 L11.88,6.552 Z"></path>
+                        </svg>
+                        <div class="componentText"><span>3D Network Analysis Services</span><div>
+                    </li>
+                    <li id="SpatialAnalystImpl" class="menuComponent" onClick="setComponentType('com.supermap.services.components.impl.SpatialAnalystImpl')">
+                        <svg class="spatialAnalystIcon" data-toggle='tooltip' title="Spatial Analysis Services" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                            <path d="M15.41475,6.52171154 C14.9820577,6.12363462 14.3762885,5.77367308 13.6183846,5.47926923 C12.9452885,5.21809615 12.1740577,5.01040385 11.3387885,4.86121154 C11.1895962,4.02594231 10.9819038,3.25471154 10.7207308,2.58161538 C10.4265,1.82284615 10.0756731,1.21846154 9.67828846,0.78525 C9.08290385,0.136211538 8.49132692,0 8.1,0 C7.39038462,0 6.85038462,0.426980769 6.52171154,0.78525 C6.12363462,1.21794231 5.77367308,1.82284615 5.47926923,2.58161538 C5.21809615,3.25471154 5.01040385,4.02594231 4.86121154,4.86121154 C4.02594231,5.01040385 3.25471154,5.21809615 2.58161538,5.47926923 C1.82284615,5.7735 1.21846154,6.12432692 0.78525,6.52171154 C0.136211538,7.11709615 0,7.70867308 0,8.1 C0,8.80961538 0.426980769,9.34961538 0.78525,9.67828846 C1.21794231,10.0763654 1.82284615,10.4263269 2.58161538,10.7207308 C3.25471154,10.9819038 4.02594231,11.1895962 4.86121154,11.3387885 C5.01040385,12.1740577 5.21809615,12.9452885 5.47926923,13.6183846 C5.7735,14.3771538 6.12432692,14.9815385 6.52171154,15.41475 C7.11709615,16.0637885 7.70867308,16.2 8.1,16.2 C8.80961538,16.2 9.34961538,15.7730192 9.67828846,15.41475 C10.0763654,14.9820577 10.4263269,14.3762885 10.7207308,13.6183846 C10.9819038,12.9452885 11.1895962,12.1740577 11.3387885,11.3387885 C12.1740577,11.1895962 12.9452885,10.9819038 13.6183846,10.7207308 C14.3771538,10.4265 14.9815385,10.0756731 15.41475,9.67828846 C16.0637885,9.08290385 16.2,8.49132692 16.2,8.1 C16.2,7.39038462 15.7730192,6.85038462 15.41475,6.52171154 Z M6.60876923,3.01984615 C7.04146154,1.90384615 7.61296154,1.21153846 8.1,1.21153846 C8.58703846,1.21153846 9.15853846,1.90384615 9.59123077,3.01984615 C9.78455769,3.51796154 9.94569231,4.07873077 10.0720385,4.68501923 C8.76062768,4.5536542 7.43937232,4.5536542 6.12796154,4.68501923 C6.25430769,4.07873077 6.41544231,3.51796154 6.60876923,3.01984615 L6.60876923,3.01984615 Z M10.4019398,8.1 C10.4029104,8.82663434 10.3602567,9.55267214 10.2741923,10.2741923 C9.55267214,10.3602567 8.82663434,10.4029104 8.1,10.4019398 C7.37336566,10.4029104 6.64732786,10.3602567 5.92580769,10.2741923 C5.75549972,8.82973346 5.75549972,7.37026654 5.92580769,5.92580769 C7.37026654,5.75549972 8.82973346,5.75549972 10.2741923,5.92580769 C10.3602567,6.64732786 10.4029104,7.37336566 10.4019398,8.1 L10.4019398,8.1 Z M3.01984615,9.59123077 C1.90384615,9.15853846 1.21153846,8.58703846 1.21153846,8.1 C1.21153846,7.61296154 1.90384615,7.04146154 3.01984615,6.60876923 C3.51796154,6.41544231 4.07873077,6.25430769 4.68501923,6.12796154 C4.5536542,7.43937232 4.5536542,8.76062768 4.68501923,10.0720385 C4.07873077,9.94569231 3.51796154,9.78455769 3.01984615,9.59123077 L3.01984615,9.59123077 Z M9.59123077,13.1801538 C9.15853846,14.2961538 8.58703846,14.9884615 8.1,14.9884615 C7.61296154,14.9884615 7.04146154,14.2961538 6.60876923,13.1801538 C6.41544231,12.6820385 6.25430769,12.1212692 6.12796154,11.5149808 C6.78322179,11.5811029 7.44141222,11.6139719 8.1,11.6134615 C8.75858778,11.6139719 9.41677821,11.5811029 10.0720385,11.5149808 C9.94569231,12.1212692 9.78455769,12.6820385 9.59123077,13.1801538 L9.59123077,13.1801538 Z M13.1801538,9.59123077 C12.6820385,9.78455769 12.1212692,9.94569231 11.5149808,10.0720385 C11.5811029,9.41677821 11.6139719,8.75858778 11.6134615,8.1 C11.6139719,7.44141222 11.5811029,6.78322179 11.5149808,6.12796154 C12.12075,6.25430769 12.6820385,6.41544231 13.1801538,6.60876923 C14.2961538,7.04146154 14.9884615,7.61296154 14.9884615,8.1 C14.9884615,8.58703846 14.2961538,9.15853846 13.1801538,9.59123077 L13.1801538,9.59123077 Z"></path>
+                        </svg>
+                        <div class="componentText"><span>Spatial Analysis Services</span></div>
+                    </li>
+                    <li id="AddressMatchImpl" class="menuComponent" onClick="setComponentType('com.supermap.services.components.impl.AddressMatchImpl')">
+                        <svg class="addressMatchIcon" data-toggle='tooltip' title="Address Matching Services" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                            <path d="M14.4238498,0 L14.5816324,0 C15.6165003,0.0262973158 16.5212363,0.631715666 16.9425699,1.58035266 C17.3669972,2.53556398 17.2084412,3.61955481 16.5289707,4.41234153 L14.8411228,6.37922606 C14.7738226,6.45732122 14.6814817,6.50960944 14.5798921,6.52714846 L9.65576154,8.28752171 L15.8839185,10.5993651 C16.1425001,10.6951697 16.32015,10.9345877 16.3368953,11.2098397 C16.3536405,11.4850917 16.2063237,11.7442797 15.9612629,11.8707243 L4.14690739,17.9616467 C3.86619863,18.0580375 3.55396566,17.9778918 3.36166847,17.7533952 L0.944656291,14.9362953 C-0.044578453,13.7830806 -0.276611622,12.2023412 0.342143495,10.8112906 C0.627834331,10.1637933 1.08420258,9.60616105 1.66241223,9.19806627 C2.27672004,8.76686764 3.00955813,8.52845153 3.7816485,8.50911527 L4.01097462,8.50911527 C4.78306499,8.5286449 5.51590308,8.76686764 6.1302109,9.19806627 C6.7086341,9.60608292 7.16520882,10.1637224 7.45105971,10.8112906 C8.06923475,12.2023412 7.83836174,13.7830806 6.84854692,14.9362953 L6.74567888,15.0561801 L13.9226582,11.3559931 L7.37700246,8.92677852 C7.102619,8.82492989 6.92124873,8.56232598 6.923152,8.26965367 C6.92505526,7.97698136 7.10982549,7.71675851 7.38551034,7.61848706 L13.3918823,5.47892972 L12.4765114,4.41234153 C11.797041,3.62052162 11.6375182,2.53556398 12.0629123,1.58035266 C12.4842459,0.631715666 13.3889819,0.0262973158 14.4238498,0 Z M3.9798435,9.74682938 L3.81316634,9.74682938 C3.27794317,9.75978467 2.79357393,9.91621503 2.37359389,10.2108997 C1.56910886,10.7859805 1.14143028,11.7533781 1.25751435,12.735442 C1.32424918,13.2520867 1.54236402,13.7374334 1.88439063,14.1303599 L3.89689165,16.4754617 L5.90900594,14.1303599 C6.40241048,13.5610909 6.63086494,12.8090738 6.5374891,12.0615445 C6.44411327,11.3140151 6.0376922,10.6413033 5.41941596,10.2108997 C4.99943592,9.91679512 4.51506668,9.76036476 3.9798435,9.74682938 Z M3.89689165,11.1148699 C4.60053305,11.1148699 5.1709471,11.6852888 5.1709471,12.3889362 C5.1709471,12.8441162 4.92811352,13.2647199 4.53391938,13.4923099 C4.13972525,13.7199 3.65405804,13.7199 3.25986391,13.4923099 C2.86566977,13.2647199 2.62283619,12.8441162 2.62283619,12.3889362 C2.62283619,11.6852888 3.19325025,11.1148699 3.89689165,11.1148699 Z M14.5624896,0.77248365 L14.4439593,0.77248365 C14.0611046,0.782151781 13.7146018,0.894108736 13.4139254,1.10506735 C12.8384892,1.51606009 12.5326343,2.20788937 12.6159247,2.91010737 C12.6631081,3.27958927 12.818921,3.62674028 13.063362,3.90785847 L14.5027411,5.5850858 L15.9425069,3.90882528 C16.2955215,3.50163263 16.4589891,2.96367087 16.3922002,2.42891258 C16.3254113,1.89415429 16.0346512,1.41292448 15.5923302,1.10506735 C15.2916539,0.894108736 14.945151,0.782151781 14.5624896,0.77248365 Z M14.5027411,1.90829566 C14.9939765,1.90829566 15.3922016,2.30652406 15.3922016,2.79776369 C15.3922016,3.28900332 14.9939765,3.68723172 14.5027411,3.68723172 C14.0115056,3.68723172 13.6132806,3.28900332 13.6132806,2.79776369 C13.6132806,2.30652406 14.0115056,1.90829566 14.5027411,1.90829566 Z"></path>
+                        </svg>
+                        <div class="componentText"><span>Address Matching Services</span></div>
+                    </li>
+                    <li id="TrafficTransferAnalystImpl" class="menuComponent" onClick="setComponentType('com.supermap.services.components.impl.TrafficTransferAnalystImpl')">
+                        <svg class="trafficTransferAnalystIcon"  data-toggle='tooltip' title="Traffic Transfer Analysis Services" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                            <path d="M12.8529786,1.8 C14.8412037,1.8 16.4529786,3.4117749 16.4529786,5.4 L16.4529786,12.6 C16.4529786,14.5882251 14.8412037,16.2 12.8529786,16.2 L4.9779786,16.2 C2.98975351,16.2 1.3779786,14.5882251 1.3779786,12.6 L1.3779786,5.4 C1.3779786,3.4117749 2.98975351,1.8 4.9779786,1.8 L12.8529786,1.8 Z M14.8320786,7.3269 L2.9979786,7.3269 L2.9979786,12.6 C2.9979786,13.6935238 3.8844548,14.58 4.9779786,14.58 L12.8529786,14.58 C13.9465024,14.58 14.8329786,13.6935238 14.8329786,12.6 L14.8320786,7.3269 Z M12.1779786,10.3174499 C12.6750349,10.3174499 13.0779786,10.7203937 13.0779786,11.2174499 L13.0779786,11.7 C13.0779786,12.1970563 12.6750349,12.6 12.1779786,12.6 C11.6809223,12.6 11.2779786,12.1970563 11.2779786,11.7 L11.2779786,11.2174499 C11.2779786,10.7203937 11.6809223,10.3174499 12.1779786,10.3174499 Z M5.69177033,10.3174499 C6.18882661,10.3174499 6.59177033,10.7203937 6.59177033,11.2174499 L6.59177033,11.7 C6.59177033,12.1970563 6.18882661,12.6 5.69177033,12.6 C5.19471406,12.6 4.79177033,12.1970563 4.79177033,11.7 L4.79177033,11.2174499 C4.79177033,10.7203937 5.19471406,10.3174499 5.69177033,10.3174499 Z M12.8529786,3.42 L4.9779786,3.42 C3.8844548,3.42 2.9979786,4.3064762 2.9979786,5.4 L2.9979786,5.8869 L14.8320786,5.8869 L14.8329786,5.4 C14.8329786,4.3064762 13.9465024,3.42 12.8529786,3.42 Z" id="形状" fill="currentColor" fill-rule="nonzero" mask="url(#mask-2)"></path>
+                        </svg>
+                        <div class="componentText"><span>Traffic Transfer Analysis Services</span></div>
+                    </li>
+                    <li id="GeoprocessingServer" class="menuComponent" onClick="setComponentType('com.supermap.server.host.webapp.handlers.geoprocessing.GeoprocessingServer')">
+                        <svg class="geoprocessingIcon" data-toggle='tooltip' title="Processing Automation Services" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                            <path d="M3.07112447,12.0879263 C2.55497036,12.0879263 2.13654478,12.4960998 2.13654478,12.9996072 C2.13654478,13.5031147 2.55497036,13.9112881 3.07112447,13.9112881 C3.58727858,13.9112881 4.00570416,13.5031147 4.00570416,12.9996072 C4.00570416,12.4960998 3.58727858,12.0879263 3.07112447,12.0879263 Z" id="路径" stroke="none" fill="currentColor" fill-rule="evenodd"></path>
+                            <path d="M1.66109457,7.38555847 C2.22967957,7.56018233 2.82831287,7.62761732 3.42807031,7.58229924 L3.45256334,7.58008657 L3.50147012,7.57494361 L3.59177658,7.56357574 L3.64190869,7.55792 C3.65900419,7.55612034 3.67627458,7.55443239 3.6930902,7.5529345 L3.70254916,7.55184062 C3.95066558,7.52879348 4.19837621,7.52918646 4.44302973,7.55256878 C4.42724328,7.70688499 4.42032239,7.86277011 4.42032239,8.02024111 C4.42032239,9.09740856 4.74444255,10.1005783 5.30224024,10.9417528 C5.43278864,11.1385469 5.57602356,11.3265412 5.73071727,11.5045358 C5.99058634,11.9449225 6.13914141,12.4553071 6.13914141,13.0000906 C6.13914141,14.6568406 4.76490468,16 3.06982173,16 C1.37473878,16 0.000502050527,14.6568406 0.000502050527,13.0000906 C0.000502050527,12.3725096 0.197756995,11.7897272 0.53538216,11.3081418 L0.609301609,11.2132446 L0.683118747,11.1141476 C1.32276497,10.2353742 1.69885894,9.16100664 1.69885894,8.00024171 C1.69885894,7.81230834 1.68900033,7.62663972 1.66976075,7.44369928 Z" id="形状结合" stroke="currentColor" stroke-width="1.14285714" fill="none"></path>
+                            <path d="M3.07112447,2.08822845 C2.55497036,2.08822845 2.13654478,2.49640189 2.13654478,2.99990936 C2.13654478,3.50341682 2.55497036,3.91159027 3.07112447,3.91159027 C3.58727858,3.91159027 4.00570416,3.50341682 4.00570416,2.99990936 C4.00570416,2.49640189 3.58727858,2.08822845 3.07112447,2.08822845 Z" id="路径" stroke="none" fill="currentColor" fill-rule="evenodd"></path>
+                            <path d="M11.8903814,7.02771477 C11.3742273,7.02771477 10.9558017,7.43588822 10.9558017,7.93939568 C10.9558017,8.44290315 11.3742273,8.8510766 11.8903814,8.8510766 C12.4065355,8.8510766 12.8249611,8.44290315 12.8249611,7.93939568 C12.8249611,7.43588822 12.4065355,7.02771477 11.8903814,7.02771477 Z" id="路径" stroke="none" fill="currentColor" fill-rule="evenodd"></path>
+                            <path d="M13.4648545,5.40224021 C14.9328078,6.23061518 15.4358488,8.06539974 14.5883073,9.50019639 C13.7407659,10.934993 11.8634881,11.4266182 10.3955348,10.5982432 C9.83945592,10.2844527 9.42170105,9.82610654 9.16379635,9.29952245 C9.13310315,9.22584468 9.10110038,9.15284689 9.0668877,9.08040907 C9.0665603,9.07932911 9.06627383,9.07820914 9.06578274,9.07748916 C8.60693991,8.0966788 7.84304763,7.24114465 6.81453907,6.66076218 C5.78598958,6.08037972 4.64600333,5.86154633 3.54751428,5.96358325 C3.54661394,5.96350325 3.54550899,5.96382324 3.54436311,5.96410323 C3.46308752,5.97134301 3.38238488,5.98074273 3.30176408,5.9916224 C2.70623421,6.03662104 2.0912244,5.9121848 1.53514552,5.59839428 C0.0671922285,4.77001931 -0.435848805,2.93523475 0.411692669,1.5004381 C1.25923414,0.0656414541 3.13651191,-0.425983692 4.6044652,0.402391279 C5.14708,0.708582028 5.55820514,1.15256861 5.81709202,1.66307319 C5.85965325,1.77022995 5.90614321,1.87634674 5.95598897,1.98070359 C6.41614137,2.94887434 7.17508182,3.79280884 8.192991,4.36719148 C9.14573072,4.90481821 10.1946272,5.13219983 11.2171132,5.0817221 C11.2189333,5.08163225 11.2526754,5.07298385 11.2681371,5.06943572 C11.293327,5.06365517 11.3167319,5.06031902 11.3430411,5.05456739 C11.4098562,5.03996052 11.485089,5.02904142 11.5547664,5.02127776 C11.6786774,5.00747124 11.805565,5.00017236 11.9354739,5.00017236 C12.4556212,5.00041235 12.9821119,5.12984844 13.4648545,5.40224021 Z" id="Fill-9" stroke="currentColor" stroke-width="1.14285714" fill="none"></path>
+                            <path d="M7.63274026,8.00002314 C7.90282577,8.27573419 8.13750878,8.58156958 8.33282693,8.91177258 C8.03091488,9.20612178 7.69444955,9.46932575 7.32708676,9.69900217 L7.28598159,9.72202314 L7.36473907,9.85184884 C7.41443607,9.92676417 7.46923597,10.0003473 7.56888885,10.1235851 L7.65265954,10.2261204 L7.8266614,10.4781308 C7.91947841,10.635423 8.00354383,10.7967552 8.07850842,10.9614201 L8.10821578,11.0308489 L8.13171328,11.0194511 C8.53451191,10.8162886 8.95450917,10.6596817 9.3845733,10.5502039 C9.60142005,10.7621736 9.84597937,10.9442634 10.1147086,11.095905 C10.5003193,11.3135075 10.9097434,11.4541771 11.3244226,11.5227233 L11.3411126,11.5223531 C10.3374518,11.4350833 9.33003339,11.6477911 8.43834155,12.1509522 C8.328868,12.2127277 8.22232275,12.278204 8.11882098,12.3472571 L7.45785311,12.7882338 L7.25012881,12.0212986 C7.15993611,11.6882997 7.02274798,11.3645773 6.86608287,11.0957819 L6.74643252,10.9206232 C6.59598397,10.7412833 6.50099444,10.617201 6.41232376,10.4835351 C6.24177282,10.2263395 6.10644891,9.95080268 6.00887339,9.66211614 L5.85298159,9.20089533 L6.28358985,8.97373146 L6.53368302,8.84205551 C6.92888765,8.6190523 7.28456313,8.34848069 7.59461597,8.03926004 Z" id="形状结合" stroke="none" fill="currentColor" fill-rule="nonzero"></path>
+                        </svg>
+                        <div class="componentText"><span>Processing Automation Services</span></div>
+                    </li>
+                    <li id="MachineLearningServer" class="menuComponent" onClick="setComponentType('com.supermap.machinelearning.handler.MachineLearningServer')">
+                        <svg class="machineLearningIcon" data-toggle='tooltip' title="Machine Learning Services" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                            <path d="M14.9366972,0 C15.634103,0.000716807533 16.1992832,0.565894002 16.2,1.26329598 L16.2,9.5118756 C16.1992832,10.2092776 15.634103,10.7744548 14.9366972,10.7751716 L8.69449541,10.7751716 L8.69449541,12.5214925 L13.8591743,12.5214925 C13.941257,12.5214925 14.0077982,12.5880333 14.0077982,12.6701155 L14.0077982,13.7104769 C14.0077982,13.7925592 13.941257,13.8591 13.8591743,13.8591 L2.34082569,13.8591 C2.258743,13.8591 2.19220183,13.7925592 2.19220183,13.7104769 L2.19220183,12.6701155 C2.19220183,12.5880333 2.258743,12.5214925 2.34082569,12.5214925 L7.50550459,12.5214925 L7.50550459,10.7751716 L1.26330275,10.7751716 C0.565897037,10.7744548 0.000716811376,10.2092776 0,9.5118756 L0,1.26329598 C0.000716811376,0.565894002 0.565897037,0.000716807533 1.26330275,0 Z M14.8623853,1.33760751 L1.33761468,1.33760751 L1.33761468,9.25178525 L14.8623853,9.25178525 L14.8623853,1.33760751 Z M8.58302752,5.75914343 C8.68211009,5.75914343 8.73165138,5.80868445 8.73165138,5.90776649 L8.73165138,6.79950483 C8.73165138,6.89858686 8.68211009,6.94812788 8.58302752,6.94812788 L3.67844037,6.94812788 C3.5793578,6.94812788 3.52981651,6.89858686 3.52981651,6.79950483 L3.52981651,5.90776649 C3.52981651,5.80868445 3.5793578,5.75914343 3.67844037,5.75914343 L8.58302752,5.75914343 Z M9.28899083,2.99103901 C9.38807339,2.99103901 9.43761468,3.04058003 9.43761468,3.13966206 L9.43761468,4.0314004 C9.43761468,4.13048244 9.38807339,4.18002346 9.28899083,4.18002346 L3.67844037,4.18002346 C3.5793578,4.18002346 3.52981651,4.13048244 3.52981651,4.0314004 L3.52981651,3.13966206 C3.52981651,3.04058003 3.5793578,2.99103901 3.67844037,2.99103901 L9.28899083,2.99103901 Z"></path>
+                        </svg>
+                        <div class="componentText"><span>Machine Learning Services</span></div>
+                    </li>
+                    <li id="DataFlowServiceInstance" class="menuComponent" onClick="setComponentType('com.supermap.service.dataflow.DataFlowServiceInstance')">
+                        <svg class="dataFlowIcon" data-toggle='tooltip' title="Data Flow Services" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                            <path d="M1.09839817,0 C1.17422674,0 1.23569794,0.0656193344 1.23569794,0.146564885 L1.23569794,10.680916 L14.8627002,10.680916 C14.9385288,10.680916 15,10.7465354 15,10.8274809 L15,11.8534351 C15,11.9343807 14.9385288,12 14.8627002,12 L0.549199085,12 C0.245884806,12 0,11.7375227 0,11.4137405 L0,0.146564885 C0,0.0656193344 0.0614712014,0 0.137299771,0 L1.09839817,0 Z M13.5964531,1.01734351 C13.6500647,0.960151643 13.736949,0.960151643 13.7905606,1.01734351 L14.3730549,1.63914504 C14.4266314,1.69637441 14.4266314,1.78912178 14.3730549,1.84635115 L9.26138444,7.30314504 C9.15838603,7.41311898 9.01867609,7.47490381 8.87299771,7.47490381 C8.72731933,7.47490381 8.58760939,7.41311898 8.48461098,7.30314504 L6.22997712,4.89618321 L3.1632151,8.17099237 C3.1096035,8.22818423 3.02271916,8.22818423 2.96910755,8.17099237 L2.38558352,7.5480916 C2.33234916,7.49092581 2.33234916,7.39860091 2.38558352,7.34143511 L5.84159039,3.65258015 C5.9445888,3.54260621 6.08429874,3.48082138 6.22997712,3.48082138 C6.3756555,3.48082138 6.51536543,3.54260621 6.61836384,3.65258015 L8.87299771,6.05954198 L13.5964531,1.01734351 Z"></path>
+                        </svg>
+                        <div class="componentText"><span>Data Flow Services</span></div>
+                    </li>
+                    <li id="ProcessingServer" class="menuComponent" onClick="setComponentType('com.supermap.processing.jobserver.ProcessingServer')">
+                        <svg class="processingIcon" data-toggle='tooltip' title="Distributed Analysis Services" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                            <path d="M15.6846656,2.22739455 L12.0019434,0.101236936 C11.8033485,-0.0134201135 11.5586695,-0.0134201135 11.3600746,0.101236936 L8.01654001,2.03162758 L4.64552537,0.0859927872 C4.44693048,-0.0286642624 4.20225148,-0.0286642624 4.00365658,0.0859927872 L0.32093441,2.2121504 C0.122356972,2.32679737 0,2.53866615 0,2.76796009 L0,7.02027532 C0,7.24964092 0.122294906,7.4616028 0.32093441,7.57628559 L3.67710584,9.51309483 L3.67710584,13.4123877 C3.67712599,13.6416816 3.79946279,13.8535504 3.99804023,13.9681974 L7.68056182,16.094355 C7.87915671,16.209012 8.12383571,16.209012 8.32243061,16.094355 L12.0051528,13.9681974 C12.2037302,13.8535504 12.326067,13.6416816 12.3260872,13.4123877 L12.3260872,9.52974305 L15.6846656,7.59072742 C15.883243,7.47608045 16.0056,7.26421167 16.0056,7.03491773 L16.0056,2.7826025 C16.005365,2.55352357 15.883057,2.34193395 15.6846656,2.22739455 Z M11.681009,1.39839366 L14.2368503,2.87386681 L11.6840178,4.33810743 L9.13860689,2.86624474 L11.681009,1.39839366 Z M8.00149621,7.58972452 L10.946671,9.29004886 L8.24460402,10.8395364 L5.31086249,9.14322364 L8.00149621,7.58972452 Z M4.32459098,1.38234719 L6.89046146,2.86383777 L4.31977696,4.33810743 L1.76453743,2.86042789 L4.32459098,1.38234719 Z M1.28373759,3.69464388 L4.3179717,5.44912508 L7.51688528,3.61441152 L7.51688528,6.75771491 L4.49448562,8.5027688 L1.28373759,6.64920064 L1.28373759,3.69464388 Z M8.00149621,14.7973988 L4.96084341,13.0417141 L4.96084341,10.0530586 L8.24259818,11.9507546 L11.0423496,10.3449039 L11.0423496,13.0417141 L8.00149621,14.7973988 Z M11.5237512,8.51139378 L8.47968846,6.75410446 L8.47968846,3.59736214 L11.6824131,5.44912508 L14.7222636,3.70567583 L14.7222636,6.66504653 L11.5237512,8.51139378 Z"></path>
+                        </svg>
+                        <div class="componentText"><span>Distributed Analysis Services</span></div>
+                    </li>
+                    <li id="DataCatalogImpl" class="menuComponent" onClick="setComponentType('com.supermap.services.components.impl.DataCatalogImpl')">
+                        <svg class="dataCatalogIcon" data-toggle='tooltip' title="Data Catalog Services" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                            <path d="M11.4390244,0 C12.0799405,0.00064756231 12.5993413,0.511227367 12.6,1.14125874 L12.6,13.2587413 C12.5993413,13.8887726 12.0799405,14.3993524 11.4390244,14.4 L1.16097561,14.4 C0.520059547,14.3993524 0.00065874987,13.8887726 0,13.2587413 L0,1.14125874 C0.00065874987,0.511227367 0.520059547,0.00064756231 1.16097561,0 L11.4390244,0 Z M11.3707317,1.20839161 L1.22926829,1.20839161 L1.22926829,13.1916084 L11.3707317,13.1916084 L11.3707317,1.20839161 Z M9.88536585,9.75104895 C9.97642276,9.75104895 10.0219512,9.7958042 10.0219512,9.88531469 L10.0219512,10.6909091 C10.0219512,10.7804196 9.97642276,10.8251748 9.88536585,10.8251748 L4.62682927,10.8251748 C4.53577236,10.8251748 4.4902439,10.7804196 4.4902439,10.6909091 L4.4902439,9.88531469 C4.4902439,9.7958042 4.53577236,9.75104895 4.62682927,9.75104895 L9.88536585,9.75104895 Z M3.26097561,9.73426573 C3.56271167,9.73426573 3.80731707,9.974717 3.80731707,10.2713287 C3.80731707,10.5679403 3.56271167,10.8083916 3.26097561,10.8083916 C2.95923955,10.8083916 2.71463415,10.5679403 2.71463415,10.2713287 C2.71463415,9.974717 2.95923955,9.73426573 3.26097561,9.73426573 Z M3.26097561,6.66293706 C3.56271167,6.66293706 3.80731707,6.90338833 3.80731707,7.2 C3.80731707,7.49661167 3.56271167,7.73706294 3.26097561,7.73706294 C2.95923955,7.73706294 2.71463415,7.49661167 2.71463415,7.2 C2.71463415,6.90338833 2.95923955,6.66293706 3.26097561,6.66293706 Z M9.88536585,6.66293706 C9.97642276,6.66293706 10.0219512,6.70769231 10.0219512,6.7972028 L10.0219512,7.6027972 C10.0219512,7.69230769 9.97642276,7.73706294 9.88536585,7.73706294 L4.62682927,7.73706294 C4.53577236,7.73706294 4.4902439,7.69230769 4.4902439,7.6027972 L4.4902439,6.7972028 C4.4902439,6.70769231 4.53577236,6.66293706 4.62682927,6.66293706 L9.88536585,6.66293706 Z M3.26097561,3.60839161 C3.56271167,3.60839161 3.80731707,3.84884288 3.80731707,4.14545455 C3.80731707,4.44206622 3.56271167,4.68251748 3.26097561,4.68251748 C2.95923955,4.68251748 2.71463415,4.44206622 2.71463415,4.14545455 C2.71463415,3.84884288 2.95923955,3.60839161 3.26097561,3.60839161 Z M9.88536585,3.57482517 C9.97642276,3.57482517 10.0219512,3.61958042 10.0219512,3.70909091 L10.0219512,4.51468531 C10.0219512,4.6041958 9.97642276,4.64895105 9.88536585,4.64895105 L4.62682927,4.64895105 C4.53577236,4.64895105 4.4902439,4.6041958 4.4902439,4.51468531 L4.4902439,3.70909091 C4.4902439,3.61958042 4.53577236,3.57482517 4.62682927,3.57482517 L9.88536585,3.57482517 Z"></path>
+                        </svg>
+                        <div class="componentText"><span>Data Catalog Services</span></div>
+                    </li>
+                    <li id="WebPrintingImpl" class="menuComponent" onClick="setComponentType('com.supermap.services.components.impl.WebPrintingImpl')">
+                        <svg class="webPrintingIcon"  data-toggle='tooltip' title="Web Printing Services" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                            <path d="M11.8220141,0 C12.2359043,0 12.5714286,0.341116381 12.5714286,0.761904762 L12.5714286,4.59047619 L14.7259953,4.59047619 C15.429309,4.59121112 15.9992771,5.17067868 16,5.88571429 L16,12.5904762 C15.9994838,13.0531258 15.6307093,13.4280466 15.175644,13.4285714 L12.5714286,13.4285714 L12.5714286,15.2380952 C12.5714286,15.6588836 12.2359043,16 11.8220141,16 L4.17798595,16 C3.76409574,16 3.42857143,15.6588836 3.42857143,15.2380952 L3.42857143,13.4285714 L0.824355972,13.4285714 C0.369290745,13.4280466 0.00051624012,13.0531258 0,12.5904762 L0,5.88571429 C0.000722883766,5.17067868 0.570690972,4.59121112 1.27400468,4.59047619 L3.42857143,4.59047619 L3.42857143,0.761904762 C3.42857143,0.341116381 3.76409574,0 4.17798595,0 Z M11.3723653,10.5714286 L4.62763466,10.5714286 L4.62763466,14.7809524 L11.3723653,14.7809524 L11.3723653,10.5714286 Z M14.6510539,5.96190476 L1.34894614,5.96190476 L1.34894614,12.0571429 L3.42857143,12.0571429 L3.42857143,10.1142857 C3.42857143,9.69349733 3.76409574,9.35238095 4.17798595,9.35238095 L11.8220141,9.35238095 C12.2359043,9.35238095 12.5714286,9.69349733 12.5714286,10.1142857 L12.5714286,12.0571429 L14.6510539,12.0571429 L14.6510539,5.96190476 Z M2.77283372,6.62857143 C3.18672393,6.62857143 3.52224824,6.96968781 3.52224824,7.39047619 C3.52224824,7.81126457 3.18672393,8.15238095 2.77283372,8.15238095 C2.35894351,8.15238095 2.0234192,7.81126457 2.0234192,7.39047619 C2.0234192,6.96968781 2.35894351,6.62857143 2.77283372,6.62857143 Z M11.3723653,1.21904762 L4.62763466,1.21904762 L4.62763466,4.59047619 L11.3723653,4.59047619 L11.3723653,1.21904762 Z"></path>
+                        </svg>
+                        <div class="componentText"><span>Web Printing Services</span></div>
+                    </li>
+                    <li id="ImageImpl" class="menuComponent" onClick="setComponentType('com.supermap.services.components.impl.ImageImpl')">
+                        <svg class="imageIcon" data-toggle='tooltip' title="Image Manager Services" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                            <path d="M14.7857143,0 C15.4560602,0.000670576168 15.999311,0.529395987 16,1.18181818 L16,11.0534759 C15.999311,11.7058981 15.4560602,12.2346235 14.7857143,12.2352941 L1.21428571,12.2352941 C0.543939832,12.2346235 0.000688998589,11.7058981 0,11.0534759 L0,1.18181818 C0.000688998589,0.529395987 0.543939832,0.000670576168 1.21428571,0 L14.7857143,0 Z M11.9732143,6.39137701 L8.63,9.64572193 C8.49604439,9.77610256 8.31435744,9.8493502 8.12491071,9.8493502 C7.93546399,9.8493502 7.75377704,9.77610256 7.61982143,9.64572193 L5.53571429,7.61664439 L2.07607143,10.9839572 L14.7142857,10.9839572 L14.7142857,9.05933155 L11.9732143,6.39137701 Z M14.7142857,1.2513369 L1.28571429,1.2513369 L1.28571429,10.1801471 L5.03071429,6.53475936 C5.1646699,6.40437873 5.34635684,6.33113109 5.53580357,6.33113109 C5.7252503,6.33113109 5.90693724,6.40437873 6.04089286,6.53475936 L8.125,8.5638369 L11.4682143,5.31001337 C11.6021699,5.17963274 11.7838568,5.1063851 11.9733036,5.1063851 C12.1627503,5.1063851 12.3444372,5.17963274 12.4783929,5.31001337 L14.7142857,7.48629679 L14.7142857,1.2513369 Z M5.44642857,2.57219251 C6.11706005,2.57219251 6.66071429,3.10131054 6.66071429,3.7540107 C6.66071429,4.40671085 6.11706005,4.93582888 5.44642857,4.93582888 C4.77579709,4.93582888 4.23214286,4.40671085 4.23214286,3.7540107 C4.23214286,3.10131054 4.77579709,2.57219251 5.44642857,2.57219251 Z"></path>
+                        </svg>
+                        <div class="componentText"><span>Image Manager Services</span></div>
+                    </li>
+                        <li id="VideoHLSComponentImpl" class="menuComponent" onClick="setComponentType('com.supermap.services.components.impl.VideoHLSComponentImpl')">
+                            <svg class="imageIcon" data-toggle='tooltip' title="Video Stream Service" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                                <path d="M10,3 C10.5522847,3 11,3.44771525 11,4 L11,5.916 L14.2591417,4.10039144 C14.5924184,3.91461676 15.0025847,4.15556736 15.0025847,4.5371242 L15.0025847,11.5220295 C15.0025847,11.9033234 14.5929284,12.144302 14.2596609,11.9590513 L11,10.147 L11,12 C11,12.5522847 10.5522847,13 10,13 L2,13 C1.44771525,13 1,12.5522847 1,12 L1,4 C1,3.44771525 1.44771525,3 2,3 L10,3 Z M10,4 L2,4 L2,12 L10,12 L10,4 Z M14.0020783,5.3871242 L11.0180783,7.0511242 L11.0180783,9.0131242 L14.0020783,10.6711242 L14.0020783,5.3871242 Z"></path>
+                            </svg>
+                            <div class="componentText"><span>Video Stream Service</span></div>
+                        </li>
+                    <li id="GeometryComponentImpl" class="menuComponent" onClick="setComponentType('com.supermap.services.components.impl.GeometryComponentImpl')">
+                        <svg class="geometryIcon" data-toggle='tooltip' title="Geometry Services" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                            <path d="M15.0558333,4.65586785 L15.0531171,4.65586785 C15.0340859,4.4300832 14.9067136,4.22755924 14.7114505,4.11261257 L7.88200038,0.0964038656 C7.66344247,-0.0321346219 7.39239086,-0.0321346219 7.17383296,0.0964038656 L0.344382786,4.11261257 C0.13185488,4.23760213 0.000968404028,4.46538296 0,4.71193955 L0,12.7464912 C0.00656644501,12.9854454 0.13487674,13.2044454 0.340114379,13.3269982 L7.16956455,17.4014129 C7.38996705,17.5328624 7.66470218,17.5328624 7.88510467,17.4014129 L14.7145548,13.3269982 C14.9202393,13.2047284 15.0490187,12.9856775 15.0558333,12.7464912 L15.0558333,4.65586785 Z M1.39693299,5.94415895 L6.82945017,9.18428867 L6.82945017,15.5714186 L1.39693299,12.3312889 L1.39693299,5.94415895 Z M8.22638316,9.18428867 L13.6589003,5.94415895 L13.6589003,12.3305128 L8.22638316,15.5706426 L8.22638316,9.18428867 Z M7.52791667,1.50809152 L12.9868204,4.71834221 L7.52791667,7.97515763 L2.06901297,4.71834221 L7.52791667,1.50809152 Z"></path>
+                        </svg>
+                        <div class="componentText"><span>Geometry Services</span></div>
+                    </li>
+                    <li id="domainComponent" class="menuComponent" onClick="setComponentType('domainComponent')">
+                        <svg class="domainComponentIcon" data-toggle='tooltip'  title="Domain Services" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                            <path d="M13.92,0 L0.58,0 C0.259674845,0 0,0.259674845 0,0.58 L0,13.92 C0,14.2403252 0.259674845,14.5 0.58,14.5 L13.92,14.5 C14.2403252,14.5 14.5,14.2403252 14.5,13.92 L14.5,0.58 C14.5,0.259674845 14.2403252,0 13.92,0 Z M13.195,4.02404 L5.45548,4.02404 L5.45548,1.305 L13.195,1.305 L13.195,4.02404 Z M1.305,13.195 L1.305,1.305 L4.29548,1.305 L4.29548,13.195 L1.305,13.195 Z M5.45548,13.195 L5.45548,5.18404 L13.195,5.18404 L13.195,13.195 L5.45548,13.195 Z"></path>
+                        </svg>
+                        <div class="componentText"><span>Domain Services</span></div>
+                    </li>
+                    <li id="componentSetType" class="menuComponent" onClick="setComponentType('componentSetType')">
+                        <svg class="componentSetIcon" data-toggle='tooltip' title="Service Component Sets" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                            <path d="M8.94031754,9.47039359 C8.82472216,9.35477182 8.66792535,9.28981397 8.50443014,9.28981397 C8.34093493,9.28981397 8.18413812,9.35477182 8.06854275,9.47039359 L4.82991675,12.7090196 C4.71429498,12.824615 4.64933713,12.9814118 4.64933713,13.144907 C4.64933713,13.3084022 4.71429498,13.465199 4.82991675,13.5807944 L8.06854275,16.8194204 C8.18413812,16.9350421 8.34093493,17 8.50443014,17 C8.66792535,17 8.82472216,16.9350421 8.94031754,16.8194204 L12.1789435,13.5807944 C12.2945653,13.465199 12.3595232,13.3084022 12.3595232,13.144907 C12.3595232,12.9814118 12.2945653,12.824615 12.1789435,12.7090196 L8.94031754,9.47039359 Z M8.50443014,15.5111804 L6.13738631,13.144907 L8.50443014,10.7778632 L10.871474,13.144907 L8.50443014,15.5111804 Z M7.52960641,8.05968246 L4.29098041,4.82105646 C4.17538504,4.70543469 4.01858822,4.64047684 3.85509302,4.64047684 C3.69159781,4.64047684 3.53480099,4.70543469 3.41920562,4.82105646 L0.18057962,8.05968246 C0.0649578523,8.17527784 0,8.33207465 0,8.49556986 C0,8.65906507 0.0649578523,8.81586188 0.18057962,8.93145725 L3.41920562,12.1700833 C3.53480099,12.285705 3.69159781,12.3506629 3.85509302,12.3506629 C4.01858822,12.3506629 4.17538504,12.285705 4.29098041,12.1700833 L7.52960641,8.93145725 C7.64522818,8.81586188 7.71018603,8.65906507 7.71018603,8.49556986 C7.71018603,8.33207465 7.64522818,8.17527784 7.52960641,8.05968246 Z M3.85509302,10.8626137 L1.48881965,8.49556986 L3.85509302,6.12852603 L6.22213684,8.49556986 L3.85509302,10.8626137 Z M16.8194204,8.06854275 L13.5807944,4.82991675 C13.465199,4.71429498 13.3084022,4.64933713 13.144907,4.64933713 C12.9814118,4.64933713 12.824615,4.71429498 12.7090196,4.82991675 L9.47039359,8.06854275 C9.35477182,8.18413812 9.28981397,8.34093493 9.28981397,8.50443014 C9.28981397,8.66792535 9.35477182,8.82472216 9.47039359,8.94031754 L12.7090196,12.1789435 C12.824615,12.2945653 12.9814118,12.3595232 13.144907,12.3595232 C13.3084022,12.3595232 13.465199,12.2945653 13.5807944,12.1789435 L16.8194204,8.94031754 C16.9350421,8.82472216 17,8.66792535 17,8.50443014 C17,8.34093493 16.9350421,8.18413812 16.8194204,8.06854275 Z M13.144907,10.871474 L10.7778632,8.50443014 L13.144907,6.13738631 L15.5111804,8.50443014 L13.144907,10.871474 Z M8.05968246,7.52960641 C8.17527784,7.64522818 8.33207465,7.71018603 8.49556986,7.71018603 C8.65906507,7.71018603 8.81586188,7.64522818 8.93145725,7.52960641 L12.1700833,4.29098041 C12.285705,4.17538504 12.3506629,4.01858822 12.3506629,3.85509302 C12.3506629,3.69159781 12.285705,3.53480099 12.1700833,3.41920562 L8.93145725,0.18057962 C8.81586188,0.0649578523 8.65906507,0 8.49556986,0 C8.33207465,0 8.17527784,0.0649578523 8.05968246,0.18057962 L4.82105646,3.41920562 C4.70543469,3.53480099 4.64047684,3.69159781 4.64047684,3.85509302 C4.64047684,4.01858822 4.70543469,4.17538504 4.82105646,4.29098041 L8.05968246,7.52960641 Z M8.49556986,1.48881965 L10.8626137,3.85509302 L8.49556986,6.22213684 L6.12852603,3.85509302 L8.49556986,1.48881965 Z"></path>
+                        </svg>
+                        <div class="componentText"><span>Service Component Sets</span></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="conRightServiceList">
+                <div class="serviceInterfaceTypeList" style="margin: 32px 24px
+                0px 24px;">
+                    Service Interface Type：
+                    <div class="serviceInterfaceType"
+                         style="display:inline-block; width: calc(100% - 170px); vertical-align: top;">
+                        <a id='ALLInterface' style='color:#e04c40' onClick="setInterfaceType('ALL')">All Service Interface Types</a>
+                        <div class="divider" style="height:16px;"></div>
+                        <a id='OGCInterface' onClick="setInterfaceType('OGC')">OGC Services</a>
+                        <div class="divider" style="height:16px;"></div>
+                        <a id='RESTInterface' onClick="setInterfaceType('REST')">REST Services</a>
+                        <div class="divider" style="height:16px;"></div>
+                        <a id='HandlerInterface' onClick="setInterfaceType('Handler')">Handler Services</a>
+                        <div class="divider" style="height:16px;"></div>
+                        <a id='otherInterface' onClick="setInterfaceType('other')">Other Services</a>
+                    </div>
+                </div>
+                <div class="serviceCount" style="margin-left: 24px;margin-top: 32px;">
+                    <span id="count_componentType" class="serviceCountTitle">All Services</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16" style="padding-top: 2px">
+                        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                    <span id="count_interfaceType" style="font-weight: bold;">All Service Interface Types</span>
+                    <div class="divider" style="height:12px;margin-left: 8px;margin-right: 8px"></div>
+                    <span id="totalCount"></span> total
+                </div>
+                <div>
+                    <div style="margin:16px 24px 0px 24px">
+                        <table id="table" style="width:100%;margin-bottom: 24px;table-layout: fixed"></table>
+                    </div>
+                    <div id="pagination"></div>
+                    <div id="nodata" style="text-align: center;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    window.onload=function(){
+        if(window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD){
+            location.reload(true);
+        }
+    }
+    var theme = JSON.parse(localStorage.getItem("pro__DEFAULT_THEME"));
+    var body = document.getElementById("listServiceBody");
+    body.classList.remove("light", "dark");
+    body.classList.add(theme ? theme.value : "light");
+
+
+var serviceTypeName = {
+    "com.supermap.services.components.impl.MapImpl": serviceTypeRes.Map,
+    "com.supermap.services.components.impl.VectorTileImpl": serviceTypeRes.VectorTile,
+    "com.supermap.services.components.impl.DataImpl": serviceTypeRes.Data,
+    "com.supermap.services.components.impl.DataHistoryImpl": serviceTypeRes.DataHistory,
+    "com.supermap.services.components.impl.RealspaceImpl": serviceTypeRes.Realspace,
+    "com.supermap.services.components.impl.PlotImpl": serviceTypeRes.Plot,
+    "com.supermap.services.components.impl.TransportationAnalystImpl": serviceTypeRes.TrafficTransferAnalyst,
+    "com.supermap.services.components.impl.NetworkAnalyst3DImpl": serviceTypeRes.Network3D,
+    "com.supermap.services.components.impl.SpatialAnalystImpl": serviceTypeRes.SpatialAnalyst,
+    "com.supermap.services.components.impl.AddressMatchImpl": serviceTypeRes.AddressMatch,
+    "com.supermap.services.components.impl.TrafficTransferAnalystImpl": serviceTypeRes.TrafficTransferAnalyst,
+    "com.supermap.server.host.webapp.handlers.geoprocessing.GeoprocessingServer": serviceTypeRes.GeoprocessingService,
+    "com.supermap.machinelearning.handler.MachineLearningServer": serviceTypeRes.MachineLearningService,
+    "com.supermap.service.dataflow.DataFlowServiceInstance": serviceTypeRes.DataFlow,
+    "com.supermap.processing.jobserver.ProcessingServer": serviceTypeRes.ProcessingService,
+    "com.supermap.services.components.impl.DataCatalogImpl": serviceTypeRes.DatacatalogService,
+    "com.supermap.services.components.impl.WebprintingImpl": serviceTypeRes.WebprintingService,
+    "com.supermap.services.components.impl.ImageImpl": serviceTypeRes.ImageService,
+    "com.supermap.services.components.impl.GeometryComponentImpl": serviceTypeRes.GeometryService,
+    "com.supermap.services.components.impl.VideoHLSComponentImpl": serviceTypeRes.VideoFlowService,
+    //"":"领域服务",
+    "componentSetType": serviceTypeRes.ComponentSetService,
+};
+var interfaceTypeName = {
+    "com.supermap.services.rest.RestServlet":"REST "+listServiceRes.service,
+    "com.supermap.services.wms.WMSServlet":"WMS "+listServiceRes.service,
+    "com.supermap.services.wfs.WFSServlet":"WFS "+listServiceRes.service,
+    "com.supermap.services.rest.JaxrsServletForJersey":"REST "+listServiceRes.service,
+    "com.supermap.services.handler.HandlerServlet":"Handler "+listServiceRes.service,
+    "com.supermap.services.wmts.WMTSServlet":"WMTS "+listServiceRes.service,
+    "com.supermap.services.wcs.WCSServlet":"WCS "+listServiceRes.service,
+    "com.supermap.services.wps.WPSServlet":"WPS "+listServiceRes.service,
+    "com.supermap.service.dataflow.DataFlowServiceImpl":"dataflow "+listServiceRes.service,
+    "com.supermap.services.rest.AGSRestServlet": "ArcGIS REST "+listServiceRes.service,
+    "com.supermap.services.rest.BaiduRestServlet": "Baidu REST "+listServiceRes.service,
+    "com.supermap.services.rest.GoogleRestServlet": "Google REST "+listServiceRes.service,
+    "com.supermap.services.rest.TMSRestServlet": "TMS REST "+listServiceRes.service,
+    "com.supermap.services.ogcapi.OGCAPIServlet": "OGCAPI "+listServiceRes.service,
+    "other": listServiceRes.otherService
+};
+var serviceUrl = "http://8.130.175.232:18090/iserver/services.json?pageSize=100&currentPage=1";
+var queryString = "";
+var currentPage = 1;
+var keywords = "";
+var componentType = "";
+var interfaceTypes = "";
+var selectedInterfaceFilter = "";
+var status = "";
+var totalservices = 0;
+var selectedCompenent=listServiceRes.allServices;
+var selectedInterface=listServiceRes.allInterfaces;
+var RoleUrl = "http://8.130.175.232:18090/iserver/services/security/profile.json?returnPermittedService=false";
+if(queryString && queryString.indexOf("status=")>-1){
+    var kvs = queryString.split("&");
+    for(var i = 0;i< kvs.length;i++){
+        var kv = kvs[i].split("=");
+        if(kv[0] === "status" && kv[1] === "OK"){
+            status = "OK";
+        }
+    }
+}
+changeComponentStyle('');
+fetchData(100,currentPage,"",status,componentType, interfaceTypes);
+function fetchData(pageSize,currentPage,keywords,status,componentType,filterInterfaceTypes){
+    var statusFilter = (status === undefined || status === null || status === "") ? "" : "&status="+status;
+    var interfaceTypesFilter = (filterInterfaceTypes !== null && filterInterfaceTypes !== undefined && filterInterfaceTypes.length>0) ? "&interfaceTypes="+filterInterfaceTypes : "";
+    var url = "http://8.130.175.232:18090/iserver/services.json?pageSize="+pageSize+"&currentPage="+currentPage+"&keywords="+keywords+statusFilter+"&componentType="+componentType+interfaceTypesFilter;
+    $.ajax({
+        type : "GET",
+        url : url,
+        async : false,
+        dataType : "json",
+        success : function(response) {
+            $("#count_componentType").html(selectedCompenent);
+            $("#count_interfaceType").html(selectedInterface);
+            renderTable(response);
+            $('#pagination').pagination(totalservices,{
+                callback:function(page){
+                    console.log(page);
+                    fetchData(100,page+1,keywords,status,componentType,interfaceTypes);
+                },
+                prev_text:"<",
+                next_text:">",
+                items_per_page:100,
+                num_edge_entries:2,
+                num_display_entries:3,
+                prev_show_always:false,
+                next_show_always:false,
+                current_page:currentPage-1
+            })
+        }
+    })
+}
+function getInterfaceColumnTitle(){
+    var html = "";
+    var handlerInterface = "";
+    if ("false" === "false") {
+        handlerInterface = "<li id='HandlerInterface' onClick='setInterfaceType(\"Handler\")'><a>Handler " + listServiceRes.service + "</a></li>";
+    }
+    html = html + "<div class='btn-group' id='interfaceColumnTitle'>" +
+        "<a class='btn' id='interfaceColumnName' data-toggle='dropdown'>" +
+        "<span style='margin-right:5px;'>"+listServiceRes.serviceInterfaceType+"</span>" +
+        "<span class='caret'></span>" +
+        "</a>" +
+        "<ul class='dropdown-menu' role='menu'>" +
+            "<li id='ALLInterface' onClick='setInterfaceType(\"ALL\")'><a>"+listServiceRes.allServices+"</a></li>" +
+            "<li id='OGCInterface' onClick='setInterfaceType(\"OGC\")'><a>OGC "+listServiceRes.service+"</a></li>" +
+            "<li id='RESTInterface' onClick='setInterfaceType(\"REST\")'><a>REST "+listServiceRes.service+"</a></li>" +
+            handlerInterface +
+            "<li id='otherInterface' onClick='setInterfaceType(\"other\")'><a>"+listServiceRes.otherServices+"</a></li>" +
+        "</ul>" +
+        "</div>";
+    return html;
+}
+function renderTable(response){
+    $("#totalCount").html(formatNum(response.total));
+    totalservices=response.total;
+    
+    $("#table").html("");
+    $("#nodata").html("");
+    $("#table").append("<tr class='tablehead' style='height: 48px;vertical-align: middle;'>\n" +
+        "                            <th class='serviceName' style='width:30%'>"+listServiceRes.serviceName+"</th>\n"+
+        "                            <th class='serviceAlias' style='width:20%'>"+listServiceRes.serviceAlias+"</th>\n" +
+        "                            <th class='interfaceType' style='width:20%'>"+listServiceRes.serviceInterfaceType+"</th>\n" +
+        "                            <th class='componentType' style='width:20%'>"+listServiceRes.serviceComponentType+"</th>\n" +
+        "                            <th class='status' style='width:10%'>"+listServiceRes.serviceStatus+"</th>\n" +
+        "                        </tr>");
+    $("#table").append("</tr>");
+    setInterfaceFilterStyle();
+    if(response.content.length===0){
+        $("#nodata").append("<svg class='nodataIcon' style='width:80px;height:80px;margin-top: 72px;vertical-align:middle'><image xlink:href='http://8.130.175.232:18090/iserver/services/../manager/static/css/iserver/images/menu/newpage/nodata.svg' width='80' height='80'/></svg>");
+        $("#nodata").append("<div class='nodataText'>"+listServiceRes.nodata+"</div>");
+        return;
+    }
+    for(var i=0;i<response.content.length;i++){
+        var item = response.content[i]
+        var interfaceName = interfaceTypeName[item.interfaceType];
+        if(interfaceName === undefined){
+            interfaceName = item.interfaceType;
+        }
+        var componentName = serviceTypeName[item.componentType];
+        if(componentName === undefined){
+            componentName = serviceTypeRes.DomainService;
+        }
+        var status = "";
+        if(item.status==="Created"){
+            status = "<img style='width:16px;height:16px;' title='"+listServiceRes.created+"' src='http://8.130.175.232:18090/iserver/services/../manager/static/img/inited.png' />";
+        }else{
+            status = "<img style='width:16px;height:16px;' title='"+listServiceRes.started+"' src='http://8.130.175.232:18090/iserver/services/../manager/static/img/started.png' />";
+        }
+        var serviceAddress = "http://8.130.175.232:18090/iserver/services/"+item.name;
+        var alias = item.alias;
+        $("#table").append("<tr class='serviceItem'><td class='wordBreak serviceLink'><a href='"+serviceAddress+"' target='_blank' data-toggle='tooltip' title='"+item.name+"'>"+item.name+"</td><td class='wordBreak serviceLink''><a href='"+serviceAddress+"' target='_blank' data-toggle='tooltip' title='"+xSSFilter(alias)+"'>"+xSSFilter(alias)+"</a></td><td class='wordBreak'>"+interfaceName+"</td><td class='wordBreak'>"+componentName+"</td><td>"+status+"</td></tr>");
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+}
+
+$("#searchByKeywords").click(function(){
+    search();
+})
+$("#keywords").keydown(function(event){
+    if((event.keyCode || event.which) === 13){
+        search();
+    }
+})
+
+$(".serviceLink").mouseover(function(){
+    const contentWidth=$(this).context.offsetWidth - 16;
+    const childWidth=$(this).context.children[0].offsetWidth;
+    if(childWidth < contentWidth){
+        $('[data-toggle="tooltip"]').tooltip('hide');
+    }else{
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+
+})
+function search(){
+    const newLineReg = /[\r\n]/g
+    keywords = $("#keywords").val();
+    if(keywords.length > 1000){
+        $("#searchErrMsg").html(listServiceRes.lengthErrMsg);
+    }else if(newLineReg.test(keywords)){
+        $("#searchErrMsg").html(listServiceRes.CRLFErrMsg);
+    }else {
+        $("#searchErrMsg").empty();
+        currentPage = 1;
+        fetchData(100,currentPage,keywords,status,componentType,interfaceTypes);
+    }
+}
+function setComponentType(type){
+    componentType = type;
+    currentPage = 1;
+    changeComponentStyle(type);
+    fetchData(100,currentPage,keywords,status,componentType,interfaceTypes);
+}
+/*function showSelectInterfaceType(){
+    document.getElementById("selectInterfacePanel").style.display = 'block';
+}*/
+function getAllInterfaceFilterTypes(){
+    if ("false" === "true") {
+        return ['ALL','OGC','REST','other'];
+    }
+    return ['ALL','OGC','REST','Handler','other'];
+}
+function setInterfaceFilterStyle(){
+    var allFilterTypes = getAllInterfaceFilterTypes();
+    if(selectedInterfaceFilter===''){
+        selectedInterfaceFilter='ALL';
+        selectedInterface=$("#ALLInterface").html();
+    }
+    for(var i=0;i<allFilterTypes.length;i++){
+        let color = '';
+        if(selectedInterfaceFilter === allFilterTypes[i]){
+            if(theme && theme.value==="dark"){
+                color = '#e04c40';
+            }else{
+                color = '#ff483e';
+            }
+            selectedInterface=$("#"+allFilterTypes[i]+'Interface').html();
+        }
+        document.getElementById(allFilterTypes[i]+'Interface').style.color = color;
+    }
+}
+function setInterfaceType(value){
+    selectedInterfaceFilter = value;
+    setInterfaceFilterStyle();
+    interfaceTypes = getInterfaceTypes(value);
+    fetchData(100,currentPage,keywords,status,componentType,interfaceTypes);
+}
+
+function getInterfaceTypes(catalog){
+    if(catalog===undefined || catalog===null || catalog === 'ALL'){
+        return "";
+    }
+    if(catalog === 'OGC'){
+        return "com.supermap.services.wms.WMSServlet,com.supermap.services.wfs.WFSServlet,com.supermap.services.wmts.WMTSServlet,com.supermap.services.wcs.WCSServlet,com.supermap.services.wps.WPSServlet";
+    }else if(catalog === 'REST'){
+        return "com.supermap.services.rest.JaxrsServletForJersey,com.supermap.services.rest.RestServlet";
+    }else if(catalog === 'Handler'){
+        return "com.supermap.services.handler.HandlerServlet";
+    }else{
+        return "other";
+    }
+}
+var ComponentTypeElementIdMap={
+    'com.supermap.services.components.impl.MapImpl': "MapImpl",
+    'com.supermap.services.components.impl.DataImpl': "DataImpl",
+    'com.supermap.services.components.impl.DataHistoryImpl': "DataHistoryImpl",
+    'com.supermap.services.components.impl.RealspaceImpl': "RealspaceImpl",
+    'com.supermap.services.components.impl.PlotImpl': "PlotImpl",
+    'com.supermap.services.components.impl.TransportationAnalystImpl': "TransportationAnalystImpl",
+    'com.supermap.services.components.impl.NetworkAnalyst3DImpl': "NetworkAnalyst3DImpl",
+    'com.supermap.services.components.impl.SpatialAnalystImpl': "SpatialAnalystImpl",
+    'com.supermap.services.components.impl.AddressMatchImpl': "AddressMatchImpl",
+    'com.supermap.services.components.impl.TrafficTransferAnalystImpl': "TrafficTransferAnalystImpl",
+    'com.supermap.server.host.webapp.handlers.geoprocessing.GeoprocessingServer': "GeoprocessingServer",
+    'com.supermap.machinelearning.handler.MachineLearningServer':"MachineLearningServer",
+    'com.supermap.service.dataflow.DataFlowServiceInstance': "DataFlowServiceInstance",
+    'com.supermap.processing.jobserver.ProcessingServer': "ProcessingServer",
+    'com.supermap.services.components.impl.DataCatalogImpl': "DataCatalogImpl",
+    'com.supermap.services.components.impl.WebPrintingImpl': "WebPrintingImpl",
+    'com.supermap.services.components.impl.ImageImpl': "ImageImpl",
+    'com.supermap.services.components.impl.GeometryComponentImpl': "GeometryComponentImpl",
+    'com.supermap.services.components.impl.VideoHLSComponentImpl': "VideoHLSComponentImpl",
+    'domainComponent': "domainComponent",
+    'componentSetType': "componentSetType"
+};
+function changeComponentStyle(selectedType){
+    var type = selectedType;
+    if(theme && theme.value === "dark"){
+        document.getElementById("allComponent").style.backgroundColor = (type === ''?'#ffffff0a':"");
+        document.getElementById("allComponent").style.fontWeight = (type === ''?'bold':"");
+        document.getElementById("allComponent").style.color = (type === ''?'#e04c40':"");
+        document.getElementById("allComponent").style.borderLeft = (type === ''?'2px solid #e04c40':"2px solid transparent");
+        var supportComponentTypeElementIdMap = getSupportComponentTypeElementIdMap();
+        if(type === ''){
+            selectedCompenent=$("#allComponent span").html();
+        }
+        for(var typeName in supportComponentTypeElementIdMap){
+            var eleId = supportComponentTypeElementIdMap[typeName];
+            document.getElementById(eleId).style.backgroundColor = (type === typeName?'#ffffff0a':"");
+            document.getElementById(eleId).style.color = (type === typeName?'#e04c40':"");
+            document.getElementById(eleId).style.fontWeight = (type === typeName?'bold':"");
+            document.getElementById(eleId).style.borderLeft = (type === typeName?'2px solid #e04c40':"2px solid transparent");
+            if(type === typeName){
+                selectedCompenent=$("#"+eleId+" span").html();
+            }
+        }
+    }else{
+        document.getElementById("allComponent").style.backgroundColor = (type === ''?'#ff483e0a':"");
+        document.getElementById("allComponent").style.fontWeight = (type === ''?'bold':"");
+        document.getElementById("allComponent").style.color = (type === ''?'#ff483e':"");
+        document.getElementById("allComponent").style.borderLeft = (type === ''?'2px solid #ff483e':"2px solid transparent");
+        var supportComponentTypeElementIdMap = getSupportComponentTypeElementIdMap();
+        if(type === ''){
+            selectedCompenent=$("#allComponent span").html();
+        }
+        for(var typeName in supportComponentTypeElementIdMap){
+            var eleId = supportComponentTypeElementIdMap[typeName];
+            document.getElementById(eleId).style.backgroundColor = (type === typeName?'#ff483e0a':"");
+            document.getElementById(eleId).style.color = (type === typeName?'#ff483e':"");
+            document.getElementById(eleId).style.fontWeight = (type === typeName?'bold':"");
+            document.getElementById(eleId).style.borderLeft = (type === typeName?'2px solid #ff483e':"2px solid transparent");
+            if(type === typeName){
+                selectedCompenent=$("#"+eleId+" span").html();
+            }
+        }
+    }
+}
+
+function getSupportComponentTypeElementIdMap(){
+    if ("false" === "true") {
+        return {
+            'com.supermap.services.components.impl.MapImpl': "MapImpl",
+            'com.supermap.services.components.impl.DataImpl': "DataImpl",
+            'com.supermap.services.components.impl.RealspaceImpl': "RealspaceImpl",
+            'com.supermap.services.components.impl.GeometryComponentImpl': "GeometryComponentImpl"
+        };
+    }
+    return ComponentTypeElementIdMap;
+}
+function formatNum(num) {
+    return ('' + num).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+//防止XSS攻击
+function xSSFilter(val) {
+    val = val.toString();
+    val = val.replace(/</g, "&lt;");
+    val = val.replace(/>/g, "&gt;");
+    val = val.replace(/"/g, "&quot;");
+    val = val.replace(/'/g, "&#39;");
+    return val;
+}
+
+$(document).ready(function(){
+	$(".subHeadMenu .btn-group").hover(
+		function(){
+			$(this).addClass('open');
+			$(".subHeadMenu .btn-group .closesvg").hide();
+			$(".subHeadMenu .btn-group .opensvg").show();
+		},
+		function(){
+			$(this).removeClass('open');
+			$(".subHeadMenu .closesvg").show();
+			$(".subHeadMenu .opensvg").hide();
+		}
+	)
+	$("#language").hover(
+		function(){
+			$(this).addClass('open');
+			$("#language .closesvg").hide();
+			$("#language .opensvg").show();
+		},
+		function(){
+			$(this).removeClass('open');
+			$("#language .closesvg").show();
+			$("#language .opensvg").hide();
+		}
+	)
+
+	$(".subHeadMenu .btn-group").on('show.bs.dropdown',function(){
+		$(".subHeadMenu .btn-group .closesvg").hide();
+		$(".subHeadMenu .btn-group .opensvg").show();
+	})
+	$(".subHeadMenu .btn-group").on('hide.bs.dropdown',function(){
+		$(".subHeadMenu .btn-group .closesvg").show();
+		$(".subHeadMenu .btn-group .opensvg").hide();
+	})
+	$("#language").on('show.bs.dropdown',function(){
+		$("#language .closesvg").hide();
+		$("#language .opensvg").show();
+	})
+	$("#language").on('hide.bs.dropdown',function(){
+		$("#language .closesvg").show();
+		$("#language .opensvg").hide();
+	})
+    $("#theme").hover(
+		function(){
+			$(this).addClass('open');
+			$("#theme .closesvg").hide();
+			$("#theme .opensvg").show();
+		},
+		function(){
+			$(this).removeClass('open');
+			$("#theme .closesvg").show();
+			$("#theme .opensvg").hide();
+		}
+	)
+	$("#theme").on('show.bs.dropdown',function(){
+		$("#theme .closesvg").hide();
+		$("#theme .opensvg").show();
+	})
+	$("#theme").on('hide.bs.dropdown',function(){
+		$("#theme .closesvg").show();
+		$("#theme .opensvg").hide();
+	})
+ });
+
+function selectTheme(theme){
+    var currentTheme = JSON.parse(localStorage.getItem("pro__DEFAULT_THEME"));
+    if (currentTheme && currentTheme.value === theme) {
+        return;
+    }
+    var themeItem = {
+        "value": theme ,
+        "expire": null,
+    }
+    localStorage.setItem("pro__DEFAULT_THEME", JSON.stringify(themeItem));
+    window.location.reload();
+}
+
+function getRoles() {
+    $.ajax({
+        url: RoleUrl,
+        success: function (res) {
+            if(!(res.roles) || !((res.roles.includes('ADMIN') || res.roles.includes('PUBLISHER') || res.managePermitted.includes('Service Publishing')))
+                || res.roles.length === 0){
+                var element = document.getElementById("servicesManageTop");
+                element.style.display = "none";
+            }
+        }
+    })
+}
+
+    getRoles();
+</script>
+<div class="foot">
+	<div id="footer" style="background:#ffffff;float:left;position:relative;text-align:center;height:44px;width:100%;border:none;margin-top:80px">
+		<p style="margin-top:15px;color:rgba(0,0,0,0.45);font-size:12px;line-height:16px">Powered by SuperMap iServer 2025 (12.0.1.0-win64) </a> © 2000-2025 <a style="color:rgba(0,0,0,0.45);text-decoration:none;" href="http://www.supermap.com.cn">SuperMap Software Co., Ltd</a></p>
+	</div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var ieEd = false;
+                isEd = false;
+        if (isEd){
+            var title = document.title;
+            document.title=title+"「SuperMap Education」";
+        }
+        // LicenseInfoTitle();
+    })
+    function LicenseInfoTitle() {
+        var url = "http://8.130.175.232:18090/iserver/services";
+        let keyPath = "/iserver";
+        let index = url.indexOf(keyPath);
+        if(index !== -1){
+            url = url.substring(0,index + keyPath.length);
+        }
+        url = url + "/manager/licenseInfo.json";
+        $.ajax({
+            type: "GET",
+            url: url,
+            async: false,
+            dataType: "json",
+            success: function (liceseInfo) {
+                var title = document.title;
+                if(!(!liceseInfo.shortCompanyName)){
+                    document.title = title+" "+liceseInfo.shortCompanyName;
+                }
+            }
+        });
+    }
+</script>

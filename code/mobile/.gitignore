@@ -1,0 +1,29 @@
+# ===== Android 工程专用（根 .gitignore 已覆盖 target/.idea/node_modules 等）=====
+# 构建产物
+.gradle/
+build/
+app/build/
+*.apk
+*.aab
+*.ap_
+*.dex
+captures/
+.cxx/
+
+# 本地配置（SDK 路径，不入库）
+local.properties
+
+# IDE
+*.iml
+.idea/
+
+# 签名
+keystore.properties
+*.jks
+*.keystore
+
+# SuperMap 商业 License（不外传）
+*.slm
+
+# native 临时
+*.so.tmp

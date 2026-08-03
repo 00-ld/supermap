@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ===== iOS 极简高保真 Premium 主题 ===== -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="android:fontFamily">@font/noto_sans_sc</item>
+        <item name="fontFamily">@font/noto_sans_sc</item>
+        <item name="android:textViewStyle">@style/AppTextView</item>
+        <item name="android:buttonStyle">@style/AppButtonPrimary</item>
+    </style>
+
+    <!-- iOS 皇家蓝圆角主按钮 -->
+    <style name="AppButtonPrimary" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/bg_button_primary</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">@font/noto_sans_sc</item>
+        <item name="android:elevation">2dp</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
+    <!-- 柔和珊瑚红圆角按钮 -->
+    <style name="AppButtonDanger" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/bg_button_danger</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">@font/noto_sans_sc</item>
+        <item name="android:elevation">2dp</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
+    <!-- 纯白质感输入框 -->
+    <style name="LoginField">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:background">@drawable/bg_input_field</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textColorHint">@color/textMuted</item>
+        <item name="android:fontFamily">@font/noto_sans_sc</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="TaskDetailLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">3dp</item>
+    </style>
+
+    <!-- 覆盖旧设备的系统手写字体，确保业务文本保持工具型、可快速扫读。 -->
+    <style name="AppTextView" parent="@android:style/Widget.TextView">
+        <item name="android:fontFamily">@font/noto_sans_sc</item>
+        <item name="fontFamily">@font/noto_sans_sc</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+</resources>
