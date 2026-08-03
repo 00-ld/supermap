@@ -1,0 +1,106 @@
+{
+	"layerInfos" : 
+	[
+		{
+			"dataSourceName" : "二维地图数据",
+			"fieldInfos" : 
+			[
+				{
+					"alias" : "SmID",
+					"isRequired" : true,
+					"isSystem" : true,
+					"name" : "SmID",
+					"size" : 4,
+					"type" : "int32"
+				},
+				{
+					"alias" : "SmUserID",
+					"isRequired" : true,
+					"isSystem" : false,
+					"name" : "SmUserID",
+					"size" : 4,
+					"type" : "int32"
+				},
+				{
+					"alias" : "SmMaxZ",
+					"isRequired" : true,
+					"isSystem" : true,
+					"name" : "SmMaxZ",
+					"size" : 8,
+					"type" : "double"
+				},
+				{
+					"alias" : "SmMinZ",
+					"isRequired" : true,
+					"isSystem" : true,
+					"name" : "SmMinZ",
+					"size" : 8,
+					"type" : "double"
+				},
+				{
+					"alias" : "SmIndexKey",
+					"isRequired" : true,
+					"isSystem" : true,
+					"name" : "SmIndexKey",
+					"size" : 0,
+					"type" : "geometry"
+				},
+				{
+					"alias" : "ModelName",
+					"isRequired" : false,
+					"isSystem" : false,
+					"name" : "ModelName",
+					"size" : 255,
+					"type" : "text"
+				},
+				{
+					"alias" : "ModelPath",
+					"isRequired" : false,
+					"isSystem" : false,
+					"name" : "ModelPath",
+					"size" : 255,
+					"type" : "text"
+				},
+				{
+					"alias" : "SmSdriW",
+					"isRequired" : true,
+					"isSystem" : true,
+					"name" : "SmSdriW",
+					"size" : 8,
+					"type" : "double"
+				},
+				{
+					"alias" : "SmSdriN",
+					"isRequired" : true,
+					"isSystem" : true,
+					"name" : "SmSdriN",
+					"size" : 8,
+					"type" : "double"
+				},
+				{
+					"alias" : "SmSdriE",
+					"isRequired" : true,
+					"isSystem" : true,
+					"name" : "SmSdriE",
+					"size" : 8,
+					"type" : "double"
+				},
+				{
+					"alias" : "SmSdriS",
+					"isRequired" : true,
+					"isSystem" : true,
+					"name" : "SmSdriS",
+					"size" : 8,
+					"type" : "double"
+				}
+			],
+			"idRange" : 
+			{
+				"maxID" : 1,
+				"minID" : 1
+			},
+			"layerName" : "storey_all"
+		}
+	],
+	"version" : "1.0"
+}

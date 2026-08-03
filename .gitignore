@@ -52,3 +52,6 @@ hs_err_pid*.log
 *.key
 *.pem
 *.p12
+
+# ===== 超大 UDBX 数据文件（不入库）=====
+*.udbx

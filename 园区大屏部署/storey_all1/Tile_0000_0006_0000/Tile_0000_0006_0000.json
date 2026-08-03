@@ -1,0 +1,161 @@
+{
+	"lodTreeExport" : 
+	{
+		"name" : "Tile_0000_0006_0000",
+		"tileInfo" : 
+		{
+			"boundingBox" : 
+			{
+				"center" : 
+				{
+					"x" : -56.064956665039063,
+					"y" : -46.634660720825195,
+					"z" : 6805.5
+				},
+				"xExtent" : 
+				{
+					"x" : 2.30047607421875,
+					"y" : 0.0,
+					"z" : 0.0
+				},
+				"yExtent" : 
+				{
+					"x" : 0.0,
+					"y" : 8.7146625518798828,
+					"z" : 0.0
+				},
+				"zExtent" : 
+				{
+					"x" : 0.0,
+					"y" : 0.0,
+					"z" : 13.39990234375
+				}
+			},
+			"children" : 
+			[
+				{
+					"tileInfo" : 
+					{
+						"boundingBox" : 
+						{
+							"center" : 
+							{
+								"x" : -56.064956665039063,
+								"y" : -46.634660720825195,
+								"z" : 6805.5
+							},
+							"xExtent" : 
+							{
+								"x" : 2.30047607421875,
+								"y" : 0.0,
+								"z" : 0.0
+							},
+							"yExtent" : 
+							{
+								"x" : 0.0,
+								"y" : 8.7146625518798828,
+								"z" : 0.0
+							},
+							"zExtent" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0,
+								"z" : 13.39990234375
+							}
+						},
+						"children" : 
+						[
+							{
+								"tileInfo" : 
+								{
+									"boundingBox" : 
+									{
+										"center" : 
+										{
+											"x" : -56.064956665039063,
+											"y" : -46.634660720825195,
+											"z" : 6805.5
+										},
+										"xExtent" : 
+										{
+											"x" : 2.30047607421875,
+											"y" : 0.0,
+											"z" : 0.0
+										},
+										"yExtent" : 
+										{
+											"x" : 0.0,
+											"y" : 8.7146625518798828,
+											"z" : 0.0
+										},
+										"zExtent" : 
+										{
+											"x" : 0.0,
+											"y" : 0.0,
+											"z" : 13.39990234375
+										}
+									},
+									"children" : 
+									[
+										{
+											"tileInfo" : 
+											{
+												"boundingBox" : 
+												{
+													"center" : 
+													{
+														"x" : -56.064956665039063,
+														"y" : -46.634660720825195,
+														"z" : 6805.5
+													},
+													"xExtent" : 
+													{
+														"x" : 2.30047607421875,
+														"y" : 0.0,
+														"z" : 0.0
+													},
+													"yExtent" : 
+													{
+														"x" : 0.0,
+														"y" : 8.7146625518798828,
+														"z" : 0.0
+													},
+													"zExtent" : 
+													{
+														"x" : 0.0,
+														"y" : 0.0,
+														"z" : 13.39990234375
+													}
+												},
+												"lodNum" : 3,
+												"modelPath" : "Tile_0000_0006_0000_0000_0000.s3mb",
+												"rangeMode" : "geometricError",
+												"rangeValue" : 4.0000002152768106,
+												"state" : "AllLeaf"
+											}
+										}
+									],
+									"lodNum" : 2,
+									"modelPath" : "Tile_0000_0006_0000_0001_0000.s3mb",
+									"rangeMode" : "geometricError",
+									"rangeValue" : 7.9989763261381146,
+									"state" : "NoLeaf"
+								}
+							}
+						],
+						"lodNum" : 1,
+						"modelPath" : "Tile_0000_0006_0000_0002_0000.s3mb",
+						"rangeMode" : "geometricError",
+						"rangeValue" : 15.861000785367409,
+						"state" : "NoLeaf"
+					}
+				}
+			],
+			"lodNum" : 0,
+			"modelPath" : "Tile_0000_0006_0000.s3mb",
+			"rangeMode" : "geometricError",
+			"rangeValue" : 0.0,
+			"state" : "NoLeaf"
+		}
+	}
+}

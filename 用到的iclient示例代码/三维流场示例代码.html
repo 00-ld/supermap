@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--
+        示例说明：三维流场（粒子速度场）
+        - 引擎选择：通过 config.js 获取引擎类型；本示例在 WebGL2 运行
+        - 资源引用：widgets.css、bootstrap、pretty.css、style.css、sunLightAnalysis.css、jQuery、config.js、SuperMap3D.js
+        - 场景容器：#Container 渲染三维视图；#loadingbar 为加载动画；#toolbar 为交互面板
+        - 参数控制：时序选择、渲染模式（图片/点图元）、图像单位（米/像素）、粒子大小/密度/速度
+        - 加载流程：创建 Viewer → 加载流场图层 → 设置相机视角 → 初始化时序与默认参数 → 绑定交互
+        - 效果说明：通过 particleVelocityFieldEffect 设置粒子大小、密度、速度、单位与渲染模式
+    -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>三维流场</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="./css/pretty.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
+    <link href="./style/sunLightAnalysis.css" rel="stylesheet">
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+    <script src="./js/config.js"></script>
+
+    <!-- 引入超图产品SDK -->
+    <script src="./js/loadSDK/loadSDK.js"></script>
+</head>
+
+<body>
+    <!-- 三维场景容器：SuperMap3D.Viewer 将在此渲染 -->
+    <div id="Container"></div>
+    <!-- 加载动画：页面初始化期间显示 -->
+    <div id='loadingbar' class="spinner">
+        <div class="spinner-container container1">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+        </div>
+        <div class="spinner-container container2">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+        </div>
+        <div class="spinner-container container3">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+        </div>
+    </div>
+    <!-- 工具栏：参数控制（时序、渲染模式、尺寸与密度、速度） -->
+    <div id='toolbar' style="position: absolute;left: 5px;top: 5px;">
+        <div class="titleBox">
+            <div class="titl">三维流场</div>
+            <span class="close2" aria-hidden="false">x</span>
+        </div>
+
+        <div class="inputBox">
+            <label class="lab" for="timeDim">选择时序</label>
+            <select id="timeDim" class="selectstyle">
+                <option value="" style="display: none">选择时序</option>
+            </select>
+        </div>
+        <div class="inputBox">
+            <label class="lab" for="particleMode">粒子渲染模式</label>
+            <select id="particleMode" class="selectstyle">
+                <option value="0" >图片</option>
+                <option value="1" selected>点图元</option>
+            </select>
+        </div>
+        <div class="inputBox" id="imageSizeInMetersBox">
+            <label class="lab" for="imageSizeInMeters">图像单位</label>
+            <select id="imageSizeInMeters" class="selectstyle">
+                <option value="1" selected>米</option>
+                <option value="0">像素</option>
+            </select>
+        </div>
+
+        <div class="inputBox">
+            <label class="lab">粒子大小</label>
+            <div class="rangeBox">
+                <input type="range" id="particleSize" min="1" max="50" step="1" value="2">
+            </div>
+            <input type="text" id="particleSize_input" size="1" value="10" style="color: #ffffff;margin-top: 3px;">
+        </div>
+
+        <div class="inputBox">
+            <label class="lab">水平粒子密度</label>
+            <div class="rangeBox">
+                <input type="range" id="horizontalDensity" min="1" max="100" step="1" value="1">
+            </div>
+            <input type="text" id="horizontalDensity_input" size="1" value="1" style="color: #ffffff;margin-top: 3px;">
+        </div>
+
+        <div class="inputBox">
+            <label class="lab">垂直粒子密度</label>
+            <div class="rangeBox">
+                <input type="range" id="verticalDensity" min="0.1" max="1.0" step="0.1" value="0.1">
+            </div>
+            <input type="text" id="verticalDensity_input" size="0.1" value="0.1"
+                style="color: #ffffff;margin-top: 3px;">
+        </div>
+
+        <div class="inputBox">
+            <label class="lab">粒子运动速度</label>
+            <div class="rangeBox">
+                <input type="range" id="velocityScale" min="1" max="20" step="1" value="1">
+            </div>
+            <input type="text" id="velocityScale_input" size="1" value="1" style="color: #ffffff;margin-top: 3px;">
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function onload(SuperMap3D) { // 页面加载入口：初始化 Viewer 并在场景就绪后调用 init
+            // 通过config.js中的getEngineType,获取引擎类型（EngineType）用于设置启动方式
+            let EngineType = getEngineType(); // 读取引擎类型配置（WebGL2/WebGPU）
+            let viewer = new SuperMap3D.Viewer('Container', { // 初始化 Viewer，禁用时间线
+                contextOptions: {
+                    contextType: 2, // Webgl2:2 ; WebGPU:3 ；三维流场暂不支持WebGPU引擎
+                },
+                timeline: false // 关闭时间线控件
+            });
+
+            viewer.scenePromise.then(function (scene) { // 场景准备完成后，执行初始化
+                init(SuperMap3D, scene, viewer);
+            });
+        }
+
+        function init(SuperMap3D, scene, viewer) {
+            window.viewer = viewer; // 暴露 viewer 到全局，便于调试与交互
+            viewer.resolutionScale = window.devicePixelRatio; // 提升渲染清晰度（按设备像素比）
+
+            // 关闭天空盒、太阳、天空大气、地形深度测试与地球显示，突出流场效果
+            scene.skyBox.show = false; // 关闭天空盒
+            scene.sun.show = false; // 关闭太阳
+            scene.skyAtmosphere.show = false; // 关闭天空大气
+            scene.globe.depthTestAgainstTerrain = false; // 禁用地形深度测试
+            scene.skyBox.show = false; // 关闭天空盒（重复设置，确保隐藏）
+            scene.fog.enabled = false; // 关闭雾效
+            scene.globe.show = false; // 隐藏地球
+
+            const url = 'https://www.supermapol.com/realspace/services/3D-SanWeiLiuChang/rest/realspace/datas/%E4%B8%89%E7%BB%B4%E6%B5%81%E5%9C%BA%E7%94%A8%E4%BE%8B%E6%95%B0%E6%8D%AE/config'; // 三维流场图层配置（SCP）地址
+            const promise = scene.addS3MTilesLayerByScp(url, {
+                name: 'field3d'
+            });
+
+            promise.then(function (layer) { // 图层加载完成后：设置视角、初始化参数并绑定交互
+                $('#loadingbar').remove();
+
+                // 根据图层定位
+                // scene.camera.setView({
+                //     destination: new SuperMap3D.Cartesian3.fromRadians(
+                //         (layer.layerBounds.west + layer.layerBounds.east) * 0.5,
+                //         (layer.layerBounds.south + layer.layerBounds.north) * 0.5,
+                //         1000
+                //     ),
+                //     orientation: {
+                //         pitch: -Math.PI / 2
+                //     }
+                // });
+
+                scene.camera.setView({
+                    destination: new SuperMap3D.Cartesian3.fromDegrees(115.8817275215527, 40.63164710941161, 30581.897563948303), // 经纬度定位（lon, lat, height）
+                    orientation: {
+                        heading: 2.3128577760886637,
+                        pitch: -0.37505118499938606,
+                        roll: 0.000035877104795467574
+                    }
+                });
+
+                // 初始化时序菜单与默认参数，并应用分层设色
+                initLayer(layer);
+
+                // 默认使用点图元的方式显示流场数据
+                layer.particleVelocityFieldEffect.particleMode = 1; // 1：点图元模式；0：图片模式
+
+                $('#timeDim').on("change", function () { // 切换时序：定位到栅格字段的指定时间序列
+                    const index = parseInt($(this).val());
+                    layer.temporalSetting.setLoaction(SuperMap3D.CategoryFieldName.RasterField, index);
+                });
+
+                $("#particleMode").on("change", function () { // 切换粒子渲染模式，并联动粒子大小与单位
+                    const mode = parseFloat($(this).val());
+                    layer.particleVelocityFieldEffect.particleMode = mode;
+
+                    // 点图元模式隐藏图像单位选项，切换时改为合适的粒子大小
+                    if(mode === 1){
+                        const size = 2;
+                        layer.particleVelocityFieldEffect.particleSize = size;
+                        $("#imageSizeInMetersBox").hide(); // 隐藏图像单位选项（点图元模式）
+                        $("#particleSize").val(size);
+                        $('#particleSize_input').val(size);
+                    }else{
+                        const size = 20;
+                        layer.particleVelocityFieldEffect.particleSize = size;
+                        $("#imageSizeInMetersBox").show(); // 显示图像单位选项（图片模式）
+                        $("#particleSize").val(size);
+                        $('#particleSize_input').val(size);
+                    }
+                });
+
+                $('#imageSizeInMeters').on("change", function () { // 设置图像单位（米/像素），影响粒子尺寸换算
+                    const value = Boolean(parseInt($(this).val()));
+                    layer.particleVelocityFieldEffect.imageSizeInMeters = value;
+                });
+
+
+                $("#particleSize").mousemove(function () { // 滑块实时更新：粒子大小
+                    const size = $(this).val();
+                    layer.particleVelocityFieldEffect.particleSize = size;
+                    $('#particleSize_input').val(`${size}`);
+                });
+                $("#horizontalDensity").mousemove(function () { // 滑块实时更新：水平粒子密度
+                    const hDensity = $(this).val();
+                    layer.particleVelocityFieldEffect.horizontalDensity = hDensity;
+                    $('#horizontalDensity_input').val(`${hDensity}`);
+                });
+                $("#verticalDensity").mousemove(function () { // 滑块实时更新：垂直粒子密度
+                    const vDensity = $(this).val();
+                    layer.particleVelocityFieldEffect.verticalDensity = vDensity;
+                    $('#verticalDensity_input').val(`${vDensity}`);
+                });
+                $("#velocityScale").mousemove(function () { // 滑块实时更新：粒子运动速度缩放
+                    const scale = $(this).val();
+                    layer.particleVelocityFieldEffect.velocityScale = scale;
+                    $('#velocityScale_input').val(`${scale}`);
+                });
+
+
+            }, function (e) {
+                consoloe.log(e); // 加载失败日志（注意：consoloe 拼写错误，应为 console）
+            });
+
+            function initLayer(layer) { // 初始化时序菜单与默认参数，并同步 UI 控件
+                $('#timeDim').empty();//先清空options
+
+                let menu = document.getElementById('timeDim');
+                let fieldName = layer.temporalSetting.getFieldName(SuperMap3D.CategoryFieldName.RasterField); // 获取栅格字段名称，用于时序菜单
+
+                let timeSize = layer.temporaInfos[fieldName].sizeInfo.allTemporalCount; // 总时序数量
+                for (let i = 1; i <= timeSize; i++) {
+                    var option = document.createElement('option');
+                    option.innerHTML = `时序-${i}`; // 菜单项显示文本
+                    option.value = parseInt(i);
+                    menu.appendChild(option);
+                }
+                $('#layersList').val(1);
+
+
+                layer.particleVelocityFieldEffect.velocityScale = 10; // 默认速度缩放
+                layer.particleVelocityFieldEffect.particleSize = 2; // 默认粒子大小
+                layer.particleVelocityFieldEffect.imageSizeInMeters = true; // 图像单位：米
+                layer.particleVelocityFieldEffect.horizontalDensity = 50; // 默认水平密度
+
+                $("#velocityScale").val(10); // 同步 UI：速度缩放
+                $("#particleSize").val(2); // 同步 UI：粒子大小
+                $("#horizontalDensity").val(50); // 同步 UI：水平密度
+                $("#particleMode").val(1);
+
+                setHypsometric(layer); // 应用分层设色增强效果层次
+            }
+
+
+            function setHypsometric(layer) { // 分层设色：按数值范围与颜色表渲染
+                var hyp = new SuperMap3D.HypsometricSetting();
+
+                let floor = 0; // 起始值
+                let ceil = 0.1; // 结束值
+                let dx = (ceil - floor) / 5; // 分层步长
+                const colorTable = new SuperMap3D.ColorTable();
+                colorTable.insert(floor, new SuperMap3D.Color(255 / 255, 35 / 255, 35 / 255, 1.0));
+                colorTable.insert(floor + dx, new SuperMap3D.Color(223 / 255, 202 / 255, 67 / 255, 1.0));
+                colorTable.insert(floor + dx * 2, new SuperMap3D.Color(116 / 255, 205 / 255, 180 / 255, 1.0));
+                colorTable.insert(floor + dx * 3, new SuperMap3D.Color(107 / 255, 159 / 255, 204 / 255, 1.0));
+                colorTable.insert(floor + dx * 4, new SuperMap3D.Color(107 / 255, 143 / 255, 204 / 255, 1.0));
+
+                hyp.ColorTable = colorTable;
+                //设置图层分层设色属性
+                layer.hypsometricSetting = {
+                    hypsometricSetting: hyp,
+                    analysisMode: SuperMap3D.HypsometricSettingEnum.AnalysisRegionMode.ARM_ALL
+                };
+            }
+        }
+    </script>
+</body>
+
+</html>

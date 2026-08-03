@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SuperMapTransformation xmlns:sml="http://www.supermap.com.cn/sml" version="20100630" Description="UGC settiong file create by SuperMap UGC 6.0">
+  <sml:TransformationMode>1</sml:TransformationMode>
+  <sml:ContrlPoint isEnable="true" ID="Point_1">
+    <sml:OriginalPointX>-455.499</sml:OriginalPointX>
+    <sml:OriginalPointY>222.642</sml:OriginalPointY>
+    <sml:TargetPointX>457,470.18</sml:TargetPointX>
+    <sml:TargetPointY>3,854,923.464</sml:TargetPointY>
+  </sml:ContrlPoint>
+  <sml:ContrlPoint isEnable="true" ID="Point_2">
+    <sml:OriginalPointX>-448.346</sml:OriginalPointX>
+    <sml:OriginalPointY>-180.638</sml:OriginalPointY>
+    <sml:TargetPointX>457,477.333</sml:TargetPointX>
+    <sml:TargetPointY>3,854,520.184</sml:TargetPointY>
+  </sml:ContrlPoint>
+  <sml:ContrlPoint isEnable="true" ID="Point_3">
+    <sml:OriginalPointX>-36.004</sml:OriginalPointX>
+    <sml:OriginalPointY>151.265</sml:OriginalPointY>
+    <sml:TargetPointX>457,889.675</sml:TargetPointX>
+    <sml:TargetPointY>3,854,852.087</sml:TargetPointY>
+  </sml:ContrlPoint>
+  <sml:ContrlPoint isEnable="true" ID="Point_4">
+    <sml:OriginalPointX>455.687</sml:OriginalPointX>
+    <sml:OriginalPointY>-179.136</sml:OriginalPointY>
+    <sml:TargetPointX>458,381.366</sml:TargetPointX>
+    <sml:TargetPointY>3,854,521.686</sml:TargetPointY>
+  </sml:ContrlPoint>
+</SuperMapTransformation>
