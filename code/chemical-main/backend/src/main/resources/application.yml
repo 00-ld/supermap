@@ -50,3 +50,13 @@ qweather:
   auth-mode: ${QWEATHER_AUTH_MODE:key}
   language: ${QWEATHER_LANG:zh}
   unit: ${QWEATHER_UNIT:m}
+
+decision-model:
+  enabled: ${DECISION_MODEL_ENABLED:false}
+  provider: ${DECISION_MODEL_PROVIDER:qwen}
+  model: ${DECISION_MODEL_NAME:qwen-plus}
+  base-url: ${DECISION_MODEL_BASE_URL:https://dashscope.aliyuncs.com/compatible-mode/v1}
+  api-key: ${DECISION_MODEL_API_KEY:}
+  timeout-ms: ${DECISION_MODEL_TIMEOUT_MS:30000}
+  temperature: ${DECISION_MODEL_TEMPERATURE:0.1}
+  max-tokens: ${DECISION_MODEL_MAX_TOKENS:1800}

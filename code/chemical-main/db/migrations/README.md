@@ -1,5 +1,7 @@
 # Migrations 目录
 
+- `005_add_ai_decision_advice.sql`：新增智巡 AI 建议、规则兜底和人工审核记录表。
+
 本目录用于存放数据库版本迁移脚本。当前规范迁移入口为：
 
 - `001_add_user_role.sql`：为用户表补角色字段。

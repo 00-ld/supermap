@@ -16,5 +16,15 @@ analysis:
   service:
     url: ${ANALYSIS_SERVICE_URL:http://127.0.0.1:8001/api/analysis/person}
 
+decision-model:
+  enabled: ${DECISION_MODEL_ENABLED:false}
+  provider: ${DECISION_MODEL_PROVIDER:qwen}
+  model: ${DECISION_MODEL_NAME:qwen-plus}
+  base-url: ${DECISION_MODEL_BASE_URL:https://dashscope.aliyuncs.com/compatible-mode/v1}
+  api-key: ${DECISION_MODEL_API_KEY:}
+  timeout-ms: ${DECISION_MODEL_TIMEOUT_MS:30000}
+  temperature: ${DECISION_MODEL_TEMPERATURE:0.1}
+  max-tokens: ${DECISION_MODEL_MAX_TOKENS:1800}
+
 inspection:
   default-location: ${INSPECTION_DEFAULT_LOCATION:核心作业区 A7}

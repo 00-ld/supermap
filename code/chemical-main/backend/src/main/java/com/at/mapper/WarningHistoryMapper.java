@@ -12,6 +12,8 @@ public interface WarningHistoryMapper {
     // 查询所有记录（无参数）
     List<WarningHistory> selectList();
 
+    WarningHistory selectById(Integer id);
+
     // 删除记录
     int deleteById(Integer id);
 }

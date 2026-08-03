@@ -648,3 +648,29 @@ ON DUPLICATE KEY UPDATE
     source = VALUES(source),
     quality_status = VALUES(quality_status),
     raw_payload = VALUES(raw_payload);
+
+-- AI patrol decision advice and human review records.
+CREATE TABLE IF NOT EXISTS ai_decision_advice (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    alert_id INT DEFAULT NULL,
+    car_id INT NOT NULL,
+    alert_type VARCHAR(40) NOT NULL DEFAULT 'GAS_CONCENTRATION',
+    source VARCHAR(20) NOT NULL DEFAULT 'RULE',
+    model VARCHAR(80) DEFAULT NULL,
+    risk_level VARCHAR(20) NOT NULL DEFAULT 'MEDIUM',
+    summary VARCHAR(500) NOT NULL,
+    risk_explanation TEXT NOT NULL,
+    recommendations TEXT NOT NULL,
+    allowed_actions TEXT NOT NULL,
+    raw_response MEDIUMTEXT,
+    fallback_reason VARCHAR(500) DEFAULT NULL,
+    review_status VARCHAR(20) NOT NULL DEFAULT 'PENDING',
+    reviewed_by VARCHAR(100) DEFAULT NULL,
+    review_comment VARCHAR(500) DEFAULT NULL,
+    reviewed_at DATETIME DEFAULT NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    KEY idx_ai_decision_advice_alert (alert_id),
+    KEY idx_ai_decision_advice_created (created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='AI decision advice and review records';

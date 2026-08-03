@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.at.mapper.AiDecisionAdviceMapper">
+    <insert id="insert" parameterType="com.at.pojo.AiDecisionAdvice"
+            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO ai_decision_advice
+        (alert_id, car_id, alert_type, source, model, risk_level, summary,
+         risk_explanation, recommendations, allowed_actions, raw_response,
+         fallback_reason, review_status, created_at, updated_at)
+        VALUES
+        (#{alertId}, #{carId}, #{alertType}, #{source}, #{model}, #{riskLevel}, #{summary},
+         #{riskExplanation}, #{recommendations}, #{allowedActions}, #{rawResponse},
+         #{fallbackReason}, #{reviewStatus}, NOW(), NOW())
+    </insert>
+
+    <select id="selectById" parameterType="java.lang.Long" resultType="com.at.pojo.AiDecisionAdvice">
+        SELECT id, alert_id AS alertId, car_id AS carId, alert_type AS alertType,
+               source, model, risk_level AS riskLevel, summary,
+               risk_explanation AS riskExplanation, recommendations, allowed_actions AS allowedActions,
+               raw_response AS rawResponse, fallback_reason AS fallbackReason,
+               review_status AS reviewStatus, reviewed_by AS reviewedBy, review_comment AS reviewComment,
+               reviewed_at AS reviewedAt, created_at AS createdAt, updated_at AS updatedAt
+        FROM ai_decision_advice
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectLatestByAlertId" parameterType="java.lang.Integer" resultType="com.at.pojo.AiDecisionAdvice">
+        SELECT id, alert_id AS alertId, car_id AS carId, alert_type AS alertType,
+               source, model, risk_level AS riskLevel, summary,
+               risk_explanation AS riskExplanation, recommendations, allowed_actions AS allowedActions,
+               raw_response AS rawResponse, fallback_reason AS fallbackReason,
+               review_status AS reviewStatus, reviewed_by AS reviewedBy, review_comment AS reviewComment,
+               reviewed_at AS reviewedAt, created_at AS createdAt, updated_at AS updatedAt
+        FROM ai_decision_advice
+        WHERE alert_id = #{alertId}
+        ORDER BY created_at DESC, id DESC
+        LIMIT 1
+    </select>
+
+    <update id="updateReview" parameterType="com.at.pojo.AiDecisionAdvice">
+        UPDATE ai_decision_advice
+        SET review_status = #{reviewStatus}, reviewed_by = #{reviewedBy},
+            review_comment = #{reviewComment}, reviewed_at = #{reviewedAt}, updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+</mapper>

@@ -153,6 +153,25 @@
                   {{ formatWarningTime(scope.row.warningTime) }}
                 </template>
               </el-table-column>
+              <el-table-column label="智巡建议" align="center" min-width="220">
+                <template #default="scope">
+                  <template v-if="scope.row.id && aiAdviceByAlertId[scope.row.id]">
+                    <el-tag size="small" :type="aiAdviceByAlertId[scope.row.id].source === 'QWEN' ? 'success' : 'warning'">
+                      {{ aiAdviceByAlertId[scope.row.id].source === 'QWEN' ? '千问' : '规则兜底' }} · {{ aiAdviceByAlertId[scope.row.id].reviewStatus }}
+                    </el-tag>
+                  </template>
+                  <el-button
+                    v-if="scope.row.id"
+                    size="small"
+                    type="primary"
+                    :loading="generatingAdviceId === scope.row.id"
+                    :disabled="!userStore.isAdmin"
+                    @click="generateAdviceForAlert(scope.row.id)"
+                  >
+                    {{ aiAdviceByAlertId[scope.row.id] ? '重新生成' : '生成建议' }}
+                  </el-button>
+                </template>
+              </el-table-column>
               <el-table-column label="关联操作" align="center" width="200">
                 <template #default="scope">
                   <el-button size="small" type="primary" @click="goToCarDetail(scope.row.carId)">
@@ -365,6 +384,7 @@ import { CAR_GAS_CHART_NAME, CAR_GAS_NAV_LABEL, getCarGasSpec } from '@/data/gas
 import { reqYoloSummary } from '@/api/yoloSummary'
 import { reqMonitoringOverview } from '@/api/monitoringData'
 import { reqWarningHistoryList } from '@/api/warningHistory'
+import { reqGenerateAiAdvice, type AiAdviceRecord } from '@/api/aiDecision'
 import { reqAnalyzePersonImage } from '@/api/analysis'
 import type { ConcentrationTrendPoint } from '@/api/monitoringData'
 import type { WarningHistoryRecord } from '@/api/warningHistory'
@@ -657,6 +677,8 @@ const initCharts = () => {
 
 // ========== 实时预警 Tab 数据 ==========
 const warningHistory = ref<WarningHistoryItem[]>([])
+const aiAdviceByAlertId = ref<Record<number, AiAdviceRecord>>({})
+const generatingAdviceId = ref<number | null>(null)
 const alertsChartRef = ref<HTMLElement | null>(null)
 let alertsChart: echarts.ECharts | null = null
 
@@ -686,6 +708,19 @@ const fetchWarningHistory = async () => {
     }
   } catch (error) {
     console.error('获取预警历史失败：', error)
+  }
+}
+
+const generateAdviceForAlert = async (alertId: number) => {
+  generatingAdviceId.value = alertId
+  try {
+    const response = await reqGenerateAiAdvice(alertId)
+    aiAdviceByAlertId.value = { ...aiAdviceByAlertId.value, [alertId]: response.data }
+    ElMessage.success('智巡建议已生成，请打开小车详情审核')
+  } catch (error) {
+    ElMessage.error(`生成建议失败：${(error as Error).message}`)
+  } finally {
+    generatingAdviceId.value = null
   }
 }
 

@@ -147,7 +147,7 @@
         </div>
 
         <!-- 异常警报 -->
-        <div v-if="hasWarning" class="alert-card">
+        <div v-if="hasWarning || aiAdvice" class="alert-card">
           <div class="alert-header">
             <span class="alert-icon">⚠️</span>
             <h4>异常警报处理</h4>
@@ -158,9 +158,27 @@
             : `检测到 ${gasTypeLabel} 超出安全阈值，请立即处理！`
             }}
           </p>
-          <button @click="handleWarning" class="alert-btn">
-            确认已处理
-          </button>
+          <div class="decision-panel">
+            <div class="decision-panel-header">
+              <strong>智巡处置建议</strong>
+              <span v-if="aiAdvice" class="decision-source">{{ aiAdvice.source === 'QWEN' ? '通义千问' : '规则兜底' }}</span>
+            </div>
+            <template v-if="aiAdvice">
+              <div class="decision-risk">风险等级：{{ aiAdvice.riskLevel }} · 审核状态：{{ aiAdvice.reviewStatus }}</div>
+              <p class="decision-summary">{{ aiAdvice.summary }}</p>
+              <p class="decision-explanation">{{ aiAdvice.riskExplanation }}</p>
+              <ul class="decision-list">
+                <li v-for="item in aiAdvice.recommendations" :key="item">{{ item }}</li>
+              </ul>
+              <div class="decision-actions">
+                <button v-if="aiAdvice.reviewStatus === 'PENDING'" class="decision-btn approve" @click="reviewAdvice('APPROVED')">采用建议</button>
+                <button v-if="aiAdvice.reviewStatus === 'PENDING'" class="decision-btn reject" @click="reviewAdvice('REJECTED')">拒绝建议</button>
+                <button class="decision-btn refresh" @click="handleWarning">重新生成</button>
+              </div>
+              <small v-if="aiAdvice.fallbackReason" class="decision-fallback">{{ aiAdvice.fallbackReason }}</small>
+            </template>
+            <button v-else @click="handleWarning" class="alert-btn">生成智巡建议</button>
+          </div>
         </div>
       </div>
     </div>
@@ -176,6 +194,8 @@ import { ElMessage } from 'element-plus'
 import { getCarGasSpec, type CarGasId } from '@/data/gasCatalog'
 import { reqMonitoringOverview } from '@/api/monitoringData'
 import { reqAddWarningHistory } from '@/api/warningHistory'
+import { reqWarningHistoryList } from '@/api/warningHistory'
+import { reqApproveAiAdvice, reqGenerateAiAdvice, reqLatestAiAdvice, reqRejectAiAdvice, type AiAdviceRecord } from '@/api/aiDecision'
 import type { ConcentrationTrendPoint } from '@/api/monitoringData'
 
 interface DetailItem {
@@ -207,6 +227,7 @@ const router = useRouter()
 const carStore = useCarStore()
 const videoUrl = ref('')
 const detailList = ref<DetailItem[]>([])
+const aiAdvice = ref<AiAdviceRecord | null>(null)
 
 // 气体配置统一引用 data/gasCatalog 单一数据源，避免与 CarHome / carStore 阈值漂移。
 const toDetailGasConfig = (config: GasConfig): DetailGasConfig => ({
@@ -291,6 +312,14 @@ async function getCarDetail() {
   videoUrl.value = carVideoMap[id] || ''
 
   try {
+    const historyRes = await reqWarningHistoryList()
+    const latestAlert = historyRes.data?.find((item) => Number(item.carId) === id)
+    aiAdvice.value = latestAlert?.id ? (await reqLatestAiAdvice(latestAlert.id)).data : null
+  } catch {
+    aiAdvice.value = null
+  }
+
+  try {
     const res = await reqMonitoringOverview()
     if (res.code === 200 && Array.isArray(res.data?.concentrationTrend)) {
       detailList.value = res.data.concentrationTrend
@@ -325,23 +354,44 @@ const handleWarning = async () => {
       ElMessage.warning('暂无后端监测读数，不能写入 0 作为处理浓度')
       return
     }
-    // 1. 保存预警历史到数据库
+    // 保存事件事实后生成建议，所有车辆动作仍需人工确认。
     await reqAddWarningHistory({
       carId: Number(carId.value),
       gasType: config.value.type,
       gasValue: latestGas
     })
 
+    const historyRes = await reqWarningHistoryList()
+    const latestAlert = historyRes.data?.find((item) => Number(item.carId) === Number(carId.value))
+    if (!latestAlert?.id) {
+      throw new Error('告警事件已保存，但未找到事件编号')
+    }
+    const adviceRes = await reqGenerateAiAdvice(latestAlert.id)
+    aiAdvice.value = adviceRes.data
+
     // 2. 重置小车状态（原有逻辑）
     if (globalStatus.value === 'warning') {
       carStore.resetCarStatus(Number(carId.value))
     }
-    ElMessage.success('已确认处理，系统已记录！')
+    ElMessage.success('已生成智巡建议，请人工审核')
     // 3. 处理后刷新明细，反映最新记录。
     await getCarDetail()
   } catch (error) {
     console.error('处理失败：', error)
     ElMessage.error('处理异常，请重试')
+  }
+}
+
+const reviewAdvice = async (status: 'APPROVED' | 'REJECTED') => {
+  if (!aiAdvice.value) return
+  try {
+    const res = status === 'APPROVED'
+      ? await reqApproveAiAdvice(aiAdvice.value.id)
+      : await reqRejectAiAdvice(aiAdvice.value.id)
+    aiAdvice.value = res.data
+    ElMessage.success(status === 'APPROVED' ? '建议已通过人工审核' : '建议已拒绝')
+  } catch (error) {
+    ElMessage.error(`审核失败：${(error as Error).message}`)
   }
 }
 
@@ -734,6 +784,46 @@ tbody tr:hover {
   border-radius: 12px;
   padding: 20px;
 }
+.decision-panel {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+.decision-panel-header,
+.decision-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.decision-panel-header {
+  justify-content: space-between;
+}
+.decision-source,
+.decision-risk {
+  color: #7de1d2;
+  font-size: 12px;
+}
+.decision-summary,
+.decision-explanation {
+  line-height: 1.6;
+}
+.decision-list {
+  padding-left: 20px;
+  color: rgba(238, 247, 251, 0.82);
+  line-height: 1.7;
+}
+.decision-btn {
+  border: 1px solid rgba(120, 211, 214, 0.28);
+  border-radius: 4px;
+  padding: 8px 12px;
+  color: #effffd;
+  cursor: pointer;
+}
+.decision-btn.approve { background: rgba(24, 169, 153, 0.42); }
+.decision-btn.reject { background: rgba(245, 108, 108, 0.24); }
+.decision-btn.refresh { background: rgba(64, 158, 255, 0.22); }
+.decision-fallback { display: block; margin-top: 10px; color: #f4bd72; line-height: 1.4; }
 .alert-header {
   display: flex;
   align-items: center;
