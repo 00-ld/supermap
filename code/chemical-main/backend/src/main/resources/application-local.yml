@@ -25,6 +25,7 @@ decision-model:
   timeout-ms: ${DECISION_MODEL_TIMEOUT_MS:30000}
   temperature: ${DECISION_MODEL_TEMPERATURE:0.1}
   max-tokens: ${DECISION_MODEL_MAX_TOKENS:1800}
+  evidence-paths: "${DECISION_MODEL_EVIDENCE_PATHS:D:\\Desktop\\chemical-park-alarm-response-plans.md;D:\\36904\\Downloads\\supermap-main (1)\\supermap\\code\\chemical-main\\docs\\chemical-park-leak-emergency-response.md}"
 
 inspection:
   default-location: ${INSPECTION_DEFAULT_LOCATION:核心作业区 A7}

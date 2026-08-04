@@ -6,11 +6,13 @@
             useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         INSERT INTO ai_decision_advice
         (alert_id, car_id, alert_type, source, model, risk_level, summary,
-         risk_explanation, recommendations, allowed_actions, raw_response,
+         risk_explanation, recommendations, allowed_actions, page_operations,
+         evidence_standards, evidence_documents, data_quality, uncertainties, raw_response,
          fallback_reason, review_status, created_at, updated_at)
         VALUES
         (#{alertId}, #{carId}, #{alertType}, #{source}, #{model}, #{riskLevel}, #{summary},
-         #{riskExplanation}, #{recommendations}, #{allowedActions}, #{rawResponse},
+         #{riskExplanation}, #{recommendations}, #{allowedActions}, #{pageOperations},
+         #{evidenceStandards}, #{evidenceDocuments}, #{dataQuality}, #{uncertainties}, #{rawResponse},
          #{fallbackReason}, #{reviewStatus}, NOW(), NOW())
     </insert>
 
@@ -18,6 +20,8 @@
         SELECT id, alert_id AS alertId, car_id AS carId, alert_type AS alertType,
                source, model, risk_level AS riskLevel, summary,
                risk_explanation AS riskExplanation, recommendations, allowed_actions AS allowedActions,
+               page_operations AS pageOperations, evidence_standards AS evidenceStandards,
+               evidence_documents AS evidenceDocuments, data_quality AS dataQuality, uncertainties,
                raw_response AS rawResponse, fallback_reason AS fallbackReason,
                review_status AS reviewStatus, reviewed_by AS reviewedBy, review_comment AS reviewComment,
                reviewed_at AS reviewedAt, created_at AS createdAt, updated_at AS updatedAt
@@ -29,6 +33,8 @@
         SELECT id, alert_id AS alertId, car_id AS carId, alert_type AS alertType,
                source, model, risk_level AS riskLevel, summary,
                risk_explanation AS riskExplanation, recommendations, allowed_actions AS allowedActions,
+               page_operations AS pageOperations, evidence_standards AS evidenceStandards,
+               evidence_documents AS evidenceDocuments, data_quality AS dataQuality, uncertainties,
                raw_response AS rawResponse, fallback_reason AS fallbackReason,
                review_status AS reviewStatus, reviewed_by AS reviewedBy, review_comment AS reviewComment,
                reviewed_at AS reviewedAt, created_at AS createdAt, updated_at AS updatedAt

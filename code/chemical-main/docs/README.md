@@ -18,6 +18,7 @@
 - `coding-standards.md`：代码、数据库、接口、文档命名规范。
 - `dataset-sources.md`：数据集来源、用途和提交边界。
 - `sensor-placement-guide.md`：传感器监控点位布局方案。
+- `chemical-park-leak-emergency-response.md`：危险化学品泄漏应急处置流程、标准依据、系统输入和 AI 输出契约。
 - `references/`：政策、算法、设备等参考资料归档。
 
 ## 目标验收口径

@@ -41,6 +41,11 @@
       "purpose": "Adds the AI patrol decision advice table for Qwen/rule fallback output and human review history."
     },
     {
+      "path": "db/migrations/006_extend_ai_decision_evidence.sql",
+      "type": "migration",
+      "purpose": "Adds traceable page-operation, evidence, data-quality, and uncertainty fields to AI advice."
+    },
+    {
       "path": "deploy/mysql/migration_add_role.sql",
       "type": "deployment-compat-migration",
       "purpose": "Compatibility migration entrypoint retained for existing Docker/MySQL deployment flows. Keep its behavior aligned with db/migrations/001_add_user_role.sql."

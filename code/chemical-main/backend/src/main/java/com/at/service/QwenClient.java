@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -21,6 +22,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class QwenClient {
     private final ObjectMapper objectMapper;
+    private final EvidenceDocumentService evidenceDocumentService;
+    private final DecisionPageFlow decisionPageFlow;
 
     @Value("${decision-model.enabled:false}")
     private boolean enabled;
@@ -46,22 +49,26 @@ public class QwenClient {
         if (!available()) {
             throw new IllegalStateException("千问未启用或未配置 DECISION_MODEL_API_KEY");
         }
-        String prompt = DecisionPromptBuilder.build(alert, alertType, evidence, ruleAdvice);
+        EvidenceDocumentService.EvidenceBundle evidenceBundle = evidenceDocumentService.load();
+        String prompt = DecisionPromptBuilder.build(alert, alertType, evidence, ruleAdvice,
+                evidenceBundle, decisionPageFlow.describe());
         try {
             var payload = objectMapper.createObjectNode();
             payload.put("model", model);
-            payload.put("temperature", temperature);
-            payload.put("max_tokens", maxTokens);
+            payload.put("temperature", Math.min(Math.max(temperature, 0D), 1D));
+            payload.put("max_tokens", Math.min(Math.max(maxTokens, 300), 4000));
             var messages = payload.putArray("messages");
             messages.addObject().put("role", "system").put("content", "严格按用户要求输出安全建议 JSON。");
             messages.addObject().put("role", "user").put("content", prompt);
 
+            long requestTimeout = Math.min(Math.max(timeoutMs, 1000L), 60000L);
             HttpClient client = HttpClient.newBuilder()
-                    .connectTimeout(Duration.ofMillis(timeoutMs))
+                    .connectTimeout(Duration.ofMillis(requestTimeout))
                     .build();
+            URI endpoint = buildEndpoint();
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(baseUrl.replaceAll("/$", "") + "/chat/completions"))
-                    .timeout(Duration.ofMillis(timeoutMs))
+                    .uri(endpoint)
+                    .timeout(Duration.ofMillis(requestTimeout))
                     .header("Authorization", "Bearer " + apiKey)
                     .header("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(objectMapper.writeValueAsString(payload)))
@@ -81,12 +88,28 @@ public class QwenClient {
                     result.path("riskExplanation").asText(""),
                     strings(result.path("recommendations")),
                     strings(result.path("allowedActions")),
-                    response.body()
+                    strings(result.path("pageOperations")),
+                    DecisionRuleService.DEFAULT_STANDARDS.stream().limit(3).toList(),
+                    evidenceBundle.names().stream().limit(2).toList(),
+                    result.path("dataQuality").asText("unknown"),
+                    strings(result.path("uncertainties"))
             );
         } catch (Exception e) {
             log.warn("千问建议生成失败，将使用规则兜底: {}", e.getMessage());
             throw new IllegalStateException("千问调用失败: " + e.getMessage(), e);
         }
+    }
+
+    private URI buildEndpoint() throws URISyntaxException {
+        String configured = baseUrl == null ? "" : baseUrl.trim();
+        URI root = new URI(configured.replaceAll("/$", ""));
+        boolean local = "localhost".equalsIgnoreCase(root.getHost())
+                || "127.0.0.1".equals(root.getHost())
+                || "[::1]".equals(root.getHost());
+        if (!"https".equalsIgnoreCase(root.getScheme()) && !local) {
+            throw new IllegalStateException("千问服务地址必须使用 HTTPS");
+        }
+        return new URI(root.toString() + "/chat/completions");
     }
 
     private JsonNode parseJsonContent(String content) throws Exception {
@@ -104,6 +127,9 @@ public class QwenClient {
     }
 
     public record QwenResponse(String model, String riskLevel, String summary, String riskExplanation,
-                               List<String> recommendations, List<String> allowedActions, String rawResponse) {
+                               List<String> recommendations, List<String> allowedActions,
+                               List<String> pageOperations, List<String> evidenceStandards,
+                               List<String> evidenceDocuments, String dataQuality,
+                               List<String> uncertainties) {
     }
 }

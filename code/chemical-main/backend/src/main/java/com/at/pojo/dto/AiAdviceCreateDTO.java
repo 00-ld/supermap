@@ -1,12 +1,13 @@
 package com.at.pojo.dto;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
 public class AiAdviceCreateDTO {
-    @NotNull
     private Integer alertId;
+    @Size(max = 40)
     private String alertType;
+    @Size(max = 4000)
     private String evidence;
 }

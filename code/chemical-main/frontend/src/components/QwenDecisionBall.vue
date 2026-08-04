@@ -4,10 +4,11 @@
       class="qwen-ball"
       type="button"
       aria-label="打开千问应急辅助决策"
+      title="应急助手"
       @pointerdown="startDrag"
       @click="handleBallClick"
     >
-      <span class="qwen-ball-mark">AI</span>
+      <img :src="assistantIcon" alt="应急助手" class="qwen-ball-icon" />
       <span v-if="latestAdvice?.reviewStatus === 'PENDING'" class="qwen-ball-dot"></span>
     </button>
 
@@ -43,20 +44,37 @@
 
       <article v-if="latestAdvice" class="qwen-result">
         <div class="qwen-result-meta">
-          <span>{{ latestAdvice.source === 'QWEN' ? '通义千问' : '规则兜底' }}</span>
+          <span>应急辅助方案</span>
           <b>{{ latestAdvice.riskLevel }}</b>
-          <em>{{ latestAdvice.reviewStatus }}</em>
         </div>
         <h4>{{ latestAdvice.summary }}</h4>
-        <p>{{ latestAdvice.riskExplanation }}</p>
-        <ol>
-          <li v-for="item in latestAdvice.recommendations" :key="item">{{ item }}</li>
+        <h5>立即处置</h5>
+        <ol class="qwen-numbered-list">
+          <li v-for="(item, index) in latestAdvice.recommendations.slice(0, 4)" :key="`${index}-${item}`">{{ item }}</li>
         </ol>
-        <div v-if="latestAdvice.reviewStatus === 'PENDING' && latestAdvice.id" class="qwen-review-actions">
+        <h5>页面操作建议</h5>
+        <ol class="qwen-numbered-list">
+          <li v-for="(item, index) in latestAdvice.pageOperations.slice(0, 3)" :key="`${index}-${item}`">{{ item }}</li>
+        </ol>
+        <div v-if="latestAdvice.uncertainties?.length" class="qwen-uncertainties">
+          <details>
+            <summary>待确认信息（{{ latestAdvice.uncertainties.length }}）</summary>
+            <ul>
+              <li v-for="item in latestAdvice.uncertainties.slice(0, 3)" :key="item">{{ item }}</li>
+            </ul>
+          </details>
+        </div>
+        <div v-if="userStore.isAdmin && latestAdvice.reviewStatus === 'PENDING' && latestAdvice.id" class="qwen-review-actions">
           <button type="button" @click="review('APPROVED')">采用建议</button>
           <button type="button" @click="review('REJECTED')">拒绝建议</button>
         </div>
         <small v-if="latestAdvice.fallbackReason">{{ latestAdvice.fallbackReason }}</small>
+        <div class="qwen-evidence">
+          <strong>依据标准</strong>
+          <ol class="qwen-numbered-list">
+            <li v-for="(item, index) in latestAdvice.evidenceStandards?.slice(0, 3)" :key="`${index}-${item}`">{{ item }}</li>
+          </ol>
+        </div>
       </article>
     </section>
   </div>
@@ -66,6 +84,7 @@
 import { computed, onBeforeUnmount, ref } from 'vue'
 import useUserStore from '@/store/modules/user'
 import { ElMessage } from 'element-plus'
+import assistantIcon from '@/assets/icons/emergency-assistant.svg'
 import {
   reqApproveAiAdvice,
   reqGenerateAiAdvice,
@@ -82,7 +101,15 @@ const alerts = ref<WarningHistoryRecord[]>([])
 const selectedAlertId = ref('')
 const scenario = ref('')
 const latestAdvice = ref<AiAdviceRecord | null>(null)
-const position = ref({ x: Math.max(16, window.innerWidth - 82), y: Math.max(100, window.innerHeight * 0.62) })
+const storedPosition = (() => {
+  try {
+    const value = JSON.parse(localStorage.getItem('qwen-decision-ball-position') || 'null') as { x?: number; y?: number } | null
+    return value && Number.isFinite(value.x) && Number.isFinite(value.y) ? { x: value.x!, y: value.y! } : null
+  } catch {
+    return null
+  }
+})()
+const position = ref(storedPosition || { x: Math.max(16, window.innerWidth - 82), y: Math.max(100, window.innerHeight * 0.62) })
 const dragging = ref(false)
 const moved = ref(false)
 let dragOffset = { x: 0, y: 0 }
@@ -90,6 +117,7 @@ let dragOffset = { x: 0, y: 0 }
 const ballStyle = computed(() => ({ left: `${position.value.x}px`, top: `${position.value.y}px` }))
 
 const startDrag = (event: PointerEvent) => {
+  event.preventDefault()
   dragging.value = true
   moved.value = false
   dragOffset = { x: event.clientX - position.value.x, y: event.clientY - position.value.y }
@@ -111,6 +139,14 @@ const stopDrag = () => {
   window.removeEventListener('pointermove', moveBall)
   const edgeX = position.value.x + 33 < window.innerWidth / 2 ? 8 : window.innerWidth - 66
   position.value = { x: edgeX, y: position.value.y }
+  localStorage.setItem('qwen-decision-ball-position', JSON.stringify(position.value))
+}
+
+const clampPosition = () => {
+  position.value = {
+    x: Math.min(Math.max(8, position.value.x), Math.max(8, window.innerWidth - 66)),
+    y: Math.min(Math.max(70, position.value.y), Math.max(70, window.innerHeight - 66)),
+  }
 }
 
 const handleBallClick = async () => {
@@ -154,14 +190,18 @@ const review = async (status: 'APPROVED' | 'REJECTED') => {
 
 const formatTime = (value: string) => value ? new Date(value).toLocaleString('zh-CN', { hour12: false }) : '-'
 
-onBeforeUnmount(() => window.removeEventListener('pointermove', moveBall))
+window.addEventListener('resize', clampPosition)
+onBeforeUnmount(() => {
+  window.removeEventListener('pointermove', moveBall)
+  window.removeEventListener('resize', clampPosition)
+})
 </script>
 
 <style scoped>
 .qwen-assistant { position: fixed; z-index: 3000; width: 58px; height: 58px; touch-action: none; }
-.qwen-ball { width: 58px; height: 58px; border-radius: 50%; border: 1px solid rgba(135, 238, 220, .78); background: linear-gradient(145deg, #0c6670, #12334f); color: #effffd; box-shadow: 0 8px 24px rgba(0, 0, 0, .36), 0 0 20px rgba(64, 224, 208, .28); cursor: grab; }
+.qwen-ball { width: 58px; height: 58px; padding: 0; border: 0; background: transparent; color: #effffd; filter: drop-shadow(0 8px 12px rgba(0, 0, 0, .34)); cursor: grab; }
 .qwen-ball:active { cursor: grabbing; }
-.qwen-ball-mark { font-size: 15px; font-weight: 700; letter-spacing: 0; }
+.qwen-ball-icon { display: block; width: 58px; height: 58px; object-fit: contain; }
 .qwen-ball-dot { position: absolute; top: 1px; right: 2px; width: 11px; height: 11px; border-radius: 50%; background: #f56c6c; border: 2px solid #081a2a; }
 .qwen-panel { position: absolute; right: 0; bottom: 72px; width: min(380px, calc(100vw - 24px)); max-height: min(660px, calc(100vh - 96px)); overflow: auto; padding: 16px; border: 1px solid rgba(120, 211, 214, .32); border-radius: 8px; background: rgba(7, 24, 38, .98); color: #eaf8f7; box-shadow: 0 20px 52px rgba(0, 0, 0, .42); }
 .qwen-panel-header { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
@@ -179,7 +219,14 @@ onBeforeUnmount(() => window.removeEventListener('pointermove', moveBall))
 .qwen-result-meta em { color: rgba(234, 248, 247, .68); font-style: normal; }
 .qwen-result h4 { margin: 9px 0; line-height: 1.5; }
 .qwen-result p, .qwen-result li { color: rgba(234, 248, 247, .78); line-height: 1.55; font-size: 13px; }
-.qwen-result ol { padding-left: 20px; }
+.qwen-numbered-list { margin: 6px 0 0; padding-left: 24px; list-style: decimal; }
+.qwen-numbered-list li { padding-left: 3px; }
+.qwen-result h5 { margin: 14px 0 6px; color: #7de1d2; font-size: 13px; }
+.qwen-uncertainties { margin-top: 10px; color: #f4bd72; font-size: 12px; }
+.qwen-uncertainties summary { cursor: pointer; }
+.qwen-uncertainties ul { margin: 6px 0 0; padding-left: 18px; }
+.qwen-evidence { margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(120, 211, 214, .18); color: #f4bd72; font-size: 12px; line-height: 1.5; }
+.qwen-evidence p { margin: 5px 0 0; color: rgba(234, 248, 247, .72); font-size: 12px; }
 .qwen-review-actions { display: flex; gap: 8px; margin-top: 12px; }
 .qwen-review-actions button { flex: 1; border: 1px solid rgba(120, 211, 214, .3); border-radius: 4px; padding: 7px; background: rgba(24, 169, 153, .14); color: #a9fff1; cursor: pointer; }
 .qwen-result small { display: block; margin-top: 10px; color: #f4bd72; line-height: 1.4; }

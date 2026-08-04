@@ -11,7 +11,7 @@ call :parse_args %*
 set "MYSQL_CONTAINER=chemical-mysql"
 set "MYSQL_LEGACY_CONTAINER=chemical-local-mysql"
 set "MYSQL_IMAGE=mysql:8.0"
-set "MYSQL_PORT=3307"
+if not defined MYSQL_PORT set "MYSQL_PORT=3307"
 set "MYSQL_DATABASE=chemical"
 set "ALGORITHM_PORT=8000"
 set "YOLO_PORT=8001"
@@ -22,6 +22,8 @@ set "SUPERMAP_PORT=8190"
 call :ensure_dirs
 call :ensure_local_env
 call :load_local_env "%ROOT%\.env.local"
+call :select_database
+if errorlevel 1 goto fail
 
 set "SPRING_PROFILES_ACTIVE=local"
 if not defined DB_USERNAME set "DB_USERNAME=root"
@@ -74,8 +76,8 @@ call :command_exists "%UV_CMD%" "uv"
 if errorlevel 1 goto fail
 call :command_exists "%MVN_CMD%" "Maven"
 if errorlevel 1 goto fail
-call :command_exists "%DOCKER_CMD%" "Docker"
-if errorlevel 1 goto fail
+if "%MYSQL_NATIVE%"=="0" call :command_exists "%DOCKER_CMD%" "Docker"
+if errorlevel 1 if "%MYSQL_NATIVE%"=="0" goto fail
 
 if defined STARTUP_CHECK_ONLY (
   echo [OK] startup.bat dependency and entry check passed.
@@ -83,10 +85,15 @@ if defined STARTUP_CHECK_ONLY (
 )
 
 call :stop_project_services
-call :ensure_mysql
-if errorlevel 1 goto fail
-call :init_database
-if errorlevel 1 goto fail
+if "%MYSQL_NATIVE%"=="1" (
+  call :check_native_mysql
+  if errorlevel 1 goto fail
+) else (
+  call :ensure_mysql
+  if errorlevel 1 goto fail
+  call :init_database
+  if errorlevel 1 goto fail
+)
 
 call :start_uvicorn_service "%ALGORITHM_PORT%" "Algorithm API" "algorithm.api_server:app"
 call :start_uvicorn_service "%YOLO_PORT%" "YOLO Person API" "algorithm.polo:app"
@@ -238,11 +245,15 @@ if "%NODE_CMD%"=="node.exe" (
 if defined MAVEN_HOME if exist "%MAVEN_HOME%\bin\mvn.cmd" set "MVN_CMD=%MAVEN_HOME%\bin\mvn.cmd"
 if "%MVN_CMD%"=="mvn.cmd" if defined M2_HOME if exist "%M2_HOME%\bin\mvn.cmd" set "MVN_CMD=%M2_HOME%\bin\mvn.cmd"
 if "%MVN_CMD%"=="mvn.cmd" call :resolve_maven
-if exist "%ROOT%\.venv\Scripts\python.exe" (
-  set "PYTHON_CMD=%ROOT%\.venv\Scripts\python.exe"
+pushd "!ROOT!" >nul
+if exist ".venv312\Scripts\python.exe" (
+  set "PYTHON_CMD=.venv312\Scripts\python.exe"
+) else if exist ".venv\Scripts\python.exe" (
+  set "PYTHON_CMD=.venv\Scripts\python.exe"
 ) else if exist "%USERPROFILE%\AppData\Local\Microsoft\WindowsApps\python.exe" (
   set "PYTHON_CMD=%USERPROFILE%\AppData\Local\Microsoft\WindowsApps\python.exe"
 )
+popd
 if exist "%USERPROFILE%\.local\bin\uv.exe" (
   set "UV_CMD=%USERPROFILE%\.local\bin\uv.exe"
 ) else if exist "%USERPROFILE%\AppData\Roaming\Python\Python312\Scripts\uv.exe" (
@@ -401,6 +412,34 @@ exit /b 1
 "%DOCKER_CMD%" inspect "%~1" >nul 2>nul
 exit /b %ERRORLEVEL%
 
+:select_database
+set "MYSQL_NATIVE=0"
+if "%MYSQL_PORT%"=="3306" (
+  set "MYSQL_NATIVE=1"
+  echo [WARN] Docker MySQL bypassed; using native MySQL on 127.0.0.1:3306.
+  exit /b 0
+)
+"%DOCKER_CMD%" info >nul 2>nul
+if not errorlevel 1 exit /b 0
+call :is_port_listening 3306
+if not errorlevel 1 (
+  set "MYSQL_PORT=3306"
+  set "MYSQL_NATIVE=1"
+  echo [WARN] Docker unavailable; using native MySQL on 127.0.0.1:3306.
+  exit /b 0
+)
+echo [ERROR] Docker is unavailable and native MySQL 3306 is not listening.
+exit /b 1
+
+:check_native_mysql
+mysqladmin.exe ping -h 127.0.0.1 -P %MYSQL_PORT% -u %DB_USERNAME% -p%DB_PASSWORD% --silent >nul 2>nul
+if not errorlevel 1 (
+  echo [OK] Native MySQL is ready on 127.0.0.1:%MYSQL_PORT%.
+  exit /b 0
+)
+echo [ERROR] Native MySQL is not ready on 127.0.0.1:%MYSQL_PORT%.
+exit /b 1
+
 :start_docker_desktop
 if exist "C:\Program Files\Docker\Docker\Docker Desktop.exe" (
   echo [START] Docker Desktop is not running. Starting Docker Desktop...
@@ -467,17 +506,17 @@ set "ERR_FILE=%ROOT%\logs\startup-%PORT%.err.log"
   echo set "CORS_ALLOWED_ORIGINS=%CORS_ALLOWED_ORIGINS%"
   echo set "ALGORITHM_REQUIRE_AUTH=%ALGORITHM_REQUIRE_AUTH%"
   echo set "ALGORITHM_API_KEY=%ALGORITHM_API_KEY%"
-  echo cd /d "%DIR%"
-  echo "%EXE%" %ARGS% 1^>^>"%LOG_FILE%" 2^>^>"%ERR_FILE%"
-) > "%RUN_FILE%"
-call :start_hidden "%RUN_FILE%"
+  echo cd /d "!DIR!"
+  echo "%EXE%" %ARGS% 1^>^>"!LOG_FILE!" 2^>^>"!ERR_FILE!"
+) > "!RUN_FILE!"
+call :start_hidden "!RUN_FILE!"
 exit /b 0
 
 :start_uvicorn_service
 set "UVICORN_PORT=%~1"
 set "UVICORN_TITLE=%~2"
 set "UVICORN_APP=%~3"
-call :start_service "%UVICORN_PORT%" "%UVICORN_TITLE%" "%ROOT%" "%UV_CMD%" "run --python %PYTHON_CMD% uvicorn %UVICORN_APP% --host 127.0.0.1 --port %UVICORN_PORT%"
+call :start_service "%UVICORN_PORT%" "%UVICORN_TITLE%" "%ROOT%" "%PYTHON_CMD%" "-m uvicorn %UVICORN_APP% --host 127.0.0.1 --port %UVICORN_PORT%"
 exit /b %ERRORLEVEL%
 
 :start_supermap_bridge
@@ -501,7 +540,7 @@ if not errorlevel 1 (
   echo     def log_message(self, fmt, *args^):
   echo         return
   echo HTTPServer(('127.0.0.1', port^), Handler^).serve_forever(^)
-) > "%ROOT%\.codex-runlogs\supermap_iportal_bridge.py"
+) > "!ROOT!\.codex-runlogs\supermap_iportal_bridge.py"
 call :start_service "%SUPERMAP_PORT%" "SuperMap iPortal Bridge" "%ROOT%" "%PYTHON_CMD%" ".codex-runlogs\supermap_iportal_bridge.py %SUPERMAP_PORT% %FRONTEND_PORT%"
 exit /b %ERRORLEVEL%
 

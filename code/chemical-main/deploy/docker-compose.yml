@@ -43,6 +43,17 @@
       - ANALYSIS_SERVICE_URL=${ANALYSIS_SERVICE_URL:-http://yolo:8001/api/analysis/person}
       - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS}
       - INSPECTION_DEFAULT_LOCATION=${INSPECTION_DEFAULT_LOCATION:-核心作业区 A7}
+      - DECISION_MODEL_ENABLED=${DECISION_MODEL_ENABLED:-false}
+      - DECISION_MODEL_PROVIDER=${DECISION_MODEL_PROVIDER:-qwen}
+      - DECISION_MODEL_NAME=${DECISION_MODEL_NAME:-qwen-plus}
+      - DECISION_MODEL_BASE_URL=${DECISION_MODEL_BASE_URL:-https://dashscope.aliyuncs.com/compatible-mode/v1}
+      - DECISION_MODEL_API_KEY=${DECISION_MODEL_API_KEY}
+      - DECISION_MODEL_TIMEOUT_MS=${DECISION_MODEL_TIMEOUT_MS:-30000}
+      - DECISION_MODEL_TEMPERATURE=${DECISION_MODEL_TEMPERATURE:-0.1}
+      - DECISION_MODEL_MAX_TOKENS=${DECISION_MODEL_MAX_TOKENS:-1800}
+      - DECISION_MODEL_EVIDENCE_PATHS=${DECISION_MODEL_EVIDENCE_PATHS:-/app/docs/chemical-park-alarm-response-plans.md;/app/docs/chemical-park-leak-emergency-response.md}
+    volumes:
+      - ../docs:/app/docs:ro
     depends_on:
       mysql:
         condition: service_healthy

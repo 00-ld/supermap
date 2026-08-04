@@ -21,6 +21,11 @@ public class AiAdviceResponseDTO {
     private String riskExplanation;
     private List<String> recommendations;
     private List<String> allowedActions;
+    private List<String> pageOperations;
+    private List<String> evidenceStandards;
+    private List<String> evidenceDocuments;
+    private String dataQuality;
+    private List<String> uncertainties;
     private String fallbackReason;
     private String reviewStatus;
     private String reviewedBy;
@@ -42,6 +47,11 @@ public class AiAdviceResponseDTO {
         dto.riskExplanation = entity.getRiskExplanation();
         dto.recommendations = readList(entity.getRecommendations(), objectMapper);
         dto.allowedActions = readList(entity.getAllowedActions(), objectMapper);
+        dto.pageOperations = readList(entity.getPageOperations(), objectMapper);
+        dto.evidenceStandards = readList(entity.getEvidenceStandards(), objectMapper);
+        dto.evidenceDocuments = readList(entity.getEvidenceDocuments(), objectMapper);
+        dto.dataQuality = entity.getDataQuality();
+        dto.uncertainties = readList(entity.getUncertainties(), objectMapper);
         dto.fallbackReason = entity.getFallbackReason();
         dto.reviewStatus = entity.getReviewStatus();
         dto.reviewedBy = entity.getReviewedBy();

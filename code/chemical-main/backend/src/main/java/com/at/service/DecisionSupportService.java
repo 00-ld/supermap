@@ -35,8 +35,8 @@ public class DecisionSupportService {
         alert.setCarId(dto.getCarId() == null ? 0 : dto.getCarId());
         alert.setAreaName("现场应急输入");
         alert.setGasType(blankOr(dto.getGasType(), "UNKNOWN"));
-        alert.setGasValue(dto.getGasValue());
-        return createFromAlert(alert, "EMERGENCY_QUICK_DECISION", dto.getScenario(), false);
+        alert.setGasValue(dto.getGasValue() != null && Double.isFinite(dto.getGasValue()) ? dto.getGasValue() : null);
+        return createFromAlert(alert, "EMERGENCY_QUICK_DECISION", dto.getScenario(), true);
     }
 
     private AiDecisionAdvice createFromAlert(WarningHistory alert, String alertType, String evidence, boolean persist) {
@@ -51,10 +51,13 @@ public class DecisionSupportService {
             DecisionAdviceValidator.ValidatedAdvice validated = validator.validate(qwen, rule);
             fill(advice, "QWEN", qwen.model(), validated.riskLevel(), validated.summary(),
                     validated.riskExplanation(), validated.recommendations(), validated.allowedActions(),
-                    qwen.rawResponse(), null);
+                    validated.pageOperations(), validated.evidenceStandards(), validated.evidenceDocuments(),
+                    validated.dataQuality(), validated.uncertainties(), null);
         } catch (RuntimeException ex) {
             fill(advice, "RULE", null, rule.getRiskLevel(), rule.getSummary(), rule.getRiskExplanation(),
-                    rule.getRecommendations(), rule.getAllowedActions(), null, ex.getMessage());
+                    rule.getRecommendations(), rule.getAllowedActions(), rule.getPageOperations(),
+                    rule.getEvidenceStandards(), rule.getEvidenceDocuments(), rule.getDataQuality(),
+                    rule.getUncertainties(), ex.getMessage());
         }
         if (persist) adviceMapper.insert(advice);
         return advice;
@@ -85,7 +88,9 @@ public class DecisionSupportService {
 
     private void fill(AiDecisionAdvice advice, String source, String model, String risk, String summary,
                       String explanation, List<String> recommendations, List<String> actions,
-                      String rawResponse, String fallbackReason) {
+                      List<String> pageOperations, List<String> evidenceStandards,
+                      List<String> evidenceDocuments, String dataQuality, List<String> uncertainties,
+                      String fallbackReason) {
         try {
             advice.setSource(source);
             advice.setModel(model);
@@ -94,7 +99,13 @@ public class DecisionSupportService {
             advice.setRiskExplanation(explanation);
             advice.setRecommendations(objectMapper.writeValueAsString(recommendations));
             advice.setAllowedActions(objectMapper.writeValueAsString(actions));
-            advice.setRawResponse(rawResponse);
+            advice.setPageOperations(objectMapper.writeValueAsString(pageOperations));
+            advice.setEvidenceStandards(objectMapper.writeValueAsString(evidenceStandards));
+            advice.setEvidenceDocuments(objectMapper.writeValueAsString(evidenceDocuments));
+            advice.setDataQuality(dataQuality);
+            advice.setUncertainties(objectMapper.writeValueAsString(uncertainties));
+            // Structured fields are sufficient for audit and avoid storing provider envelopes or prompts.
+            advice.setRawResponse(null);
             advice.setFallbackReason(fallbackReason);
         } catch (Exception e) {
             throw new IllegalStateException("序列化AI建议失败", e);

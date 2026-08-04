@@ -13,24 +13,46 @@ public class DecisionRuleService {
     public static final List<String> ACTIONS = List.of(
             "PAUSE_PATROL", "RECHECK", "ANALYZE_DIFFUSION", "RETURN_HOME", "NOTIFY_RESPONSIBLE"
     );
+    public static final List<String> DEFAULT_STANDARDS = List.of(
+            "AQ/T 3052-2015《危险化学品事故应急救援指挥导则》",
+            "GB/T 29639-2020",
+            "GB 30077-2023",
+            "GB/T 50493-2019",
+            "GB 18218-2018",
+            "GB 30871-2022",
+            "《中华人民共和国安全生产法》",
+            "《危险化学品安全管理条例》",
+            "《生产安全事故应急条例》",
+            "《生产安全事故应急预案管理办法》",
+            "应急〔2023〕123号《化工园区安全风险排查治理导则》",
+            "应急厅〔2022〕5号《化工园区安全风险智能化管控平台建设指南》"
+    );
+    public static final List<String> DEFAULT_DOCUMENTS = List.of(
+            "D:/Desktop/chemical-park-alarm-response-plans.md",
+            "docs/chemical-park-leak-emergency-response.md"
+    );
 
     public RuleAdvice build(WarningHistory alert) {
         String gasType = alert.getGasType() == null ? "UNKNOWN" : alert.getGasType().toUpperCase(Locale.ROOT);
-        double value = alert.getGasValue() == null ? 0D : alert.getGasValue();
-        boolean oxygenOutOfRange = "O2".equals(gasType) && (value < 19.5D || value > 23.5D);
-        boolean critical = "CH4".equals(gasType) || "CO".equals(gasType) || oxygenOutOfRange || value >= 100D;
-        String risk = critical ? "HIGH" : "MEDIUM";
-        String summary = String.format(Locale.ROOT, "小车%d在%s发现%s浓度异常，当前值为%.2f，需人工确认后处置。",
-                alert.getCarId(), alert.getAreaName() == null ? "未知区域" : alert.getAreaName(), gasType, value);
-        String explanation = critical
-                ? "该气体或浓度值可能带来中高风险，当前数据不足以直接判定事故范围，应先暂停近距离巡检并复测。"
-                : "当前为单点异常信号，可能是瞬时波动或传感器误报，应通过复测和扩散分析确认。";
-        List<String> recommendations = critical
-                ? List.of("暂停当前巡检任务并保持安全距离", "立即复测并检查同区域关联监测点", "启动扩散分析并通知责任人", "确认后安排小车返航")
-                : List.of("暂停当前点位继续前进", "在安全距离复测一次", "复测仍异常时开展扩散分析", "通知责任人并保留事件记录");
+        Double value = alert.getGasValue();
+        boolean uncertain = alert.getGasValue() == null || !Double.isFinite(alert.getGasValue())
+                || "UNKNOWN".equals(gasType);
+        // No universal concentration threshold is safe here; thresholds come from the approved site documents.
+        String risk = uncertain ? "HIGH" : "MEDIUM";
+        String valueText = value == null || !Double.isFinite(value)
+                ? "未知" : String.format(Locale.ROOT, "%.2f", value);
+        String summary = String.format(Locale.ROOT, "小车%d在%s发现%s浓度异常，当前值为%s，需人工确认后处置。",
+                alert.getCarId(), alert.getAreaName() == null ? "未知区域" : alert.getAreaName(), gasType, valueText);
+        String explanation = uncertain
+                ? "介质、数值或数据质量不足，不能据此推导处置阈值，应按较高风险先暂停近距离巡检、复测并通知责任人。"
+                : "当前仅能视为监测异常线索，是否超出企业处置阈值须核对仪表配置、现场方案和最新版 SDS。";
+        List<String> recommendations = List.of("暂停当前点位继续前进并保持安全距离", "核对单位、阈值来源、时间戳和数据质量后复测",
+                "检查同区域关联监测点、视频、风向和工艺状态", "通知责任人并保留事件记录");
         return new RuleAdvice(risk, summary, explanation, recommendations,
-                critical ? List.of("PAUSE_PATROL", "RECHECK", "ANALYZE_DIFFUSION", "RETURN_HOME", "NOTIFY_RESPONSIBLE")
-                        : List.of("PAUSE_PATROL", "RECHECK", "ANALYZE_DIFFUSION", "NOTIFY_RESPONSIBLE"));
+                List.of("PAUSE_PATROL", "RECHECK", "ANALYZE_DIFFUSION", "NOTIFY_RESPONSIBLE"),
+                List.of("实时预警核对告警详情和趋势", "智巡监测暂停并复测，必要时返航", "智慧地图核对风向、边界和影响范围"),
+                DEFAULT_STANDARDS, DEFAULT_DOCUMENTS, "degraded",
+                List.of("缺少介质最新版 SDS、现场人员状态、阈值来源和人工检测回执"));
     }
 
     @Data
@@ -41,5 +63,10 @@ public class DecisionRuleService {
         private String riskExplanation;
         private List<String> recommendations;
         private List<String> allowedActions;
+        private List<String> pageOperations;
+        private List<String> evidenceStandards;
+        private List<String> evidenceDocuments;
+        private String dataQuality;
+        private List<String> uncertainties;
     }
 }

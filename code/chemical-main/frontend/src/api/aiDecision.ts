@@ -1,6 +1,8 @@
 import request from '@/utils/request'
 import type { ApiResult } from '@/types/api'
 
+const AI_DECISION_TIMEOUT_MS = 70000
+
 export type AiAdviceSource = 'QWEN' | 'RULE'
 export type AiReviewStatus = 'PENDING' | 'APPROVED' | 'REJECTED'
 
@@ -16,6 +18,11 @@ export interface AiAdviceRecord {
   riskExplanation: string
   recommendations: string[]
   allowedActions: string[]
+  pageOperations: string[]
+  evidenceStandards: string[]
+  evidenceDocuments: string[]
+  dataQuality: 'normal' | 'degraded' | 'unknown'
+  uncertainties: string[]
   fallbackReason?: string | null
   reviewStatus: AiReviewStatus
   reviewedBy?: string | null
@@ -29,6 +36,7 @@ export const reqGenerateAiAdvice = (alertId: number, evidence?: string) =>
   request.post<{ alertType: string; evidence?: string }, ApiResult<AiAdviceRecord>>(
     `/mobile/alerts/${alertId}/ai-advice`,
     { alertType: 'GAS_CONCENTRATION', evidence },
+    { timeout: AI_DECISION_TIMEOUT_MS },
   )
 
 export const reqQuickAiAdvice = (payload: {
@@ -36,7 +44,12 @@ export const reqQuickAiAdvice = (payload: {
   gasType?: string
   gasValue?: number
   scenario: string
-}) => request.post<typeof payload, ApiResult<AiAdviceRecord>>('/mobile/ai-advice/quick', payload)
+}) =>
+  request.post<typeof payload, ApiResult<AiAdviceRecord>>(
+    '/mobile/ai-advice/quick',
+    payload,
+    { timeout: AI_DECISION_TIMEOUT_MS },
+  )
 
 export const reqAiAdvice = (adviceId: number) =>
   request.get<null, ApiResult<AiAdviceRecord>>(`/mobile/ai-advice/${adviceId}`)

@@ -1,4 +1,7 @@
 spring:
+  # 本地开发时读取项目根目录的 .env.local；生产环境缺少该文件也不影响启动。
+  config:
+    import: optional:file:../.env.local[.properties]
   application:
     name: chemical-park-monitor
   # 本地运行默认走 local profile；生产环境显式设置 SPRING_PROFILES_ACTIVE=prod
@@ -60,3 +63,4 @@ decision-model:
   timeout-ms: ${DECISION_MODEL_TIMEOUT_MS:30000}
   temperature: ${DECISION_MODEL_TEMPERATURE:0.1}
   max-tokens: ${DECISION_MODEL_MAX_TOKENS:1800}
+  evidence-paths: "${DECISION_MODEL_EVIDENCE_PATHS:}"

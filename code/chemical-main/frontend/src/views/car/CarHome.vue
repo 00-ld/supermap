@@ -165,7 +165,6 @@
                     size="small"
                     type="primary"
                     :loading="generatingAdviceId === scope.row.id"
-                    :disabled="!userStore.isAdmin"
                     @click="generateAdviceForAlert(scope.row.id)"
                   >
                     {{ aiAdviceByAlertId[scope.row.id] ? '重新生成' : '生成建议' }}

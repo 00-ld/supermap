@@ -17,6 +17,11 @@ public class AiDecisionAdvice {
     private String riskExplanation;
     private String recommendations;
     private String allowedActions;
+    private String pageOperations;
+    private String evidenceStandards;
+    private String evidenceDocuments;
+    private String dataQuality;
+    private String uncertainties;
     private String rawResponse;
     private String fallbackReason;
     private String reviewStatus;

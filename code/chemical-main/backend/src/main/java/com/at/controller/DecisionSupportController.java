@@ -7,10 +7,13 @@ import com.at.pojo.dto.AiAdviceResponseDTO;
 import com.at.pojo.dto.AiAdviceReviewDTO;
 import com.at.pojo.dto.AiAdviceQuickDTO;
 import com.at.service.DecisionSupportService;
+import com.at.service.RateLimiterService;
+import com.at.exception.ApiException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import java.time.Duration;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,17 +21,20 @@ import org.springframework.web.bind.annotation.*;
 public class DecisionSupportController {
     @Resource private DecisionSupportService service;
     @Resource private ObjectMapper objectMapper;
+    @Resource private RateLimiterService rateLimiterService;
 
     @PostMapping("/alerts/{alertId}/ai-advice")
-    @RequiresRole("admin")
     public Result<AiAdviceResponseDTO> generate(@PathVariable Integer alertId,
-                                                @Valid @RequestBody AiAdviceCreateDTO dto) {
+                                                @Valid @RequestBody AiAdviceCreateDTO dto,
+                                                HttpServletRequest request) {
+        enforceRateLimit(request.getAttribute("userId"));
         dto.setAlertId(alertId);
         return Result.success(AiAdviceResponseDTO.fromEntity(service.create(dto), objectMapper));
     }
 
     @PostMapping("/ai-advice/quick")
-    public Result<AiAdviceResponseDTO> quick(@Valid @RequestBody AiAdviceQuickDTO dto) {
+    public Result<AiAdviceResponseDTO> quick(@Valid @RequestBody AiAdviceQuickDTO dto, HttpServletRequest request) {
+        enforceRateLimit(request.getAttribute("userId"));
         return Result.success(AiAdviceResponseDTO.fromEntity(service.quick(dto), objectMapper));
     }
 
@@ -70,5 +76,12 @@ public class DecisionSupportController {
         dto.setStatus(status);
         String reviewer = (String) request.getAttribute("username");
         return Result.success(AiAdviceResponseDTO.fromEntity(service.review(id, dto, reviewer), objectMapper));
+    }
+
+    private void enforceRateLimit(Object key) {
+        String bucket = key == null ? "unknown" : key.toString();
+        if (rateLimiterService.isRateLimited("ai-decision", bucket, 10, Duration.ofMinutes(1))) {
+            throw new ApiException(429, 429, "应急建议请求过于频繁，请保留当前告警并稍后重试");
+        }
     }
 }

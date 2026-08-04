@@ -1476,7 +1476,7 @@ function collectPickProperties(picked: PickedFeature) {
     const direct = (picked as Record<string, unknown>)[field]
     const value = direct ?? getters.map(getter => getter(field)).find(item => item !== undefined && item !== null)
     if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean' || value === null) {
-      properties[field] = value
+      properties[field] = value as string | number | boolean | null
     }
   })
   return properties
