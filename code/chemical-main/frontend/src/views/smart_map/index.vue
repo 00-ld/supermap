@@ -1,5 +1,6 @@
 <template>
   <div class="chempark-container">
+    <SmartMapAiDraftBanner />
     <div class="main-layout">
       <aside class="left-panel">
         <div class="panel-section">
@@ -553,6 +554,7 @@ import {
 } from './useSuperMapIserverData'
 import ParkScene3D from './components/ParkScene3D.vue'
 import SmartMapAlertList from './components/SmartMapAlertList.vue'
+import SmartMapAiDraftBanner from './components/SmartMapAiDraftBanner.vue'
 import SmartMapBottomToolbar from './components/SmartMapBottomToolbar.vue'
 import SmartMapCoarseCandidatePanel from './components/SmartMapCoarseCandidatePanel.vue'
 import SmartMapCoordinateDisplay from './components/SmartMapCoordinateDisplay.vue'

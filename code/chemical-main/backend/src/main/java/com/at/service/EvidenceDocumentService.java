@@ -1,5 +1,8 @@
 package com.at.service;
 
+import org.apache.pdfbox.Loader;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
@@ -14,7 +17,7 @@ import java.util.List;
 /** Loads the approved local response documents without exposing their paths to the browser. */
 @Service
 public class EvidenceDocumentService {
-    private static final int MAX_DOCUMENT_CHARS = 60_000;
+    private static final int MAX_DOCUMENT_CHARS = 36_000;
     private static final int MAX_TOTAL_CHARS = 110_000;
     private static final String REPOSITORY_DOCUMENT = "docs/chemical-park-leak-emergency-response.md";
 
@@ -44,7 +47,8 @@ public class EvidenceDocumentService {
         for (String path : paths) {
             if (path == null || path.isBlank()) continue;
             String selected = path.trim();
-            if (!selected.toLowerCase().endsWith(".md")) continue;
+            String extension = extension(selected);
+            if (!extension.equals(".md") && !extension.equals(".pdf")) continue;
             configured = true;
             String name = Path.of(selected).getFileName().toString();
             try {
@@ -53,7 +57,8 @@ public class EvidenceDocumentService {
                     documents.add(new EvidenceDocument(name, "文件未找到：不能声称已引用该文件。", false));
                     continue;
                 }
-                documents.add(new EvidenceDocument(name + " [" + file + "]", readLimited(file), true));
+                String content = extension.equals(".pdf") ? readLimitedPdf(file) : readLimited(file);
+                documents.add(new EvidenceDocument(name + " [" + file + "]", content, true));
             } catch (Exception exception) {
                 documents.add(new EvidenceDocument(name, "文件读取失败：不能声称已引用该文件。", false));
             }
@@ -90,6 +95,21 @@ public class EvidenceDocumentService {
             }
             return builder.toString();
         }
+    }
+
+    private String readLimitedPdf(Path path) throws IOException {
+        try (PDDocument document = Loader.loadPDF(path.toFile())) {
+            PDFTextStripper stripper = new PDFTextStripper();
+            stripper.setStartPage(1);
+            stripper.setEndPage(Math.min(document.getNumberOfPages(), 12));
+            String content = stripper.getText(document);
+            return content.substring(0, Math.min(content.length(), MAX_DOCUMENT_CHARS));
+        }
+    }
+
+    private String extension(String filename) {
+        int separator = filename.lastIndexOf('.');
+        return separator < 0 ? "" : filename.substring(separator).toLowerCase();
     }
 
     public record EvidenceBundle(List<EvidenceDocument> documents) {

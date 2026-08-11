@@ -11,7 +11,7 @@ import java.util.Locale;
 @Service
 public class DecisionRuleService {
     public static final List<String> ACTIONS = List.of(
-            "PAUSE_PATROL", "RECHECK", "ANALYZE_DIFFUSION", "RETURN_HOME", "NOTIFY_RESPONSIBLE"
+            "PAUSE_PATROL", "RECHECK", "RETURN_HOME", "NOTIFY_RESPONSIBLE"
     );
     public static final List<String> DEFAULT_STANDARDS = List.of(
             "AQ/T 3052-2015《危险化学品事故应急救援指挥导则》",
@@ -47,10 +47,10 @@ public class DecisionRuleService {
                 ? "介质、数值或数据质量不足，不能据此推导处置阈值，应按较高风险先暂停近距离巡检、复测并通知责任人。"
                 : "当前仅能视为监测异常线索，是否超出企业处置阈值须核对仪表配置、现场方案和最新版 SDS。";
         List<String> recommendations = List.of("暂停当前点位继续前进并保持安全距离", "核对单位、阈值来源、时间戳和数据质量后复测",
-                "检查同区域关联监测点、视频、风向和工艺状态", "通知责任人并保留事件记录");
+                "在事故告警和巡检监测中核对告警记录与小车当前状态", "通知责任人并保留事件记录");
         return new RuleAdvice(risk, summary, explanation, recommendations,
-                List.of("PAUSE_PATROL", "RECHECK", "ANALYZE_DIFFUSION", "NOTIFY_RESPONSIBLE"),
-                List.of("实时预警核对告警详情和趋势", "智巡监测暂停并复测，必要时返航", "智慧地图核对风向、边界和影响范围"),
+                List.of("PAUSE_PATROL", "RECHECK", "RETURN_HOME", "NOTIFY_RESPONSIBLE"),
+                List.of("事故告警核对告警详情并刷新数据", "巡检监测查看小车状态，必要时提交暂停、复测或返航申请", "任务中心创建或跟进关联任务"),
                 DEFAULT_STANDARDS, DEFAULT_DOCUMENTS, "degraded",
                 List.of("缺少介质最新版 SDS、现场人员状态、阈值来源和人工检测回执"));
     }

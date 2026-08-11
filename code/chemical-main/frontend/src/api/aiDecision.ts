@@ -36,7 +36,7 @@ export const reqGenerateAiAdvice = (alertId: number, evidence?: string) =>
   request.post<{ alertType: string; evidence?: string }, ApiResult<AiAdviceRecord>>(
     `/mobile/alerts/${alertId}/ai-advice`,
     { alertType: 'GAS_CONCENTRATION', evidence },
-    { timeout: AI_DECISION_TIMEOUT_MS },
+    { timeout: AI_DECISION_TIMEOUT_MS, headers: { 'x-skip-error-toast': 'true' } },
   )
 
 export const reqQuickAiAdvice = (payload: {
@@ -48,7 +48,7 @@ export const reqQuickAiAdvice = (payload: {
   request.post<typeof payload, ApiResult<AiAdviceRecord>>(
     '/mobile/ai-advice/quick',
     payload,
-    { timeout: AI_DECISION_TIMEOUT_MS },
+    { timeout: AI_DECISION_TIMEOUT_MS, headers: { 'x-skip-error-toast': 'true' } },
   )
 
 export const reqAiAdvice = (adviceId: number) =>

@@ -45,6 +45,8 @@ const handleDefaultError = (error: unknown) => {
   const isAuthEntry = /\/(login|register)\b/.test(url)
   const isPublicDemoRoute = publicDemoRoutes.has(router.currentRoute.value.path)
   const responseMessage = axiosError?.response?.data?.message
+  const requestHeaders = axiosError?.config?.headers as Record<string, unknown> | undefined
+  const suppressToast = requestHeaders?.['x-skip-error-toast'] === 'true'
 
   switch (status) {
     case 401:
@@ -82,10 +84,12 @@ const handleDefaultError = (error: unknown) => {
       break
   }
 
-  ElMessage({
-    type: 'error',
-    message,
-  })
+  if (!suppressToast) {
+    ElMessage({
+      type: 'error',
+      message,
+    })
+  }
   return Promise.reject(error)
 }
 
