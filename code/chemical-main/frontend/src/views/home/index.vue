@@ -97,14 +97,6 @@
           >
             实时监测
           </el-button>
-          <el-button
-              type="primary"
-              class="shortcut-btn"
-              @click="goToSmartMap()"
-              :loading="shortcutLoading.map"
-          >
-            智慧地图
-          </el-button>
         </div>
       </el-card>
 
@@ -158,7 +150,7 @@ const userStore = useUserStore()
 
 // 定义类型
 type RefreshType = 'alarm' | 'env'
-type ShortcutType = 'inspect' | 'approval' | 'export' | 'setting' | 'map'
+type ShortcutType = 'inspect' | 'approval' | 'export' | 'setting'
 type StatTrendTone = 'positive' | 'negative' | 'neutral'
 
 interface ParkStatCard {
@@ -220,7 +212,6 @@ const shortcutLoading = ref<Record<ShortcutType, boolean>>({
   approval: false,
   export: false,
   setting: false,
-  map: false,
 })
 // 预警历史数据（经 warningHistory API 层获取，对应 warning_history 表）
 const historyList = ref<HistoryItem[]>([])
@@ -245,7 +236,7 @@ const parkStats = computed<ParkStatCard[]>(() => [
     title: '在线监测点',
     value: monitoringOverview.value?.environment?.onlineSensorCount ?? '--',
     trend: monitoringOverview.value
-      ? `风险均值 ${Number(monitoringOverview.value.environment.averageRisk || 0).toFixed(2)}`
+      ? `风险均值 ${Number(monitoringOverview.value.environment?.averageRisk || 0).toFixed(2)}`
       : '待加载',
     trendTone: 'neutral',
     sourceLabel: '监测概览',
@@ -357,15 +348,6 @@ const goToSetting = () => {
     shortcutLoading.value.setting = false
     router.push({ path: '/monitor' })
     ElMessage.success('进入实时监测页面')
-  }, 800)
-}
-
-const goToSmartMap = () => {
-  shortcutLoading.value.map = true
-  setTimeout(() => {
-    shortcutLoading.value.map = false
-    router.push({ path: '/smart-map', query: { source: 'home-shortcut' } })
-    ElMessage.success('进入智慧地图页面')
   }, 800)
 }
 

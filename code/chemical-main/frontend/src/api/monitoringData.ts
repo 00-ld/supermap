@@ -10,10 +10,11 @@ export interface EnvironmentSnapshot {
   humidity: number | null
   pressure: number | null
   noise: number | null
-  sensorCount: number
-  onlineSensorCount: number
-  averageRisk: number
-  maxRisk: number
+  // 后端已下线 sensor 指标：传感器总数/在线数/风险值可能缺失，消费方需按 undefined 兜底。
+  sensorCount?: number
+  onlineSensorCount?: number
+  averageRisk?: number
+  maxRisk?: number
   warningCarCount: number
   observedAt: string | null
   source: string | null

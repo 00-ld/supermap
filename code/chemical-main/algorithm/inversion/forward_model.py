@@ -306,6 +306,7 @@ class ForwardModel:
             map_meters_per_unit=self.map_meters_per_unit,
             mixing_height_m=self.mixing_height_m,
             gas=gas_condition_from_dict(gas),
+            urban=self.urban,
         )
 
     @property

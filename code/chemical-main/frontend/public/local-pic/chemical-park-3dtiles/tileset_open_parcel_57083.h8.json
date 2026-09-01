@@ -1,0 +1,141 @@
+{
+  "asset": {
+    "version": "1.0",
+    "gltfUpAxis": "Z"
+  },
+  "properties": {
+    "supermapCupAnchor": {
+      "name": "Zhengzhou user selected vacant parcel placement",
+      "longitude": 113.569463,
+      "latitude": 34.76965,
+      "height": 8,
+      "epsg": 4490,
+      "scaleX": 0.19,
+      "scaleY": 0.22,
+      "scaleZ": 0.16,
+      "sourceXOrigin": -1345.9164671191247,
+      "sourceYOrigin": 878.3000417170115,
+      "placementBasis": "local override: model center placed on user-selected vacant parcel; preserve ENU rotation/scale to avoid vertical insertion"
+    },
+    "supermapCupPlacement": {
+      "mode": "ENU_LOCAL_X_EAST_Y_UP_Z_SOUTH_SCALED_USER_VACANT_PARCEL",
+      "targetCenterLongitude": 113.569463,
+      "targetCenterLatitude": 34.76965,
+      "targetCenterHeight": 8,
+      "sourceCenter": [
+        -224.9392136407243,
+        -0.10632924731091488,
+        18.88048171196667
+      ],
+      "tileRestore": {
+        "strategy": "restore core top-level 3D Tiles children, including central model tile; keep oversized surrounding tiles out because they obscure globe imagery and slow loading",
+        "source": "tileset_open_parcel_57083.trim1.json children with current EPSG:4490 anchor",
+        "restoredTopLevelChildren": 5,
+        "restoredAt": "2026-07-17"
+      }
+    }
+  },
+  "geometricError": 294271.79399274854,
+  "root": {
+    "boundingVolume": {
+      "sphere": [
+        -224.9392136407243,
+        -0.10632924731091488,
+        18.88048171196667,
+        1839.1987124546783
+      ]
+    },
+    "children": [
+      {
+        "boundingVolume": {
+          "sphere": [
+            163.1842001487777,
+            -396.8821813734753,
+            0.013535535510082505,
+            1046.3465552767104
+          ]
+        },
+        "content": {
+          "uri": "/pic/chemical-park-3dtiles/Tile_-0001_-0002_0000/Tile_-0001_-0002_0000.json"
+        },
+        "geometricError": 167415.44884427363
+      },
+      {
+        "boundingVolume": {
+          "sphere": [
+            -894.7121761583736,
+            -257.6088287953462,
+            9.83187763573378,
+            125.33194821792569
+          ]
+        },
+        "content": {
+          "uri": "/pic/chemical-park-3dtiles/Tile_-0001_0001_0000/Tile_-0001_0001_0000.json"
+        },
+        "geometricError": 20053.111714868108
+      },
+      {
+        "boundingVolume": {
+          "sphere": [
+            -408.9044375737474,
+            -150.82956962459392,
+            29.114691159960508,
+            552.4420257874632
+          ]
+        },
+        "content": {
+          "uri": "/pic/chemical-park-3dtiles/Tile_-0001_0000_0000/Tile_-0001_0000_0000.json"
+        },
+        "geometricError": 88390.72412599411
+      },
+      {
+        "boundingVolume": {
+          "sphere": [
+            -171.09251876931697,
+            -182.85797230112215,
+            67.77988263819665,
+            399.35539424081526
+          ]
+        },
+        "content": {
+          "uri": "/pic/chemical-park-3dtiles/Tile_-0001_-0001_0000/Tile_-0001_-0001_0000.json"
+        },
+        "geometricError": 63896.86307853044
+      },
+      {
+        "boundingVolume": {
+          "sphere": [
+            -411.0326087428807,
+            24.13285110306941,
+            18.724584073443076,
+            581.5713556835383
+          ]
+        },
+        "content": {
+          "uri": "/pic/chemical-park-3dtiles/Tile_0000_0000_0000/Tile_0000_0000_0000.json"
+        },
+        "geometricError": 93051.41690936612
+      }
+    ],
+    "geometricError": 294271.79399274854,
+    "refine": "REPLACE",
+    "transform": [
+      -0.1740248413607987,
+      -0.07625847224635991,
+      0,
+      0,
+      -0.0725794435405089,
+      0.16562915275023768,
+      0.12529648093457577,
+      0,
+      -0.036573849622644636,
+      0.08346296734050102,
+      -0.13151534741808135,
+      0,
+      -2097326.7428463213,
+      4807467.04902891,
+      3616911.395137041,
+      1
+    ]
+  }
+}

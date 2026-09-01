@@ -45,15 +45,6 @@ export const constantRoute: RouteRecordRaw[] = [
           icon: 'HomeFilled',
         },
       },
-      {
-        path: '/smart-map',
-        component: () => import('@/views/smart_map/index.vue'),
-        meta: {
-          title: '智慧地图',
-          hidden: false,
-          icon: 'Platform',
-        },
-      },
     ],
   },
   {
@@ -203,38 +194,6 @@ export const constantRoute: RouteRecordRaw[] = [
     ],
   },
 
-  //重点监测视频
-  {
-    path: '/monitor',
-    component: () => import('@/layout/index.vue'),
-    name: 'Monitor',
-    meta: {
-      title: '监测点目录',
-      icon: 'VideoCamera',
-      hidden: false,
-    },
-    children: [
-      {
-        path: '',
-        component: () => import('@/views/monitor/index.vue'),
-        name: 'MonitorDirectory',
-        meta: {
-          title: '监测点目录',
-          icon: 'VideoCamera',
-          hidden: false,
-        },
-      },
-      {
-        path: ':id',
-        component: () => import('@/layout/monitor.vue'),
-        name: 'MonitorDetail',
-        meta: {
-          hidden: true,
-          title: '监测详情',
-        },
-      },
-    ],
-  },
 ];
 
 // 任意路由

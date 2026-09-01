@@ -1,0 +1,13 @@
+flowchart TD
+    INIT["初始化<br/>12000 粒子: 位置均匀, Q 对数均匀<br/>权重均等, seed 确定"] --> LOOP{"进入 36 轮迭代"}
+    LOOP --> L["① 似然计算<br/>前向预测 vs 实测<br/>高斯残差 + 到达时间差约束 + 上风向惩罚"]
+    L --> AN["② 退火 β: 0→1<br/>逐步引入似然, 防早熟"]
+    AN --> ESS{"ESS < 0.55N ?"}
+    ESS -->|否| REC["记录 x, y, Q, ESS, RMSE"]
+    ESS -->|是| RS["③ 系统重采样<br/>复制高权重, 淘汰低权重"]
+    RS --> MCMC["④ MCMC 复兴<br/>高斯抖动 + MH 接受/拒绝, 防退化"]
+    MCMC --> REC
+    REC --> DONE{"迭代结束?"}
+    DONE -->|否| LOOP
+    DONE -->|是| OUT["⑤ 收敛诊断 split-R-hat"]
+    OUT --> FINAL["加权均值 → 点估计<br/>解析重拟合 Q = (g·c)/(g·g)<br/>协方差 → 95% 可信半径<br/>KDE → 概率山 GeoJSON"]

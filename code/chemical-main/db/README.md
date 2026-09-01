@@ -22,16 +22,15 @@ db/
 
 | 类型 | 当前文件 | 用途 |
 | --- | --- | --- |
-| 初始化 | `deploy/mysql/init.sql` | Docker MySQL 容器启动时执行的主初始化脚本，包含真实 DOM 传感器点位。 |
+| 初始化 | `deploy/mysql/init.sql` | Docker MySQL 容器启动时执行的主初始化脚本。 |
 | 迁移 | `db/migrations/001_add_user_role.sql` | 为用户表增加角色字段的规范迁移脚本。 |
 | 迁移 | `db/migrations/002_add_core_audit_columns.sql` | 为核心表补齐来源、创建时间和更新时间字段。 |
 | 迁移 | `db/migrations/003_extend_monitor_point_semantics.sql` | 将 `monitor_point` 从名称目录扩展为带区域、传感器/视频源绑定、坐标和质量状态的监测点对象。 |
 | 迁移 | `db/migrations/004_seed_monitor_point_video_sources.sql` | 为 4 个可公开演示监测点绑定前端公开视频源。 |
 | 部署兼容迁移 | `deploy/mysql/migration_add_role.sql` | Docker/MySQL 兼容入口，保留给现有部署流程；语义应与 `db/migrations/001_add_user_role.sql` 保持一致。 |
-| 历史参考 | `deploy/mysql/sensor_data.sql` | 已废弃的真实 DOM 传感器点位参考脚本；不是初始化入口，也不由默认校验链路检查。 |
 | 后端本地资源 | `backend/src/main/resources/schema-gas.sql` | 气体类型表局部建表脚本。 |
-| 后端本地资源 | `backend/src/main/resources/schema-sensor.sql` | 传感器与布局表局部建表脚本。 |
-| 后端本地资源 | `backend/src/main/resources/init-sensor-db.sql` | 传感器相关初始化脚本。 |
+| 后端本地资源 | `backend/src/main/resources/schema-sensor.sql` | 传感器布局与环境观测表局部建表脚本。 |
+| 后端本地资源 | `backend/src/main/resources/init-sensor-db.sql` | 传感器布局、环境观测与气体初始化脚本。 |
 
 ## 强制要求
 
@@ -45,5 +44,5 @@ db/
 ## 后续整理方向
 
 1. 将 `deploy/mysql/init.sql` 拆分为 `db/schema/001_init.sql`、`db/seed/001_seed_sensor.sql` 等小文件。
-2. 保留 `deploy/mysql/init.sql` 作为部署聚合脚本，并保持 `frontend/src/data/realSensorLayout.ts` 与其中 61 个真实 DOM 点位同步；`deploy/mysql/sensor_data.sql` 只作为 legacy 参考，需显式参数才校验。
-3. 为核心业务表补充 ER 图或字段字典，至少覆盖用户、传感器、小车、气体数据、告警、扩散任务、溯源任务和路径规划任务。
+2. 保留 `deploy/mysql/init.sql` 作为部署聚合脚本；A 套传感器（sensor/sensor_reading/monitor_point）已随 B 套迁移删除，`frontend/src/data/realSensorLayout.ts` 仅作前端布局参考，不再与数据库种子同步。
+3. 为核心业务表补充 ER 图或字段字典，至少覆盖用户、小车、气体数据、告警、扩散任务、溯源任务和路径规划任务。

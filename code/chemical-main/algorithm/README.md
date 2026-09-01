@@ -57,6 +57,7 @@ uv run uvicorn algorithm.polo:app --host 127.0.0.1 --port 8001 --reload
 ```bash
 uv run --no-sync python -m py_compile algorithm/api_server.py algorithm/response_utils.py algorithm/polo.py
 uv run --no-sync python -m algorithm.diffusion.test_physical_invariants
+uv run --no-sync python -m algorithm.diffusion.test_conditioned_advection_volume
 uv run --no-sync python -m algorithm.diffusion.test_real_prairie_grass
 uv run --no-sync python -m algorithm.inversion.validate_particle_filter
 uv run --no-sync python -m algorithm.tests.test_path_hazard_avoidance
@@ -64,11 +65,27 @@ uv run --no-sync python -m algorithm.tests.test_path_hazard_avoidance
 
 真实数据样本验证使用 `datasets/samples/prairie_grass/PGrassOBSAnalysis.txt`，来源和边界见 `docs/dataset-sources.md`。该测试只验证横风向扩散宽度 `Sy (m)`，不得把它扩大解释为绝对浓度或完整事故级模型验证。
 
-当前扩散运行时使用 `deep_learning.gas_surrogate` 物理信息深度学习模型：PyTorch MLP 学习源点到传感器/网格点的浓度响应，并以 `diffusion.conditioned_advection` 作为安全锚点进行神经校正。`diffusion.gaussian_plume` 保留为 Prairie Grass 真实横风扩散宽度验证和历史公式基准，不再作为 `/api/diffusion/simulate` 的主场生成器。
+当前 `/api/diffusion/simulate` 主场生成器使用 `diffusion.conditioned_advection.ConditionedAdvectionVolume`，直接求解按 `z-y-x` 排列的三维浓度体 `C(z,y,x,t)`。水平风、气体浮力、垂直湍流、三维障碍掩码和释放高度共同参与输运；模型绑定监控点按安装高度从体场三线性插值取值。`deep_learning.gas_surrogate` 继续服务于快速点响应和溯源回归，不再冒充三维主场。
+
+三维请求使用 `releaseHeight` 表示泄漏原点相对场景地面的高度；`volumeFence.minRelativeHeightMeters`、`maxRelativeHeightMeters` 限制源点上下的求解空间，`verticalCellSizeMeters` 控制垂直网格分辨率（默认 5 m）。响应帧包含 `volumeGrid` 和由真实体素浓度筛选得到的 `volumeCells`；`releaseGeometry.visualizationOnly=false`，浓度语义为 `three-dimensional-voxel-concentration`。
+
+当现场气象塔提供与释放时段、释放位置一致的测量值时，扩散请求可额外传入以下可选字段；未提供时保持原有风廓线和有效扩散率行为：
+
+| 字段 | 单位 | 含义 |
+| --- | --- | --- |
+| `windSpeedAtReleaseHeight` | m/s | 释放高度实测风速，优先于由 10 m 风速外推的值 |
+| `sigvMps` | m/s | 横风速度标准差，用于横向拉格朗日扩散宽度 |
+| `sigwMps` | m/s | 垂直速度标准差，用于近地受体的垂直稀释 |
+| `lagrangianTimescaleS` | s | 可选显式拉格朗日积分时间尺度，必须大于零；省略时按 `0.1 × mixingHeightM / SIGV(SIGW)` 分别诊断横向/垂向尺度 |
+| `turbulenceTimescaleMixingHeightFraction` | 无量纲 | 当未显式提供 `lagrangianTimescaleS` 时的比例，默认 0.1；只能由跨案例验证结果配置 |
+
+这些输入必须经逐案例留一验证；不得以单个 Copenhagen 弧线反推后直接用于同一案例的精度宣称。
+
+惰性气体默认不施加质量损失；若存在经过验证的沉降、反应或地表吸收过程，可在请求或气体配置中显式传入 `groundLossRateS`（s⁻¹）。相对密度只影响输运与扩散条件，不能充当浓度衰减系数。
 
 `uv run --no-sync python -m algorithm.inversion.validate_particle_filter` 会先复用 Prairie Grass 真实扩散宽度验证，再用可复现的深度学习代理观测样本验证粒子滤波溯源定位、释放强度估计、噪声压力场景和多随机种子重复性。合成观测不得写成真实事故数据。重复性检查使用 9000 粒子和 24 轮迭代，避免用过低预算掩盖随机种子不稳定。
 
-深度学习权重默认生成到 `models/deep_gas_surrogate.pt`。该权重由本项目物理教师模型监督训练得到，可复现但不提交 Git；缺失时算法服务会自动训练默认 CPU 模型。
+深度学习权重默认生成到 `models/deep_gas_surrogate.pt`。该权重由本项目物理教师模型监督训练得到，可复现但不提交 Git；仅在快速点响应/溯源链路需要时加载。
 
 ## 提交边界
 

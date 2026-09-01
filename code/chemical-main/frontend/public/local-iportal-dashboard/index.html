@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>化工园区 iPortal 本地大屏</title>
+    <style>
+      :root { color-scheme: dark; font-family: "Microsoft YaHei", "Segoe UI", sans-serif; }
+      * { box-sizing: border-box; }
+      body { min-height: 100vh; margin: 0; padding: 32px; color: #d8ecf5; background: radial-gradient(circle at top, #123247 0, #07131d 56%); }
+      header { display: flex; align-items: end; justify-content: space-between; gap: 24px; padding-bottom: 20px; border-bottom: 1px solid #254c60; }
+      h1 { margin: 0; font-size: 28px; letter-spacing: 1px; }
+      p { margin: 8px 0 0; color: #85adbf; }
+      .status { color: #67d6a0; font-size: 13px; }
+      .enter { display: inline-flex; margin-top: 24px; padding: 12px 20px; color: #04151d; font-weight: 700; text-decoration: none; background: #59d9b0; border-radius: 6px; }
+      .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 22px; }
+      .card { min-height: 112px; padding: 18px; background: #0e2331; border: 1px solid #254c60; border-radius: 6px; }
+      .dot { display: block; width: 10px; height: 10px; margin-bottom: 14px; background: #59d9b0; border-radius: 50%; box-shadow: 0 0 12px #59d9b0; }
+      .card strong, .card small { display: block; }
+      .card small { margin-top: 8px; color: #82a8bb; }
+      @media (max-width: 760px) { body { padding: 18px; } header { align-items: start; flex-direction: column; } .grid { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div><h1>化工园区数字孪生大屏</h1><p>iPortal 本地静态入口 · SuperMap iServer · 全链路本机运行</p></div>
+      <span class="status">本地服务已接管</span>
+    </header>
+    <a class="enter" href="/#/screen">进入本地三维大屏</a>
+    <main class="grid" aria-label="已发布本地三维场景">
+      <article class="card"><span class="dot"></span><strong>加工厂房</strong><small>本地 iServer / S3M</small></article>
+      <article class="card"><span class="dot"></span><strong>生产装置厂房</strong><small>本地 iServer / S3M</small></article>
+      <article class="card"><span class="dot"></span><strong>原材料仓库</strong><small>本地 iServer / S3M</small></article>
+      <article class="card"><span class="dot"></span><strong>换热器</strong><small>本地 iServer / S3M</small></article>
+      <article class="card"><span class="dot"></span><strong>立式罐子</strong><small>本地 iServer / S3M</small></article>
+      <article class="card"><span class="dot"></span><strong>蒸馏塔</strong><small>本地 iServer / S3M</small></article>
+    </main>
+  </body>
+</html>

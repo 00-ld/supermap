@@ -1,38 +1,61 @@
-import { MAP_METERS_PER_UNIT } from './coordinate'
+import { MAP_METERS_PER_UNIT } from './coordinate.js'
 
 export const GAS_SOURCE_CATALOG = [
   {
     gasId: 'co',
     gasName: 'CO',
     validRadiusMeters: 36,
-    allowedSourceFacilityIds: ['pa-west-north', 'pa-center-north', 'pa-center-south', 'pb-mid-process', 'wh-logistics'],
-    description: 'Allowed near real-DOM production, process and warehouse areas',
+    allowedSourceFacilityIds: [
+      'pa-west-north',
+      'pa-center-north',
+      'pa-center-south',
+      'pb-mid-process',
+      'wh-logistics',
+    ],
+    description:
+      'Allowed near real-DOM production, process and warehouse areas',
   },
   {
     gasId: 'nh3',
     gasName: 'NH3',
     validRadiusMeters: 38,
-    allowedSourceFacilityIds: ['pa-west-south', 'tw-center', 'pb-north-tank', 'pb-mid-process'],
-    description: 'Allowed near real-DOM tank, tower and process equipment areas',
+    allowedSourceFacilityIds: [
+      'pa-west-south',
+      'tw-center',
+      'pb-north-tank',
+      'pb-mid-process',
+    ],
+    description:
+      'Allowed near real-DOM tank, tower and process equipment areas',
   },
   {
     gasId: 'ch4',
     gasName: 'CH4',
     validRadiusMeters: 40,
-    allowedSourceFacilityIds: ['pa-west-north', 'pa-west-south', 'pb-north-tank', 'wh-logistics'],
-    description: 'Allowed near real-DOM combustible gas process, tank and warehouse areas',
+    allowedSourceFacilityIds: [
+      'pa-west-north',
+      'pa-west-south',
+      'pb-north-tank',
+      'wh-logistics',
+    ],
+    description:
+      'Allowed near real-DOM combustible gas process, tank and warehouse areas',
   },
   {
     gasId: 'o2',
     gasName: 'O2',
     validRadiusMeters: 30,
-    allowedSourceFacilityIds: ['ut-center', 'pa-center-south', 'pb-mid-process'],
+    allowedSourceFacilityIds: [
+      'ut-center',
+      'pa-center-south',
+      'pb-mid-process',
+    ],
     description: 'Allowed near real-DOM utility and process areas',
   },
 ]
 
 export function getGasSourceConfig(gasId) {
-  return GAS_SOURCE_CATALOG.find(item => item.gasId === gasId) || null
+  return GAS_SOURCE_CATALOG.find((item) => item.gasId === gasId) || null
 }
 
 export function getAllowedGasSourceFacilityIds(gasId) {
@@ -40,11 +63,26 @@ export function getAllowedGasSourceFacilityIds(gasId) {
 }
 
 export function getAllowedGasSourceFacilities(facilities, gasId) {
+  const normalizedGasCode = String(gasId || '')
+    .trim()
+    .toUpperCase()
+  const modelBoundSources = facilities.filter(
+    (facility) =>
+      Array.isArray(facility.supportedGasCodes) &&
+      facility.supportedGasCodes.some(
+        (code) => String(code).trim().toUpperCase() === normalizedGasCode,
+      ),
+  )
+  if (modelBoundSources.length) return modelBoundSources
   const allowedIds = new Set(getAllowedGasSourceFacilityIds(gasId))
-  return facilities.filter(facility => allowedIds.has(facility.id))
+  return facilities.filter((facility) => allowedIds.has(facility.id))
 }
 
-export function findNearestAllowedGasSourceFacility(facilities, gasId, mapPoint) {
+export function findNearestAllowedGasSourceFacility(
+  facilities,
+  gasId,
+  mapPoint,
+) {
   if (!mapPoint) return null
   const allowedFacilities = getAllowedGasSourceFacilities(facilities, gasId)
   if (!allowedFacilities.length) return null
@@ -72,7 +110,8 @@ export function validateGasLeakSource({
     }
   }
 
-  const selectedFacility = facilities.find(item => item.id === sourceFacilityId) || null
+  const selectedFacility =
+    facilities.find((item) => item.id === sourceFacilityId) || null
   const allowedFacilities = getAllowedGasSourceFacilities(facilities, gasId)
   if (!selectedFacility) {
     return {
@@ -104,8 +143,11 @@ export function validateGasLeakSource({
 
   const selectedPoint = mapPoint || getFacilityCenter(selectedFacility)
   const nearest = findNearestAllowedFacility(selectedPoint, allowedFacilities)
-  const isDirectlyAllowed = config.allowedSourceFacilityIds.includes(selectedFacility.id)
-  const isWithinRadius = nearest && nearest.distanceMeters <= config.validRadiusMeters
+  const isDirectlyAllowed = allowedFacilities.some(
+    (facility) => facility.id === selectedFacility.id,
+  )
+  const isWithinRadius =
+    nearest && nearest.distanceMeters <= config.validRadiusMeters
   const valid = Boolean(isDirectlyAllowed || isWithinRadius)
 
   if (valid) {
@@ -117,7 +159,9 @@ export function validateGasLeakSource({
       selectedFacility,
       allowedFacilities,
       nearestAllowedFacility: nearest?.facility || null,
-      distanceToNearestAllowedMeters: nearest ? round2(nearest.distanceMeters) : 0,
+      distanceToNearestAllowedMeters: nearest
+        ? round2(nearest.distanceMeters)
+        : 0,
       message: `${config.gasName} 泄漏源校验通过`,
     }
   }
@@ -132,7 +176,9 @@ export function validateGasLeakSource({
     selectedFacility,
     allowedFacilities,
     nearestAllowedFacility: nearest?.facility || null,
-    distanceToNearestAllowedMeters: nearest ? round2(nearest.distanceMeters) : null,
+    distanceToNearestAllowedMeters: nearest
+      ? round2(nearest.distanceMeters)
+      : null,
     message: `当前泄漏点不在 ${config.gasName} 允许的生产/储存区域附近，最近允许设施为 ${nearestLabel}，距离 ${distanceLabel}`,
   }
 }
@@ -141,7 +187,8 @@ function findNearestAllowedFacility(point, facilities) {
   let nearest = null
   for (const facility of facilities) {
     const center = getFacilityCenter(facility)
-    const distanceMeters = Math.hypot(point.x - center.x, point.y - center.y) * MAP_METERS_PER_UNIT
+    const distanceMeters =
+      Math.hypot(point.x - center.x, point.y - center.y) * MAP_METERS_PER_UNIT
     if (!nearest || distanceMeters < nearest.distanceMeters) {
       nearest = {
         facility,

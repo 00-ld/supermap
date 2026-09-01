@@ -1,0 +1,11 @@
+flowchart TD
+    A["前端采集<br/>传感器浓度 + 到达时间<br/>气象: 风速/风向/稳定度<br/>气体: 摩尔质量/密度比"] --> B["POST /api/inversion/particle-filter<br/>X-API-Key 鉴权"]
+    B --> C["task_router 分发"]
+    C --> D["ForwardModel.from_scenario<br/>构建前向算子 G(θ)"]
+    D --> E{"选择溯源方法"}
+    E -->|主力 · 全局搜索| F["粒子滤波 run_particle_filter"]
+    E -->|对照 · 局部精修| G["两阶段 grid_search + EKI"]
+    F --> H["输出: 点估计 + 95%可信区间<br/>+ KDE 概率山 GeoJSON<br/>+ 诊断 ESS / R-hat"]
+    G --> I["输出: 点估计 + 置信椭圆<br/>+ 收缩动画帧"]
+    H --> J["前端渲染<br/>源图标 + 可信圆 + 三维概率山"]
+    I --> J

@@ -7,6 +7,9 @@ export interface GasSourceFacility {
   y: number
   w?: number
   h?: number
+  modelSmId?: number
+  modelName?: string
+  supportedGasCodes?: string[]
 }
 
 interface GasSourcePoint {
@@ -47,13 +50,13 @@ export function getAllowedGasSourceFacilityIds(gasId: string): string[]
 
 export function getAllowedGasSourceFacilities(
   facilities: GasSourceFacility[],
-  gasId: string
+  gasId: string,
 ): GasSourceFacility[]
 
 export function findNearestAllowedGasSourceFacility(
   facilities: GasSourceFacility[],
   gasId: string,
-  mapPoint: GasSourcePoint | null
+  mapPoint: GasSourcePoint | null,
 ): NearestGasSourceFacility | null
 
 export function validateGasLeakSource(params: {

@@ -4,7 +4,7 @@ spring:
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:mysql://127.0.0.1:3306/chemical?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true}
     username: ${SPRING_DATASOURCE_USERNAME:${DB_USERNAME:root}}
-    password: ${SPRING_DATASOURCE_PASSWORD:${DB_PASSWORD:}}
+    password: ${SPRING_DATASOURCE_PASSWORD:${DB_PASSWORD:123456}}
 
 server:
   port: ${SERVER_PORT:8081}

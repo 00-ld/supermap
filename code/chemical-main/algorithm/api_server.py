@@ -394,7 +394,35 @@ def _run_engine_task(data: Dict[str, Any], request: Request | None = None) -> Al
     payload = data.get("payload", {})
     started_at = time.perf_counter()
     try:
+        scenario = payload.get("scenario") or {}
+        input_crs = (
+            payload.get("sourceCoordSys")
+            or scenario.get("sourceCoordSys")
+            or "PCS_NON_EARTH_LOCAL_METER"
+        )
+        if str(input_crs).upper() not in {
+            "LOCAL_METER",
+            "PCS_NON_EARTH_LOCAL_METER",
+            "ALGORITHM-MAP-PLANAR",
+        }:
+            raise ValueError(
+                f"unsupported algorithm input CRS: {input_crs}; "
+                "convert to the registered local-meter scene adapter first"
+            )
         result = route_task(task_type, payload)
+        if isinstance(result, dict):
+            result.setdefault(
+                "spatialReference",
+                {
+                    "inputCrs": input_crs,
+                    "analysisCrs": input_crs,
+                    "resultCoordinateSpace": "LOCAL_METER",
+                    "presentationTargetCrs": "EPSG:4490",
+                    "presentationTransformApplied": False,
+                    "presentationTransformOwner": "frontend-scene-adapter",
+                    "transformVersion": "cgcs2000-scene-anchor-2026-07-29",
+                },
+            )
         return _success_with_trace(
             result,
             request=request,

@@ -23,6 +23,12 @@ public interface EmployeeMapper {
             + "create_time AS createTime FROM employee WHERE employee_no = #{employeeNo} LIMIT 1")
     Employee selectByEmployeeNo(Integer employeeNo);
 
+    // 按主键查（task 模块校验指派员工存在用）
+    @Select("SELECT id, name, age, gender, phone, department, "
+            + "employee_no AS employeeNo, status, job_desc AS jobDesc, "
+            + "create_time AS createTime FROM employee WHERE id = #{id} LIMIT 1")
+    Employee selectById(Long id);
+
     @Insert("INSERT INTO employee(name, age, gender, phone, department, employee_no, status, job_desc, create_time) "
             + "VALUES(#{name}, #{age}, #{gender}, #{phone}, #{department}, #{employeeNo}, #{status}, #{jobDesc}, NOW())")
     @Options(useGeneratedKeys = true, keyProperty = "id")

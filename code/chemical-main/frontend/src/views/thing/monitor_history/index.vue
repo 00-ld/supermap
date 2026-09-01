@@ -2,7 +2,6 @@
   <div class="container">
     <!-- 主要内容区域 -->
     <div class="main-content">
-      <!-- 监测点列表与视频源绑定状态 -->
       <el-card class="card video-card" shadow="hover">
         <template #header>
           <div class="card-header">
@@ -10,38 +9,30 @@
               <el-icon><VideoPlay /></el-icon>
               监测点与视频源绑定
             </span>
-            <!-- 搜索 + 新增按钮 -->
-            <div class="header-toolbar">
+            <div class="video-toolbar">
               <el-input
-                  v-model="searchKey"
-                  placeholder="搜索监测区域"
-                  style="width: 200px"
-                  size="small"
-                  clearable
+                v-model="videoSearchKey"
+                placeholder="搜索监测区域"
+                clearable
+                aria-label="搜索监控视频"
               >
-                <template #prefix><el-icon><Search /></el-icon></template>
+                <template #prefix>
+                  <el-icon><Search /></el-icon>
+                </template>
               </el-input>
-              <el-button
-                  type="primary"
-                  size="small"
-                  icon="Plus"
-                  @click="openAddDialog"
-              >
-                新增监测点
-              </el-button>
+              <span>{{ monitorVideoSources.length }} 路在线</span>
             </div>
           </div>
         </template>
 
-        <div class="monitor-source-note">
-          安全第一，预防为主；实时监测，源头管控，守护化工园区平稳运行。
-        </div>
+        <p class="monitor-source-note">
+          视频监控与气体传感器联动，辅助值守人员快速复核预警现场。
+        </p>
 
-        <!-- 监测点列表（带搜索筛选） -->
         <div class="monitor-summary">
           <div class="summary-item">
             <span class="summary-label">监测点</span>
-            <strong>{{ monitorList.length }}</strong>
+            <strong>{{ monitorVideoSources.length }}</strong>
           </div>
           <div class="summary-item">
             <span class="summary-label">预警记录</span>
@@ -56,85 +47,42 @@
             <strong>{{ latestWarningText }}</strong>
           </div>
         </div>
-        <div class="video-container">
-          <div v-if="filteredMonitorList.length === 0" class="monitor-empty">
-            <div class="empty-title">暂无可展示监测点</div>
-            <div class="empty-desc">请确认后端监测点接口可用，或新增一个重点监测区域。</div>
-            <el-button type="primary" :icon="Plus" @click="openAddDialog">新增监测点</el-button>
-          </div>
-          <div
-              v-for="item in filteredMonitorList"
-              :key="item.id"
-              class="monitor-item"
-          >
-            <!-- 删除按钮 -->
-            <div class="delete-monitor" @click.stop="handleDeleteMonitor(item.id)">
-              <el-icon><Close /></el-icon>
-            </div>
 
-            <div class="monitor-label" @click="goMonitor(item.id)">
-              {{ item.name }}
-            </div>
+        <div v-if="filteredMonitorVideoSources.length" class="video-container">
+          <article
+            v-for="source in filteredMonitorVideoSources"
+            :key="source.id"
+            class="monitor-video-item"
+          >
+            <header>
+              <strong>{{ source.name }}</strong>
+              <span>在线</span>
+            </header>
             <div class="monitor-meta">
-              <span>{{ item.areaName || '未配置区域' }}</span>
-              <span>{{ item.sensorId ? `传感器 ${item.sensorId}` : '未绑定传感器' }}</span>
-              <span>{{ item.cameraUrl ? '已绑定视频源' : '未绑定视频源' }}</span>
-              <span>{{ item.qualityStatus || 'UNBOUND' }}</span>
+              <span>{{ source.areaName }}</span>
+              <span>传感器 {{ source.sensorId }}</span>
             </div>
-            <div class="video-item">
-              <div class="video-placeholder">
-                <video
-                    v-if="item.cameraUrl"
-                    :src="item.cameraUrl"
-                    class="video-media"
-                    muted
-                    loop
-                    autoplay
-                    playsinline
-                    controls
-                    preload="metadata"
-                />
-                <img
-                    v-else
-                    src="/gas_video/novideo.png"
-                    alt="监测点未绑定视频源占位"
-                    class="video-media video-placeholder-image"
-                />
-                <div class="video-source-badge">{{ item.cameraUrl ? '已绑定视频源' : '未绑定视频源' }}</div>
-              </div>
+            <div class="video-frame">
+              <video
+                :src="source.cameraUrl"
+                :aria-label="`${source.name}监控视频`"
+                muted
+                loop
+                autoplay
+                playsinline
+                controls
+                preload="metadata"
+              ></video>
+              <span class="video-source-badge">
+                实时监控 · {{ source.gasLabel }}
+              </span>
             </div>
-          </div>
+          </article>
+        </div>
+        <div v-else class="monitor-empty">
+          没有匹配的监测点，请尝试区域、点位或传感器编号。
         </div>
       </el-card>
-
-      <!-- 新增弹窗：添加监测点 -->
-      <el-dialog
-          v-model="addDialogVisible"
-          title="新增监测点"
-          width="500px"
-          @close="resetAddForm"
-      >
-        <el-form
-            ref="addFormRef"
-            :model="addForm"
-            label-width="100px"
-            size="default"
-        >
-          <el-form-item
-              label="监测点名称"
-              prop="name"
-              :rules="[{ required: true, message: '请输入监测区域名称', trigger: 'blur' }]"
-          >
-            <el-input v-model="addForm.name" placeholder="如：装卸区东侧入口" />
-          </el-form-item>
-        </el-form>
-        <template #footer>
-          <div class="dialog-footer">
-            <el-button @click="addDialogVisible = false">取消</el-button>
-            <el-button type="primary" @click="handleAddMonitor">确认添加</el-button>
-          </div>
-        </template>
-      </el-dialog>
 
       <!-- 优化后的预警历史记录区域 -->
       <el-card class="card history-card" shadow="hover">
@@ -167,55 +115,106 @@
         </div>
         <div class="table-container">
           <el-table
-              :data="historyList"
-              border
-              stripe
-              :header-cell-style="{background: '#f5f7fa', color: '#303133', fontWeight: '600'}"
-              :row-class-name="({ row }: { row: HistoryItem }) => `level-${getLevelTagType(getRiskLevel(row))}`"
-              class="history-table"
+            :data="historyList"
+            border
+            stripe
+            :header-cell-style="{
+              background: '#f5f7fa',
+              color: '#303133',
+              fontWeight: '600',
+            }"
+            :row-class-name="
+              ({ row }: { row: HistoryItem }) =>
+                `level-${getLevelTagType(getRiskLevel(row))}`
+            "
+            class="history-table"
           >
-            <el-table-column prop="carId" label="小车编号" align="center" width="120" />
-            <el-table-column prop="areaName" label="所属区域" align="center" width="120" />
-            <el-table-column prop="x" label="坐标X" align="center" width="120" />
-            <el-table-column prop="y" label="坐标Y" align="center" width="120" />
-            <el-table-column prop="gasType" label="气体类型" align="center" width="100">
+            <el-table-column
+              prop="carId"
+              label="小车编号"
+              align="center"
+              width="120"
+            />
+            <el-table-column
+              prop="areaName"
+              label="所属区域"
+              align="center"
+              width="120"
+            />
+            <el-table-column
+              prop="x"
+              label="坐标X"
+              align="center"
+              width="120"
+            />
+            <el-table-column
+              prop="y"
+              label="坐标Y"
+              align="center"
+              width="120"
+            />
+            <el-table-column
+              prop="gasType"
+              label="气体类型"
+              align="center"
+              width="100"
+            >
               <template #default="scope">
                 <el-tag size="small" type="info" class="gas-tag">
                   {{ formatGasType(scope.row.gasType) }}
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="gasValue" label="浓度值" align="center" width="170">
+            <el-table-column
+              prop="gasValue"
+              label="浓度值"
+              align="center"
+              width="170"
+            >
               <template #default="scope">
                 <span class="concentration-text">
                   {{ scope.row.gasValue }}
-                  {{ normalizeGasType(scope.row.gasType) === 'O2' ? '%VOL' : 'ppm' }}
+                  {{
+                    normalizeGasType(scope.row.gasType) === 'O2'
+                      ? '%VOL'
+                      : 'ppm'
+                  }}
                 </span>
               </template>
             </el-table-column>
             <el-table-column label="危险等级" align="center" width="130">
               <template #default="scope">
                 <div
-                    class="level-tag"
-                    :class="getLevelTagType(getRiskLevel(scope.row))"
+                  class="level-tag"
+                  :class="getLevelTagType(getRiskLevel(scope.row))"
                 >
                   {{ getRiskLevelText(getRiskLevel(scope.row)) }}
                 </div>
               </template>
             </el-table-column>
-            <el-table-column prop="warningTime" label="预警时间" align="center" width="220">
+            <el-table-column
+              prop="warningTime"
+              label="预警时间"
+              align="center"
+              width="220"
+            >
               <template #default="scope">
                 {{ formatTime(scope.row.warningTime) }}
               </template>
             </el-table-column>
-            <el-table-column label="操作" align="center" width="120" fixed="right">
+            <el-table-column
+              label="操作"
+              align="center"
+              width="120"
+              fixed="right"
+            >
               <template #default="scope">
                 <el-button
-                    type="danger"
-                    size="small"
-                    icon="Delete"
-                    @click="handleDelete(scope.row.id)"
-                    class="delete-btn"
+                  type="danger"
+                  size="small"
+                  icon="Delete"
+                  @click="handleDelete(scope.row.id)"
+                  class="delete-btn"
                 >
                   删除
                 </el-button>
@@ -250,7 +249,11 @@
 
       <!-- 气体类型切换 -->
       <div class="gas-tabs">
-        <el-radio-group v-model="activeGasType" size="default" class="radio-group">
+        <el-radio-group
+          v-model="activeGasType"
+          size="default"
+          class="radio-group"
+        >
           <el-radio-button label="all">全部气体</el-radio-button>
           <el-radio-button label="ch4">甲烷(CH₄)</el-radio-button>
           <el-radio-button label="nh3">氨气(NH₃)</el-radio-button>
@@ -263,124 +266,317 @@
       <div class="table-container">
         <!-- 全部气体汇总表 -->
         <el-table
-            v-if="activeGasType === 'all'"
-            :data="allGasLevelList"
-            border
-            stripe
-            :header-cell-style="{background: '#f5f7fa', color: '#303133', fontWeight: '600'}"
-            class="level-table"
+          v-if="activeGasType === 'all'"
+          :data="allGasLevelList"
+          border
+          stripe
+          :header-cell-style="{
+            background: '#f5f7fa',
+            color: '#303133',
+            fontWeight: '600',
+          }"
+          class="level-table"
         >
-          <el-table-column prop="level" label="危险等级" align="center" min-width="120" />
-          <el-table-column prop="color" label="预警色" align="center" min-width="120">
+          <el-table-column
+            prop="level"
+            label="危险等级"
+            align="center"
+            min-width="120"
+          />
+          <el-table-column
+            prop="color"
+            label="预警色"
+            align="center"
+            min-width="120"
+          >
             <template #default="scope">
-              <div class="color-tag" :class="scope.row.tagType">{{ scope.row.color }}</div>
+              <div class="color-tag" :class="scope.row.tagType">
+                {{ scope.row.color }}
+              </div>
             </template>
           </el-table-column>
-          <el-table-column prop="ch4" label="甲烷(CH₄)" align="center" min-width="200">
+          <el-table-column
+            prop="ch4"
+            label="甲烷(CH₄)"
+            align="center"
+            min-width="200"
+          >
             <template #default="scope">
-              <div class="cell-content" style="white-space:pre-line">{{ scope.row.ch4 }}</div>
+              <div class="cell-content" style="white-space: pre-line">
+                {{ scope.row.ch4 }}
+              </div>
             </template>
           </el-table-column>
-          <el-table-column prop="nh3" label="氨气(NH₃)" align="center" min-width="220">
+          <el-table-column
+            prop="nh3"
+            label="氨气(NH₃)"
+            align="center"
+            min-width="220"
+          >
             <template #default="scope">
-              <div class="cell-content" style="white-space:pre-line">{{ scope.row.nh3 }}</div>
+              <div class="cell-content" style="white-space: pre-line">
+                {{ scope.row.nh3 }}
+              </div>
             </template>
           </el-table-column>
-          <el-table-column prop="co" label="一氧化碳(CO)" align="center" min-width="220">
+          <el-table-column
+            prop="co"
+            label="一氧化碳(CO)"
+            align="center"
+            min-width="220"
+          >
             <template #default="scope">
-              <div class="cell-content" style="white-space:pre-line">{{ scope.row.co }}</div>
+              <div class="cell-content" style="white-space: pre-line">
+                {{ scope.row.co }}
+              </div>
             </template>
           </el-table-column>
-          <el-table-column prop="o2" label="氧气(O₂)" align="center" min-width="200">
+          <el-table-column
+            prop="o2"
+            label="氧气(O₂)"
+            align="center"
+            min-width="200"
+          >
             <template #default="scope">
-              <div class="cell-content" style="white-space:pre-line">{{ scope.row.o2 }}</div>
+              <div class="cell-content" style="white-space: pre-line">
+                {{ scope.row.o2 }}
+              </div>
             </template>
           </el-table-column>
-          <el-table-column prop="risk" label="风险描述" align="center" min-width="200" />
-          <el-table-column prop="response" label="应急响应" align="center" min-width="180" />
+          <el-table-column
+            prop="risk"
+            label="风险描述"
+            align="center"
+            min-width="200"
+          />
+          <el-table-column
+            prop="response"
+            label="应急响应"
+            align="center"
+            min-width="180"
+          />
         </el-table>
 
         <!-- 甲烷单独表格 -->
         <el-table
-            v-else-if="activeGasType === 'ch4'"
-            :data="ch4LevelList"
-            border
-            stripe
-            :header-cell-style="{background: '#f5f7fa', color: '#303133', fontWeight: '600'}"
-            class="level-table"
+          v-else-if="activeGasType === 'ch4'"
+          :data="ch4LevelList"
+          border
+          stripe
+          :header-cell-style="{
+            background: '#f5f7fa',
+            color: '#303133',
+            fontWeight: '600',
+          }"
+          class="level-table"
         >
-          <el-table-column prop="level" label="危险等级" align="center" min-width="120" />
-          <el-table-column prop="color" label="预警色" align="center" min-width="120">
+          <el-table-column
+            prop="level"
+            label="危险等级"
+            align="center"
+            min-width="120"
+          />
+          <el-table-column
+            prop="color"
+            label="预警色"
+            align="center"
+            min-width="120"
+          >
             <template #default="scope">
-              <div class="color-tag" :class="scope.row.tagType">{{ scope.row.color }}</div>
+              <div class="color-tag" :class="scope.row.tagType">
+                {{ scope.row.color }}
+              </div>
             </template>
           </el-table-column>
-          <el-table-column prop="concentration" label="浓度范围（占LEL%）" align="center" min-width="180" />
-          <el-table-column prop="ppm" label="对应浓度(ppm)" align="center" min-width="180" />
-          <el-table-column prop="risk" label="爆炸风险描述" align="center" min-width="250" />
-          <el-table-column prop="response" label="应急响应措施" align="center" min-width="200" />
+          <el-table-column
+            prop="concentration"
+            label="浓度范围（占LEL%）"
+            align="center"
+            min-width="180"
+          />
+          <el-table-column
+            prop="ppm"
+            label="对应浓度(ppm)"
+            align="center"
+            min-width="180"
+          />
+          <el-table-column
+            prop="risk"
+            label="爆炸风险描述"
+            align="center"
+            min-width="250"
+          />
+          <el-table-column
+            prop="response"
+            label="应急响应措施"
+            align="center"
+            min-width="200"
+          />
         </el-table>
 
         <!-- 氨气单独表格 -->
         <el-table
-            v-else-if="activeGasType === 'nh3'"
-            :data="nh3LevelList"
-            border
-            stripe
-            :header-cell-style="{background: '#f5f7fa', color: '#303133', fontWeight: '600'}"
-            class="level-table"
+          v-else-if="activeGasType === 'nh3'"
+          :data="nh3LevelList"
+          border
+          stripe
+          :header-cell-style="{
+            background: '#f5f7fa',
+            color: '#303133',
+            fontWeight: '600',
+          }"
+          class="level-table"
         >
-          <el-table-column prop="level" label="危险等级" align="center" min-width="120" />
-          <el-table-column prop="color" label="预警色" align="center" min-width="120">
+          <el-table-column
+            prop="level"
+            label="危险等级"
+            align="center"
+            min-width="120"
+          />
+          <el-table-column
+            prop="color"
+            label="预警色"
+            align="center"
+            min-width="120"
+          >
             <template #default="scope">
-              <div class="color-tag" :class="scope.row.tagType">{{ scope.row.color }}</div>
+              <div class="color-tag" :class="scope.row.tagType">
+                {{ scope.row.color }}
+              </div>
             </template>
           </el-table-column>
-          <el-table-column prop="mg" label="浓度(mg/m³)" align="center" min-width="150" />
-          <el-table-column prop="ppm" label="浓度(ppm)" align="center" min-width="150" />
-          <el-table-column prop="risk" label="健康风险描述" align="center" min-width="280" />
-          <el-table-column prop="response" label="应急响应措施" align="center" min-width="200" />
+          <el-table-column
+            prop="mg"
+            label="浓度(mg/m³)"
+            align="center"
+            min-width="150"
+          />
+          <el-table-column
+            prop="ppm"
+            label="浓度(ppm)"
+            align="center"
+            min-width="150"
+          />
+          <el-table-column
+            prop="risk"
+            label="健康风险描述"
+            align="center"
+            min-width="280"
+          />
+          <el-table-column
+            prop="response"
+            label="应急响应措施"
+            align="center"
+            min-width="200"
+          />
         </el-table>
 
         <!-- 一氧化碳单独表格 -->
         <el-table
-            v-else-if="activeGasType === 'co'"
-            :data="coLevelList"
-            border
-            stripe
-            :header-cell-style="{background: '#f5f7fa', color: '#303133', fontWeight: '600'}"
-            class="level-table"
+          v-else-if="activeGasType === 'co'"
+          :data="coLevelList"
+          border
+          stripe
+          :header-cell-style="{
+            background: '#f5f7fa',
+            color: '#303133',
+            fontWeight: '600',
+          }"
+          class="level-table"
         >
-          <el-table-column prop="level" label="危险等级" align="center" min-width="120" />
-          <el-table-column prop="color" label="预警色" align="center" min-width="120">
+          <el-table-column
+            prop="level"
+            label="危险等级"
+            align="center"
+            min-width="120"
+          />
+          <el-table-column
+            prop="color"
+            label="预警色"
+            align="center"
+            min-width="120"
+          >
             <template #default="scope">
-              <div class="color-tag" :class="scope.row.tagType">{{ scope.row.color }}</div>
+              <div class="color-tag" :class="scope.row.tagType">
+                {{ scope.row.color }}
+              </div>
             </template>
           </el-table-column>
-          <el-table-column prop="mg" label="浓度(mg/m³)" align="center" min-width="150" />
-          <el-table-column prop="ppm" label="浓度(ppm)" align="center" min-width="150" />
-          <el-table-column prop="risk" label="健康风险描述" align="center" min-width="280" />
-          <el-table-column prop="response" label="应急响应措施" align="center" min-width="200" />
+          <el-table-column
+            prop="mg"
+            label="浓度(mg/m³)"
+            align="center"
+            min-width="150"
+          />
+          <el-table-column
+            prop="ppm"
+            label="浓度(ppm)"
+            align="center"
+            min-width="150"
+          />
+          <el-table-column
+            prop="risk"
+            label="健康风险描述"
+            align="center"
+            min-width="280"
+          />
+          <el-table-column
+            prop="response"
+            label="应急响应措施"
+            align="center"
+            min-width="200"
+          />
         </el-table>
 
         <!-- 氧气单独表格 -->
         <el-table
-            v-else-if="activeGasType === 'o2'"
-            :data="o2LevelList"
-            border
-            stripe
-            :header-cell-style="{background: '#f5f7fa', color: '#303133', fontWeight: '600'}"
-            class="level-table"
+          v-else-if="activeGasType === 'o2'"
+          :data="o2LevelList"
+          border
+          stripe
+          :header-cell-style="{
+            background: '#f5f7fa',
+            color: '#303133',
+            fontWeight: '600',
+          }"
+          class="level-table"
         >
-          <el-table-column prop="level" label="危险等级" align="center" min-width="120" />
-          <el-table-column prop="color" label="预警色" align="center" min-width="120">
+          <el-table-column
+            prop="level"
+            label="危险等级"
+            align="center"
+            min-width="120"
+          />
+          <el-table-column
+            prop="color"
+            label="预警色"
+            align="center"
+            min-width="120"
+          >
             <template #default="scope">
-              <div class="color-tag" :class="scope.row.tagType">{{ scope.row.color }}</div>
+              <div class="color-tag" :class="scope.row.tagType">
+                {{ scope.row.color }}
+              </div>
             </template>
           </el-table-column>
-          <el-table-column prop="concentration" label="浓度(%VOL)" align="center" min-width="180" />
-          <el-table-column prop="risk" label="风险描述" align="center" min-width="300" />
-          <el-table-column prop="response" label="应急响应措施" align="center" min-width="200" />
+          <el-table-column
+            prop="concentration"
+            label="浓度(%VOL)"
+            align="center"
+            min-width="180"
+          />
+          <el-table-column
+            prop="risk"
+            label="风险描述"
+            align="center"
+            min-width="300"
+          />
+          <el-table-column
+            prop="response"
+            label="应急响应措施"
+            align="center"
+            min-width="200"
+          />
         </el-table>
       </div>
     </el-card>
@@ -391,118 +587,28 @@
 import { ref, reactive, onMounted, computed, onUnmounted } from 'vue'
 import * as echarts from 'echarts'
 import {
-  VideoPlay, WarnTriangleFilled, Clock, Delete, Plus, Close, Search, Histogram
+  Clock,
+  Histogram,
+  Search,
+  VideoPlay,
+  WarnTriangleFilled,
 } from '@element-plus/icons-vue'
-import { ElMessage, ElMessageBox, FormInstance } from 'element-plus'
-import { useRouter } from 'vue-router'
-import {
-  reqMonitorPointList,
-  reqCreateMonitorPoint,
-  reqDeleteMonitorPoint,
-} from '@/api/monitorPoint'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import {
   reqDeleteWarningHistory,
   reqWarningHistoryList,
 } from '@/api/warningHistory'
 import type { WarningHistoryRecord } from '@/api/warningHistory'
+import {
+  filterMonitorVideoSources,
+  MONITOR_VIDEO_SOURCES,
+} from './monitorVideoSources'
 
-const router = useRouter()
-
-// 搜索关键词
-const searchKey = ref('')
-
-// 监测点列表（后端持久化）
-interface MonitorItem {
-  id: number
-  name: string
-  areaName?: string | null
-  sensorId?: string | null
-  cameraUrl?: string | null
-  qualityStatus?: string | null
-}
-const monitorList = ref<MonitorItem[]>([])
-
-// 新增弹窗
-const addDialogVisible = ref(false)
-const addFormRef = ref<FormInstance>()
-const addForm = ref({
-  name: ''
-})
-
-// 打开新增弹窗
-const openAddDialog = () => {
-  addDialogVisible.value = true
-}
-
-// 重置表单
-const resetAddForm = () => {
-  addForm.value.name = ''
-  addFormRef.value?.clearValidate()
-}
-
-const normalizeMonitorPointName = () => addForm.value.name.trim()
-
-// 从后端加载监测点（取代此前的浏览器本地假存储）
-const loadMonitorList = async () => {
-  try {
-    const res = await reqMonitorPointList()
-    if (res.code === 200) {
-      monitorList.value = res.data || []
-    }
-  } catch (error) {
-    console.error('加载监测点失败：', error)
-    ElMessage.error('网络异常，无法加载监测点')
-  }
-}
-
-// 搜索筛选
-const filteredMonitorList = computed(() => {
-  if (!searchKey.value) return monitorList.value
-  return monitorList.value.filter(item =>
-      item.name.includes(searchKey.value.trim())
-  )
-})
-
-// 新增监测点（写后端，需 admin 权限）
-const handleAddMonitor = async () => {
-  if (!addFormRef.value) return
-  await addFormRef.value.validate()
-  try {
-    const monitorPointName = normalizeMonitorPointName()
-    const res = await reqCreateMonitorPoint(monitorPointName)
-    if (res.code === 200) {
-      addDialogVisible.value = false
-      resetAddForm()
-      ElMessage.success('添加成功！')
-      await loadMonitorList()
-    }
-  } catch (error) {
-    console.error('新增监测点失败：', error)
-  }
-}
-
-// 删除监测点（写后端，需 admin 权限）
-const handleDeleteMonitor = async (id: number) => {
-  try {
-    await ElMessageBox.confirm('确定删除该监测点？删除后无法恢复', '删除确认', {
-      type: 'warning'
-    })
-    const res = await reqDeleteMonitorPoint(id)
-    if (res.code === 200) {
-      ElMessage.success('删除成功')
-      await loadMonitorList()
-    }
-  } catch (e) {
-    if (e !== 'cancel') {
-      console.error('删除监测点失败：', e)
-    }
-  }
-}
-
-//点击跳转监测页面
-const goMonitor = (id: number) => {
-  router.push(`/monitor/${id}`)
-}
+const videoSearchKey = ref('')
+const monitorVideoSources = MONITOR_VIDEO_SOURCES
+const filteredMonitorVideoSources = computed(() =>
+  filterMonitorVideoSources(monitorVideoSources, videoSearchKey.value),
+)
 
 // 气体类型切换
 const activeGasType = ref('all')
@@ -521,7 +627,7 @@ const renderCharts = () => {
     areaCount[areaName] = (areaCount[areaName] || 0) + 1
   })
   const areaNames = Object.keys(areaCount)
-  const areaValues = areaNames.map(k => areaCount[k])
+  const areaValues = areaNames.map((k) => areaCount[k])
 
   // 区域图表配置
   areaChart.setOption({
@@ -529,65 +635,68 @@ const renderCharts = () => {
       trigger: 'axis',
       backgroundColor: 'rgba(0, 20, 40, 0.8)',
       borderColor: '#40e0d0',
-      textStyle: { color: '#fff', fontSize: 14 }
+      textStyle: { color: '#fff', fontSize: 14 },
     },
     grid: {
       left: '10%',
       right: '10%',
       bottom: '15%',
-      top: '15%'
+      top: '15%',
     },
     xAxis: {
       type: 'category',
       data: areaNames,
       axisLabel: {
         fontSize: 16, // 放大X轴字体
-        color: '#e0e6ed' // 适配深色背景
+        color: '#e0e6ed', // 适配深色背景
       },
       axisLine: { lineStyle: { color: 'rgba(255,255,255,0.2)' } },
-      axisTick: { lineStyle: { color: 'rgba(255,255,255,0.2)' } }
+      axisTick: { lineStyle: { color: 'rgba(255,255,255,0.2)' } },
     },
     yAxis: {
       type: 'value',
       axisLabel: {
         fontSize: 16, // 放大Y轴字体
-        color: '#e0e6ed'
+        color: '#e0e6ed',
       },
       axisLine: { lineStyle: { color: 'rgba(255,255,255,0.2)' } },
       axisTick: { lineStyle: { color: 'rgba(255,255,255,0.2)' } },
-      splitLine: { lineStyle: { color: 'rgba(255,255,255,0.1)' } }
+      splitLine: { lineStyle: { color: 'rgba(255,255,255,0.1)' } },
     },
-    series: [{
-      type: 'bar',
-      data: areaValues,
-      itemStyle: {
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          { offset: 0, color: '#409eff' },
-          { offset: 1, color: '#40e0d0' }
-        ]),
-        borderRadius: [4, 4, 0, 0]
-      },
-      emphasis: {
+    series: [
+      {
+        type: 'bar',
+        data: areaValues,
         itemStyle: {
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: '#66b1ff' },
-            { offset: 1, color: '#66f0e0' }
-          ])
-        }
+            { offset: 0, color: '#409eff' },
+            { offset: 1, color: '#40e0d0' },
+          ]),
+          borderRadius: [4, 4, 0, 0],
+        },
+        emphasis: {
+          itemStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              { offset: 0, color: '#66b1ff' },
+              { offset: 1, color: '#66f0e0' },
+            ]),
+          },
+        },
+        barWidth: 45, // 缩小柱状体粗度
+        barMaxWidth: 40,
+        barMinWidth: 20,
+        barGap: '5%',
+        barCategoryGap: '15%',
       },
-      barWidth: 45, // 缩小柱状体粗度
-      barMaxWidth: 40,
-      barMinWidth: 20,
-      barGap: '5%',
-      barCategoryGap: '15%'
-    }]
+    ],
   })
 }
 
 // 初始化图表
-const handleResize = () => { areaChart?.resize() }
+const handleResize = () => {
+  areaChart?.resize()
+}
 onMounted(() => {
-  loadMonitorList()
   if (areaChartRef.value) {
     areaChart = echarts.init(areaChartRef.value)
   }
@@ -611,7 +720,7 @@ const allGasLevelList = reactive([
     co: '≥ 300mg/m³\n(≥ 262ppm)',
     o2: '< 16%VOL 或 >23.5%VOL',
     risk: '致命风险/爆炸极高风险',
-    response: '立即疏散/专业应急'
+    response: '立即疏散/专业应急',
   },
   {
     level: '危险',
@@ -622,7 +731,7 @@ const allGasLevelList = reactive([
     co: '100 ~ 300mg/m³\n(87 ~ 262ppm)',
     o2: '16% ~ 19.5%VOL',
     risk: '中毒重伤/爆炸高风险',
-    response: '禁止动火/人员撤离'
+    response: '禁止动火/人员撤离',
   },
   {
     level: '预警',
@@ -633,7 +742,7 @@ const allGasLevelList = reactive([
     co: '50 ~ 100mg/m³\n(43 ~ 87ppm)',
     o2: '19.5% ~ 20.9%VOL',
     risk: '刺激不适/爆炸预警',
-    response: '启动报警/加强通风'
+    response: '启动报警/加强通风',
   },
   {
     level: '安全',
@@ -644,8 +753,8 @@ const allGasLevelList = reactive([
     co: '≤ 20mg/m³\n(≤ 17ppm)',
     o2: '20.9% ~ 23.5%VOL',
     risk: '无急性风险/可正常作业',
-    response: '常规监测/定期巡检'
-  }
+    response: '常规监测/定期巡检',
+  },
 ])
 
 // 甲烷(CH₄) - 按爆炸下限LEL划分
@@ -657,7 +766,7 @@ const ch4LevelList = reactive([
     concentration: '≥ 50% LEL',
     ppm: '≈25000ppm',
     risk: '接近爆炸极限，随时可能爆炸，立即疏散',
-    response: '紧急撤离/切断气源/防爆通风'
+    response: '紧急撤离/切断气源/防爆通风',
   },
   {
     level: '危险',
@@ -666,7 +775,7 @@ const ch4LevelList = reactive([
     concentration: '25% ~ 50% LEL',
     ppm: '12500-25000ppm',
     risk: '禁止动火，人员撤离，紧急处置',
-    response: '区域隔离/专业防爆处置'
+    response: '区域隔离/专业防爆处置',
   },
   {
     level: '预警',
@@ -675,7 +784,7 @@ const ch4LevelList = reactive([
     concentration: '10% ~ 25% LEL',
     ppm: '5000-12500ppm',
     risk: '需启动报警，加强通风，排查泄漏源',
-    response: '启动报警/加强通风/排查泄漏'
+    response: '启动报警/加强通风/排查泄漏',
   },
   {
     level: '安全',
@@ -684,8 +793,8 @@ const ch4LevelList = reactive([
     concentration: '< 10% LEL',
     ppm: '< 5000ppm',
     risk: '无爆炸风险，可正常作业',
-    response: '常规监测/定期巡检'
-  }
+    response: '常规监测/定期巡检',
+  },
 ])
 
 // 氨气(NH₃) - 刺激性有毒气体
@@ -697,7 +806,7 @@ const nh3LevelList = reactive([
     mg: '≥ 52mg/m³',
     ppm: '≥ 75ppm',
     risk: '强烈刺激呼吸道和眼部，存在急性中毒风险',
-    response: '佩戴正压呼吸器/紧急撤离/专业处置'
+    response: '佩戴正压呼吸器/紧急撤离/专业处置',
   },
   {
     level: '危险',
@@ -706,7 +815,7 @@ const nh3LevelList = reactive([
     mg: '35 ~ 52mg/m³',
     ppm: '50 ~ 75ppm',
     risk: '刺激明显，可能引起咳嗽、胸闷等症状',
-    response: '立即通风/人员撤离/医学观察'
+    response: '立即通风/人员撤离/医学观察',
   },
   {
     level: '预警',
@@ -715,7 +824,7 @@ const nh3LevelList = reactive([
     mg: '17 ~ 35mg/m³',
     ppm: '25 ~ 50ppm',
     risk: '刺激眼睛和呼吸道，需报警',
-    response: '启动报警/加强通风/佩戴防护装备'
+    response: '启动报警/加强通风/佩戴防护装备',
   },
   {
     level: '安全',
@@ -724,8 +833,8 @@ const nh3LevelList = reactive([
     mg: '≤ 17mg/m³',
     ppm: '≤ 25ppm',
     risk: '低于预警阈值，可维持常规监测',
-    response: '常规监测/定期巡检'
-  }
+    response: '常规监测/定期巡检',
+  },
 ])
 
 // 一氧化碳(CO) - 血液窒息性气体
@@ -737,7 +846,7 @@ const coLevelList = reactive([
     mg: '≥ 300mg/m³',
     ppm: '≥ 262ppm',
     risk: '昏迷、呼吸衰竭，数小时内死亡',
-    response: '紧急送医/高压氧治疗/环境通风'
+    response: '紧急送医/高压氧治疗/环境通风',
   },
   {
     level: '危险',
@@ -746,7 +855,7 @@ const coLevelList = reactive([
     mg: '100 ~ 300mg/m³',
     ppm: '87 ~ 262ppm',
     risk: '恶心、呕吐，意识模糊',
-    response: '立即撤离/新鲜空气/医学观察'
+    response: '立即撤离/新鲜空气/医学观察',
   },
   {
     level: '预警',
@@ -755,7 +864,7 @@ const coLevelList = reactive([
     mg: '50 ~ 100mg/m³',
     ppm: '43 ~ 87ppm',
     risk: '头痛、头晕，需报警',
-    response: '启动报警/加强通风/人员防护'
+    response: '启动报警/加强通风/人员防护',
   },
   {
     level: '安全',
@@ -764,8 +873,8 @@ const coLevelList = reactive([
     mg: '≤ 20mg/m³',
     ppm: '≤ 17ppm',
     risk: '8小时加权平均容许浓度（PC-TWA）',
-    response: '常规监测/定期巡检'
-  }
+    response: '常规监测/定期巡检',
+  },
 ])
 
 // 氧气(O₂) - 浓度异常风险
@@ -776,7 +885,7 @@ const o2LevelList = reactive([
     tagType: 'danger',
     concentration: '< 16%VOL 或 >23.5%VOL',
     risk: '严重缺氧致死亡 / 富氧环境火灾爆炸风险剧增',
-    response: '缺氧：供氧撤离 / 富氧：严禁明火/通风稀释'
+    response: '缺氧：供氧撤离 / 富氧：严禁明火/通风稀释',
   },
   {
     level: '危险',
@@ -784,7 +893,7 @@ const o2LevelList = reactive([
     tagType: 'warning',
     concentration: '16% ~ 19.5%VOL',
     risk: '呼吸急促、心跳加快，判断力下降',
-    response: '补充氧气/人员撤离/通风换气'
+    response: '补充氧气/人员撤离/通风换气',
   },
   {
     level: '预警',
@@ -792,7 +901,7 @@ const o2LevelList = reactive([
     tagType: 'primary',
     concentration: '19.5% ~ 20.9%VOL',
     risk: '开始出现缺氧症状，需关注',
-    response: '加强监测/通风换气/人员观察'
+    response: '加强监测/通风换气/人员观察',
   },
   {
     level: '安全',
@@ -800,19 +909,34 @@ const o2LevelList = reactive([
     tagType: 'info',
     concentration: '20.9% ~ 23.5%VOL',
     risk: '大气正常浓度，安全',
-    response: '常规监测/定期巡检'
-  }
+    response: '常规监测/定期巡检',
+  },
 ])
 
 // ========== 预警历史记录相关逻辑 ==========
 type HistoryItem = WarningHistoryRecord
 const historyList = ref<HistoryItem[]>([])
 
-const safeCount = computed(() => historyList.value.filter(item => getRiskLevel(item) === 4).length)
-const warningCount = computed(() => historyList.value.filter(item => getRiskLevel(item) === 3).length)
-const dangerCount = computed(() => historyList.value.filter(item => getRiskLevel(item) === 2).length)
-const highRiskCount = computed(() => historyList.value.filter(item => getRiskLevel(item) <= 2).length)
-const gasTypeCount = computed(() => new Set(historyList.value.map(item => normalizeGasType(item.gasType)).filter(Boolean)).size)
+const safeCount = computed(
+  () => historyList.value.filter((item) => getRiskLevel(item) === 4).length,
+)
+const warningCount = computed(
+  () => historyList.value.filter((item) => getRiskLevel(item) === 3).length,
+)
+const dangerCount = computed(
+  () => historyList.value.filter((item) => getRiskLevel(item) === 2).length,
+)
+const highRiskCount = computed(
+  () => historyList.value.filter((item) => getRiskLevel(item) <= 2).length,
+)
+const gasTypeCount = computed(
+  () =>
+    new Set(
+      historyList.value
+        .map((item) => normalizeGasType(item.gasType))
+        .filter(Boolean),
+    ).size,
+)
 const latestWarningText = computed(() => {
   const latest = historyList.value[0]
   if (!latest) return '暂无'
@@ -821,12 +945,22 @@ const latestWarningText = computed(() => {
 
 // 格式化气体类型显示
 const normalizeGasType = (gasType: string | null | undefined) => {
-  const raw = String(gasType || '').trim().toUpperCase()
+  const raw = String(gasType || '')
+    .trim()
+    .toUpperCase()
   if (!raw) return ''
   if (raw.includes('CO') || raw.includes('一氧化碳')) return 'CO'
-  if (raw.includes('O2') || raw.includes('O₂') || raw.includes('氧气')) return 'O2'
-  if (raw.includes('NH3') || raw.includes('NH₃') || raw.includes('氨')) return 'NH3'
-  if (raw.includes('CH4') || raw.includes('CH₄') || raw.includes('甲烷') || raw.includes('可燃')) return 'CH4'
+  if (raw.includes('O2') || raw.includes('O₂') || raw.includes('氧气'))
+    return 'O2'
+  if (raw.includes('NH3') || raw.includes('NH₃') || raw.includes('氨'))
+    return 'NH3'
+  if (
+    raw.includes('CH4') ||
+    raw.includes('CH₄') ||
+    raw.includes('甲烷') ||
+    raw.includes('可燃')
+  )
+    return 'CH4'
   return raw
 }
 
@@ -835,7 +969,7 @@ const formatGasType = (gasType: string) => {
     CH4: '甲烷(CH₄)',
     NH3: '氨气(NH₃)',
     CO: '一氧化碳(CO)',
-    O2: '氧气(O₂)'
+    O2: '氧气(O₂)',
   }
   const normalized = normalizeGasType(gasType)
   return gasMap[normalized] || gasType
@@ -877,7 +1011,7 @@ const getRiskLevelText = (level: number) => {
     1: '极高危险',
     2: '危险',
     3: '预警',
-    4: '安全'
+    4: '安全',
   }
   return levelMap[level] || '未知'
 }
@@ -888,7 +1022,7 @@ const getLevelTagType = (level: number) => {
     1: 'danger',
     2: 'warning',
     3: 'primary',
-    4: 'info'
+    4: 'info',
   }
   return typeMap[level] || 'info'
 }
@@ -898,8 +1032,9 @@ const fetchHistory = async () => {
   try {
     const res = await reqWarningHistoryList()
     if (res.code === 200) {
-      historyList.value = res.data.sort((a: HistoryItem, b: HistoryItem) =>
-          new Date(b.warningTime).getTime() - new Date(a.warningTime).getTime()
+      historyList.value = res.data.sort(
+        (a: HistoryItem, b: HistoryItem) =>
+          new Date(b.warningTime).getTime() - new Date(a.warningTime).getTime(),
       )
       renderCharts()
     }
@@ -912,15 +1047,11 @@ const fetchHistory = async () => {
 // 删除单条记录
 const handleDelete = async (id: number) => {
   try {
-    await ElMessageBox.confirm(
-        '确定要删除这条预警记录吗？',
-        '删除确认',
-        {
-          confirmButtonText: '确认删除',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }
-    )
+    await ElMessageBox.confirm('确定要删除这条预警记录吗？', '删除确认', {
+      confirmButtonText: '确认删除',
+      cancelButtonText: '取消',
+      type: 'warning',
+    })
 
     const res = await reqDeleteWarningHistory(id)
     if (res.code === 200) {
@@ -996,155 +1127,6 @@ const handleDelete = async (id: number) => {
   align-items: center;
   gap: 8px;
   text-shadow: 0 0 10px rgba(64, 224, 208, 0.3);
-}
-
-.monitor-source-note {
-  margin: 14px 20px 0;
-  padding: 10px 12px;
-  border: 1px solid rgba(120, 211, 214, 0.22);
-  border-radius: 8px;
-  background: rgba(2, 12, 24, 0.36);
-  color: rgba(221, 239, 247, 0.72);
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-/* 视频区域样式 */
-.video-card {
-  padding: 0;
-}
-
-.video-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  padding: 20px;
-}
-
-.monitor-display {
-  display: inline-block;
-  margin-bottom: 10px;
-  vertical-align: top;
-}
-
-.monitor-label:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  border-color: #409eff;
-}
-
-.monitor-label {
-  text-align: center;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 5px;
-  background-color: #f8fafc;
-  transition: all 0.3s ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  color: #1e293b;
-  letter-spacing: 0.5px;
-  line-height: 1.0;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-
-/* 视频容器：四列网格对齐，窄屏自动换行 */
-.video-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(292px, 1fr));
-  gap: 16px;
-  padding: 20px;
-  width: 100%;
-  overflow: visible;
-  box-sizing: border-box;
-}
-.video-container::-webkit-scrollbar {
-  height: 8px;
-}
-.video-container::-webkit-scrollbar-thumb {
-  background: #c0c4cc;
-  border-radius: 4px;
-}
-.video-container::-webkit-scrollbar-track {
-  background: #f1f5f9;
-}
-
-/* 子元素：固定宽度 */
-.monitor-item {
-  min-width: 0;
-  max-width: none;
-  display: grid;
-  grid-template-rows: auto auto 1fr;
-  gap: 8px;
-  position: relative;
-}
-
-.monitor-label {
-  width: 100%;
-  text-align: center;
-  border: 1px solid rgba(64, 224, 208, 0.3);
-  border-radius: 8px;
-  padding: 8px;
-  background-color: rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-  font-size: 16px;
-  font-weight: 600;
-  color: #e0e6ed;
-  cursor: pointer;
-}
-
-.monitor-label:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(64, 224, 208, 0.2);
-  border-color: #40e0d0;
-  color: #40e0d0;
-}
-
-.video-item {
-  width: 100%;
-  border: 1px solid rgba(64, 224, 208, 0.2);
-  border-radius: 8px;
-  padding: 12px;
-  background-color: rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-}
-
-.video-placeholder {
-  width: 100%;
-  aspect-ratio: 16/9;
-  overflow: hidden;
-  border-radius: 8px;
-  background-color: #000;
-  position: relative;
-}
-
-.video-source-badge {
-  position: absolute;
-  left: 10px;
-  top: 10px;
-  z-index: 2;
-  padding: 4px 8px;
-  border-radius: 999px;
-  border: 1px solid rgba(120, 211, 214, 0.34);
-  background: rgba(2, 12, 24, 0.68);
-  color: #c7d8de;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.video-media {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-}
-
-.video-placeholder-image {
-  object-fit: contain;
 }
 
 /* 气体等级划分区域 */
@@ -1256,13 +1238,12 @@ const handleDelete = async (id: number) => {
   border-bottom: 1px solid rgba(142, 163, 137, 0.1) !important;
 }
 
-
 :deep(.el-table__row:nth-child(even)) {
-  background: rgba(255,255,255,0.9) !important;
+  background: rgba(255, 255, 255, 0.9) !important;
   color: #000 !important;
 }
 :deep(.el-table__row:nth-child(odd)) {
-  background: rgba(0,0,0,0.15) !important;
+  background: rgba(0, 0, 0, 0.15) !important;
   color: #fff !important;
 }
 
@@ -1360,9 +1341,6 @@ const handleDelete = async (id: number) => {
 
 /* 响应式适配 */
 @media (max-width: 1400px) {
-  .video-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
   .history-table {
     font-size: 13px;
   }
@@ -1375,9 +1353,6 @@ const handleDelete = async (id: number) => {
 }
 
 @media (max-width: 768px) {
-  .video-grid {
-    grid-template-columns: 1fr;
-  }
   .card-title {
     font-size: 16px;
   }
@@ -1393,42 +1368,6 @@ const handleDelete = async (id: number) => {
     padding: 4px 12px;
     font-size: 12px;
   }
-}
-
-/* 视频区头部工具栏：搜索 + 新增 */
-.header-toolbar {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-/* 监测点删除按钮 */
-.monitor-item {
-  position: relative;
-}
-.delete-monitor {
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 10;
-  color: #f56c6c;
-  transition: 0.2s;
-}
-.delete-monitor:hover {
-  background: #f56c6c;
-  color: #fff;
-}
-
-.dialog-footer {
-  text-align: right;
 }
 
 /* Detail polish */
@@ -1469,19 +1408,159 @@ const handleDelete = async (id: number) => {
   text-shadow: 0 0 14px rgba(64, 224, 208, 0.26);
 }
 
-.header-toolbar {
+.video-toolbar {
+  display: flex;
+  align-items: center;
   gap: 12px;
 }
 
-.header-toolbar :deep(.el-input__wrapper) {
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.92);
+.video-toolbar :deep(.el-input) {
+  width: 230px;
 }
 
-.header-toolbar :deep(.el-button) {
-  height: 34px;
+.video-toolbar :deep(.el-input__wrapper) {
+  background: rgba(2, 12, 24, 0.62);
+  box-shadow: 0 0 0 1px rgba(120, 211, 214, 0.22) inset;
+}
+
+.video-toolbar :deep(.el-input__inner) {
+  color: #eef7fb;
+}
+
+.video-toolbar > span {
+  padding: 7px 10px;
+  border: 1px solid rgba(64, 224, 208, 0.28);
+  border-radius: 999px;
+  color: #7ee6d4;
+  background: rgba(64, 224, 208, 0.08);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.monitor-source-note {
+  margin: 16px 24px 0;
+  padding: 11px 13px;
+  border: 1px solid rgba(120, 211, 214, 0.16);
   border-radius: 8px;
-  font-weight: 600;
+  color: rgba(221, 239, 247, 0.7);
+  background: rgba(2, 12, 24, 0.3);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.video-container {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  padding: 18px 24px 24px;
+}
+
+.monitor-video-item {
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid rgba(120, 211, 214, 0.17);
+  border-radius: 9px;
+  background: rgba(2, 12, 24, 0.34);
+}
+
+.monitor-video-item > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 32px;
+}
+
+.monitor-video-item > header strong {
+  overflow: hidden;
+  color: #eef7fb;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.monitor-video-item > header span {
+  position: relative;
+  padding-left: 11px;
+  color: #66e4ae;
+  font-size: 11px;
+}
+
+.monitor-video-item > header span::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #45d69d;
+  box-shadow: 0 0 8px rgba(69, 214, 157, 0.8);
+  content: '';
+  transform: translateY(-50%);
+}
+
+.monitor-meta {
+  display: flex;
+  gap: 6px;
+  margin: 5px 0 8px;
+}
+
+.monitor-meta span {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  padding: 4px 6px;
+  border: 1px solid rgba(120, 211, 214, 0.12);
+  border-radius: 4px;
+  color: rgba(221, 239, 247, 0.64);
+  background: rgba(64, 224, 208, 0.05);
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.video-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid rgba(120, 211, 214, 0.2);
+  border-radius: 7px;
+  background: #02080e;
+}
+
+.video-frame video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-source-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  max-width: calc(100% - 16px);
+  overflow: hidden;
+  padding: 5px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(2, 12, 24, 0.76);
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.monitor-empty {
+  margin: 18px 24px 24px;
+  padding: 28px 20px;
+  border: 1px dashed rgba(120, 211, 214, 0.24);
+  border-radius: 8px;
+  color: rgba(221, 239, 247, 0.62);
+  text-align: center;
+  background: rgba(2, 12, 24, 0.28);
 }
 
 .monitor-summary,
@@ -1529,100 +1608,6 @@ const handleDelete = async (id: number) => {
   color: #e6a23c;
 }
 
-.video-container {
-  min-height: 210px;
-  padding: 20px 24px 24px;
-  border-top: 0;
-}
-
-.video-container::-webkit-scrollbar-track {
-  background: rgba(3, 12, 24, 0.55);
-}
-
-.video-container::-webkit-scrollbar-thumb {
-  background: linear-gradient(90deg, rgba(64, 224, 208, 0.7), rgba(64, 158, 255, 0.55));
-}
-
-.monitor-empty {
-  width: 100%;
-  min-height: 150px;
-  border-radius: 8px;
-  border: 1px dashed rgba(120, 211, 214, 0.28);
-  background:
-    linear-gradient(135deg, rgba(64, 224, 208, 0.07), rgba(230, 162, 60, 0.04)),
-    rgba(2, 12, 24, 0.22);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  text-align: center;
-}
-
-.empty-title {
-  color: #eef7fb;
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.empty-desc {
-  color: rgba(221, 239, 247, 0.68);
-  font-size: 13px;
-}
-
-.monitor-item {
-  border-radius: 8px;
-}
-
-.monitor-label {
-  min-height: 42px;
-  border-color: rgba(120, 211, 214, 0.24);
-  background:
-    linear-gradient(135deg, rgba(64, 224, 208, 0.12), rgba(230, 162, 60, 0.05)),
-    rgba(2, 12, 24, 0.35);
-  color: #eef7fb;
-}
-
-.monitor-meta {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 6px;
-  margin: 8px 0;
-  font-size: 12px;
-  color: #9bdfff;
-}
-
-.monitor-meta span {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  padding: 4px 6px;
-  border: 1px solid rgba(64, 224, 208, 0.2);
-  border-radius: 4px;
-  background: rgba(64, 224, 208, 0.08);
-}
-
-.video-item {
-  border-color: rgba(120, 211, 214, 0.16);
-  background: rgba(2, 12, 24, 0.36);
-  height: 100%;
-}
-
-.video-placeholder::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 20%, rgba(0, 0, 0, 0.16));
-}
-
-.delete-monitor {
-  top: 8px;
-  right: 8px;
-  background: rgba(5, 18, 34, 0.76);
-  border: 1px solid rgba(255, 120, 117, 0.32);
-}
-
 .table-container {
   padding: 22px 24px;
 }
@@ -1654,8 +1639,20 @@ const handleDelete = async (id: number) => {
 
 .history-card :deep(.el-table__body tr:nth-child(even) > td.el-table__cell),
 .level-card :deep(.el-table__body tr:nth-child(even) > td.el-table__cell),
-.history-card :deep(.el-table--striped .el-table__body tr.el-table__row--striped > td.el-table__cell),
-.level-card :deep(.el-table--striped .el-table__body tr.el-table__row--striped > td.el-table__cell) {
+.history-card
+  :deep(
+    .el-table--striped
+      .el-table__body
+      tr.el-table__row--striped
+      > td.el-table__cell
+  ),
+.level-card
+  :deep(
+    .el-table--striped
+      .el-table__body
+      tr.el-table__row--striped
+      > td.el-table__cell
+  ) {
   background: rgba(255, 255, 255, 0.045) !important;
   color: rgba(238, 247, 251, 0.88) !important;
 }
@@ -1762,7 +1759,11 @@ const handleDelete = async (id: number) => {
   border-color: rgba(120, 211, 214, 0.14);
 }
 
-:deep(.radio-group .el-radio-button__original-radio:checked + .el-radio-button__inner) {
+:deep(
+  .radio-group
+    .el-radio-button__original-radio:checked
+    + .el-radio-button__inner
+) {
   color: #06131f;
   background: #40e0d0;
   border-color: #40e0d0;
@@ -1775,18 +1776,21 @@ const handleDelete = async (id: number) => {
     gap: 12px;
   }
 
-  .header-toolbar {
-    width: 100%;
-    flex-wrap: wrap;
-  }
-
-  .header-toolbar :deep(.el-input) {
-    width: 100% !important;
-  }
-
   .monitor-summary,
   .history-summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .video-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .video-toolbar {
+    width: 100%;
+  }
+
+  .video-toolbar :deep(.el-input) {
+    width: min(280px, 100%);
   }
 }
 
@@ -1798,6 +1802,24 @@ const handleDelete = async (id: number) => {
   .monitor-summary,
   .history-summary {
     grid-template-columns: 1fr;
+  }
+
+  .video-container {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  .video-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .video-toolbar > span {
+    align-self: flex-start;
+  }
+
+  .monitor-source-note {
+    margin: 14px 16px 0;
   }
 
   .table-container {

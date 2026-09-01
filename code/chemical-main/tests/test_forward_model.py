@@ -22,14 +22,22 @@ from __future__ import annotations
 
 import json
 import os
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
 from algorithm.diffusion import gaussian_plume as gp
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-CASE1 = os.path.join(HERE, "case01_gaussian_plume")
+HERE = Path(__file__).resolve().parent
+PROJECT_ROOT = HERE.parent
+TEST_DATA_ROOT = Path(
+    os.environ.get(
+        "CHEMICAL_PARK_TEST_DATA_DIR",
+        PROJECT_ROOT.parent.parent / "2数据" / "算法测试数据集" / "内部算法验证",
+    )
+)
+CASE1 = TEST_DATA_ROOT / "case01_gaussian_plume"
 MG_PER_G = 1000.0  # g/m^3 -> mg/m^3
 
 # 源参数与网格 (与 config.json / meta.json 完全一致)
@@ -45,7 +53,7 @@ def load_truth_csv(stab: str) -> np.ndarray:
 
     CSV 布局: 第一列是 y 索引(行=y横风向), 列头是 x(下风向)。
     """
-    df = pd.read_csv(os.path.join(CASE1, f"stability_{stab}.csv"), index_col=0)
+    df = pd.read_csv(CASE1 / f"stability_{stab}.csv", index_col=0)
     return df.to_numpy(dtype=float)  # [ny, nx]
 
 
@@ -186,8 +194,8 @@ def main():
 
     # ---- 3D 剖面对比 (中性 D) ----
     print("\n[表4] 3D 体数据对比 (plume_3d_D.npy, shape [nx,ny,nz])")
-    truth3d_path = os.path.join(CASE1, "plume_3d_D.npy")
-    if not os.path.exists(truth3d_path):
+    truth3d_path = CASE1 / "plume_3d_D.npy"
+    if not truth3d_path.exists():
         print("跳过: plume_3d_D.npy 未提交到仓库。需要 3D 对比时请先运行 tests/generate_dataset.py 生成。")
     else:
         truth3d = np.load(truth3d_path).astype(float)
@@ -224,4 +232,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

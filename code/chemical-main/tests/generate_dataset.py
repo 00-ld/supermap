@@ -14,10 +14,18 @@ tests 数据集生成脚本
 """
 import json
 import os
+from pathlib import Path
 import numpy as np
 import pandas as pd
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+HERE = Path(__file__).resolve().parent
+PROJECT_ROOT = HERE.parent
+TEST_DATA_ROOT = Path(
+    os.environ.get(
+        "CHEMICAL_PARK_TEST_DATA_DIR",
+        PROJECT_ROOT.parent.parent / "2数据" / "算法测试数据集" / "内部算法验证",
+    )
+)
 
 
 # --------------------------------------------------------------------------
@@ -95,7 +103,7 @@ def add_noise(values, snr_db, floor, rng):
 
 # ==========================================================================
 def main():
-    with open(os.path.join(HERE, "config.json"), "r", encoding="utf-8") as f:
+    with (TEST_DATA_ROOT / "config.json").open("r", encoding="utf-8") as f:
         cfg = json.load(f)
     rng = np.random.default_rng(cfg["random_seed"])
 
@@ -109,7 +117,8 @@ def main():
     # ---------------- Case 1: 高斯烟羽稳态浓度场 ----------------
     c1 = cfg["case01_gaussian_plume"]
     src = c1["source"]; u1 = c1["wind_speed"]
-    out1 = os.path.join(HERE, "case01_gaussian_plume")
+    out1 = TEST_DATA_ROOT / "case01_gaussian_plume"
+    out1.mkdir(parents=True, exist_ok=True)
     X, Y = np.meshgrid(xs_grid, ys_grid)  # 地面 z=0
     for stab in c1["stability_classes"]:
         conc = gaussian_plume(X, Y, 0.0, src["x"], src["y"], src["H"],
@@ -117,7 +126,7 @@ def main():
         df = pd.DataFrame(conc, index=np.round(ys_grid, 2),
                           columns=np.round(xs_grid, 2))
         df.index.name = "y\\x"
-        path = os.path.join(out1, f"stability_{stab}.csv")
+        path = out1 / f"stability_{stab}.csv"
         df.to_csv(path)
         summary.append((f"case01/stability_{stab}.csv", conc.shape,
                         float(conc.min()), float(conc.max())))
@@ -126,10 +135,10 @@ def main():
     Zx, Zy, Zz = np.meshgrid(xs_grid, ys_grid, zs_grid, indexing="ij")
     conc3d = gaussian_plume(Zx, Zy, Zz, src["x"], src["y"], src["H"],
                             src["Q"], u1, stab3d)
-    np.save(os.path.join(out1, f"plume_3d_{stab3d}.npy"), conc3d.astype(np.float32))
+    np.save(out1 / f"plume_3d_{stab3d}.npy", conc3d.astype(np.float32))
     summary.append((f"case01/plume_3d_{stab3d}.npy", conc3d.shape,
                    float(conc3d.min()), float(conc3d.max())))
-    with open(os.path.join(out1, "meta.json"), "w", encoding="utf-8") as f:
+    with (out1 / "meta.json").open("w", encoding="utf-8") as f:
         json.dump({"description": "连续点源高斯烟羽稳态地面浓度场 + 3D体数据",
                    "source": src, "wind_speed_m_s": u1,
                    "stability_classes": c1["stability_classes"],
@@ -144,7 +153,8 @@ def main():
     # ---------------- Case 2: 瞬时烟团时序 ----------------
     c2 = cfg["case02_puff_timeseries"]
     s2 = c2["source"]; u2 = c2["wind_speed"]; stab2 = c2["stability"]
-    out2 = os.path.join(HERE, "case02_puff_timeseries")
+    out2 = TEST_DATA_ROOT / "case02_puff_timeseries"
+    out2.mkdir(parents=True, exist_ok=True)
     times = np.linspace(c2["t_start"], c2["t_end"], c2["nt"])
     # 浓度演化 [t, y, x] 在地面 z=1.5
     field = np.zeros((c2["nt"], d["ny"], d["nx"]), dtype=np.float32)
@@ -152,7 +162,7 @@ def main():
     for it, t in enumerate(times):
         field[it] = puff_concentration(Xg, Yg, 1.5, s2["x0"], s2["y0"],
                                        s2["H"], s2["mass"], u2, stab2, t)
-    np.save(os.path.join(out2, "puff_concentration.npy"), field)
+    np.save(out2 / "puff_concentration.npy", field)
     summary.append(("case02/puff_concentration.npy", field.shape,
                    float(field.min()), float(field.max())))
     # 受体时序
@@ -165,10 +175,10 @@ def main():
                 s2["H"], s2["mass"], u2, stab2, t))
         rec_rows.append(row)
     pd.DataFrame(rec_rows).to_csv(
-        os.path.join(out2, "receptor_timeseries.csv"), index=False)
+        out2 / "receptor_timeseries.csv", index=False)
     summary.append(("case02/receptor_timeseries.csv",
                    (len(times), len(c2["receptors"]) + 1), None, None))
-    with open(os.path.join(out2, "meta.json"), "w", encoding="utf-8") as f:
+    with (out2 / "meta.json").open("w", encoding="utf-8") as f:
         json.dump({"description": "瞬时点源烟团浓度时空演化 + 受体点时序",
                    "source": s2, "wind_speed_m_s": u2, "stability": stab2,
                    "time": {"start": c2["t_start"], "end": c2["t_end"],
@@ -180,7 +190,8 @@ def main():
     # ---------------- Case 3: 传感器观测 (含噪, 溯源输入) ----------------
     c3 = cfg["case03_sensor_observations"]
     ts = c3["true_source"]; u3 = c3["wind_speed"]; stab3 = c3["stability"]
-    out3 = os.path.join(HERE, "case03_sensor_observations")
+    out3 = TEST_DATA_ROOT / "case03_sensor_observations"
+    out3.mkdir(parents=True, exist_ok=True)
     n = c3["n_sensors"]
     sx = rng.uniform(50.0, 1500.0, n)
     sy = rng.uniform(-300.0, 300.0, n)
@@ -191,14 +202,14 @@ def main():
     sensors_df = pd.DataFrame({
         "sensor_id": [f"P{i+1:02d}" for i in range(n)],
         "x": np.round(sx, 2), "y": np.round(sy, 2), "z": sh})
-    sensors_df.to_csv(os.path.join(out3, "sensors.csv"), index=False)
+    sensors_df.to_csv(out3 / "sensors.csv", index=False)
     obs_df = pd.DataFrame({
         "sensor_id": [f"P{i+1:02d}" for i in range(n)],
         "x": np.round(sx, 2), "y": np.round(sy, 2), "z": sh,
         "conc_true": np.round(clean, 6),
         "conc_observed": np.round(noisy, 6)})
-    obs_df.to_csv(os.path.join(out3, "observations.csv"), index=False)
-    with open(os.path.join(out3, "ground_truth.json"), "w", encoding="utf-8") as f:
+    obs_df.to_csv(out3 / "observations.csv", index=False)
+    with (out3 / "ground_truth.json").open("w", encoding="utf-8") as f:
         json.dump({"true_source": ts, "wind_speed_m_s": u3, "stability": stab3,
                    "noise": c3["noise"], "unit": "mg/m^3",
                    "note": "反演时仅可用 observations.csv 的 conc_observed; "
@@ -210,7 +221,8 @@ def main():
     # ---------------- Case 4: 多源 / 复杂气象 ----------------
     c4 = cfg["case04_multi_source"]
     srcs = c4["true_sources"]; stab4 = c4["stability"]
-    out4 = os.path.join(HERE, "case04_multi_source")
+    out4 = TEST_DATA_ROOT / "case04_multi_source"
+    out4.mkdir(parents=True, exist_ok=True)
     wf = c4["wind_field"]
     wt = np.linspace(wf["t_start"], wf["t_end"], wf["nt"])
     phase = 2.0 * np.pi * wt / (wf["t_end"] - wf["t_start"] + 1e-9)
@@ -219,7 +231,7 @@ def main():
     wind_df = pd.DataFrame({"time_s": wt,
                             "wind_speed_m_s": np.round(wspeed, 4),
                             "wind_dir_deg": np.round(wdir, 4)})
-    wind_df.to_csv(os.path.join(out4, "wind_field.csv"), index=False)
+    wind_df.to_csv(out4 / "wind_field.csv", index=False)
     # 传感器: 用平均风(沿 x) 近似生成多源叠加观测
     n4 = c4["n_sensors"]
     sx4 = rng.uniform(0.0, 1200.0, n4)
@@ -240,8 +252,8 @@ def main():
             "conc_observed": np.round(noisy4, 6)}
     for name, cs in per_source.items():
         obs4[f"contrib_{name}"] = np.round(cs, 6)
-    pd.DataFrame(obs4).to_csv(os.path.join(out4, "observations.csv"), index=False)
-    with open(os.path.join(out4, "ground_truth.json"), "w", encoding="utf-8") as f:
+    pd.DataFrame(obs4).to_csv(out4 / "observations.csv", index=False)
+    with (out4 / "ground_truth.json").open("w", encoding="utf-8") as f:
         json.dump({"true_sources": srcs, "stability": stab4,
                    "wind_field_mean_speed_m_s": u_mean,
                    "noise": c4["noise"], "unit": "mg/m^3",

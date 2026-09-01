@@ -167,13 +167,23 @@ def normalize_coarse_search_payload(payload: Dict) -> Dict:
         or 0
     )
 
+    # sensors 键兼容：评估发现部分调用方按 particle_filter 的 payload
+    # 约定传 activeSensors 键，而此处原先只认 sensors 键，导致返回空
+    # 候选（评估报告 03 §8 问题 3）。此处统一支持两者。
+    sensors = (
+        export_payload.get("sensors")
+        or payload.get("sensors")
+        or export_payload.get("activeSensors")
+        or payload.get("activeSensors")
+        or []
+    )
     return {
         "gas": gas,
         "config": config,
         "scenario": scenario,
         "currentFrameIndex": current_frame_index,
         "frameTimeSec": frame_time_sec,
-        "sensors": export_payload.get("sensors") or payload.get("sensors") or [],
+        "sensors": sensors,
     }
 
 

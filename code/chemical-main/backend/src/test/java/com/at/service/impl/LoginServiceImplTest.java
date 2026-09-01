@@ -97,4 +97,26 @@ class LoginServiceImplTest {
         verify(passwordEncoder, org.mockito.Mockito.never()).encode(any());
         verify(userMapper, org.mockito.Mockito.never()).insert(any());
     }
+
+    @Test
+    void loginUpgradesLegacyUnprefixedPasswordAfterSuccessfulMatch() {
+        User requestUser = new User();
+        requestUser.setUsername("admin");
+        requestUser.setPassword("legacy-password");
+        User storedUser = new User();
+        storedUser.setId(1L);
+        storedUser.setUsername("admin");
+        storedUser.setPassword("legacy-password");
+        storedUser.setRole("admin");
+        when(userMapper.selectByUsername("admin")).thenReturn(storedUser);
+        when(passwordEncoder.matches("legacy-password", "legacy-password")).thenReturn(true);
+        when(passwordEncoder.encode("legacy-password")).thenReturn("{argon2id}upgraded-hash");
+        when(userMapper.updateById(storedUser)).thenReturn(1);
+
+        String token = loginService.login(requestUser);
+
+        assertThat(token).isNotBlank();
+        assertThat(storedUser.getPassword()).isEqualTo("{argon2id}upgraded-hash");
+        verify(userMapper).updateById(storedUser);
+    }
 }

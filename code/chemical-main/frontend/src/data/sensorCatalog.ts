@@ -96,6 +96,42 @@ export const sensorDeviceMap: Record<string, SensorDeviceInfo> = {
     standard: 'GB 50160 8.3: 消防水泵房应设置双电源供电',
     deviceName: '多种气体传感器',
   },
+  OP: {
+    image: '/sensor-devices/production-area-sensors.png',
+    name: '开放路径气体探测器布点示意',
+    standard: 'IEC 60079-29-2: 开放路径探测器适用于边界、装卸区和开阔通道的可燃气体路径监测',
+    deviceName: '开放路径气体探测器',
+  },
+  WX: {
+    image: '/sensor-devices/admin-area-sensors.png',
+    name: '微型气象站布点示意',
+    standard: '扩散与溯源模型需要局地风速、风向、温湿度等环境参数，气象站应布设在开阔代表性位置',
+    deviceName: '微型气象站',
+  },
+  PTZ: {
+    image: '/sensor-devices/admin-area-sensors.png',
+    name: '视频监控 / PTZ 布点示意',
+    standard: '智慧化工园区重点设施、道路节点和应急通道需要视频复核，与气体报警形成证据闭环',
+    deviceName: '视频监控 / PTZ',
+  },
+  IR: {
+    image: '/sensor-devices/tank-farm-sensors.png',
+    name: '火焰 / 热成像探测器布点示意',
+    standard: '高危储罐、泵区、装卸区补充火焰和热异常识别，作为气体报警后的复核证据',
+    deviceName: '火焰 / 热成像探测器',
+  },
+  AL: {
+    image: '/sensor-devices/production-area-sensors.png',
+    name: '声光报警器布点示意',
+    standard: '报警联动设备布设在人员通道、装卸区和控制室周边，支撑现场处置闭环',
+    deviceName: '声光报警器',
+  },
+  GW: {
+    image: '/sensor-devices/admin-area-sensors.png',
+    name: '边缘采集网关布点示意',
+    standard: '网关靠近分区设备集中处布设，负责 SensorThings 语义数据汇聚和服务化上报',
+    deviceName: '边缘采集网关',
+  },
   FD: {
     image: '/sensor-devices/tank-farm-sensors.png',
     name: '防火堤传感器布点示意',

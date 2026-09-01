@@ -47,6 +47,7 @@ interface PipeLine {
   status: string
   medium?: string
   diameter?: string
+  hazardLevel?: number
 }
 
 interface MapEntrance extends JsMapPoint {
@@ -97,10 +98,28 @@ declare module '@/data/supermapGeoreference' {
   export const SUPERMAP_CGCS2000_COORD_SYS: string
   export const SUPERMAP_CGCS2000_EPSG: number
   export const SUPERMAP_CGCS2000_GEOGRAPHIC_EPSG: number
+  export const ZHENGZHOU_STATION_57083: {
+    id: string
+    name: string
+    address: string
+    longitude: number
+    latitude: number
+    altitude: number
+    geographicEpsg: number
+  }
   export const SUPERMAP_CGCS2000_TRANSFORM: JsModuleRecord
   export const SUPERMAP_CGCS2000_CONTROL_POINTS: JsModuleRecord[]
   export function localToProjected(x: number, y: number): { easting: number; northing: number }
   export function projectedToLocal(easting: number, northing: number): JsMapPoint
+  // F2 双锚点（路 B）：iServer 数据集 D 锚点（HAUT 莲花南门）
+  export const SUPERMAP_ISERVER_DATA_ANCHOR: {
+    local: JsMapPoint
+    projected: { easting: number; northing: number }
+    wgs84: { longitude: number; latitude: number }
+    label: string
+  }
+  export function localToProjectedD(x: number, y: number): { easting: number; northing: number }
+  export function projectedToLocalD(easting: number, northing: number): JsMapPoint
   export function localToWgs84(x: number, y: number, altitude?: number): {
     longitude: number
     latitude: number
@@ -111,6 +130,19 @@ declare module '@/data/supermapGeoreference' {
     latitude: number
     altitude: number
   }
+  // F11 算法坐标系（2026-08-01，B 套模型绑定点位迁移）
+  export const ALGORITHM_FRAME: {
+    offsetX: number
+    offsetY: number
+    width: number
+    height: number
+    label: string
+  }
+  export function wgs84ToEnu(longitude: number, latitude: number): { east: number; north: number }
+  export function enuToAlgorithm(east: number, north: number): { x: number; y: number }
+  export function wgs84ToAlgorithmPoint(longitude: number, latitude: number): { x: number; y: number }
+  export function algorithmToLocal(point: { x: number; y: number }): { x: number; y: number }
+  export function localToAlgorithm(x: number, y: number): { x: number; y: number }
 }
 
 declare module '@/data/sensorCatalog' {

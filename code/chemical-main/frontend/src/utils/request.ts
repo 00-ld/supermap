@@ -1,18 +1,40 @@
 import axios from 'axios'
-import type { AxiosInstance, AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios'
+import type {
+  AxiosInstance,
+  AxiosRequestConfig,
+  InternalAxiosRequestConfig,
+} from 'axios'
 import { ElMessage } from 'element-plus'
 import useUserStore from '@/store/modules/user'
 import { GET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
 import router from '@/router'
+import { resolveRequestErrorMessageType } from './requestErrorPresentation'
 import type { ApiResult } from '@/types/api'
 
 export type { ApiResult } from '@/types/api'
 
-export type HttpClient = Omit<AxiosInstance, 'get' | 'post' | 'put' | 'delete'> & {
-  get<T = unknown, R = ApiResult<T>>(url: string, config?: AxiosRequestConfig): Promise<R>
-  post<T = unknown, R = ApiResult<T>>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<R>
-  put<T = unknown, R = ApiResult<T>>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<R>
-  delete<T = unknown, R = ApiResult<T>>(url: string, config?: AxiosRequestConfig): Promise<R>
+export type HttpClient = Omit<
+  AxiosInstance,
+  'get' | 'post' | 'put' | 'delete'
+> & {
+  get<T = unknown, R = ApiResult<T>>(
+    url: string,
+    config?: AxiosRequestConfig,
+  ): Promise<R>
+  post<T = unknown, R = ApiResult<T>>(
+    url: string,
+    data?: unknown,
+    config?: AxiosRequestConfig,
+  ): Promise<R>
+  put<T = unknown, R = ApiResult<T>>(
+    url: string,
+    data?: unknown,
+    config?: AxiosRequestConfig,
+  ): Promise<R>
+  delete<T = unknown, R = ApiResult<T>>(
+    url: string,
+    config?: AxiosRequestConfig,
+  ): Promise<R>
 }
 
 interface HttpClientOptions {
@@ -26,7 +48,7 @@ interface ErrorResponseBody {
   message?: string
 }
 
-const publicDemoRoutes = new Set(['/screen', '/smart-map'])
+const publicDemoRoutes = new Set(['/screen'])
 
 const attachAuthToken = (config: InternalAxiosRequestConfig) => {
   const userStore = useUserStore()
@@ -83,8 +105,9 @@ const handleDefaultError = (error: unknown) => {
   }
 
   ElMessage({
-    type: 'error',
+    type: resolveRequestErrorMessageType({ status, isPublicDemoRoute }),
     message,
+    grouping: isPublicDemoRoute && status === 401,
   })
   return Promise.reject(error)
 }

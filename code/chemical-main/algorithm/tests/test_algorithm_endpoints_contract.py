@@ -12,6 +12,11 @@ import unittest
 from fastapi.testclient import TestClient
 
 from algorithm import api_server
+from algorithm.diffusion.phase1_diffusion import (
+    MAX_VOLUME_PARTICLES_PER_RESPONSE,
+    build_volume_cells,
+    get_gas_by_id,
+)
 
 
 class AlgorithmEndpointsContractTests(unittest.TestCase):
@@ -40,6 +45,7 @@ class AlgorithmEndpointsContractTests(unittest.TestCase):
             "sourceMapPoint": {"x": 500, "y": 300},
             "sourceRate": 50,
             "releaseDuration": 60,
+            "releaseHeight": 6,
             "windSpeed": 3,
             "windDirection": 90,
             "stabilityClass": "D",
@@ -49,8 +55,8 @@ class AlgorithmEndpointsContractTests(unittest.TestCase):
                 {"id": "f1", "type": "tank", "x": 100, "y": 100, "w": 40, "h": 40},
             ],
             "sensors": [
-                {"id": "s1", "x": 600, "y": 350},
-                {"id": "s2", "x": 400, "y": 250},
+                {"id": "s1", "x": 600, "y": 350, "installationHeight": 8},
+                {"id": "s2", "x": 400, "y": 250, "installationHeight": 2},
             ],
         }
 
@@ -119,6 +125,7 @@ class AlgorithmEndpointsContractTests(unittest.TestCase):
         self.assertEqual(data["gas"]["id"], "nh3")
         self.assertIsInstance(data["sourcePoint"], dict)
         self.assertIn("x", data["sourcePoint"])
+        self.assertEqual(data["sourcePoint"]["zMeters"], 6)
         self.assertIsInstance(data["map"], dict)
         self.assertIn("width", data["map"])
         self.assertIn("gridSize", data["map"])
@@ -130,6 +137,63 @@ class AlgorithmEndpointsContractTests(unittest.TestCase):
         self.assertIn("affectedArea", frame)
         self.assertIn("cells", frame)
         self.assertIsInstance(frame["cells"], list)
+        self.assertIn("volumeCells", frame)
+        self.assertIsInstance(frame["volumeCells"], list)
+        self.assertIn("volumeGrid", frame)
+        self.assertEqual(frame["volumeGrid"]["axisOrder"], "z-y-x")
+        self.assertEqual(len(frame["volumeGrid"]["shape"]), 3)
+        self.assertTrue(frame["volumeGrid"]["isPhysicalConcentrationField"])
+        volume_frame = next(candidate for candidate in data["frames"] if candidate["volumeCells"])
+        volume_cell = volume_frame["volumeCells"][0]
+        self.assertIn("zOffsetMeters", volume_cell)
+        self.assertIn("zMeters", volume_cell)
+        self.assertAlmostEqual(
+            volume_cell["zMeters"],
+            data["sourcePoint"]["zMeters"] + volume_cell["zOffsetMeters"],
+            places=3,
+        )
+        self.assertIn("radiusMeters", volume_cell)
+        self.assertGreater(volume_cell["radiusMeters"], 0)
+        self.assertIn("radiusAlongMeters", volume_cell)
+        self.assertIn("radiusCrossMeters", volume_cell)
+        self.assertIn("radiusVerticalMeters", volume_cell)
+        self.assertNotEqual(
+            volume_cell["radiusAlongMeters"],
+            volume_cell["radiusCrossMeters"],
+            "粒子羽流不能退化成球体",
+        )
+        self.assertIn("particleCount", volume_cell)
+        self.assertGreaterEqual(volume_cell["particleCount"], 4)
+        self.assertLessEqual(volume_cell["particleCount"], 8)
+        self.assertIn("particleSeed", volume_cell)
+        self.assertEqual(volume_cell["shape"], "BUOYANT_WISPY_PUFF")
+        self.assertGreater(volume_cell["speedFactor"], 1)
+        self.assertGreater(volume_cell["buoyancyMetersPerSecond"], 0)
+        self.assertIn("particleProfile", data["gas"])
+        self.assertEqual(data["releaseGeometry"]["shape"], "VOLUME")
+        self.assertFalse(data["releaseGeometry"]["visualizationOnly"])
+        self.assertEqual(
+            data["releaseGeometry"]["concentrationSemantics"],
+            "three-dimensional-voxel-concentration",
+        )
+        self.assertLessEqual(
+            sum(len(candidate["volumeCells"]) for candidate in data["frames"]),
+            data["releaseGeometry"]["maxVolumeCellsPerResponse"],
+        )
+        self.assertLessEqual(
+            sum(
+                cell["particleCount"]
+                for candidate in data["frames"]
+                for cell in candidate["volumeCells"]
+            ),
+            data["releaseGeometry"]["maxVolumeParticlesPerResponse"],
+        )
+        self.assertEqual(
+            data["releaseGeometry"]["maxVolumeParticlesPerResponse"],
+            MAX_VOLUME_PARTICLES_PER_RESPONSE,
+        )
+        self.assertEqual(data["scenarioMeta"]["sourceShape"], "VOLUME")
+        self.assertEqual(data["scenarioMeta"]["concentrationFieldDimensions"], 3)
         self.assertIn("plume", frame)
         self.assertIn("sensorReadings", frame)
         self.assertIn("stats", data)
@@ -154,6 +218,162 @@ class AlgorithmEndpointsContractTests(unittest.TestCase):
         payload["unknownFutureField"] = "透传"
         resp = self.client.post("/api/diffusion/simulate", json=payload)
         self.assertEqual(resp.status_code, 200, resp.text)
+
+    def test_diffusion_rejects_conflicting_gas_binding(self) -> None:
+        payload = self._diffusion_payload()
+        payload["gasCode"] = "CH4"
+        resp = self.client.post("/api/diffusion/simulate", json=payload)
+        self.assertEqual(resp.status_code, 400, resp.text)
+        self.assertIn("gasCode must match gasId", resp.json()["data"]["error"])
+
+    def test_diffusion_rejects_non_finite_numeric_values(self) -> None:
+        for value in ("NaN", "Infinity", "-Infinity"):
+            with self.subTest(value=value):
+                payload = self._diffusion_payload()
+                payload["lagrangianTimescaleS"] = value
+                resp = self.client.post("/api/diffusion/simulate", json=payload)
+                self.assertEqual(resp.status_code, 400, resp.text)
+                self.assertIn("finite number", resp.json()["data"]["error"])
+
+    def test_diffusion_rejects_non_object_volume_fence(self) -> None:
+        payload = self._diffusion_payload()
+        payload["volumeFence"] = [320]
+        resp = self.client.post("/api/diffusion/simulate", json=payload)
+        self.assertEqual(resp.status_code, 400, resp.text)
+        self.assertIn(
+            "volumeFence must be an object",
+            resp.json()["data"]["error"],
+        )
+
+    def test_volume_cell_selection_is_bounded_before_expansion(self) -> None:
+        cells = [
+            {
+                "x": index % 100,
+                "y": index // 100,
+                "concentration": float(index + 1),
+                "level": "low",
+            }
+            for index in range(10_000)
+        ]
+        volume_cells = build_volume_cells(
+            cells=cells,
+            source={"x": 50, "y": 50},
+            gas={
+                "particleProfile": {
+                    "shape": "NEUTRAL_PUFF",
+                    "densityFactor": 1,
+                }
+            },
+            release_height_m=0.8,
+            wind_speed_mps=3,
+            wind_direction_degrees=90,
+            vertical_turbulence_mps=0.3,
+            vertical_timescale_s=20,
+            frame_peak_concentration=10_000,
+            grid_size=5,
+            map_meters_per_unit=1,
+            max_horizontal_radius_m=1_000,
+            max_columns=2,
+        )
+        self.assertLessEqual(len(volume_cells), 6)
+        self.assertEqual({cell["x"] for cell in volume_cells}, {98.0, 99.0})
+
+    def test_volume_particle_count_tracks_absolute_concentration(self) -> None:
+        volume_cells = build_volume_cells(
+            cells=[
+                {"x": 10, "y": 0, "concentration": 1.0, "level": "low"},
+                {"x": 20, "y": 0, "concentration": 100.0, "level": "high"},
+            ],
+            source={"x": 0, "y": 0},
+            gas=get_gas_by_id("co"),
+            release_height_m=1,
+            wind_speed_mps=3,
+            wind_direction_degrees=0,
+            vertical_turbulence_mps=0.3,
+            vertical_timescale_s=20,
+            frame_peak_concentration=100,
+            grid_size=5,
+            map_meters_per_unit=1,
+            max_horizontal_radius_m=1_000,
+            max_columns=2,
+        )
+        low_counts = [cell["particleCount"] for cell in volume_cells if cell["x"] == 10]
+        high_counts = [cell["particleCount"] for cell in volume_cells if cell["x"] == 20]
+        self.assertGreater(max(high_counts), max(low_counts))
+
+    def test_volume_particle_age_uses_downwind_projection(self) -> None:
+        volume_cells = build_volume_cells(
+            cells=[
+                {"x": 100, "y": 0, "concentration": 10.0, "level": "high"},
+                {"x": 0, "y": 100, "concentration": 10.0, "level": "high"},
+            ],
+            source={"x": 0, "y": 0},
+            gas=get_gas_by_id("co"),
+            release_height_m=1,
+            wind_speed_mps=5,
+            wind_direction_degrees=0,
+            vertical_turbulence_mps=0.4,
+            vertical_timescale_s=20,
+            frame_peak_concentration=10,
+            grid_size=5,
+            map_meters_per_unit=1,
+            max_horizontal_radius_m=1_000,
+            max_columns=2,
+        )
+        downwind = [cell for cell in volume_cells if cell["x"] == 100]
+        crosswind = [cell for cell in volume_cells if cell["y"] == 100]
+        self.assertTrue(all(cell["particleAgeSeconds"] > 0 for cell in downwind))
+        self.assertTrue(all(cell["particleAgeSeconds"] == 0 for cell in crosswind))
+        self.assertTrue(all(cell["headingDegrees"] == 90 for cell in volume_cells))
+        self.assertTrue(all("crossWindDistanceMeters" in cell for cell in volume_cells))
+        self.assertTrue(all("sourceDistanceMeters" in cell for cell in volume_cells))
+
+    def test_volume_cells_reject_materially_upwind_points(self) -> None:
+        volume_cells = build_volume_cells(
+            cells=[
+                {"x": -20, "y": 0, "concentration": 100.0, "level": "high"},
+                {"x": 20, "y": 0, "concentration": 10.0, "level": "high"},
+            ],
+            source={"x": 0, "y": 0},
+            gas=get_gas_by_id("co"),
+            release_height_m=1,
+            wind_speed_mps=5,
+            wind_direction_degrees=0,
+            vertical_turbulence_mps=0.4,
+            vertical_timescale_s=20,
+            frame_peak_concentration=100,
+            grid_size=5,
+            map_meters_per_unit=1,
+            max_horizontal_radius_m=1_000,
+            max_columns=8,
+        )
+        self.assertTrue(volume_cells)
+        self.assertEqual({cell["x"] for cell in volume_cells}, {20.0})
+        self.assertTrue(
+            all(cell["radiusAlongMeters"] > cell["radiusCrossMeters"] for cell in volume_cells)
+        )
+
+    def test_gas_particle_profiles_remain_distinct(self) -> None:
+        gases = {gas_id: get_gas_by_id(gas_id) for gas_id in ("co", "nh3", "ch4", "o2")}
+        profiles = {gas_id: gas["particleProfile"] for gas_id, gas in gases.items()}
+        self.assertEqual(
+            len({profile["shape"] for profile in profiles.values()}),
+            4,
+        )
+        self.assertGreater(
+            profiles["ch4"]["speedFactor"],
+            profiles["nh3"]["speedFactor"],
+        )
+        self.assertGreater(
+            profiles["nh3"]["speedFactor"],
+            profiles["co"]["speedFactor"],
+        )
+        self.assertGreater(
+            profiles["ch4"]["buoyancyMetersPerSecond"],
+            profiles["nh3"]["buoyancyMetersPerSecond"],
+        )
+        self.assertGreater(profiles["nh3"]["buoyancyMetersPerSecond"], 0)
+        self.assertLess(profiles["o2"]["buoyancyMetersPerSecond"], 0)
 
     # ---- 2. 粗搜索 ----
 
@@ -242,7 +462,7 @@ class AlgorithmEndpointsContractTests(unittest.TestCase):
             "sensors": self._active_sensors(),
             "gas": self._gas(),
             "scenario": self._scenario(),
-            "particleFilterConfig": {"num_particles": 200, "iterations": 6, "seed": 42},
+            "particleFilterConfig": {"numParticles": 500, "iterations": 6, "seed": 42},
         }
         resp = self.client.post("/api/inversion/particle-filter", json=payload)
         self.assertEqual(resp.status_code, 200, resp.text)
@@ -259,6 +479,15 @@ class AlgorithmEndpointsContractTests(unittest.TestCase):
         self.assertIn("posteriorDensityGeoJSON", data)
         self.assertEqual(data["posteriorDensityGeoJSON"]["type"], "FeatureCollection")
         self.assertGreater(len(data["posteriorDensityGeoJSON"]["features"]), 0)
+        self.assertIn("posteriorParticles", data)
+        self.assertGreater(len(data["posteriorParticles"]), 0)
+        self.assertLessEqual(len(data["posteriorParticles"]), 160)
+        particle = data["posteriorParticles"][0]
+        self.assertIn("x", particle)
+        self.assertIn("y", particle)
+        self.assertIn("emissionRate", particle)
+        self.assertGreaterEqual(particle["relativeWeight"], 0)
+        self.assertLessEqual(particle["relativeWeight"], 1)
         self.assertEqual(
             data["posteriorDensityGeoJSON"]["metadata"]["interpolation"],
             "weighted-gaussian-kde",
@@ -269,10 +498,48 @@ class AlgorithmEndpointsContractTests(unittest.TestCase):
         self.assertIn("errorMetrics", data)
         self.assertIn("history", data)
         self.assertIsInstance(data["history"], list)
+        self.assertEqual(
+            data["spatialReference"]["analysisCrs"],
+            data["spatialReference"]["inputCrs"],
+        )
+        self.assertEqual(data["spatialReference"]["presentationTargetCrs"], "EPSG:4490")
+        self.assertFalse(data["spatialReference"]["presentationTransformApplied"])
+        self.assertEqual(data["diagnostics"]["particles"], 500)
 
     def test_particle_filter_no_sensors_returns_400(self) -> None:
         resp = self.client.post("/api/inversion/particle-filter", json={"gas": self._gas()})
         self.assertEqual(resp.status_code, 400)
+
+    def test_particle_filter_rejects_fewer_than_three_sensors(self) -> None:
+        payload = {
+            "sensors": self._active_sensors()[:2],
+            "gas": self._gas(),
+            "scenario": self._scenario(),
+        }
+        resp = self.client.post("/api/inversion/particle-filter", json=payload)
+        self.assertEqual(resp.status_code, 400)
+        self.assertIn("at least three", resp.json()["data"]["errors"][0])
+
+    def test_particle_filter_rejects_duplicate_sensor_positions(self) -> None:
+        sensors = self._active_sensors()
+        sensors[1]["x"] = sensors[0]["x"]
+        sensors[1]["y"] = sensors[0]["y"]
+        resp = self.client.post(
+            "/api/inversion/particle-filter",
+            json={"sensors": sensors, "gas": self._gas(), "scenario": self._scenario()},
+        )
+        self.assertEqual(resp.status_code, 400)
+        self.assertIn("duplicate sensor position", resp.json()["data"]["errors"][0])
+
+    def test_particle_filter_rejects_negative_signal(self) -> None:
+        sensors = self._active_sensors()
+        sensors[0]["signal"] = -1
+        resp = self.client.post(
+            "/api/inversion/particle-filter",
+            json={"sensors": sensors, "gas": self._gas(), "scenario": self._scenario()},
+        )
+        self.assertEqual(resp.status_code, 400)
+        self.assertIn("non-negative", resp.json()["data"]["errors"][0])
 
     # ---- 5. 疏散规划 ----
 
@@ -315,7 +582,9 @@ class AlgorithmEndpointsContractTests(unittest.TestCase):
         self.assertEqual(len(data["routesByBuilding"]), 2)
         self.assertIn("hasAnyReachable", data)
         self.assertIn("reachableCount", data)
-        self.assertEqual(data["reachableCount"], sum(1 for r in data["routesByBuilding"] if r["isReachable"]))
+        self.assertEqual(
+            data["reachableCount"], sum(1 for r in data["routesByBuilding"] if r["isReachable"])
+        )
 
     # ---- 6. 气体目录 ----
 

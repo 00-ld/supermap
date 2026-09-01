@@ -33,6 +33,22 @@ _SURROGATE: "GasResponseSurrogate | None" = None
 _DEVICE = torch.device("cpu")
 
 
+def should_apply_neural_correction(params: ConditionedAdvectionParams) -> bool:
+    """Return whether the neural residual is compatible with the input contract.
+
+    The surrogate was trained without release-height wind or measured turbulence
+    features.  Applying it to such a request would add an uncalibrated residual
+    to the better-constrained physical solution, so measured meteorology uses
+    the physical anchor directly.
+    """
+
+    return (
+        params.wind_speed_at_release_m_s is None
+        and params.sigv_m_s is None
+        and params.sigw_m_s is None
+    )
+
+
 class GasResponseNet(nn.Module):
     """Small MLP for point concentration response prediction."""
 
@@ -116,14 +132,6 @@ def deep_sensor_response(
     along-wind source identifiability, which is critical for inversion.
     """
 
-    neural = ensure_deep_surrogate().predict(
-        source_x,
-        source_y,
-        sensor_x,
-        sensor_y,
-        emission_rate_g_s,
-        params,
-    )
     physical = np.asarray(
         conditioned_sensor_response(
             source_x,
@@ -134,6 +142,17 @@ def deep_sensor_response(
             params,
         ),
         dtype=float,
+    )
+    if not should_apply_neural_correction(params):
+        return np.maximum(physical, 0.0)
+
+    neural = ensure_deep_surrogate().predict(
+        source_x,
+        source_y,
+        sensor_x,
+        sensor_y,
+        emission_rate_g_s,
+        params,
     )
     # Keep the runtime model genuinely neural while preserving the physically
     # validated plume geometry that source inversion depends on.

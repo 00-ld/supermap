@@ -67,6 +67,15 @@ class AlgorithmServiceConfigTests(unittest.TestCase):
 
         self.assertEqual(raised.exception.status_code, 401)
 
+    def test_validate_algorithm_api_key_allows_explicitly_disabled_auth(self) -> None:
+        validate_algorithm_api_key(
+            None,
+            service_name="算法服务",
+            api_key="configured-local-key",
+            require_auth=False,
+            logger=logging.getLogger("test"),
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

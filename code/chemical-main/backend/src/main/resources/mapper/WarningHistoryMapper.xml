@@ -16,6 +16,13 @@
         ORDER BY warning_time DESC, id DESC
     </select>
 
+    <!-- 按主键查询单条记录（task 模块冗余告警坐标/区域用） -->
+    <select id="selectById" resultType="com.at.pojo.WarningHistory">
+        SELECT id, car_id as carId, area_name as areaName, x, y, gas_type as gasType, gas_value as gasValue, warning_time as warningTime
+        FROM warning_history
+        WHERE id = #{id}
+    </select>
+
     <!-- 删除记录 -->
     <delete id="deleteById" parameterType="java.lang.Integer">
         DELETE FROM warning_history WHERE id = #{id}

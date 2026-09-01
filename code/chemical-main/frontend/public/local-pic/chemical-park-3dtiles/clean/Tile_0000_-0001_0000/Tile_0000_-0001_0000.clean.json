@@ -1,0 +1,319 @@
+{
+  "asset": {
+    "version": "1.0"
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "boundingVolume": {
+                  "sphere": [
+                    0.5597928485913408,
+                    -61.81115647381145,
+                    33.37109634340045,
+                    107.30370954430924
+                  ]
+                },
+                "geometricError": 2.406568236446694,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "/pic/chemical-park-3dtiles/Tile_0000_-0001_0000/Tile_0000_-0001_0000_0000_0000.b3dm"
+                }
+              }
+            ],
+            "boundingVolume": {
+              "sphere": [
+                0.5597928488416591,
+                -61.81118006965942,
+                33.371565912909325,
+                107.30417970628947
+              ]
+            },
+            "geometricError": 4.0000001139667045,
+            "refine": "REPLACE",
+            "content": {
+              "uri": "/pic/chemical-park-3dtiles/Tile_0000_-0001_0000/Tile_0000_-0001_0000_0001_0000.b3dm"
+            }
+          },
+          {
+            "children": [
+              {
+                "boundingVolume": {
+                  "sphere": [
+                    -0.00011976775203137436,
+                    -0.006296898235795096,
+                    22.86557763234482,
+                    1590.389381078069
+                  ]
+                },
+                "geometricError": 1.999999981989962,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "/pic/chemical-park-3dtiles/Tile_0000_-0001_0000/Tile_0000_-0001_0000_0000_0001.b3dm"
+                }
+              }
+            ],
+            "boundingVolume": {
+              "sphere": [
+                -0.00011976775203137436,
+                -0.006296898235795096,
+                22.86557763234482,
+                1590.389381078069
+              ]
+            },
+            "geometricError": 4.000000069370267,
+            "refine": "REPLACE",
+            "content": {
+              "uri": "/pic/chemical-park-3dtiles/Tile_0000_-0001_0000/Tile_0000_-0001_0000_0001_0001.b3dm"
+            }
+          },
+          {
+            "children": [
+              {
+                "boundingVolume": {
+                  "sphere": [
+                    -98.4941511021234,
+                    -69.5302691203251,
+                    21.512029396835715,
+                    207.512640826309
+                  ]
+                },
+                "geometricError": 1.9999998952571296,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "/pic/chemical-park-3dtiles/Tile_0000_-0001_0000/Tile_0000_-0001_0000_0000_0002.b3dm"
+                }
+              }
+            ],
+            "boundingVolume": {
+              "sphere": [
+                -98.49415112565688,
+                -69.52980369295729,
+                21.51199882400228,
+                207.51310725672548
+              ]
+            },
+            "geometricError": 3.999999974226264,
+            "refine": "REPLACE",
+            "content": {
+              "uri": "/pic/chemical-park-3dtiles/Tile_0000_-0001_0000/Tile_0000_-0001_0000_0001_0002.b3dm"
+            }
+          },
+          {
+            "children": [
+              {
+                "boundingVolume": {
+                  "sphere": [
+                    -119.0850754128402,
+                    36.06379774254158,
+                    14.548656988508798,
+                    151.79438206864603
+                  ]
+                },
+                "geometricError": 2.0081796395010802,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "/pic/chemical-park-3dtiles/Tile_0000_-0001_0000/Tile_0000_-0001_0000_0000_0003.b3dm"
+                }
+              }
+            ],
+            "boundingVolume": {
+              "sphere": [
+                -119.0850754128402,
+                36.06379774254158,
+                14.548656988508798,
+                151.79438206864603
+              ]
+            },
+            "geometricError": 4.000000045860961,
+            "refine": "REPLACE",
+            "content": {
+              "uri": "/pic/chemical-park-3dtiles/Tile_0000_-0001_0000/Tile_0000_-0001_0000_0001_0003.b3dm"
+            }
+          }
+        ],
+        "boundingVolume": {
+          "sphere": [
+            -0.00011976775203137436,
+            -0.006296898235795096,
+            22.86557763234482,
+            1590.389381078069
+          ]
+        },
+        "geometricError": 24.861683323011096,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "/pic/chemical-park-3dtiles/Tile_0000_-0001_0000/Tile_0000_-0001_0000_0002_0000.b3dm"
+        }
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "boundingVolume": {
+                  "sphere": [
+                    -185.30701948168337,
+                    -74.9421495028659,
+                    23.91928451632333,
+                    136.645589332287
+                  ]
+                },
+                "geometricError": 2.122920610682055,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "/pic/chemical-park-3dtiles/Tile_0000_-0001_0000/Tile_0000_-0001_0000_0000_0004.b3dm"
+                }
+              }
+            ],
+            "boundingVolume": {
+              "sphere": [
+                -185.30701948168337,
+                -74.9421495028659,
+                23.91928451632333,
+                136.645589332287
+              ]
+            },
+            "geometricError": 4.000000193562509,
+            "refine": "REPLACE",
+            "content": {
+              "uri": "/pic/chemical-park-3dtiles/Tile_0000_-0001_0000/Tile_0000_-0001_0000_0001_0004.b3dm"
+            }
+          },
+          {
+            "children": [
+              {
+                "boundingVolume": {
+                  "sphere": [
+                    -215.91771904268316,
+                    18.19505180685218,
+                    25.001517796215214,
+                    105.26141746472864
+                  ]
+                },
+                "geometricError": 2.4252942420715375,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "/pic/chemical-park-3dtiles/Tile_0000_-0001_0000/Tile_0000_-0001_0000_0000_0005.b3dm"
+                }
+              }
+            ],
+            "boundingVolume": {
+              "sphere": [
+                -215.91771904268316,
+                18.19505180685218,
+                25.001517796215214,
+                105.26141746472864
+              ]
+            },
+            "geometricError": 3.9999998873235394,
+            "refine": "REPLACE",
+            "content": {
+              "uri": "/pic/chemical-park-3dtiles/Tile_0000_-0001_0000/Tile_0000_-0001_0000_0001_0005.b3dm"
+            }
+          },
+          {
+            "children": [
+              {
+                "boundingVolume": {
+                  "sphere": [
+                    -350.2124855033801,
+                    -71.072404776173,
+                    23.924175048460523,
+                    110.6363606702613
+                  ]
+                },
+                "geometricError": 2.1386351254925953,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "/pic/chemical-park-3dtiles/Tile_0000_-0001_0000/Tile_0000_-0001_0000_0000_0006.b3dm"
+                }
+              }
+            ],
+            "boundingVolume": {
+              "sphere": [
+                -350.2124855033801,
+                -71.072404776173,
+                23.924175048460523,
+                110.6363606702613
+              ]
+            },
+            "geometricError": 4.000000064876151,
+            "refine": "REPLACE",
+            "content": {
+              "uri": "/pic/chemical-park-3dtiles/Tile_0000_-0001_0000/Tile_0000_-0001_0000_0001_0006.b3dm"
+            }
+          },
+          {
+            "children": [
+              {
+                "boundingVolume": {
+                  "sphere": [
+                    -334.7166565573742,
+                    32.26116257982742,
+                    11.209176659425397,
+                    413.45366378489433
+                  ]
+                },
+                "geometricError": 8.494293047705813,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "/pic/chemical-park-3dtiles/Tile_0000_-0001_0000/Tile_0000_-0001_0000_0000_0007.b3dm"
+                }
+              }
+            ],
+            "boundingVolume": {
+              "sphere": [
+                -334.7166565573742,
+                32.26116257982742,
+                11.209176659425397,
+                413.45366378489433
+              ]
+            },
+            "geometricError": 4.000000015189307,
+            "refine": "REPLACE",
+            "content": {
+              "uri": "/pic/chemical-park-3dtiles/Tile_0000_-0001_0000/Tile_0000_-0001_0000_0001_0007.b3dm"
+            }
+          }
+        ],
+        "boundingVolume": {
+          "sphere": [
+            -334.7166565548162,
+            -15.512422040882388,
+            22.45604237478654,
+            462.533266227574
+          ]
+        },
+        "geometricError": 87.68496610649034,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "/pic/chemical-park-3dtiles/Tile_0000_-0001_0000/Tile_0000_-0001_0000_0002_0001.b3dm"
+        }
+      }
+    ],
+    "boundingVolume": {
+      "sphere": [
+        -0.00011976775203137436,
+        -0.006296898235795096,
+        22.86557763234482,
+        1590.389381078069
+      ]
+    },
+    "geometricError": 24.86129928351824,
+    "refine": "REPLACE",
+    "content": {
+      "uri": "/pic/chemical-park-3dtiles/Tile_0000_-0001_0000/Tile_0000_-0001_0000.b3dm"
+    }
+  },
+  "properties": {
+    "supermapCupClean": {
+      "strategy": "preserve building/coarse content; prune malformed _-0001_ leaf b3dm; rely on skipLevelOfDetail=false to avoid parent-child overlap artifacts",
+      "source": "/pic/chemical-park-3dtiles/Tile_0000_-0001_0000/Tile_0000_-0001_0000.json",
+      "generatedAt": "2026-07-20"
+    }
+  }
+}

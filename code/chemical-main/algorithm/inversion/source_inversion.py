@@ -330,7 +330,14 @@ def refine_candidate(
     estimated = iterations[-1]
     source_match_error = None
     if true_source_map_point:
-        source_match_error = round(distance(estimated["center"], normalize_point(true_source_map_point)), 2)
+        # 统一判据口径：与粒子滤波（particle_filter.py）一致，位置误差
+        # 换算为米（× mapMetersPerUnit）后比较 15 m 阈值；修复前此处为
+        # 像素坐标（15 px = 7.5 m），两模块口径相差 2 倍（评估报告 04 §2.2）。
+        source_match_error = round(
+            distance(estimated["center"], normalize_point(true_source_map_point))
+            * MAP_METERS_PER_UNIT,
+            2,
+        )
 
     # Posterior spatial std (RMS of x/y std) reported in metres.
     final_spatial_cov = np.asarray(eki_result.final_cov)[:2, :2]

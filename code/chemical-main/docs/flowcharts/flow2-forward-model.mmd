@@ -1,0 +1,9 @@
+flowchart LR
+    TH["候选源 θ = (x, y, Q)"] --> PU["predict_unit(Q=1)<br/>单位响应向量 g"]
+    PU --> BL{"融合"}
+    PHY["物理锚点 97%<br/>条件平流扩散<br/>conditioned_advection"] --> BL
+    NN["神经残差 3%<br/>PyTorch MLP<br/>gas_surrogate"] --> SW{"实测气象<br/>在训练范围内?"}
+    SW -->|是| NN2["启用 3% 残差"] --> BL
+    SW -->|否 · 未训练| PURE["退回纯物理 0% 残差"] --> BL
+    BL --> P["predict = g × Q<br/>线性缩放"]
+    P --> Z["上风向传感器 = 0<br/>硬物理约束"]

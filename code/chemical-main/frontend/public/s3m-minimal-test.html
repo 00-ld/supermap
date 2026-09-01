@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SuperMap S3M 最小加载测试</title>
+  <link rel="stylesheet" href="/supermap3d/Widgets/widgets.css" />
+  <style>
+    html,body,#viewer{width:100%;height:100%;margin:0;overflow:hidden;background:#17191f;font-family:Arial,"Microsoft YaHei",sans-serif}
+    #panel{position:absolute;z-index:10;top:12px;left:12px;width:min(760px,calc(100vw - 48px));padding:12px;background:rgba(20,23,29,.95);color:#f3f4f6;border:1px solid #555;border-radius:6px;box-sizing:border-box}
+    #configUrl{width:100%;box-sizing:border-box;margin:6px 0 8px;padding:8px;background:#0f1116;color:#fff;border:1px solid #666;border-radius:4px}
+    button{padding:7px 12px;margin-right:6px;border:0;border-radius:4px;cursor:pointer}
+    #log{max-height:210px;overflow:auto;margin-top:10px;padding:8px;background:#0f1116;border-radius:4px;white-space:pre-wrap;word-break:break-all;font:12px/1.45 Consolas,monospace}
+    .hint{margin-top:8px;color:#c8cdd4;font-size:12px}
+  </style>
+</head>
+<body>
+  <div id="viewer"></div>
+  <div id="panel">
+    <strong>SuperMap S3M 最小加载测试</strong>
+    <input id="configUrl" value="/supermap-iserver/iserver/services/3D-local3DCache-YuanCaiLiaoCangKu/rest/realspace/datas/result_ImportFBX/config" />
+    <button id="loadBtn">加载 S3M</button>
+    <button id="flyBtn" disabled>飞到图层</button>
+    <button id="clearBtn">清空日志</button>
+    <div class="hint">F12 → Network → 勾选 Preserve log、Disable cache；分别筛选 config、attribute、s3mb。</div>
+    <div id="log"></div>
+  </div>
+
+  <script src="/supermap3d/Cesium.js"></script>
+  <script>
+    (() => {
+      "use strict";
+      const runtime = window.SuperMap3D || window.Cesium;
+      const configInput = document.getElementById("configUrl");
+      const loadBtn = document.getElementById("loadBtn");
+      const flyBtn = document.getElementById("flyBtn");
+      const clearBtn = document.getElementById("clearBtn");
+      const logBox = document.getElementById("log");
+      let viewer = null;
+      let layer = null;
+      let seq = 0;
+
+      const log = (message, value) => {
+        const time = new Date().toLocaleTimeString();
+        let extra = "";
+        if (value !== undefined) {
+          try { extra = "\n" + (typeof value === "string" ? value : JSON.stringify(value, null, 2)); }
+          catch { extra = "\n[对象无法序列化，请查看 Console]"; }
+        }
+        logBox.textContent += `[${time}] ${message}${extra}\n`;
+        logBox.scrollTop = logBox.scrollHeight;
+        console.log("[S3M minimal]", message, value ?? "");
+      };
+
+      const timeout = (promise, ms, label) => Promise.race([
+        promise,
+        new Promise((_, reject) => setTimeout(() => reject(new Error(`${label}，超过 ${ms}ms`)), ms)),
+      ]);
+
+      async function fly() {
+        if (!viewer || !layer) return log("没有可飞行的图层");
+        try {
+          log("开始 viewer.flyTo(layer)");
+          await viewer.flyTo(layer);
+          log("viewer.flyTo 完成");
+        } catch (error) {
+          console.error(error);
+          log("viewer.flyTo 失败", error instanceof Error ? error.message : String(error));
+        }
+      }
+
+      async function load() {
+        const current = ++seq;
+        const url = configInput.value.trim();
+        if (!url) return log("config URL 不能为空");
+
+        loadBtn.disabled = true;
+        flyBtn.disabled = true;
+        layer = null;
+        log("开始 addS3MTilesLayerByScp", url);
+
+        try {
+          const result = await timeout(
+            Promise.resolve(viewer.scene.addS3MTilesLayerByScp(url, { name: `原材料仓库-minimal-${Date.now()}` })),
+            60000,
+            "S3M 图层 Promise 返回超时"
+          );
+
+          if (current !== seq) return log("忽略过期加载结果");
+          if (!result) throw new Error("Promise 已完成，但返回图层为空");
+
+          layer = result;
+          flyBtn.disabled = false;
+          log("S3M 图层 Promise 已返回", {
+            name: layer.name,
+            visible: layer.visible,
+            hasBoundingSphere: Boolean(layer.boundingSphere),
+          });
+          await fly();
+        } catch (error) {
+          console.error("[S3M minimal] load failed", error);
+          log("S3M 加载失败", error instanceof Error ? {
+            name: error.name,
+            message: error.message,
+            stack: error.stack,
+          } : String(error));
+        } finally {
+          if (current === seq) loadBtn.disabled = false;
+        }
+      }
+
+      try {
+        if (!runtime || typeof runtime.Viewer !== "function") {
+          throw new Error("未找到 SuperMap3D/Cesium Viewer，请检查 /supermap3d/Cesium.js");
+        }
+
+        log("运行时已加载", {
+          namespace: window.SuperMap3D ? "SuperMap3D" : "Cesium",
+          version: window.SuperMap3D?.VERSION || window.Cesium?.VERSION || "未暴露 VERSION",
+          scripts: [...document.scripts].map(s => s.src).filter(src => /Cesium|SuperMap3D/i.test(src)),
+        });
+
+        viewer = new runtime.Viewer("viewer", {
+          animation:false,timeline:false,baseLayerPicker:false,geocoder:false,
+          homeButton:false,navigationHelpButton:false,sceneModePicker:false,
+          fullscreenButton:false,infoBox:false,selectionIndicator:false,shouldAnimate:false
+        });
+
+        if (!viewer.scene || typeof viewer.scene.addS3MTilesLayerByScp !== "function") {
+          throw new Error("当前 SDK 未暴露 scene.addS3MTilesLayerByScp");
+        }
+
+        window.__s3mMinimalTest = {
+          runtime,
+          viewer,
+          getLayer: () => layer,
+          load,
+          fly,
+        };
+
+        log("Viewer 创建成功，请打开 Network 后点击“加载 S3M”");
+      } catch (error) {
+        console.error(error);
+        log("初始化失败", error instanceof Error ? error.message : String(error));
+        loadBtn.disabled = true;
+      }
+
+      loadBtn.addEventListener("click", () => void load());
+      flyBtn.addEventListener("click", () => void fly());
+      clearBtn.addEventListener("click", () => { logBox.textContent = ""; });
+      window.addEventListener("error", e => log("window error", {message:e.message,source:e.filename,line:e.lineno,column:e.colno}));
+      window.addEventListener("unhandledrejection", e => log("unhandled rejection", e.reason instanceof Error ? {message:e.reason.message,stack:e.reason.stack} : String(e.reason)));
+    })();
+  </script>
+</body>
+</html>

@@ -148,32 +148,27 @@
 
 | 方法 | 路径 | 说明 |
 | --- | --- | --- |
-| GET | `/api/sensor/list` | 查询传感器列表。 |
-| POST | `/api/sensor/add` | 新增传感器。 |
-| POST | `/api/sensor/update` | 更新传感器。 |
-| POST | `/api/sensor/delete` | 删除传感器。 |
 | GET | `/api/gas/list` | 查询气体类型。 |
 | POST | `/api/gas/add` | 新增气体类型。 |
 | POST | `/api/gas/update` | 更新气体类型。 |
 | POST | `/api/gas/delete` | 删除气体类型。 |
 
+> F11（2026-08-01）：`/api/sensor/*`、`/api/sensor-readings/*`（含 SSE 流）、`/api/monitor-point/*`
+> 已随 A 套点位数据迁移移除。算法点位改为 B 套模型绑定点位（iServer MonitorPoints_4490，
+> 前端静态数据 `modelMonitorPoints.generated.ts`，583 个低位气体点位），不再经后端 DB 读写。
+> 传感器读数（sensor_reading 表）已删除，实时读数链路（SSE）一并下线。
+
 ### 监测概览、点位与读数
 
 | 方法 | 路径 | 说明 |
 | --- | --- | --- |
-| GET | `/api/monitoring/overview` | 查询监测概览；读数和趋势只来自 `sensor_reading`，不从 `warning_history` 回退。 |
-| GET | `/api/monitor-point/list` | 查询监控点位列表。 |
-| POST | `/api/monitor-point` | 新增监控点位，需 admin。 |
-| DELETE | `/api/monitor-point/{id}` | 删除监控点位，需 admin。 |
+| GET | `/api/monitoring/overview` | 查询监测概览；F11 后传感器指标为空（sensor 表已删），保留环境读数部分。 |
 | GET | `/api/environment-reading/latest` | 查询最新环境读数。 |
 | GET | `/api/environment-reading/recent` | 查询近期环境读数。 |
 | POST | `/api/environment-reading/add` | 新增环境读数，需 admin。 |
 | GET | `/api/simulation-monitoring/scenarios/latest` | 查询最新仿真监测场景。 |
 | GET | `/api/simulation-monitoring/scenarios/recent` | 查询近期仿真监测场景。 |
 | POST | `/api/simulation-monitoring/scenarios/add` | 新增仿真监测场景，需 admin；不得冒充真实硬件场景。 |
-| GET | `/api/simulation-monitoring/readings/latest` | 查询最新仿真/来源标注读数。 |
-| GET | `/api/simulation-monitoring/readings/recent` | 查询近期仿真/来源标注读数，可按 `sensorId` 过滤。 |
-| POST | `/api/simulation-monitoring/readings/add` | 新增仿真读数，需 admin；当前仓库只接受 `source=simulation` 与 `qualityStatus=SIMULATED`。 |
 
 ### 监控点位布局
 
@@ -218,6 +213,8 @@
 | POST | `/api/inversion/solve` | 泄漏源反演求解。 |
 | POST | `/api/inversion/particle-filter` | 粒子滤波泄漏源反演，输出位置、释放强度、置信区间和诊断指标。 |
 | POST | `/api/planning/evacuation` | D* Lite 疏散路径规划。 |
+
+三维扩散请求应传入真实泄漏原点高度 `releaseHeight`；可通过 `volumeFence.minRelativeHeightMeters`、`volumeFence.maxRelativeHeightMeters` 和 `verticalCellSizeMeters` 控制垂直求解范围。响应的 `frames[].volumeGrid.shape` 按 `[z,y,x]` 排列，`frames[].volumeCells` 是真实三维浓度体的有界采样，监控点读数使用 `sensors[].installationHeight` 从三维场插值。`releaseGeometry.concentrationSemantics` 固定为 `three-dimensional-voxel-concentration`。
 
 `/api/engine/run` 保留是为了让受控调用方按任务类型转发到同一算法服务，响应仍必须包含统一追踪字段、输入摘要、运行时、警告和失败/兜底标记。面向页面的稳定链路应直接使用 `/api/diffusion/simulate`、`/api/inversion/*` 与 `/api/planning/evacuation`。
 

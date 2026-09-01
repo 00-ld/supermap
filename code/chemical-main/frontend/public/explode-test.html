@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>S3M 模型爆炸验证（本地 iServer）</title>
+  <style>
+    body { margin: 0; overflow: hidden; font-family: sans-serif; }
+    #info {
+      position: absolute; top: 10px; left: 10px; z-index: 10;
+      background: rgba(0, 0, 0, 0.78); color: #fff;
+      padding: 12px 14px; border-radius: 8px; min-width: 300px;
+      font-size: 13px; line-height: 1.8;
+    }
+    #slider { width: 100%; margin-top: 6px; }
+    #axis button {
+      margin-right: 6px; padding: 3px 10px; cursor: pointer;
+      border: 1px solid #4fc3f7; background: transparent; color: #fff;
+    }
+    #axis button.active { background: #4fc3f7; color: #000; }
+    #log { color: #ffd54f; font-size: 12px; word-break: break-all; max-height: 90px; overflow: auto; }
+  </style>
+</head>
+<body>
+  <div id="info">
+    <div>模型爆炸（抽屉拆解）— 加工厂房 result_ImportFBX</div>
+    <input id="slider" type="range" min="0" max="100" step="1" value="0" disabled>
+    <div id="axis">
+      <button data-axis="x">X 轴</button>
+      <button data-axis="y">Y 轴</button>
+      <button data-axis="z" class="active">Z 轴</button>
+      <button id="reset">复位</button>
+    </div>
+    <div id="log">正在加载三维 SDK…</div>
+  </div>
+  <div id="container"></div>
+  <script>
+    // 隧道绕过：预置 tunnelUrl 阻止 SDK 创建加密隧道；blockedUrlRegex 空 → 全部请求直连 HTTP
+    try {
+      sessionStorage.setItem('tunnelUrl', 'http://127.0.0.1:65535/tunnel')
+      sessionStorage.setItem('blockedUrlRegex', JSON.stringify({ HEAD: [], POST: [], GET: [], PUT: [], DELETE: [] }))
+      sessionStorage.setItem('encryptAESKey', '')
+      sessionStorage.setItem('encryptAESIV', '')
+    } catch (e) {}
+  </script>
+  <script src="/supermap3d/Cesium.js"></script>
+  <script>
+    const logEl = document.getElementById('log')
+    const slider = document.getElementById('slider')
+    const log = (msg) => { logEl.textContent = msg }
+    // 资源加载探针：统计瓦片/隧道请求走向
+    let s3mbCount = 0
+    let proxyTiles = 0
+    let directTiles = 0
+    let tunnelCount = 0
+    const probe = () => {
+      performance.getEntriesByType('resource').forEach((entry) => {
+        if (entry.name.includes('.s3mb') || entry.name.includes('Tile_')) {
+          s3mbCount++
+          if (entry.name.includes('localhost:5173')) proxyTiles++
+          else directTiles++
+        }
+        if (entry.name.includes('security/tunnel')) tunnelCount++
+      })
+    }
+    setInterval(() => {
+      probe()
+      logEl.textContent += '\n[探针] s3mb=' + s3mbCount + ' 代理=' + proxyTiles + ' 直连=' + directTiles + ' tunnel=' + tunnelCount
+    }, 10000)
+    const S3D = window.Cesium || window.SuperMap3D
+    if (!S3D) throw new Error('SDK 全局对象未找到')
+    const viewer = new S3D.Viewer('container', {
+      infoBox: false, timeline: false, animation: false,
+      baseLayerPicker: false, fullscreenButton: false,
+    })
+    viewer.scene.globe.show = false
+
+    const CONFIG_URL = '/supermap-iserver/iserver/services/3D-local3DCache-result_ImportFBX/rest/realspace/datas/result_ImportFBX/config'
+    const SLICE_COUNT = 10
+    let layer = null
+    let slices = []
+    let spanZ = 8
+
+    log('正在加载远端场景瓦片（cullEnabled:false 强制加载）…')
+    viewer.scene
+      .addS3MTilesLayerByScp(CONFIG_URL, { name: 'result_ImportFBX', cullEnabled: false })
+      .then((loaded) => {
+        layer = loaded
+        log('图层对象已返回，读取 attribute.json（datasetInfo）…')
+        return loaded.datasetInfo().then((info) => {
+          log('datasetInfo 返回：' + JSON.stringify(info))
+          return info
+        })
+      })
+      .then((info) => {
+        // 2025 SDK 返回数组 [{datasetName,startID,endID}]；2026 SDK 返回 {layerInfos:[{idRange}]}
+        const first =
+          (Array.isArray(info) && info[0]) ||
+          (info && info.layerInfos && info.layerInfos[0]) ||
+          null
+        if (!first) {
+          log('datasetInfo 结构不可识别：' + JSON.stringify(info) + '（爆炸分层不可用，继续加载瓦片）')
+          return fetch(CONFIG_URL).then((r) => r.json()).then((config) => {
+            spanZ = Math.abs(Number(config.heightRange.max) - Number(config.heightRange.min)) || 8
+          })
+        }
+        const minID = Number(first.startID ?? (first.idRange && first.idRange.minID))
+        const maxID = Number(first.endID ?? (first.idRange && first.idRange.maxID))
+        if (!Number.isFinite(minID) || !Number.isFinite(maxID)) {
+          throw new Error('缺少对象 ID 范围: ' + JSON.stringify(first))
+        }
+        const sliceSize = Math.max(1, Math.ceil((maxID - minID + 1) / SLICE_COUNT))
+        slices = Array.from({ length: SLICE_COUNT }, (_, i) => {
+          const ids = []
+          const first = minID + i * sliceSize
+          const last = Math.min(first + sliceSize - 1, maxID)
+          for (let id = first; id <= last; id++) ids.push(id)
+          return ids
+        }).filter((s) => s.length)
+        return fetch(CONFIG_URL).then((r) => r.json()).then((config) => {
+          const minZ = Number(config.heightRange.min)
+          const maxZ = Number(config.heightRange.max)
+          if (Number.isFinite(minZ) && Number.isFinite(maxZ)) spanZ = Math.abs(maxZ - minZ)
+          log('分层成功：' + slices.reduce((n, s) => n + s.length, 0) + ' 构件，' + slices.length + ' 层，模型高度约 ' + Math.round(spanZ) + ' 米')
+        })
+      })
+      .then(() => {
+        slider.disabled = slices.length === 0
+        // 图层状态诊断
+        setInterval(() => {
+          const lr = layer || {}
+          logEl.textContent = 'ready=' + lr.ready + ' visible=' + lr.visible + ' show=' + lr.show + ' tilesLoaded=' + lr.tilesLoaded + ' _tilesWaiting=' + (lr._tilesWaiting || 0) + ' _tilesLoading=' + (lr._tilesLoading || 0) + ' _baseUri=' + lr._baseUri + '\n' + logEl.textContent
+        }, 8000)
+        try { viewer.zoomTo(layer) } catch (e) { console.error('zoomTo failed', e) }
+        // 强制渲染循环（2025 SDK 瓦片调度可能依赖帧更新）
+        let frames = 0
+        const renderTimer = setInterval(() => {
+          frames++
+          try { viewer.scene.requestRender() } catch (e) {}
+          if (frames % 5 === 0) logEl.textContent = 'frames=' + frames + ' s3mb=' + s3mbCount + '\n' + logEl.textContent
+        }, 500)
+        // 手动定位到模型中心（不依赖 zoomTo）
+        fetch(CONFIG_URL).then((r) => r.json()).then((config) => {
+          const b = config.geoBounds || {}
+          const h = config.heightRange || {}
+          const cx = (Number(b.left) + Number(b.right)) / 2
+          const cy = (Number(b.bottom) + Number(b.top)) / 2
+          const cz = (Number(h.max) + Number(h.min)) / 2
+          const halfX = Math.abs(Number(b.right) - Number(b.left)) / 2
+          const halfY = Math.abs(Number(b.top) - Number(b.bottom)) / 2
+          const dist = Math.max(halfX, halfY) * 2.2
+          try {
+            viewer.camera.setView({
+              destination: new S3D.Cartesian3(cx, cy, cz + dist),
+              orientation: { heading: 0, pitch: -Math.PI / 2, roll: 0 },
+            })
+          } catch (e) { console.error('setView failed', e) }
+        })
+      })
+      .catch((err) => {
+        log('初始化失败：' + (err && err.message ? err.message : String(err)))
+        console.error(err)
+      })
+
+    let axis = 'z'
+    function applyExplode(percent) {
+      if (!layer || !slices.length) return
+      if (percent <= 0) { layer.removeAllObjsTranslate(); return }
+      const unit = Math.max(spanZ, 1) / slices.length
+      const fraction = percent / 100
+      for (let i = 0; i < slices.length; i++) {
+        const distance = i * unit * fraction
+        const offset = new S3D.Cartesian3(
+          axis === 'x' ? distance : 0,
+          axis === 'y' ? distance : 0,
+          axis === 'z' ? distance : 0,
+        )
+        layer.setObjsTranslate(slices[i], offset)
+      }
+    }
+    slider.addEventListener('input', () => applyExplode(+slider.value))
+    document.querySelectorAll('#axis button[data-axis]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        axis = btn.dataset.axis
+        document.querySelectorAll('#axis button').forEach((b) => b.classList.remove('active'))
+        btn.classList.add('active')
+        applyExplode(+slider.value)
+      })
+    })
+    document.getElementById('reset').addEventListener('click', () => {
+      slider.value = 0
+      applyExplode(0)
+    })
+  </script>
+</body>
+</html>

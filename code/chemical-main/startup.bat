@@ -38,7 +38,7 @@ if not defined MYSQL_APP_PASSWORD set "MYSQL_APP_PASSWORD=%DB_PASSWORD%"
 if /I not "%ALGORITHM_REQUIRE_AUTH%"=="true" echo [WARN] Algorithm API auth is disabled for this 127.0.0.1 session only.
 if not defined ANALYSIS_SERVICE_URL set "ANALYSIS_SERVICE_URL=http://127.0.0.1:%YOLO_PORT%/api/analysis/person"
 if not defined CORS_ALLOWED_ORIGINS set "CORS_ALLOWED_ORIGINS=http://localhost:%FRONTEND_PORT%,http://127.0.0.1:%FRONTEND_PORT%"
-if not defined SUPERMAP_DASHBOARD_URL set "SUPERMAP_DASHBOARD_URL=http://8.130.175.232:18190/iportal/apps/mapdashboard/v2/index.html?id=1782865708&action=view&mode=pc"
+if not defined SUPERMAP_DASHBOARD_URL set "SUPERMAP_DASHBOARD_URL=http://127.0.0.1:8190/iportal/"
 
 call :resolve_tools
 
@@ -491,7 +491,7 @@ if not errorlevel 1 (
   echo from http.server import BaseHTTPRequestHandler, HTTPServer
   echo port = int(sys.argv[1]^)
   echo frontend = int(sys.argv[2]^)
-  echo target = f'http://127.0.0.1:{frontend}/index.html#/smart-map'
+  echo target = f'http://127.0.0.1:{frontend}/index.html#/screen'
   echo class Handler(BaseHTTPRequestHandler^):
   echo     def do_GET(self^):
   echo         self.send_response(302^)

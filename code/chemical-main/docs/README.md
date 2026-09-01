@@ -10,6 +10,7 @@
 - `supermap-cup-division-plan.md`：超图杯参赛作品中 SuperMap 能力与自研算法的分工边界。
 - `supermap-cgcs2000-georeference-plan.md`：河南工业大学莲花街校区 CGCS2000 控制点、坐标转换和发布契约。
 - `supermap-algorithm-2d-compute-3d-visualization-plan.md`：二维 GIS/算法计算、三维事件触发和可视化组件计划。
+- `supermap-iclient-screen-monitoring-sensor-model.md`：iClient3D 原生大屏、SensorThings 监控点位模型和 `Park_MonitoringSensor_P` 字段建议。
 - `algorithm-implementation-verification-supermap-principle.md`：扩散、反演、粒子滤波、疏散、YOLO 的代码入口、验证结果、可信边界和 SuperMap 优先原则说明。
 - `supermap-current-state-for-deepseek.md`：给新 AI 对话快速了解项目的 SuperMap 现状、诚实边界和优化建议。
 - `api-reference.md`：统一 JSON 响应协议和接口说明。

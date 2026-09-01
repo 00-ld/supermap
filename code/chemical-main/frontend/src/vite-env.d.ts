@@ -2,25 +2,34 @@
 
 declare module '*.vue' {
   import type { DefineComponent } from 'vue'
-  const component: DefineComponent<Record<string, never>, Record<string, never>, unknown>
+  const component: DefineComponent<
+    Record<string, never>,
+    Record<string, never>,
+    unknown
+  >
   export default component
 }
 
 // 环境变量类型声明。
 interface ImportMetaEnv {
+  readonly VITE_FEATURE_SCENE_REGISTRY_4490?: string
+  readonly VITE_FEATURE_SENSOR_SSE?: string
+  readonly VITE_FEATURE_DIFFUSION_3D?: string
+  readonly VITE_FEATURE_INVERSION_KDE_3D?: string
+  readonly VITE_FEATURE_ISERVER_2D_TILES?: string
+  readonly VITE_FEATURE_LOCAL_2D_MAP?: string
   readonly VITE_APP_BASE_API: string
   readonly VITE_ALGORITHM_BASE_API: string
   readonly VITE_ALGORITHM_API_KEY: string
   readonly VITE_IPORTAL_DASHBOARD_URL: string
   readonly VITE_SUPERMAP3D_BASE_URL: string
-  readonly VITE_SUPERMAP3D_REMOTE_PROXY_BASE: string
-  readonly VITE_SUPERMAP3D_REMOTE_PROXY_TARGET: string
   readonly VITE_SUPERMAP_ISERVER_PROXY_BASE: string
   readonly VITE_SUPERMAP_ISERVER_PROXY_TARGET: string
   readonly VITE_SUPERMAP3D_SCRIPT_URL: string
   readonly VITE_SUPERMAP3D_STYLE_URL: string
   readonly VITE_SUPERMAP_3D_SCENE_URL: string
   readonly VITE_SUPERMAP_3D_SCENE_NAME: string
+  readonly VITE_SUPERMAP_3D_PREFER_SCENE: string
   readonly VITE_SUPERMAP_3D_LAYER_CONFIGS: string
   readonly VITE_SUPERMAP_3D_LAYER_POSITION: string
   readonly VITE_SUPERMAP_3D_APPLY_LAYER_POSITION: string

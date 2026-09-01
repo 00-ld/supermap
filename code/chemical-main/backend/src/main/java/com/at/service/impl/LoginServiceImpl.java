@@ -30,6 +30,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public String login(User user) {
+        validatePasswordLength(user.getPassword());
         User loginUser = userMapper.selectByUsername(user.getUsername());
         String encodedPassword = loginUser == null
                 ? passwordEncoder.encode(DUMMY_PASSWORD)
@@ -39,6 +40,7 @@ public class LoginServiceImpl implements LoginService {
             log.warn("Login failed for username={}", user.getUsername());
             return null;
         }
+        upgradeLegacyPasswordIfNeeded(user, loginUser, encodedPassword);
         Map<String, Object> claims = new HashMap<>();
         claims.put("username", loginUser.getUsername());
         claims.put("id", loginUser.getId());
@@ -71,6 +73,19 @@ public class LoginServiceImpl implements LoginService {
         if (rawPassword != null
                 && rawPassword.getBytes(StandardCharsets.UTF_8).length > MAX_PASSWORD_BYTES) {
             throw new IllegalArgumentException("Password is too long");
+        }
+    }
+
+    private void upgradeLegacyPasswordIfNeeded(User requestUser, User loginUser, String encodedPassword) {
+        if (encodedPassword == null || encodedPassword.startsWith("{")) {
+            return;
+        }
+        loginUser.setPassword(passwordEncoder.encode(requestUser.getPassword()));
+        int rows = userMapper.updateById(loginUser);
+        if (rows > 0) {
+            log.info("Upgraded legacy password encoding for username={}", loginUser.getUsername());
+        } else {
+            log.warn("Legacy password encoding upgrade affected no rows for username={}", loginUser.getUsername());
         }
     }
 }

@@ -1,0 +1,218 @@
+.chempark-container {
+  --bg: #0a0f1a;
+  --fg: #e8ecf4;
+  --fg-muted: #8b98ab;
+  --accent: #9aa8b8;
+  --warning: #c2a46d;
+  --border: rgba(139, 152, 171, 0.22);
+
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Noto Sans SC', sans-serif;
+}
+
+.main-layout {
+  display: flex;
+  height: 100%;
+}
+
+.map-container {
+  position: relative;
+  flex: 1;
+  align-self: stretch;
+  min-height: 0;
+  overflow: hidden;
+  background: #070921;
+}
+
+#mapCanvas {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+
+#mapCanvas.grabbing {
+  cursor: grabbing;
+}
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(154, 168, 184, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(154, 168, 184, 0.025) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.embedded-sensor-panel {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 90;
+  width: min(330px, calc(100% - 24px));
+  max-height: calc(100% - 24px);
+  overflow-y: auto;
+  border: 1px solid rgba(113, 182, 207, 0.42);
+  border-radius: 8px;
+  background: rgba(10, 20, 30, 0.96);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.38);
+}
+
+.embedded-sensor-panel > header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 40px;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--border);
+  background: #111d29;
+}
+
+.embedded-sensor-panel > header button {
+  min-height: 28px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: #172738;
+  color: var(--fg);
+  cursor: pointer;
+}
+
+.control-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.control-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.control-field span {
+  color: var(--fg-muted);
+  font-size: 11px;
+}
+
+.control-field input,
+.control-field select {
+  width: 100%;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+  background: #1e293b;
+  color: var(--fg);
+}
+
+.control-field input:focus,
+.control-field select:focus {
+  border-color: var(--accent);
+}
+
+.control-note,
+.control-subnote {
+  color: var(--fg-muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.control-note {
+  padding: 10px 12px;
+  border: 1px solid rgba(154, 168, 184, 0.16);
+  border-radius: 8px;
+  background: rgba(154, 168, 184, 0.08);
+}
+
+.control-note.invalid {
+  border-color: rgba(194, 164, 109, 0.22);
+  background: rgba(194, 164, 109, 0.09);
+  color: #d4bd8a;
+}
+
+.candidate-detail-card {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #111827;
+}
+
+.candidate-detail-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--fg);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.inline-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.sensor-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  min-height: 32px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.sensor-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.sensor-btn.primary {
+  border: 1px solid rgba(154, 168, 184, 0.18);
+  background: #1b2533;
+  color: #d1dae5;
+}
+
+.sensor-btn.primary.active {
+  outline: 1px solid rgba(154, 168, 184, 0.3);
+  background: #243144;
+  color: #eef3f8;
+}
+
+.sensor-btn.danger {
+  border: 1px solid rgba(199, 130, 130, 0.18);
+  background: rgba(199, 130, 130, 0.12);
+  color: #d6a0a0;
+}
+
+@media (max-width: 520px) {
+  .control-grid,
+  .inline-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chempark-container *,
+  .chempark-container *::before,
+  .chempark-container *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

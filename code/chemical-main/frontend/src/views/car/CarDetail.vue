@@ -2,15 +2,19 @@
   <div class="car-detail">
     <!-- 顶部导航栏 -->
     <div class="top-nav">
-      <button @click="$router.back()" class="back-btn">
-        ← 返回
-      </button>
+      <button @click="$router.back()" class="back-btn">← 返回</button>
       <div class="title-block">
         <h2 class="page-title">小车 {{ route.params.id }} 详情</h2>
         <div class="title-meta">
           <span>{{ config.type }}</span>
           <span>{{ latestGasDisplay }}</span>
-          <span :class="globalStatus === 'normal' ? 'meta-pill normal' : 'meta-pill warning'">
+          <span
+            :class="
+              globalStatus === 'normal'
+                ? 'meta-pill normal'
+                : 'meta-pill warning'
+            "
+          >
             {{ globalStatus === 'normal' ? '运行正常' : '异常标记' }}
           </span>
         </div>
@@ -25,6 +29,7 @@
           <div class="video-wrapper">
             <video
               v-if="!isPlaceholderVideo"
+              :key="videoUrl"
               :src="videoUrl"
               class="detail-video"
               muted
@@ -33,23 +38,25 @@
               playsinline
               controls
               preload="metadata"
+              @loadeddata="handleVideoLoaded"
+              @error="handleVideoError"
             ></video>
             <div v-else class="video-empty-state">
               <div class="camera-mark">
                 <span class="camera-body"></span>
                 <span class="camera-lens"></span>
               </div>
-              <strong>未上传监控影像</strong>
-              <span>当前仓库未接入小车实时视频流，可上传巡检图片进行识别</span>
+              <strong>监控影像加载失败</strong>
+              <span>请检查小车视频资源是否完整</span>
             </div>
             <div class="video-corners"></div>
             <div class="video-status">
               <span>CAM-{{ route.params.id }}</span>
-              <strong>{{ globalStatus === 'normal' ? 'ONLINE' : 'ALERT' }}</strong>
+              <strong>{{ videoStatus }}</strong>
             </div>
           </div>
         </div>
-        
+
         <!-- 小车基本信息卡片 -->
         <div class="info-card">
           <h3 class="section-title">小车基本信息</h3>
@@ -64,17 +71,30 @@
             </div>
             <div class="info-item">
               <span class="info-label">安全阈值</span>
-              <span class="info-value">{{ config.gasId === 'o2' ? `${config.min}-${config.max} ${config.unit}` : `≤${config.warning} ${config.unit}` }}</span>
+              <span class="info-value">
+                {{
+                  config.gasId === 'o2'
+                    ? `${config.min}-${config.max} ${config.unit}`
+                    : `≤${config.warning} ${config.unit}`
+                }}
+              </span>
             </div>
             <div class="info-item">
               <span class="info-label">当前状态</span>
-              <span class="status-badge" :class="globalStatus === 'normal' ? 'status-normal' : 'status-warning'">
+              <span
+                class="status-badge"
+                :class="
+                  globalStatus === 'normal' ? 'status-normal' : 'status-warning'
+                "
+              >
                 {{ globalStatus === 'normal' ? '正常' : '异常' }}
               </span>
             </div>
             <div class="info-item">
               <span class="info-label">最近检测</span>
-              <span class="info-value">{{ detailList[detailList.length - 1]?.time || '无数据' }}</span>
+              <span class="info-value">
+                {{ detailList[detailList.length - 1]?.time || '无数据' }}
+              </span>
             </div>
             <div class="info-item">
               <span class="info-label">最近浓度</span>
@@ -91,29 +111,43 @@
           <div class="table-wrapper">
             <table>
               <thead>
-              <tr>
-                <th>检测时间</th>
-                <th>{{ gasTypeLabel }}</th>
-                <th>位置(X/Y)</th>
-                <th>状态</th>
-              </tr>
+                <tr>
+                  <th>检测时间</th>
+                  <th>{{ gasTypeLabel }}</th>
+                  <th>位置(X/Y)</th>
+                  <th>状态</th>
+                </tr>
               </thead>
               <tbody>
-              <tr v-if="detailList.length === 0" class="empty-row">
-                <td colspan="4">暂无后端监测读数</td>
-              </tr>
-              <tr
-                v-for="item in detailList"
-                :key="item.time"
-                :class="item.status === '一级预警' || globalStatus === 'warning' ? 'warning-row' : ''"
-              >
-                <td>{{ item.time }}</td>
-                <td>{{ formatGasValue(item.gas) }}</td>
-                <td>{{ formatCoordinatePair(item) }}</td>
-                <td :class="(item.status === '正常' && globalStatus === 'normal') ? 'status-normal' : 'status-warning'">
-                  {{ globalStatus === 'warning' ? '一级预警（手动标记）' : item.status }}
-                </td>
-              </tr>
+                <tr v-if="detailList.length === 0" class="empty-row">
+                  <td colspan="4">暂无后端监测读数</td>
+                </tr>
+                <tr
+                  v-for="item in detailList"
+                  :key="item.time"
+                  :class="
+                    item.status === '一级预警' || globalStatus === 'warning'
+                      ? 'warning-row'
+                      : ''
+                  "
+                >
+                  <td>{{ item.time }}</td>
+                  <td>{{ formatGasValue(item.gas) }}</td>
+                  <td>{{ formatCoordinatePair(item) }}</td>
+                  <td
+                    :class="
+                      item.status === '正常' && globalStatus === 'normal'
+                        ? 'status-normal'
+                        : 'status-warning'
+                    "
+                  >
+                    {{
+                      globalStatus === 'warning'
+                        ? '一级预警（手动标记）'
+                        : item.status
+                    }}
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -125,22 +159,46 @@
           <div class="chart-wrapper">
             <div class="chart-placeholder">
               <div class="chart-title">{{ gasTypeLabel }}变化趋势</div>
-              <div v-if="detailList.length === 0" class="chart-empty">暂无后端采样</div>
+              <div v-if="detailList.length === 0" class="chart-empty">
+                暂无后端采样
+              </div>
               <div v-else class="chart-bars">
-                <div v-for="(item, index) in detailList" :key="index" class="chart-bar-container">
-                  <div class="chart-bar" :style="{ height: getChartBarHeight(item) }"></div>
+                <div
+                  v-for="(item, index) in detailList"
+                  :key="index"
+                  class="chart-bar-container"
+                >
+                  <div
+                    class="chart-bar"
+                    :style="{ height: getChartBarHeight(item) }"
+                  ></div>
                   <div class="chart-label">{{ item.time.split(' ')[1] }}</div>
                   <div class="chart-value">{{ formatGasValue(item.gas) }}</div>
                 </div>
               </div>
               <div class="chart-threshold" v-if="config.gasId !== 'o2'">
-                <div class="threshold-line" :style="{ bottom: `${(config.warning / (config.warning * 1.5)) * 100}%` }"></div>
-                <div class="threshold-label">安全阈值: {{ config.warning }} {{ gasUnit }}</div>
+                <div
+                  class="threshold-line"
+                  :style="{
+                    bottom: `${(config.warning / (config.warning * 1.5)) * 100}%`,
+                  }"
+                ></div>
+                <div class="threshold-label">
+                  安全阈值: {{ config.warning }} {{ gasUnit }}
+                </div>
               </div>
               <div class="chart-threshold" v-else>
-                <div class="threshold-line min" :style="{ bottom: `${(config.min / 25) * 100}%` }"></div>
-                <div class="threshold-line max" :style="{ bottom: `${(config.max / 25) * 100}%` }"></div>
-                <div class="threshold-label">安全范围: {{ config.min }}-{{ config.max }} {{ gasUnit }}</div>
+                <div
+                  class="threshold-line min"
+                  :style="{ bottom: `${(config.min / 25) * 100}%` }"
+                ></div>
+                <div
+                  class="threshold-line max"
+                  :style="{ bottom: `${(config.max / 25) * 100}%` }"
+                ></div>
+                <div class="threshold-label">
+                  安全范围: {{ config.min }}-{{ config.max }} {{ gasUnit }}
+                </div>
               </div>
             </div>
           </div>
@@ -153,14 +211,13 @@
             <h4>异常警报处理</h4>
           </div>
           <p class="alert-desc">
-            {{ globalStatus === 'warning'
-            ? '该小车已被手动标记为异常！'
-            : `检测到 ${gasTypeLabel} 超出安全阈值，请立即处理！`
+            {{
+              globalStatus === 'warning'
+                ? '该小车已被手动标记为异常！'
+                : `检测到 ${gasTypeLabel} 超出安全阈值，请立即处理！`
             }}
           </p>
-          <button @click="handleWarning" class="alert-btn">
-            确认已处理
-          </button>
+          <button @click="handleWarning" class="alert-btn">确认已处理</button>
         </div>
       </div>
     </div>
@@ -175,14 +232,22 @@ import { useCarStore } from '@/store/carStore'
 import { ElMessage } from 'element-plus'
 import { getCarGasSpec, type CarGasId } from '@/data/gasCatalog'
 import { reqMonitoringOverview } from '@/api/monitoringData'
-import { reqAddWarningHistory } from '@/api/warningHistory'
-import type { ConcentrationTrendPoint } from '@/api/monitoringData'
+import {
+  reqAddWarningHistory,
+  reqWarningHistoryList,
+} from '@/api/warningHistory'
+import {
+  isActionablePatrolCarReading,
+  PATROL_CAR_VIDEO_SOURCES,
+  resolvePatrolCarReadings,
+} from '@/data/patrolCarMonitoring'
 
 interface DetailItem {
   time: string
   gas: number | null
   x: number | null
   y: number | null
+  isActionable: boolean
   status?: string
 }
 
@@ -206,46 +271,46 @@ const route = useRoute()
 const router = useRouter()
 const carStore = useCarStore()
 const videoUrl = ref('')
+const hasVideoError = ref(false)
+const hasVideoLoaded = ref(false)
 const detailList = ref<DetailItem[]>([])
+let detailRequestSequence = 0
 
 // 气体配置统一引用 data/gasCatalog 单一数据源，避免与 CarHome / carStore 阈值漂移。
 const toDetailGasConfig = (config: GasConfig): DetailGasConfig => ({
   warning: 0,
   min: 0,
   max: 0,
-  ...config
+  ...config,
 })
 
 const gasConfig: Record<number, DetailGasConfig> = {
   1: toDetailGasConfig(getCarGasSpec(1)),
   2: toDetailGasConfig(getCarGasSpec(2)),
   3: toDetailGasConfig(getCarGasSpec(3)),
-  4: toDetailGasConfig(getCarGasSpec(4))
+  4: toDetailGasConfig(getCarGasSpec(4)),
 }
 
 function getStatus(gasValue: number | null, config: GasConfig): string {
   if (gasValue == null) return '暂无读数'
   if (config.gasId === 'o2') {
-    return (config.min !== undefined && config.max !== undefined && (gasValue < config.min || gasValue > config.max)) ? '一级预警' : '正常'
+    return config.min !== undefined &&
+      config.max !== undefined &&
+      (gasValue < config.min || gasValue > config.max)
+      ? '一级预警'
+      : '正常'
   } else {
-    return (config.warning !== undefined && gasValue >= config.warning) ? '一级预警' : '正常'
+    return config.warning !== undefined && gasValue >= config.warning
+      ? '一级预警'
+      : '正常'
   }
-}
-
-// 视频引用为真实本地资源，按 carId 单独保留映射。
-// 大体积巡检视频已从版本库移除；详情页使用已跟踪占位图，避免 CI/新克隆依赖本地未跟踪 mp4。
-const carVideoMap: Record<number, string> = {
-  1: '/video/小车1视频.mp4',
-  2: '/video/小车2视频.mp4',
-  3: '/video/小车3视频.mp4',
-  4: '/video/小车4视频.mp4'
 }
 
 // 巡检明细 X 轴时间格式化（年-月-日 时:分），与 CarHome 一致口径。
 function formatWarningTime(timeStr: string): string {
   if (!timeStr) return '-'
   const d = new Date(timeStr)
-  return `${d.getFullYear()}-${(d.getMonth()+1).toString().padStart(2,'0')}-${d.getDate().toString().padStart(2,'0')} ${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}`
+  return `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getDate().toString().padStart(2, '0')} ${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}`
 }
 
 const carId = computed(() => String(route.params.id ?? ''))
@@ -255,8 +320,26 @@ const gasUnit = computed(() => config.value?.unit || 'ppm')
 
 const globalStatus = computed(() => carStore.getCarStatus(Number(carId.value)))
 
-const latestGasDisplay = computed(() => formatGasValue(detailList.value.at(-1)?.gas ?? null))
-const isPlaceholderVideo = computed(() => !videoUrl.value || videoUrl.value.includes('novideo'))
+const latestGasDisplay = computed(() =>
+  formatGasValue(detailList.value.at(-1)?.gas ?? null),
+)
+const isPlaceholderVideo = computed(
+  () => !videoUrl.value || hasVideoError.value,
+)
+const videoStatus = computed(() => {
+  if (!videoUrl.value) return 'OFFLINE'
+  if (hasVideoError.value) return 'ERROR'
+  return hasVideoLoaded.value ? 'ONLINE' : 'LOADING'
+})
+
+function handleVideoLoaded() {
+  hasVideoLoaded.value = true
+}
+
+function handleVideoError() {
+  hasVideoLoaded.value = false
+  hasVideoError.value = true
+}
 
 function formatGasValue(gasValue: number | null | undefined): string {
   return gasValue == null ? '暂无读数' : `${gasValue} ${gasUnit.value}`
@@ -268,48 +351,83 @@ function formatCoordinatePair(item: DetailItem): string {
 
 function getChartBarHeight(item: DetailItem): string {
   if (item.gas == null) return '0%'
-  const denominator = config.value.gasId === 'o2'
-    ? 25
-    : Math.max(config.value.warning * 1.5, item.gas, 1)
+  const denominator =
+    config.value.gasId === 'o2'
+      ? 25
+      : Math.max(config.value.warning * 1.5, item.gas, 1)
   return `${Math.min(100, Math.max(2, (item.gas / denominator) * 100))}%`
 }
 
-const hasWarning = computed(() =>
-  detailList.value.some(item => item.status === '一级预警') || globalStatus.value === 'warning'
+const hasWarning = computed(
+  () =>
+    detailList.value.some((item) => item.status === '一级预警') ||
+    globalStatus.value === 'warning',
 )
 
-// 加载小车详情：视频用本地真实资源，巡检明细来自后端 sensor_reading 仿真采样。
-// 没有采样读数时保持空态，warning_history 只表示告警事件。
+// 加载小车详情：优先使用连续采样，没有采样时显示数据库记录的预警事件观测。
 async function getCarDetail() {
   const id = Number(carId.value)
+  const requestSequence = ++detailRequestSequence
+  const detailConfig = gasConfig[id]
+  detailList.value = []
   // 合法性基于 gasConfig（carId∈[1..4]）判断，而非依赖此前的写死假数据是否存在。
-  if (!id || !gasConfig[id]) {
+  if (!id || !detailConfig) {
     ElMessage.warning('小车数据不存在')
     router.push('/car/home')
     return
   }
-  videoUrl.value = carVideoMap[id] || ''
+  const nextVideoUrl = PATROL_CAR_VIDEO_SOURCES[id] || ''
+  if (videoUrl.value !== nextVideoUrl) {
+    videoUrl.value = nextVideoUrl
+    hasVideoError.value = false
+    hasVideoLoaded.value = false
+  }
+
+  const [overviewResult, historyResult] = await Promise.allSettled([
+    reqMonitoringOverview(),
+    reqWarningHistoryList(),
+  ])
+  const sampledReadings =
+    overviewResult.status === 'fulfilled' &&
+    overviewResult.value.code === 200 &&
+    Array.isArray(overviewResult.value.data?.concentrationTrend)
+      ? overviewResult.value.data.concentrationTrend
+      : []
+  const warningRecords =
+    historyResult.status === 'fulfilled' &&
+    historyResult.value.code === 200 &&
+    Array.isArray(historyResult.value.data)
+      ? historyResult.value.data
+      : []
+
+  if (overviewResult.status === 'rejected') {
+    console.error('获取小车连续采样失败：', overviewResult.reason)
+  }
+  if (historyResult.status === 'rejected') {
+    console.error('获取小车预警观测失败：', historyResult.reason)
+  }
+
+  if (requestSequence !== detailRequestSequence || id !== Number(carId.value)) {
+    return
+  }
 
   try {
-    const res = await reqMonitoringOverview()
-    if (res.code === 200 && Array.isArray(res.data?.concentrationTrend)) {
-      detailList.value = res.data.concentrationTrend
-        .filter(item => Number(item.carId) === id)
-        .sort((a, b) => new Date(a.time).getTime() - new Date(b.time).getTime())
-        .map((item: ConcentrationTrendPoint) => {
-          const parsedGas = Number(item.gasValue)
-          const gas = Number.isFinite(parsedGas) ? parsedGas : null
-          return {
-            time: formatWarningTime(item.time),
-            gas,
-            x: null,
-            y: null,
-            status: getStatus(gas, config.value)
-          }
-        })
-    } else {
-      detailList.value = []
-    }
+    detailList.value = resolvePatrolCarReadings(sampledReadings, warningRecords)
+      .filter((item) => Number(item.carId) === id)
+      .sort((a, b) => new Date(a.time).getTime() - new Date(b.time).getTime())
+      .map((item) => {
+        const parsedGas = Number(item.gasValue)
+        const gas = Number.isFinite(parsedGas) ? parsedGas : null
+        const isActionable = isActionablePatrolCarReading(item)
+        return {
+          time: formatWarningTime(item.time),
+          gas,
+          x: item.x ?? null,
+          y: item.y ?? null,
+          isActionable,
+          status: isActionable ? getStatus(gas, detailConfig) : '历史预警事件',
+        }
+      })
   } catch (error) {
     console.error('获取小车巡检明细失败：', error)
     detailList.value = []
@@ -319,22 +437,29 @@ async function getCarDetail() {
 // 预警处理函数（走统一 request 实例）
 const handleWarning = async () => {
   try {
-    // 取最新一条历史读数作为当前浓度；无历史记录则兜底 0。
-    const latestGas = detailList.value.at(-1)?.gas ?? null
+    // 历史事件仅用于展示，不能再次作为当前处理浓度写入。
+    const latestGas = detailList.value.findLast(
+      (item) => item.isActionable && item.gas != null,
+    )?.gas
     if (latestGas == null) {
-      ElMessage.warning('暂无后端监测读数，不能写入 0 作为处理浓度')
+      if (globalStatus.value === 'warning') {
+        await carStore.resetCarStatus(Number(carId.value))
+        ElMessage.success('已确认处理；无当前监测读数，未新增历史记录')
+      } else {
+        ElMessage.warning('暂无当前监测读数，不能新增处理记录')
+      }
       return
     }
     // 1. 保存预警历史到数据库
     await reqAddWarningHistory({
       carId: Number(carId.value),
       gasType: config.value.type,
-      gasValue: latestGas
+      gasValue: latestGas,
     })
 
     // 2. 重置小车状态（原有逻辑）
     if (globalStatus.value === 'warning') {
-      carStore.resetCarStatus(Number(carId.value))
+      await carStore.resetCarStatus(Number(carId.value))
     }
     ElMessage.success('已确认处理，系统已记录！')
     // 3. 处理后刷新明细，反映最新记录。
@@ -353,12 +478,11 @@ watch(
       getCarDetail()
     }
   },
-  { immediate: true }
+  { immediate: true },
 )
 
 onMounted(async () => {
   await carStore.fetchCarDataFromDB()
-  getCarDetail()
 })
 </script>
 
@@ -373,7 +497,9 @@ onMounted(async () => {
 .car-detail {
   min-height: 100vh;
   background-color: transparent;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    sans-serif;
   color: #e0e6ed;
   position: relative;
 }
@@ -448,7 +574,10 @@ onMounted(async () => {
   flex-direction: column;
   gap: 20px;
 }
-.video-card, .info-card, .data-card, .chart-card {
+.video-card,
+.info-card,
+.data-card,
+.chart-card {
   background: rgba(10, 25, 50, 0.6);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -498,7 +627,7 @@ onMounted(async () => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 .video-empty-state {
@@ -512,7 +641,11 @@ onMounted(async () => {
   padding: 24px;
   text-align: center;
   background:
-    radial-gradient(circle at 50% 38%, rgba(64, 224, 208, 0.18), transparent 26%),
+    radial-gradient(
+      circle at 50% 38%,
+      rgba(64, 224, 208, 0.18),
+      transparent 26%
+    ),
     linear-gradient(145deg, rgba(7, 19, 34, 0.96), rgba(2, 10, 18, 0.98));
 }
 
@@ -603,7 +736,8 @@ thead tr {
   color: #40e0d0;
   border-bottom: 1px solid rgba(64, 224, 208, 0.3);
 }
-th, td {
+th,
+td {
   padding: 12px 16px;
   text-align: center;
   font-size: 14px;
@@ -681,7 +815,11 @@ tbody tr:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.3));
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.3)
+  );
 }
 .chart-label {
   font-size: 12px;
@@ -788,8 +926,16 @@ tbody tr:hover {
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(circle at 12% 8%, rgba(64, 224, 208, 0.14), transparent 30%),
-    radial-gradient(circle at 90% 0%, rgba(230, 162, 60, 0.15), transparent 28%),
+    radial-gradient(
+      circle at 12% 8%,
+      rgba(64, 224, 208, 0.14),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 0%,
+      rgba(230, 162, 60, 0.15),
+      transparent 28%
+    ),
     linear-gradient(135deg, rgba(3, 12, 24, 0.82), rgba(7, 28, 38, 0.76));
 }
 
@@ -912,8 +1058,19 @@ tbody tr:hover {
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 20%, rgba(0, 0, 0, 0.16)),
-    linear-gradient(90deg, rgba(64, 224, 208, 0.08), transparent 18%, transparent 82%, rgba(230, 162, 60, 0.08));
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.06),
+      transparent 20%,
+      rgba(0, 0, 0, 0.16)
+    ),
+    linear-gradient(
+      90deg,
+      rgba(64, 224, 208, 0.08),
+      transparent 18%,
+      transparent 82%,
+      rgba(230, 162, 60, 0.08)
+    );
 }
 
 .video-corners::before,

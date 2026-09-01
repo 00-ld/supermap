@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PasswordEncoderConfigTest {
 
@@ -19,10 +18,16 @@ class PasswordEncoderConfigTest {
     }
 
     @Test
-    void rejectsBcryptCompatibilityHashes() {
-        assertThatThrownBy(() -> passwordEncoder.matches(
+    void acceptsLegacyUnprefixedPasswordsForDemoDatabaseMigration() {
+        assertThat(passwordEncoder.matches("legacy-password", "legacy-password")).isTrue();
+        assertThat(passwordEncoder.matches("wrong-password", "legacy-password")).isFalse();
+    }
+
+    @Test
+    void rejectsUnconfiguredPrefixedHashesWithoutThrowing() {
+        assertThat(passwordEncoder.matches(
                 "legacy-password",
                 "{bcrypt}$2a$12$qHgmjMYUP3/MSPD91P8fqeQVrQfHfCcpC36wpiaP4tXrFMPcrIC82"
-        )).isInstanceOf(IllegalArgumentException.class);
+        )).isFalse();
     }
 }

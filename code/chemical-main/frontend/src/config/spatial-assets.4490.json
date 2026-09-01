@@ -1,0 +1,383 @@
+{
+  "crs": "EPSG:4490",
+  "sceneBounds": {
+    "west": 113.52251344784995,
+    "south": 34.809569875817076,
+    "east": 113.5490252942224,
+    "north": 34.82777430787187
+  },
+  "modelInsertionPoint4490": {
+    "longitude": 113.53576937103617,
+    "latitude": 34.818672091844476,
+    "heightMeters": 0
+  },
+  "analysisFrameLocalMeters": {
+    "modelInsertionPoint4547": {
+      "easting": 457527.796936,
+      "northing": 3854574.825733,
+      "epsg": 4547
+    },
+    "anchorModelEnuMeters": { "east": 102.2, "north": 46.2, "up": 0 },
+    "anchorPoint": { "x": 622, "y": 454 },
+    "metersPerUnit": 1,
+    "xAxis": "east",
+    "yAxis": "south"
+  },
+  "scenes": [
+    {
+      "id": "park-main",
+      "name": "化工园区主场景",
+      "configUrl": "/iserver/services/3D-huagong-finally-4490/rest/realspace/datas/modelComposeResult@huagong-finally-fbx-4490/config",
+      "layerName": "modelComposeResult@huagong-finally-fbx-4490",
+      "published": true,
+      "sourceCrs": "EPSG:4490",
+      "target": {
+        "longitude": 113.53576937103617,
+        "latitude": 34.818672091844476,
+        "heightMeters": 24
+      },
+      "camera": {
+        "headingDegrees": 20,
+        "pitchDegrees": -28,
+        "distanceMeters": 900,
+        "fieldOfViewDegrees": 42
+      }
+    },
+    {
+      "id": "processing-plant",
+      "name": "加工厂房",
+      "configUrl": "/iserver/services/3D-local3DCache-result_ImportFBX/rest/realspace/datas/result_ImportFBX/config",
+      "localConfigUrl": "/local-mini-scene/processing-plant/result_ImportFBX.scp",
+      "layerName": "result_ImportFBX",
+      "published": true,
+      "sourceCrs": "PCS_NON_EARTH_LOCAL_METER",
+      "camera": {
+        "headingDegrees": 25,
+        "pitchDegrees": -24,
+        "distanceMeters": 180,
+        "fieldOfViewDegrees": 38
+      }
+    },
+    {
+      "id": "production-plant",
+      "name": "生产厂房",
+      "configUrl": "/iserver/services/3D-local3DCache-result_ImportFBX2/rest/realspace/datas/result_ImportFBX/config",
+      "localConfigUrl": "/local-mini-scene/production-plant/result_ImportFBX.scp",
+      "layerName": "result_ImportFBX",
+      "published": true,
+      "sourceCrs": "PCS_NON_EARTH_LOCAL_METER",
+      "camera": {
+        "headingDegrees": 25,
+        "pitchDegrees": -24,
+        "distanceMeters": 180,
+        "fieldOfViewDegrees": 38
+      }
+    },
+    {
+      "id": "raw-material-warehouse",
+      "name": "原材料仓库",
+      "configUrl": "/iserver/services/3D-local3DCache-YuanCaiLiaoCangKu/rest/realspace/datas/result_ImportFBX/config",
+      "localConfigUrl": "/local-mini-scene/raw-material-warehouse/result_ImportFBX.scp",
+      "layerName": "result_ImportFBX",
+      "published": true,
+      "sourceCrs": "PCS_NON_EARTH_LOCAL_METER",
+      "camera": {
+        "headingDegrees": 20,
+        "pitchDegrees": -22,
+        "distanceMeters": 140,
+        "fieldOfViewDegrees": 38
+      }
+    },
+    {
+      "id": "heat-exchanger",
+      "name": "换热器",
+      "configUrl": "/iserver/services/3D-local3DCache-HuanReQi/rest/realspace/datas/%E6%8D%A2%E7%83%AD%E5%99%A8/config",
+      "localConfigUrl": "/local-mini-scene/heat-exchanger/%E6%8D%A2%E7%83%AD%E5%99%A8.scp",
+      "layerName": "换热器",
+      "published": true,
+      "sourceCrs": "PCS_NON_EARTH_LOCAL_METER",
+      "camera": {
+        "headingDegrees": 30,
+        "pitchDegrees": -18,
+        "distanceMeters": 70,
+        "fieldOfViewDegrees": 35
+      }
+    },
+    {
+      "id": "vertical-tank",
+      "name": "立式罐",
+      "configUrl": "/iserver/services/3D-local3DCache-LiShiGuanZi/rest/realspace/datas/%E7%BD%90%E5%AD%90/config",
+      "localConfigUrl": "/local-mini-scene/vertical-tank/%E7%BD%90%E5%AD%90.scp",
+      "layerName": "罐子",
+      "published": true,
+      "sourceCrs": "PCS_NON_EARTH_LOCAL_METER",
+      "camera": {
+        "headingDegrees": 25,
+        "pitchDegrees": -20,
+        "distanceMeters": 85,
+        "fieldOfViewDegrees": 35
+      }
+    },
+    {
+      "id": "distillation-tower",
+      "name": "蒸馏塔",
+      "configUrl": "/iserver/services/3D-local3DCache-ZhengLiuTa/rest/realspace/datas/%E8%92%B8%E9%A6%8F%E5%A1%94/config",
+      "localConfigUrl": "/local-mini-scene/distillation-tower/%E8%92%B8%E9%A6%8F%E5%A1%94.scp",
+      "layerName": "蒸馏塔",
+      "published": true,
+      "sourceCrs": "PCS_NON_EARTH_LOCAL_METER",
+      "camera": {
+        "headingDegrees": 20,
+        "pitchDegrees": -15,
+        "distanceMeters": 105,
+        "fieldOfViewDegrees": 35
+      }
+    }
+  ],
+  "entrances": [
+    {
+      "entranceId": "park-west",
+      "name": "中南装置厂房南门",
+      "facilityId": "building-195",
+      "modelObjectId": "huangong_4490/SmID=370",
+      "modelDataset": "配准后模型@化工园区项目-三维配准",
+      "modelSmId": 370,
+      "modelName": "BUILDING_195",
+      "bindingRole": "FACTORY_ENTRANCE",
+      "bindingMethod": "FOOTPRINT_EDGE_BOTTOM",
+      "roadNodeId": "road-row-middle",
+      "positionStatus": "MODEL_SURFACE_BOUND",
+      "longitude": 113.535800227,
+      "latitude": 34.81902008,
+      "heightMeters": 1.5,
+      "modelLocalEnuMeters": { "east": 3.002, "north": 38.592, "up": 1.5 },
+      "camera": {
+        "headingDegrees": 110,
+        "pitchDegrees": -28,
+        "distanceMeters": 140,
+        "fieldOfViewDegrees": 34
+      }
+    },
+    {
+      "entranceId": "park-east",
+      "name": "西北生产厂房北门",
+      "facilityId": "building-096",
+      "modelObjectId": "huangong_4490/SmID=212",
+      "modelDataset": "配准后模型@化工园区项目-三维配准",
+      "modelSmId": 212,
+      "modelName": "BUILDING_096",
+      "bindingRole": "FACTORY_ENTRANCE",
+      "bindingMethod": "FOOTPRINT_EDGE_TOP",
+      "roadNodeId": "road-north-main",
+      "positionStatus": "MODEL_SURFACE_BOUND",
+      "longitude": 113.53541298,
+      "latitude": 34.821257148,
+      "heightMeters": 4.505,
+      "modelLocalEnuMeters": { "east": -31.278, "north": 286.933, "up": 4.505 },
+      "camera": {
+        "headingDegrees": 250,
+        "pitchDegrees": -28,
+        "distanceMeters": 140,
+        "fieldOfViewDegrees": 34
+      }
+    },
+    {
+      "entranceId": "park-north",
+      "name": "中北厂房北门",
+      "facilityId": "building-5773",
+      "modelObjectId": "huangong_4490/SmID=7293",
+      "modelDataset": "配准后模型@化工园区项目-三维配准",
+      "modelSmId": 7293,
+      "modelName": "BUILDING_5773",
+      "bindingRole": "FACTORY_ENTRANCE",
+      "bindingMethod": "FOOTPRINT_EDGE_TOP",
+      "roadNodeId": "road-row-north",
+      "positionStatus": "MODEL_SURFACE_BOUND",
+      "longitude": 113.536905399,
+      "latitude": 34.820044514,
+      "heightMeters": 2.562,
+      "modelLocalEnuMeters": { "east": 104.638, "north": 151.774, "up": 2.562 },
+      "camera": {
+        "headingDegrees": 180,
+        "pitchDegrees": -28,
+        "distanceMeters": 130,
+        "fieldOfViewDegrees": 34
+      }
+    },
+    {
+      "entranceId": "park-south",
+      "name": "北部生产厂房南门",
+      "facilityId": "building-5709",
+      "modelObjectId": "huangong_4490/SmID=7093",
+      "modelDataset": "配准后模型@化工园区项目-三维配准",
+      "modelSmId": 7093,
+      "modelName": "BUILDING_5709",
+      "bindingRole": "FACTORY_ENTRANCE",
+      "bindingMethod": "FOOTPRINT_EDGE_BOTTOM",
+      "roadNodeId": "road-north-main",
+      "positionStatus": "MODEL_SURFACE_BOUND",
+      "longitude": 113.536098518,
+      "latitude": 34.820821359,
+      "heightMeters": 1.5,
+      "modelLocalEnuMeters": { "east": 31.216, "north": 238.297, "up": 1.5 },
+      "camera": {
+        "headingDegrees": 0,
+        "pitchDegrees": -28,
+        "distanceMeters": 130,
+        "fieldOfViewDegrees": 34
+      }
+    }
+  ],
+  "leakSources": [
+    {
+      "leakSourceId": "model-leak-smid-3",
+      "name": "输气管道",
+      "facilityId": "pa-center-south",
+      "modelObjectId": "modelComposeResult@huagong-finally-fbx-4490/SmID=3",
+      "modelDataset": "modelComposeResult@huagong-finally-fbx-4490",
+      "modelSmId": 3,
+      "modelName": "输气管道",
+      "equipmentType": "BUILDING_COMPONENT",
+      "bindingRole": "LEAK_SOURCE",
+      "bindingMethod": "MODEL_FOOTPRINT_CENTER_AT_PIPE_AXIS",
+      "positionStatus": "MODEL_SURFACE_BOUND",
+      "gasCode": "CH4",
+      "supportedGasCodes": ["CH4", "NH3", "CO", "O2"],
+      "sourceShape": "VOLUME",
+      "longitude": 113.5387624064349,
+      "latitude": 34.81911041430216,
+      "heightMeters": 4.5,
+      "modelLocalEnuMeters": { "east": 273.383, "north": 48.693, "up": 4.5 },
+      "volumeFence": {
+        "maxHorizontalRadiusMeters": 460,
+        "minRelativeHeightMeters": -0.8,
+        "maxRelativeHeightMeters": 95
+      }
+    },
+    {
+      "leakSourceId": "model-leak-smid-17",
+      "name": "立式缓冲罐011",
+      "facilityId": "pa-west-south",
+      "modelObjectId": "modelComposeResult@huagong-finally-fbx-4490/SmID=17",
+      "modelDataset": "modelComposeResult@huagong-finally-fbx-4490",
+      "modelSmId": 17,
+      "modelName": "立式缓冲罐011",
+      "equipmentType": "PROCESS_EQUIPMENT",
+      "bindingRole": "LEAK_SOURCE",
+      "bindingMethod": "MODEL_BOUNDS_CENTER",
+      "positionStatus": "MODEL_SURFACE_BOUND",
+      "gasCode": "NH3",
+      "supportedGasCodes": ["NH3", "CH4", "CO"],
+      "sourceShape": "VOLUME",
+      "longitude": 113.5358349252584,
+      "latitude": 34.81928180962052,
+      "heightMeters": 1.2,
+      "modelLocalEnuMeters": { "east": 5.842, "north": 67.773, "up": 1.2 },
+      "volumeFence": {
+        "maxHorizontalRadiusMeters": 460,
+        "minRelativeHeightMeters": -1.2,
+        "maxRelativeHeightMeters": 110
+      }
+    },
+    {
+      "leakSourceId": "model-leak-smid-34",
+      "name": "立式架空常压储罐009",
+      "facilityId": "pa-center-south",
+      "modelObjectId": "modelComposeResult@huagong-finally-fbx-4490/SmID=34",
+      "modelDataset": "modelComposeResult@huagong-finally-fbx-4490",
+      "modelSmId": 34,
+      "modelName": "立式架空常压储罐009",
+      "equipmentType": "PROCESS_EQUIPMENT",
+      "bindingRole": "LEAK_SOURCE",
+      "bindingMethod": "MODEL_BOUNDS_CENTER",
+      "positionStatus": "MODEL_SURFACE_BOUND",
+      "gasCode": "CH4",
+      "supportedGasCodes": ["CH4", "NH3", "CO", "O2"],
+      "sourceShape": "VOLUME",
+      "longitude": 113.54015875896995,
+      "latitude": 34.81971654943267,
+      "heightMeters": 6,
+      "modelLocalEnuMeters": { "east": 400.996, "north": 116.168, "up": 6 },
+      "volumeFence": {
+        "maxHorizontalRadiusMeters": 460,
+        "minRelativeHeightMeters": -1.5,
+        "maxRelativeHeightMeters": 105
+      }
+    },
+    {
+      "leakSourceId": "model-leak-smid-42",
+      "name": "立式固定顶储罐",
+      "facilityId": "pa-center-south",
+      "modelObjectId": "modelComposeResult@huagong-finally-fbx-4490/SmID=42",
+      "modelDataset": "modelComposeResult@huagong-finally-fbx-4490",
+      "modelSmId": 42,
+      "modelName": "立式固定顶储罐",
+      "equipmentType": "PROCESS_EQUIPMENT",
+      "bindingRole": "LEAK_SOURCE",
+      "bindingMethod": "MODEL_BOUNDS_CENTER",
+      "positionStatus": "MODEL_SURFACE_BOUND",
+      "gasCode": "CH4",
+      "supportedGasCodes": ["CH4", "NH3", "CO", "O2"],
+      "sourceShape": "VOLUME",
+      "longitude": 113.53722883756004,
+      "latitude": 34.81965244592785,
+      "heightMeters": 1.2,
+      "modelLocalEnuMeters": { "east": 133.231, "north": 109.032, "up": 1.2 },
+      "volumeFence": {
+        "maxHorizontalRadiusMeters": 460,
+        "minRelativeHeightMeters": -2,
+        "maxRelativeHeightMeters": 100
+      }
+    },
+    {
+      "leakSourceId": "model-leak-smid-79",
+      "name": "立式压力容器001",
+      "facilityId": "pb-north-tank",
+      "modelObjectId": "modelComposeResult@huagong-finally-fbx-4490/SmID=79",
+      "modelDataset": "modelComposeResult@huagong-finally-fbx-4490",
+      "modelSmId": 79,
+      "modelName": "立式压力容器001",
+      "equipmentType": "PROCESS_EQUIPMENT",
+      "bindingRole": "LEAK_SOURCE",
+      "bindingMethod": "MODEL_BOUNDS_CENTER",
+      "positionStatus": "MODEL_SURFACE_BOUND",
+      "gasCode": "NH3",
+      "supportedGasCodes": ["NH3", "CH4", "CO", "O2"],
+      "sourceShape": "VOLUME",
+      "longitude": 113.54398380531737,
+      "latitude": 34.82176208076111,
+      "heightMeters": 3.5,
+      "modelLocalEnuMeters": { "east": 750.565, "north": 343.876, "up": 3.5 },
+      "volumeFence": {
+        "maxHorizontalRadiusMeters": 460,
+        "minRelativeHeightMeters": -2,
+        "maxRelativeHeightMeters": 92
+      }
+    },
+    {
+      "leakSourceId": "model-leak-smid-3156",
+      "name": "3号输气管道",
+      "facilityId": "pb-mid-process",
+      "modelObjectId": "modelComposeResult@huagong-finally-fbx-4490/SmID=3156",
+      "modelDataset": "modelComposeResult@huagong-finally-fbx-4490",
+      "modelSmId": 3156,
+      "modelName": "3号输气管道",
+      "equipmentType": "BUILDING_COMPONENT",
+      "bindingRole": "LEAK_SOURCE",
+      "bindingMethod": "MODEL_FOOTPRINT_CENTER_AT_PIPE_AXIS",
+      "positionStatus": "MODEL_SURFACE_BOUND",
+      "gasCode": "CH4",
+      "supportedGasCodes": ["CH4", "NH3", "CO"],
+      "sourceShape": "VOLUME",
+      "longitude": 113.54308542013855,
+      "latitude": 34.81934788672763,
+      "heightMeters": 4.5,
+      "modelLocalEnuMeters": { "east": 668.462, "north": 75.128, "up": 4.5 },
+      "volumeFence": {
+        "maxHorizontalRadiusMeters": 460,
+        "minRelativeHeightMeters": -3,
+        "maxRelativeHeightMeters": 115
+      }
+    }
+  ]
+}

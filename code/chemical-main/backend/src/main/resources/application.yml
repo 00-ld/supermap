@@ -50,3 +50,10 @@ qweather:
   auth-mode: ${QWEATHER_AUTH_MODE:key}
   language: ${QWEATHER_LANG:zh}
   unit: ${QWEATHER_UNIT:m}
+
+qwen:
+  # 密钥仅由后端进程读取，禁止写入前端、移动端 APK 或版本库。
+  api-key: ${DASHSCOPE_API_KEY:}
+  endpoint: ${DASHSCOPE_ENDPOINT:https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions}
+  model: ${DASHSCOPE_MODEL:qwen-plus}
+  knowledge-base-path: ${AI_KNOWLEDGE_BASE_PATH:}

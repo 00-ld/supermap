@@ -5,6 +5,8 @@
 - `001_add_user_role.sql`：为用户表补角色字段。
 - `002_add_core_audit_columns.sql`：为核心表补来源、创建时间和更新时间字段。
 - `003_extend_monitor_point_semantics.sql`：把监测点对象从名称目录扩展为区域、来源类型、传感器/视频源绑定、坐标和质量状态。
+- `004_seed_monitor_point_video_sources.sql`：为监测点补视频源种子数据。
+- `005_add_task_table.sql`：新建 task 表，承载移动端任务指派闭环（事故→指派→打卡→验收→异常解除）。
 
 `deploy/mysql/migration_add_role.sql` 保留为现有 Docker/MySQL 部署流程的兼容入口；新增迁移应优先放在本目录，再按部署需要提供兼容入口或执行说明。
 

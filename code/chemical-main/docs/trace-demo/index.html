@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>化工园区气体泄漏溯源 · 实时演示</title>
+<style>
+:root{--bg:#070b16;--panel:#0f1626;--panel2:#141d33;--border:#1e2a44;--text:#dfe7f3;--muted:#8a98b5;--cyan:#22d3ee;--green:#34d399;--red:#fb5b6b;--yellow:#fbbf24;--dim:#5a6a8a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',-apple-system,'Microsoft YaHei',sans-serif;line-height:1.65}
+.app{max-width:1400px;margin:0 auto;padding:16px}
+header{padding:12px 20px;background:linear-gradient(90deg,#0f1626,#101a30);border:1px solid var(--border);border-radius:12px;margin-bottom:14px}
+header h1{font-size:21px;font-weight:600}header h1 span{color:var(--cyan)}
+header p{font-size:13px;color:var(--muted);margin-top:3px}
+nav.steps{display:flex;gap:10px;align-items:stretch;flex-wrap:wrap;margin-bottom:14px}
+nav.steps .step{flex:1;min-width:130px;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:12px 14px;cursor:pointer;transition:.18s;color:var(--muted)}
+nav.steps .step:hover{border-color:var(--cyan)}
+nav.steps .step.active{border-color:var(--cyan);background:linear-gradient(90deg,rgba(34,211,238,.14),rgba(34,211,238,.02));color:var(--text)}
+nav.steps .step .n{font-size:12px;color:var(--dim);font-weight:700}nav.steps .step.active .n{color:var(--cyan)}
+nav.steps .step .t{font-size:15px;font-weight:700;margin:2px 0}nav.steps .step .s{font-size:11px;color:var(--muted)}
+nav.steps .auto{flex:0 0 auto;background:linear-gradient(90deg,#0891b2,#22d3ee);color:#04141a;border:none;border-radius:10px;padding:0 18px;cursor:pointer;font-weight:600;font-size:13px}
+nav.steps .auto:hover{filter:brightness(1.1)}
+main{display:grid;grid-template-columns:1fr 370px;gap:14px;margin-bottom:14px}
+.scene-panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:12px}
+#scene{width:100%;height:auto;display:block;border-radius:8px;background:#050810;cursor:crosshair}
+.scene-tip{font-size:12px;color:var(--cyan);margin-top:8px;text-align:center;font-weight:600}
+.calc{font-size:13px;color:var(--yellow);text-align:center;padding:8px;display:none}
+.calc.show{display:block}
+.talk{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.talk .tag{display:inline-block;font-size:11px;color:var(--cyan);border:1px solid rgba(34,211,238,.4);border-radius:14px;padding:2px 10px;align-self:flex-start}
+.talk h2{font-size:17px;line-height:1.45}
+.talk .body{font-size:13.5px;color:#c8d2e6;line-height:1.85}.talk .body b{color:var(--text)}
+.talk .body .hl{color:var(--cyan);font-weight:600}.talk .body .grn{color:var(--green);font-weight:600}.talk .body .rd{color:var(--red);font-weight:600}
+.talk .anim-hint{font-size:12px;color:var(--muted);background:var(--panel2);border-radius:8px;padding:8px 10px;border-left:3px solid var(--yellow)}
+.prog{height:6px;background:#1e2a44;border-radius:4px;overflow:hidden}.prog > i{display:block;height:100%;background:linear-gradient(90deg,#22d3ee,#34d399);transition:width .08s}
+.talk .ctrl{display:flex;gap:8px;margin-top:auto;align-items:center}
+button.act{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:10px 12px;cursor:pointer;font-size:13px;transition:.15s}
+button.act:hover{border-color:var(--cyan);color:var(--cyan)}
+button.act.primary{background:linear-gradient(90deg,#0891b2,#22d3ee);color:#04141a;border:none;font-weight:600}
+button.act:disabled{opacity:.4;cursor:not-allowed}
+.below{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px;min-height:120px}
+.below-pane{display:none}.below-pane.show{display:block}
+.below .bt{font-size:13px;color:var(--cyan);margin-bottom:10px;font-weight:600}
+.weather{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap;margin-bottom:14px}
+.wcard{flex:1;min-width:240px;background:linear-gradient(135deg,#101a30,#0c1424);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
+.wcard .wsrc{font-size:11px;color:var(--green);margin-bottom:8px;font-weight:700}.wcard .wsrc.def{color:var(--yellow)}
+.wgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.wgrid .wi{background:var(--panel2);border-radius:6px;padding:6px 8px}.wgrid .wi span{font-size:10px;color:var(--muted);display:block}.wgrid .wi b{font-size:14px;color:var(--text)}
+.wfetch{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.wfetch input{flex:1;min-width:120px;background:var(--panel2);border:1px solid var(--border);border-radius:6px;padding:6px 8px;color:var(--text);font-size:12px}
+.wfetch input::placeholder{color:var(--dim)}
+.wfetch button{background:var(--panel2);border:1px solid var(--border);border-radius:6px;padding:6px 12px;color:var(--cyan);cursor:pointer;font-size:12px}
+.layout-note{font-size:12.5px;color:#b8c4dc;background:var(--panel2);border-radius:8px;padding:10px 12px;border-left:3px solid var(--cyan);line-height:1.7}
+table.sensors{width:100%;border-collapse:collapse;font-size:12px;margin-top:12px}
+table.sensors th,table.sensors td{padding:5px 7px;text-align:left;border-bottom:1px solid var(--border)}
+table.sensors th{color:var(--muted);font-weight:600}table.sensors td{font-variant-numeric:tabular-nums}
+.bar-wrap{height:12px;background:#1e2a44;border-radius:6px;overflow:hidden;margin:8px 0}.bar-wrap > i{display:block;height:100%;background:linear-gradient(90deg,#22d3ee,#34d399);transition:width .1s}
+.below .desc{font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.7}
+.result-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+.alg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
+.rc{background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:10px}
+.rc .k{font-size:11px;color:var(--muted)}.rc .v{font-size:15px;font-weight:600;margin-top:2px}
+.rc .v.g{color:var(--green)}.rc .v.r{color:var(--red)}.rc .v.c{color:var(--cyan)}
+.density-wrap{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start}
+#density{width:420px;max-width:100%;height:auto;display:block;border-radius:8px;background:#050810;border:1px solid var(--border)}
+.density-legend{font-size:12px;color:var(--muted);flex:1;min-width:180px;line-height:1.8}
+footer{text-align:center;color:var(--muted);font-size:11.5px;padding:12px 0 4px}
+@media(max-width:1000px){main{grid-template-columns:1fr}.wgrid{grid-template-columns:repeat(2,1fr)}.result-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>化工园区气体泄漏溯源 · <span>实时演示</span></h1>
+    <p>自己选泄漏点 → 算法实时跑扩散与粒子滤波寻源 → 三步连贯看结果（纯前端，项目物理模型 + 粒子滤波）</p>
+  </header>
+  <nav class="steps">
+    <div class="step active" data-step="1"><div class="n">STEP 1</div><div class="t">天眼布控</div><div class="s">选泄漏点 · 气象 · 扩散初起</div></div>
+    <div class="step" data-step="2"><div class="n">STEP 2</div><div class="t">粒子寻源</div><div class="s">撒候选源 · 智能反演</div></div>
+    <div class="step" data-step="3"><div class="n">STEP 3</div><div class="t">精准锁定</div><div class="s">源项量化 · 可信度</div></div>
+    <button class="auto" id="btnAuto">▶ 自动播放全程</button>
+  </nav>
+  <main>
+    <section class="scene-panel">
+      <canvas id="scene" width="1000" height="650"></canvas>
+      <div class="scene-tip" id="sceneTip"></div>
+      <div class="calc" id="calcTip">⚙️ 正在跑粒子滤波反演（800 粒子 × 18 轮 + 到达时间约束）……</div>
+    </section>
+    <aside class="talk">
+      <span class="tag" id="stepTag"></span>
+      <h2 id="stepTitle"></h2>
+      <div class="body" id="stepBody"></div>
+      <div class="anim-hint" id="animHint"></div>
+      <div class="prog"><i id="progBar" style="width:0%"></i></div>
+      <div class="ctrl">
+        <button class="act primary" id="btnSub">▶ 播放本步</button>
+        <button class="act" id="btnNext">下一步 →</button>
+      </div>
+    </aside>
+  </main>
+  <section class="below">
+    <div class="below-pane show" id="below1">
+      <div class="bt">🌤️ 气象（驱动扩散与溯源）</div>
+      <div class="weather" id="weatherCard"></div>
+      <div class="bt">📡 监测点位（16 点 · 园区均匀覆盖）</div>
+      <div class="layout-note" id="layoutNote"></div>
+      <table class="sensors" id="sensorTable"></table>
+    </div>
+    <div class="below-pane" id="below2">
+      <div class="bt">🎯 溯源模型：粒子滤波源项反演（Particle Filter STE）</div>
+      <div class="alg-grid" id="algGrid"></div>
+      <div class="bar-wrap"><i id="filtBar" style="width:0%"></i></div>
+      <div class="desc" id="filtDesc"></div>
+    </div>
+    <div class="below-pane" id="below3">
+      <div class="bt">✅ 反演结果 vs 你选的真实漏点</div>
+      <div class="result-grid" id="resultGrid"></div>
+      <div class="density-wrap">
+        <canvas id="density" width="420" height="273"></canvas>
+        <div class="density-legend">
+          <p><b style="color:var(--green)">●</b> 后验峰：粒子聚最密处 = 算出的源</p>
+          <p><b style="color:var(--red)">○</b> 你选的真源</p>
+          <p>概率山山尖应压在你选的点上 —— 说明算法对任意位置都准。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer>扩散与溯源在前端用项目条件平流-扩散物理模型 + 粒子滤波实时计算 · 选不同泄漏点可验证算法可靠性</footer>
+</div>
+<script>
+/* ============ 物理常数与公式（移植自项目 conditioned_advection / gaussian_plume） ============ */
+const R_GAS=8.314462618, MPU=0.5, CELL_M=10, MIX_H=3.0, M_MOL=28.97, Q_SOURCE=50;
+const WIND_EXP={A:0.07,B:0.07,C:0.10,D:0.15,E:0.35,F:0.55};
+function effWind(w10,h=2,stab='D',ref=10){ return Math.max(w10*Math.pow(Math.max(h,1)/ref,WIND_EXP[stab]),0.3); }
+function effDiffusivity(w,cellM,gas){
+  const condDiff=gas.diffusivity*1e5, condBuoy=Math.max(0,2*(1-gas.densityRatio));
+  return Math.max((0.35+0.12*w*cellM+0.10*condDiff+0.08*condBuoy)*Math.max(gas.bias,0.1),0.05);
+}
+function massToPpm(c,M,T,P){ return c*R_GAS*T/(M*P)*1e6; }
+function sensorResponse(sx,sy,px,py,Q,env){
+  const a=env.windDirDeg*Math.PI/180, dx=px-sx, dy=py-sy;
+  const alongM=(dx*Math.cos(a)+dy*Math.sin(a))*env.mpu;
+  if(alongM<=0) return 0;
+  const crossM=(-dx*Math.sin(a)+dy*Math.cos(a))*env.mpu;
+  const u=Math.max(env.effWind,0.3), travel=Math.max(alongM/u,1e-6);
+  const sigma=Math.sqrt(Math.max(2*env.kEff*travel, env.cellM*env.cellM*0.25))*3;
+  const norm=Math.max(Q,0)/(Math.sqrt(2*Math.PI)*sigma*u*Math.max(env.mixH,0.5));
+  return massToPpm(norm*Math.exp(-(crossM*crossM)/(2*sigma*sigma)), env.M, env.T, env.P);
+}
+function buildEnv(w){
+  const projDir=(w.wind360+90)%360, ew=effWind(w.windSpeed,2,'D',10);
+  const gas={diffusivity:2e-5,densityRatio:1,bias:1};
+  return {windDirDeg:projDir, windSpeed:w.windSpeed, effWind:ew, kEff:effDiffusivity(ew,CELL_M,gas), mpu:MPU, cellM:CELL_M, mixH:MIX_H, M:M_MOL, T:w.temp+273.15, P:w.pressure*100};
+}
+/* 动态扩散场（t 时刻，连续释放 + 边缘渐进） */
+function fieldAt(sx,sy,t,env,xs,ys){
+  const a=env.windDirDeg*Math.PI/180, ca=Math.cos(a), sa=Math.sin(a), u=Math.max(env.effWind,0.3);
+  const reach=u*t, out=new Float32Array(xs.length*ys.length); let k=0;
+  for(let r=0;r<ys.length;r++) for(let c=0;c<xs.length;c++){
+    const dx=xs[c]-sx, dy=ys[r]-sy;
+    const alongM=(dx*ca+dy*sa)*env.mpu;
+    if(alongM<=0){ out[k++]=0; continue; }
+    const crossM=(-dx*sa+dy*ca)*env.mpu, travel=Math.max(alongM/u,1e-6);
+    const sigma=Math.sqrt(Math.max(2*env.kEff*travel, env.cellM*env.cellM*0.25))*3;
+    if(alongM>reach+2*sigma){ out[k++]=0; continue; }
+    const norm=Q_SOURCE/(Math.sqrt(2*Math.PI)*sigma*u*Math.max(env.mixH,0.5));
+    const fade=1/(1+Math.exp(-(reach-alongM)/(sigma*0.6+0.5)));
+    out[k++]=massToPpm(norm*Math.exp(-(crossM*crossM)/(2*sigma*sigma))*fade, env.M, env.T, env.P);
+  }
+  return out;
+}
+
+/* ============ seeded RNG ============ */
+function mulberry32(s){ return function(){ s=(s+0x6D2B79F5)|0; let t=Math.imul(s^(s>>>15),1|s); t=(t+Math.imul(t^(t>>>7),61|t))^t; return ((t^(t>>>14))>>>0)/4294967296; }; }
+
+/* ============ 全局状态 ============ */
+const W=1000,H=650;
+const defaultWeather={source:'default',location:'示例化工园区',windSpeed:2.0,windDir:'北风',windDirDeg:180,wind360:180,temp:25,pressure:1013,humidity:50,text:'晴',obsTime:'示例数据（填入和风 Key 启用实时天气）'};
+const state={step:1,leak:{x:330,y:420},sensors:[],observed:[],arrival:[],frames:[],frameTimes:[5,15,30,50,80,120,170,230,300,400],frameMax:1,env:null,weather:defaultWeather,pf:null,pfStale:true,subProgress:0,subPlaying:false,autoPlaying:false,lastT:0};
+const stepDur={1:7000,2:4500,3:2600};
+const scene=document.getElementById('scene'), sctx=scene.getContext('2d');
+const density=document.getElementById('density'), dctx=density.getContext('2d');
+const NX=50,NY=33, xs=Array.from({length:NX},(_,i)=>i*1000/(NX-1)), ys=Array.from({length:NY},(_,j)=>j*650/(NY-1));
+
+/* ============ 16 监测点：jittered 4×4 网格（均匀覆盖 + 随机偏移） ============ */
+function buildSensors(){
+  const r=mulberry32(98765); const out=[];
+  for(let j=0;j<5;j++) for(let i=0;i<6;i++){
+    const bx=60+(i+0.5)*880/6, by=60+(j+0.5)*530/5;
+    out.push({id:'M'+(j*6+i+1), x:Math.max(50,Math.min(950,bx+(r()-0.5)*60)), y:Math.max(50,Math.min(600,by+(r()-0.5)*50))});
+  }
+  return out;
+}
+
+/* ============ 颜色 / 工具 ============ */
+function heat(t){ t=Math.max(0,Math.min(1,t));
+  const s=[[0,[5,8,28]],[0.18,[12,42,120]],[0.4,[10,150,210]],[0.6,[20,225,140]],[0.8,[255,200,50]],[1,[255,70,90]]];
+  for(let i=0;i<s.length-1;i++){ if(t<=s[i+1][0]){ const f=(t-s[i][0])/(s[i+1][0]-s[i][0]),a=s[i][1],b=s[i+1][1]; return [a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f,a[2]+(b[2]-a[2])*f]; } }
+  return s[s.length-1][1];
+}
+function rgba(c,a){ return `rgba(${c[0]|0},${c[1]|0},${c[2]|0},${a})`; }
+function lerp(a,b,f){ return a+(b-a)*f; }
+function smooth(t){ t=Math.max(0,Math.min(1,t)); return t*t*(3-2*t); }
+
+/* ============ 计算观测 + 动态扩散帧 ============ */
+function computeObservations(){
+  const env=state.env, r=mulberry32(7);
+  state.observed=state.sensors.map(s=>{
+    const c=sensorResponse(state.leak.x,state.leak.y,s.x,s.y,Q_SOURCE,env);
+    return Math.max(c+r()*0.1*Math.max(c,1e-3)-0.05*Math.max(c,1e-3),0);
+  });
+  const a=env.windDirDeg*Math.PI/180, ca=Math.cos(a), sa=Math.sin(a);
+  state.arrival=state.sensors.map((s,i)=>{
+    const dx=s.x-state.leak.x, dy=s.y-state.leak.y;
+    const alongM=(dx*ca+dy*sa)*env.mpu;
+    if(alongM<=0||state.observed[i]<0.3) return null;
+    return Math.max(alongM/Math.max(env.effWind,0.3)+(r()-0.5)*10, 1);
+  });
+  state.frames=state.frameTimes.map(t=>({t,values:Array.from(fieldAt(state.leak.x,state.leak.y,t,env,xs,ys))}));
+  state.frameMax=Math.max(...state.frames.flatMap(f=>Array.from(f.values)),1e-6);
+  state.pfStale=true;
+}
+
+/* ============ 小型粒子滤波（移植项目 particle_filter 核心逻辑） ============ */
+function normalizeLogs(lw){ const mx=Math.max(...lw), w=lw.map(v=>Math.exp(v-mx)); const s=w.reduce((a,b)=>a+b,0); return w.map(v=>v/(s||1)); }
+function sysResample(P,W,r){ const N=P.length, pos=new Array(N), cum=new Array(N); let c=0;
+  for(let i=0;i<N;i++){ c+=W[i]; cum[i]=c; }
+  const u0=r()/N; for(let i=0;i<N;i++) pos[i]=u0+i/N;
+  const out=new Array(N); for(let i=0;i<N;i++){ let lo=0,hi=N-1; while(lo<hi){ const m=(lo+hi)>>1; if(cum[m]<pos[i]) lo=m+1; else hi=m; } out[i]=P[lo].slice(); }
+  return out;
+}
+function weightedMean(P,W){ let mx=0,my=0,mq=0; for(let i=0;i<P.length;i++){ mx+=W[i]*P[i][0]; my+=W[i]*P[i][1]; mq+=W[i]*P[i][2]; } return [mx,my,mq]; }
+function weightedCov(P,W,mean){ let sxx=0,syy=0,sxy=0; for(let i=0;i<P.length;i++){ const dx=P[i][0]-mean[0],dy=P[i][1]-mean[1]; sxx+=W[i]*dx*dx; syy+=W[i]*dy*dy; sxy+=W[i]*dx*dy; } return [[sxx,sxy],[sxy,syy]]; }
+function concLogL(P){ const env=state.env, sens=state.sensors, obs=state.observed;
+  return P.map(p=>{ let s=0; for(let j=0;j<sens.length;j++){ const pred=sensorResponse(p[0],p[1],sens[j].x,sens[j].y,p[2],env); const o=obs[j];
+    const sig=Math.sqrt((0.1*Math.max(o,1e-4))**2+(0.05*Math.max(Math.abs(pred),o,1e-4))**2+1e-8); s+=-0.5*((pred-o)/sig)**2-0.5*Math.log(2*Math.PI*sig*sig); } return s; });
+}
+function arrivalLogL(P){ const env=state.env, sens=state.sensors, arr=state.arrival;
+  const a=env.windDirDeg*Math.PI/180, ca=Math.cos(a), sa=Math.sin(a), u=Math.max(env.effWind,0.5);
+  const timed=[]; for(let i=0;i<sens.length;i++) if(arr[i]!=null) timed.push({s:sens[i],a:arr[i]});
+  if(timed.length<2) return new Array(P.length).fill(0);
+  const sigma=6, obsArr=timed.map(t=>t.a), obsMin=Math.min(...obsArr);
+  return P.map(p=>{ const predArr=timed.map(t=>{const dx=t.s.x-p[0],dy=t.s.y-p[1];const alongM=(dx*ca+dy*sa)*env.mpu;return Math.max(alongM,0)/u;});
+    let abs=0; for(let k=0;k<predArr.length;k++) abs+=((predArr[k]-timed[k].a)/sigma)**2; abs/=predArr.length;
+    const predMin=Math.min(...predArr); let rel=0; for(let k=0;k<predArr.length;k++) rel+=((predArr[k]-predMin)-(obsArr[k]-obsMin))/sigma; rel/=predArr.length; rel*=rel;
+    return -0.5*6.0*timed.length*(0.65*abs+0.35*rel); });
+}
+function computeLogL(P){ const c=concLogL(P), ar=arrivalLogL(P); return c.map((v,i)=>v+ar[i]); }
+function fitQ(x,y){ const env=state.env, sens=state.sensors, obs=state.observed; let gg=0,gc=0;
+  for(let j=0;j<sens.length;j++){ const g=sensorResponse(x,y,sens[j].x,sens[j].y,1,env); gg+=g*g; gc+=g*obs[j]; } return gg<1e-18?0.1:Math.max(gc/gg,0.1); }
+function rmseOf(est){ const env=state.env, sens=state.sensors, obs=state.observed; let s=0;
+  for(let j=0;j<sens.length;j++){ const p=sensorResponse(est[0],est[1],sens[j].x,sens[j].y,est[2],env); s+=(p-obs[j])**2; } return Math.sqrt(s/sens.length); }
+function mcmcRejuvenate(P,logL,beta,r){ const env=state.env, sens=state.sensors, obs=state.observed; let acc=0;
+  for(let i=0;i<P.length;i++){ const prop=[Math.max(40,Math.min(960,P[i][0]+(r()-0.5)*40)), Math.max(40,Math.min(610,P[i][1]+(r()-0.5)*40)), Math.max(0.1,Math.min(1e5,P[i][2]*Math.exp((r()-0.5)*0.6)))];
+    let pl=0; for(let j=0;j<sens.length;j++){ const pred=sensorResponse(prop[0],prop[1],sens[j].x,sens[j].y,prop[2],env); const o=obs[j]; const sig=Math.sqrt((0.1*Math.max(o,1e-4))**2+(0.05*Math.max(Math.abs(pred),o,1e-4))**2+1e-8); pl+=-0.5*((pred-o)/sig)**2; }
+    if(Math.log(r()+1e-300)<beta*(pl-logL[i])){ P[i]=prop; logL[i]=pl; acc++; } } return acc/P.length; }
+function runPF(){ const N=1000,iters=24, r=mulberry32(42), xB=[40,960], yB=[40,610], qLo=0.1,qHi=1e5;
+  let P=[], W=new Array(N).fill(1/N);
+  for(let i=0;i<N;i++) P.push([xB[0]+r()*(xB[1]-xB[0]), yB[0]+r()*(yB[1]-yB[0]), Math.exp(Math.log(qLo)+r()*(Math.log(qHi)-Math.log(qLo)))]);
+  let logL=computeLogL(P), beta=0, hist=[];
+  for(let it=0;it<iters;it++){ const bn=(it+1)/iters;
+    for(let i=0;i<N;i++) W[i]=Math.log(W[i]+1e-300)+(bn-beta)*logL[i]; W=normalizeLogs(W); beta=bn;
+    let ess=0; for(const w of W) ess+=w*w; ess=1/ess;
+    if(ess<0.5*N){ P=sysResample(P,W,r); W=new Array(N).fill(1/N); logL=computeLogL(P); mcmcRejuvenate(P,logL,beta,r); }
+    const est=weightedMean(P,W); hist.push({it:it+1,beta,x:est[0],y:est[1],Q:est[2],ess,rmse:rmseOf(est)});
+  }
+  const est=weightedMean(P,W), cov=weightedCov(P,W,est);
+  const eig=Math.max(...eigen2x1(cov)); const credR_m=Math.sqrt(Math.max(eig,0))*2.45*MPU;
+  return {particles:P,weights:W,estimate:est,cov,history:hist,Qfit:fitQ(est[0],est[1]),credR_m,locErr:Math.hypot(est[0]-state.leak.x,est[1]-state.leak.y)*MPU};
+}
+function eigen2x1(m){ const a=m[0][0],b=m[0][1],c=m[1][0],d=m[1][1], tr=a+d, det=a*d-b*c, disc=Math.sqrt(Math.max(tr*tr-4*det,0)); return [(tr+disc)/2,(tr-disc)/2]; }
+
+/* ============ KDE 概率山 ============ */
+function kde(P,W){ const G=28; let xmin=1e9,xmax=-1e9,ymin=1e9,ymax=-1e9;
+  for(const p of P){ xmin=Math.min(xmin,p[0]);xmax=Math.max(xmax,p[0]);ymin=Math.min(ymin,p[1]);ymax=Math.max(ymax,p[1]); }
+  const pad=25; xmin-=pad;xmax+=pad;ymin-=pad;ymax+=pad; const dx=(xmax-xmin)/G, dy=(ymax-ymin)/G;
+  const g=new Float32Array(G*G);
+  for(let i=0;i<P.length;i++){ const cx=Math.floor((P[i][0]-xmin)/dx), cy=Math.floor((P[i][1]-ymin)/dy); if(cx>=0&&cx<G&&cy>=0&&cy<G) g[cy*G+cx]+=W[i]; }
+  const k=[0.1,0.2,0.1,0.2,0.4,0.2,0.1,0.2,0.1], b=new Float32Array(G*G);
+  for(let y=0;y<G;y++)for(let x=0;x<G;x++){ let s=0; for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){ const nx=x+dx,ny=y+dy; if(nx<0||nx>=G||ny<0||ny>=G)continue; s+=g[ny*G+nx]*k[(dy+1)*3+dx+1]; } b[y*G+x]=s/1.6; }
+  return {grid:b,G,xmin,xmax,ymin,ymax,max:Math.max(...b)||1};
+}
+
+/* ============ 离屏画布 ============ */
+const animCanvas=document.createElement('canvas'); animCanvas.width=NX; animCanvas.height=NY; const animCtx=animCanvas.getContext('2d');
+let kdeCache=null;
+
+/* ============ 绘制件 ============ */
+function drawWind(){ const wd=state.env.windDirDeg*Math.PI/180, cx=64,cy=60,len=34, ex=cx+Math.cos(wd)*len, ey=cy+Math.sin(wd)*len;
+  sctx.strokeStyle='rgba(34,211,238,0.9)'; sctx.lineWidth=3; sctx.beginPath(); sctx.moveTo(cx,cy); sctx.lineTo(ex,ey); sctx.stroke();
+  const ah=9; sctx.beginPath(); sctx.moveTo(ex,ey); sctx.lineTo(ex-Math.cos(wd-0.42)*ah,ey-Math.sin(wd-0.42)*ah); sctx.lineTo(ex-Math.cos(wd+0.42)*ah,ey-Math.sin(wd+0.42)*ah); sctx.closePath(); sctx.fillStyle='rgba(34,211,238,0.9)'; sctx.fill();
+  sctx.fillStyle='rgba(34,211,238,0.95)'; sctx.font='11px sans-serif'; sctx.textAlign='left'; sctx.fillText('风 '+state.env.windSpeed.toFixed(1)+' m/s · '+state.weather.windDir, cx-6, cy-13); }
+function drawSensor(s,lit,ppm){ const maxp=Math.max(...state.observed); const t=Math.min(1,ppm/maxp), r=6+t*11;
+  if(!lit){ sctx.beginPath(); sctx.arc(s.x,s.y,5,0,Math.PI*2); sctx.fillStyle='rgba(90,106,138,0.45)'; sctx.fill(); sctx.strokeStyle='rgba(140,160,190,0.5)'; sctx.lineWidth=1.5; sctx.stroke(); sctx.fillStyle='rgba(150,165,190,0.5)'; sctx.font='10px sans-serif'; sctx.textAlign='center'; sctx.fillText(s.id,s.x,s.y-9); return; }
+  const c=heat(0.45+t*0.55); sctx.beginPath(); sctx.arc(s.x,s.y,r,0,Math.PI*2); sctx.fillStyle=rgba(c,0.95); sctx.fill(); sctx.lineWidth=2; sctx.strokeStyle='rgba(255,255,255,0.9)'; sctx.stroke();
+  sctx.fillStyle='#fff'; sctx.font='bold 11px sans-serif'; sctx.textAlign='center'; sctx.fillText(s.id,s.x,s.y-r-4); sctx.font='10px sans-serif'; sctx.fillStyle='rgba(225,232,245,0.95)'; sctx.fillText(ppm.toFixed(0)+' ppm',s.x,s.y+r+11);
+}
+function drawLeak(label){ sctx.beginPath(); sctx.arc(state.leak.x,state.leak.y,9,0,Math.PI*2); sctx.fillStyle='#fb5b6b'; sctx.fill(); sctx.lineWidth=2; sctx.strokeStyle='#4a0010'; sctx.stroke();
+  sctx.beginPath(); sctx.arc(state.leak.x,state.leak.y,13,0,Math.PI*2); sctx.strokeStyle='rgba(251,91,107,0.4)'; sctx.lineWidth=2; sctx.stroke();
+  sctx.fillStyle='#fb5b6b'; sctx.font='bold 12px sans-serif'; sctx.textAlign='left'; sctx.fillText(label, state.leak.x+16, state.leak.y+4); }
+function drawTrueSource(){ sctx.save(); sctx.translate(state.leak.x,state.leak.y); sctx.beginPath();
+  for(let i=0;i<5;i++){ const a=-Math.PI/2+i*Math.PI*2/5,r1=11,r2=4.5; if(i===0) sctx.moveTo(Math.cos(a)*r1,Math.sin(a)*r1); else sctx.lineTo(Math.cos(a)*r1,Math.sin(a)*r1); const a2=a+Math.PI/5; sctx.lineTo(Math.cos(a2)*r2,Math.sin(a2)*r2); }
+  sctx.closePath(); sctx.fillStyle='#fb5b6b'; sctx.fill(); sctx.lineWidth=1.5; sctx.strokeStyle='#4a0010'; sctx.stroke(); sctx.restore();
+  sctx.fillStyle='#fb5b6b'; sctx.font='bold 12px sans-serif'; sctx.textAlign='left'; sctx.fillText('你选的真源', state.leak.x+13, state.leak.y+4); }
+function drawEstimate(){ const e=state.pf.estimate; sctx.beginPath(); sctx.arc(e[0],e[1],8,0,Math.PI*2); sctx.fillStyle='#34d399'; sctx.fill(); sctx.lineWidth=2.5; sctx.strokeStyle='#06301f'; sctx.stroke();
+  sctx.fillStyle='#34d399'; sctx.font='bold 12px sans-serif'; sctx.textAlign='left'; sctx.fillText('算法算出的源', e[0]+12, e[1]-10); }
+
+function drawScene(){ sctx.clearRect(0,0,W,H); sctx.fillStyle='#050810'; sctx.fillRect(0,0,W,H);
+  if(state.step===1) drawStep1(); else if(state.step===2) drawStep2(); else drawStep3(); }
+
+function drawStep1(){ const frames=state.frames, times=state.frameTimes;
+  const fIdx=state.subProgress*(frames.length-1), i0=Math.floor(fIdx), i1=Math.min(frames.length-1,i0+1), frac=fIdx-i0;
+  const curT=lerp(times[i0],times[i1],frac), v0=frames[i0].values, v1=frames[i1].values;
+  const img=animCtx.createImageData(NX,NY);
+  for(let k=0;k<v0.length;k++){ const v=v0[k]*(1-frac)+v1[k]*frac, t=Math.min(1,v/state.frameMax), c=heat(t);
+    img.data[k*4]=c[0]|0; img.data[k*4+1]=c[1]|0; img.data[k*4+2]=c[2]|0; img.data[k*4+3]=Math.min(255,t*255*1.8); }
+  animCtx.putImageData(img,0,0); sctx.imageSmoothingEnabled=true; sctx.drawImage(animCanvas,0,0,NX,NY,0,0,W,H);
+  drawWind();
+  state.sensors.forEach((s,i)=>drawSensor(s, state.arrival[i]!=null && state.arrival[i]<=curT, state.observed[i]));
+  drawLeak('泄漏点（你选的）');
+  sctx.fillStyle='rgba(255,255,255,0.92)'; sctx.font='bold 15px sans-serif'; sctx.textAlign='right'; sctx.fillText('泄漏后 '+Math.round(curT)+' 秒', W-14, 28);
+  sctx.font='11px sans-serif'; sctx.fillStyle='rgba(140,155,180,0.85)'; sctx.textAlign='left'; sctx.fillText('👆 点击地图可移动泄漏点', 14, H-14);
+}
+
+let partInit=null, partOrder=null;
+function ensurePartInit(){ if(partInit) return; const r=mulberry32(2024); partInit=[]; partOrder=[];
+  for(let i=0;i<state.pf.particles.length;i++){ partInit.push([r()*W, r()*H]); partOrder.push({i,w:state.pf.weights[i]}); }
+  partOrder.sort((a,b)=>b.w-a.w);
+}
+function drawStep2(){ drawWind(); state.sensors.forEach((s,i)=>drawSensor(s,true,state.observed[i]));
+  ensurePartInit(); const P=state.pf.particles, N=P.length;
+  for(let k=0;k<N;k++){ const ratio=k/N, localP=Math.min(1,Math.max(0,(state.subProgress-ratio)*4)), sp=smooth(localP), it=partOrder[k];
+    const x=lerp(partInit[it.i][0],P[it.i][0],sp), y=lerp(partInit[it.i][1],P[it.i][1],sp), a=0.12+sp*0.55;
+    sctx.fillStyle=rgba(sp>0.6?[255,200,90]:[150,180,220], a); sctx.fillRect(x-1.6,y-1.6,3.2,3.2);
+  }
+  const est=state.pf.history[Math.min(state.pf.history.length-1, Math.floor(state.subProgress*state.pf.history.length))];
+  if(est){ sctx.beginPath(); sctx.arc(est.x,est.y,6,0,Math.PI*2); sctx.fillStyle='rgba(52,211,153,0.8)'; sctx.fill(); }
+}
+
+function drawStep3(){ sctx.imageSmoothingEnabled=true; sctx.globalAlpha=0.55+state.subProgress*0.35; sctx.drawImage(animCanvas,0,0,NX,NY,0,0,W,H); sctx.globalAlpha=1;
+  // 用最终帧填充 animCanvas（稳态近似）
+  drawWind(); state.sensors.forEach((s,i)=>drawSensor(s,true,state.observed[i]));
+  sctx.fillStyle='rgba(200,215,240,0.28)'; for(const p of state.pf.particles) sctx.fillRect(p[0]-1.4,p[1]-1.4,2.8,2.8);
+  const rPx=lerp(190, state.pf.credR_m/MPU, smooth(state.subProgress));
+  sctx.setLineDash([6,5]); sctx.lineWidth=2.5; sctx.strokeStyle=rgba([52,211,153],0.55+state.subProgress*0.35); sctx.beginPath(); sctx.arc(state.pf.estimate[0],state.pf.estimate[1],rPx,0,Math.PI*2); sctx.stroke(); sctx.setLineDash([]);
+  sctx.globalAlpha=smooth(state.subProgress); drawEstimate(); sctx.globalAlpha=1;
+  sctx.globalAlpha=smooth(Math.max(0,(state.subProgress-0.4)/0.6)); drawTrueSource(); sctx.globalAlpha=1;
+}
+function fillAnimFinal(){ const f=state.frames[state.frames.length-1].values, img=animCtx.createImageData(NX,NY);
+  for(let k=0;k<f.length;k++){ const t=Math.min(1,f[k]/state.frameMax), c=heat(t); img.data[k*4]=c[0]|0; img.data[k*4+1]=c[1]|0; img.data[k*4+2]=c[2]|0; img.data[k*4+3]=Math.min(255,t*255*1.7); }
+  animCtx.putImageData(img,0,0);
+}
+function drawDensity(){ if(!kdeCache) return; const k=kdeCache; dctx.clearRect(0,0,density.width,density.height); dctx.fillStyle='#050810'; dctx.fillRect(0,0,density.width,density.height);
+  const off=document.createElement('canvas'); off.width=k.G; off.height=k.G; const oc=off.getContext('2d'); const img=oc.createImageData(k.G,k.G);
+  for(let i=0;i<k.grid.length;i++){ const t=k.grid[i]/k.max, c=heat(t*0.9); img.data[i*4]=c[0]|0; img.data[i*4+1]=c[1]|0; img.data[i*4+2]=c[2]|0; img.data[i*4+3]=Math.min(255,t*255*1.9+20); }
+  oc.putImageData(img,0,0); dctx.imageSmoothingEnabled=true; dctx.drawImage(off,0,0,k.G,k.G,0,0,density.width,density.height);
+  const sx=density.width/(k.xmax-k.xmin), sy=density.height/(k.ymax-k.ymin);
+  const tx=(state.leak.x-k.xmin)*sx, ty=(state.leak.y-k.ymin)*sy;
+  dctx.strokeStyle='#fb5b6b'; dctx.lineWidth=2.5; dctx.beginPath(); dctx.arc(tx,ty,9,0,Math.PI*2); dctx.stroke();
+  let mv=0,mi=0; for(let i=0;i<k.grid.length;i++) if(k.grid[i]>mv){mv=k.grid[i];mi=i;} const mr=Math.floor(mi/k.G),mc=mi%k.G;
+  const px=(mc+0.5)/k.G*density.width, py=(mr+0.5)/k.G*density.height;
+  dctx.strokeStyle='#34d399'; dctx.lineWidth=2.5; dctx.beginPath(); dctx.arc(px,py,8,0,Math.PI*2); dctx.stroke();
+}
+
+/* ============ 解说 ============ */
+const copy={
+  1:{tag:'STEP 1 · 天眼布控',title:'选泄漏点 + 气象 + 看扩散初起',
+    body:'<b>在地图上点一下</b>选择泄漏位置（<span class="rd">红点</span>）——这是你定的，算法事先不知道。气体随风扩散形成浓度云，<span class="hl">颜色越红浓度越高</span>。16 个监测点（蓝点）覆盖整个园区，气体飘到哪、哪就报警，<span class="grn">离得近、正对风的先触发</span>。<br><br>气象来自<span class="hl">和风天气</span>（下方可填 Key 启用实时），风速风向直接驱动扩散。<br><br>记住这些监测点读数——下一步就要靠它们<b>倒推</b>你选的漏点。',
+    hint:'▶ 播放看气体扩散 · 👆 点击地图换泄漏点', tip:'泄漏后 X 秒 · 监测点陆续触发'},
+  2:{tag:'STEP 2 · 粒子寻源',title:'撒候选源，比谁更像',
+    body:'现在<b>忘掉红点</b>——假设我们只知道监测点读数。怎么倒推漏点？<span class="hl">撒网</span>：往地图撒一大把假想泄漏点（白点，叫<span class="hl">粒子</span>）。对每个，用同一套物理模型算"要是它漏的，16 个监测点该读多少"，再跟真实读数比——<span class="grn">算得准的留下变亮，算得偏的淘汰</span>。<br><br>多轮筛选（退火 + 重采样），粒子集中到一处。',
+    hint:'▶ 播放看粒子从满图散开 → 聚焦', tip:'候选源筛选中 · 高分粒子越来越集中'},
+  3:{tag:'STEP 3 · 精准锁定',title:'锁定源头 + 量化强度 + 给出把握',
+    body:'粒子聚成那团，重心（<span class="grn">绿点</span>）就是算法算出的泄漏源。外面绿圈是<span class="grn">95% 把握圈</span>——真源有 95% 落在圈内。<br><br>还能算出<b>漏多猛</b>（排放强度 Q）。红色五角星是<span class="rd">你选的真源</span>——<b>看是不是几乎重合</b>！换不同泄漏点再试，算法照样能找准——这就是可靠性。下方概率山山尖应压在你选的点上。',
+    hint:'▶ 播放看可信圈收紧、与真源比对', tip:'算出的源 vs 你选的真源 · 几乎重合'}
+};
+function updateUI(){ const c=copy[state.step];
+  document.getElementById('stepTag').textContent=c.tag; document.getElementById('stepTitle').textContent=c.title;
+  document.getElementById('stepBody').innerHTML=c.body; document.getElementById('animHint').innerHTML=c.hint;
+  const tcur=Math.round(lerp(state.frameTimes[0],state.frameTimes[state.frameTimes.length-1],state.subProgress));
+  document.getElementById('sceneTip').textContent=c.tip.replace('X',tcur);
+  document.getElementById('progBar').style.width=(state.subProgress*100).toFixed(1)+'%';
+  document.getElementById('btnSub').textContent=state.subPlaying?'⏸ 暂停':(state.subProgress>=1?'↺ 重播':'▶ 播放本步');
+  document.getElementById('btnNext').disabled=state.step>=3; document.getElementById('btnNext').textContent=state.step>=3?'已完成':'下一步 →';
+  document.getElementById('btnAuto').textContent=state.autoPlaying?'⏹ 停止全程':'▶ 自动播放全程';
+  document.querySelectorAll('.step').forEach(el=>el.classList.toggle('active',parseInt(el.dataset.step)===state.step));
+  for(let i=1;i<=3;i++) document.getElementById('below'+i).classList.toggle('show',i===state.step);
+  if(state.step===1){ buildSensorTable(); }
+  if(state.step===2 && state.pf){ const H=state.pf.history, hi=H[Math.min(H.length-1,Math.floor(state.subProgress*H.length))];
+    document.getElementById('algGrid').innerHTML=[
+      {k:'前向算子',v:'条件平流-扩散'},{k:'粒子数',v:'800'},
+      {k:'迭代轮次',v:(hi?hi.it:0)+' / '+H.length},{k:'退火 β',v:hi?hi.beta.toFixed(2):'0'},
+      {k:'有效样本 ESS',v:hi?hi.ess.toFixed(0):'0'},{k:'数据 RMSE',v:hi?hi.rmse.toFixed(2)+' ppm':'—'},
+      {k:'到达时间约束',v:'启用'},{k:'重采样+MCMC复兴',v:'是'},
+    ].map(d=>`<div class="rc"><div class="k">${d.k}</div><div class="v">${d.v}</div></div>`).join('');
+    document.getElementById('filtBar').style.width=(state.subProgress*100).toFixed(0)+'%';
+    document.getElementById('filtDesc').textContent=state.subProgress<1?'已淘汰 '+Math.round((1-state.subProgress)*100)+'% 低分候选，高分粒子正聚向一处……':'筛选完成：粒子集中在一个小区域，那里就是源最可能在的地方。'; }
+  if(state.step===3 && state.pf){ const e=state.pf.estimate;
+    document.getElementById('resultGrid').innerHTML=[
+      {k:'你选的真源',v:'('+state.leak.x.toFixed(0)+', '+state.leak.y.toFixed(0)+')',c:'r'},
+      {k:'算法算出',v:'('+e[0].toFixed(0)+', '+e[1].toFixed(0)+')',c:'g'},
+      {k:'位置误差',v:state.pf.locErr.toFixed(1)+' m',c:'c'},
+      {k:'是否命中',v:state.pf.locErr<=15?'✓ 命中':'✗',c:state.pf.locErr<=15?'g':'r'},
+    ].map(d=>`<div class="rc"><div class="k">${d.k}</div><div class="v ${d.c}">${d.v}</div></div>`).join('');
+    drawDensity();
+  }
+}
+function buildSensorTable(){ const rows=state.sensors.map((s,i)=>({s,a:state.arrival[i],o:state.observed[i]})).sort((a,b)=>(a.a||9999)-(b.b||9999));
+  document.getElementById('sensorTable').innerHTML='<tr><th>监测点</th><th>位置</th><th>浓度</th><th>气体到达</th></tr>'+rows.map(r=>`<tr><td>${r.s.id}</td><td>(${r.s.x.toFixed(0)},${r.s.y.toFixed(0)})</td><td>${r.o.toFixed(1)} ppm</td><td>${r.a!=null?r.a.toFixed(0)+' s':'未触发'}</td></tr>`).join('');
+}
+function buildWeatherCard(){ const w=state.weather, real=w.source==='qweather';
+  document.getElementById('weatherCard').innerHTML='<div class="wcard"><div class="wsrc '+(real?'':'def')+'">'+(real?'🟢 和风天气 API · 实况':'🟡 示例气象（填 Key 启用实时）')+'</div>'+
+    '<div class="wgrid"><div class="wi"><span>风速</span><b>'+w.windSpeed.toFixed(1)+' m/s</b></div><div class="wi"><span>风向</span><b>'+w.windDir+' '+w.windDirDeg+'°</b></div><div class="wi"><span>温度</span><b>'+w.temp+'℃</b></div><div class="wi"><span>气压</span><b>'+w.pressure+' hPa</b></div><div class="wi"><span>湿度</span><b>'+w.humidity+'%</b></div><div class="wi"><span>天气</span><b>'+w.text+'</b></div></div>'+
+    '<div class="wfetch"><input id="wkKey" value="d170476dadbe478d9fddd16864c98b7a"><input id="wkLoc" value="116.41,39.92"><button id="wkBtn">获取实时</button></div></div>';
+  document.getElementById('wkBtn').onclick=fetchQweather;
+}
+
+/* ============ 和风天气 ============ */
+async function fetchQweather(){ const key=document.getElementById('wkKey').value.trim(), loc=document.getElementById('wkLoc').value.trim()||'116.41,39.92';
+  if(!key){ alert('请填入和风天气 API Key'); return; }
+  const btn=document.getElementById('wkBtn'); btn.textContent='获取中…'; btn.disabled=true;
+  try{ const r=await fetch('https://nf5khxj9md.re.qweatherapi.com/v7/weather/now?location='+encodeURIComponent(loc)+'&key='+encodeURIComponent(key));
+    const d=await r.json(); if(String(d.code)!=='200') throw new Error('code '+d.code); const now=d.now, kmh=parseFloat(now.windSpeed);
+    state.weather={source:'qweather',location:loc,windSpeed:kmh/3.6,windDir:now.windDir||'',windDirDeg:parseFloat(now.wind360||180),wind360:parseFloat(now.wind360||180),temp:parseFloat(now.temp),pressure:parseFloat(now.pressure),humidity:parseFloat(now.humidity),text:now.text||'',obsTime:now.obsTime||''};
+    state.env=buildEnv(state.weather); computeObservations(); partInit=null; if(state.pf){state.pf=null;} buildWeatherCard(); updateUI(); drawScene();
+    btn.textContent='已更新 ✓'; setTimeout(()=>{btn.textContent='获取实时';btn.disabled=false;},1500);
+  }catch(e){ alert('获取失败：'+e.message+'（可能是 Key 无效或网络/CORS 限制）'); btn.textContent='获取实时'; btn.disabled=false; } }
+
+/* ============ 交互 ============ */
+function setLeak(x,y){ state.leak={x:Math.max(40,Math.min(960,x)),y:Math.max(40,Math.min(610,y))}; state.step=1; state.autoPlaying=false; computeObservations(); partInit=null; state.pf=null; state.pfStale=true; state.subProgress=0; state.subPlaying=false; drawScene(); updateUI(); }
+scene.addEventListener('click',e=>{ if(state.step!==1) return; const rect=scene.getBoundingClientRect(); setLeak((e.clientX-rect.left)/rect.width*1000,(e.clientY-rect.top)/rect.height*650); });
+function ensurePF(cb){ if(state.pf && !state.pfStale){ cb(); return; } document.getElementById('calcTip').classList.add('show');
+  setTimeout(()=>{ state.pf=runPF(); state.pfStale=false; kdeCache=kde(state.pf.particles,state.pf.weights); fillAnimFinal(); document.getElementById('calcTip').classList.remove('show'); cb(); },60); }
+function goStep(n,autoplay){ state.step=n; state.subProgress=0; state.subPlaying=autoplay||false;
+  if(n===1){ drawScene(); updateUI(); }
+  else if(n===2){ ensurePF(()=>{ partInit=null; drawScene(); updateUI(); if(autoplay) state.subPlaying=true; }); }
+  else if(n===3){ ensurePF(()=>{ fillAnimFinal(); drawScene(); updateUI(); if(autoplay) state.subPlaying=true; }); }
+}
+function toggleSub(){ if(state.autoPlaying) state.autoPlaying=false; if(state.subProgress>=1) state.subProgress=0;
+  if(state.step>=2 && !state.pf){ ensurePF(()=>{ state.subPlaying=true; partInit=null; drawScene(); updateUI(); }); return; }
+  state.subPlaying=!state.subPlaying; updateUI(); }
+function nextStep(){ if(state.step<3){ state.autoPlaying=false; goStep(state.step+1,false); } }
+function onSubEnd(){ if(!state.autoPlaying) return; setTimeout(()=>{ if(!state.autoPlaying) return; if(state.step<3) goStep(state.step+1,true); else {state.autoPlaying=false;updateUI();} },1400); }
+function toggleAuto(){ if(state.autoPlaying){state.autoPlaying=false;state.subPlaying=false;updateUI();return;} state.autoPlaying=true; goStep(1,true); }
+
+document.querySelectorAll('.step').forEach(el=>el.addEventListener('click',()=>{state.autoPlaying=false;goStep(parseInt(el.dataset.step),false);}));
+document.getElementById('btnSub').addEventListener('click',toggleSub);
+document.getElementById('btnNext').addEventListener('click',nextStep);
+document.getElementById('btnAuto').addEventListener('click',toggleAuto);
+
+/* ============ 动画循环 ============ */
+function loop(t){ if(state.subPlaying){ if(state.lastT) state.subProgress+=(t-state.lastT)/stepDur[state.step]; state.lastT=t;
+    if(state.subProgress>=1){ state.subProgress=1; state.subPlaying=false; state.lastT=0; drawScene(); updateUI(); onSubEnd(); }
+    else { drawScene(); if(state.step===2) updateUI(); } } else { state.lastT=0; } requestAnimationFrame(loop); }
+
+/* ============ 初始化 ============ */
+document.getElementById('layoutNote').textContent='16 个监测点在园区内做 jittered 网格布设（4×4 均匀覆盖 + 随机偏移），不依赖泄漏位置——无论你把泄漏点选在哪，下风方向都有监测点能捕捉到，这是源定位可靠性的基础。';
+state.sensors=buildSensors(); state.env=buildEnv(state.weather); computeObservations(); buildWeatherCard(); goStep(1,false); requestAnimationFrame(loop);
+setTimeout(()=>{ const k=document.getElementById('wkKey'); if(k&&k.value) fetchQweather(); }, 400);
+if(location.hash==='#auto') setTimeout(toggleAuto, 600);
+</script>
+</body>
+</html>

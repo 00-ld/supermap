@@ -63,7 +63,14 @@ export const roads = [
   { id: 'road-logistics-loop', x: 984, y: 246, w: 14, h: 432, main: false },
 ]
 
-export const pipes = []
+export const pipes = [
+  { id: 'pipe-main-01', name: '西侧原油主管廊', from: [314, 456], to: [622, 454], status: '运行中', medium: '原油/VOC', diameter: 'DN300', hazardLevel: 0.9 },
+  { id: 'pipe-main-02', name: '西南储罐出料管廊', from: [458, 512], to: [700, 504], status: '运行中', medium: '成品油/溶剂', diameter: 'DN250', hazardLevel: 0.86 },
+  { id: 'pipe-main-03', name: '中部油品连通管廊', from: [622, 454], to: [798, 412], status: '运行中', medium: '油气/氮封', diameter: 'DN200', hazardLevel: 0.84 },
+  { id: 'pipe-main-04', name: '东侧塔器进出料管廊', from: [798, 412], to: [910, 500], status: '运行中', medium: '轻烃/VOC', diameter: 'DN200', hazardLevel: 0.82 },
+  { id: 'pipe-main-05', name: '东北罐组装卸管汇', from: [982, 344], to: [1102, 336], status: '运行中', medium: '油品/VOC', diameter: 'DN250', hazardLevel: 0.88 },
+  { id: 'pipe-main-06', name: '塔器-罐组连通管廊', from: [910, 500], to: [982, 344], status: '运行中', medium: '溶剂/轻烃', diameter: 'DN200', hazardLevel: 0.82 },
+]
 
 export const zones = [
   { id: 'prod_a', name: '西中生产区', color: '#4d7c67', tag: '生产', status: '运行中', key: true },
@@ -81,6 +88,7 @@ export const stats = [
   { filter: 'building', value: facilities.filter(item => item.type === 'production').length, label: '生产装置', color: '' },
   { filter: 'tank', value: facilities.filter(item => item.type === 'tank').length, label: '罐组', color: '' },
   { filter: 'tower', value: facilities.filter(item => item.type === 'tower').length, label: '塔器', color: '' },
+  { filter: 'pipe', value: pipes.length, label: '油品管廊', color: '' },
   { filter: 'key', value: keyAreas.length, label: '重点区域', color: 'var(--info)' },
 ]
 

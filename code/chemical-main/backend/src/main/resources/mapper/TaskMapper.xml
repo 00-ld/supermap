@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.at.mapper.TaskMapper">
+
+    <resultMap id="taskResultMap" type="com.at.pojo.Task">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="description" column="description"/>
+        <result property="type" column="type"/>
+        <result property="status" column="status"/>
+        <result property="warningHistoryId" column="warning_history_id"/>
+        <result property="gasType" column="gas_type"/>
+        <result property="assigneeType" column="assignee_type"/>
+        <result property="carId" column="car_id"/>
+        <result property="employeeId" column="employee_id"/>
+        <result property="x" column="x"/>
+        <result property="y" column="y"/>
+        <result property="areaName" column="area_name"/>
+        <result property="creatorUserId" column="creator_user_id"/>
+        <result property="assignedTime" column="assigned_time"/>
+        <result property="acceptedTime" column="accepted_time"/>
+        <result property="checkinTime" column="checkin_time"/>
+        <result property="checkinX" column="checkin_x"/>
+        <result property="checkinY" column="checkin_y"/>
+        <result property="checkinPhotoBase64" column="checkin_photo_base64"/>
+        <result property="yoloPersonCount" column="yolo_person_count"/>
+        <result property="checkinRemark" column="checkin_remark"/>
+        <result property="reviewResult" column="review_result"/>
+        <result property="reviewRemark" column="review_remark"/>
+        <result property="reviewTime" column="review_time"/>
+        <result property="reviewerUserId" column="reviewer_user_id"/>
+        <result property="warningResolved" column="warning_resolved"/>
+        <result property="inspectRecordId" column="inspect_record_id"/>
+        <result property="source" column="source"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <!-- 公用列清单，避免手写漏列。 -->
+    <sql id="taskColumns">
+        id, title, description, type, status,
+        warning_history_id, gas_type, assignee_type, car_id, employee_id,
+        x, y, area_name, creator_user_id, assigned_time, accepted_time,
+        checkin_time, checkin_x, checkin_y, checkin_photo_base64, yolo_person_count, checkin_remark,
+        review_result, review_remark, review_time, reviewer_user_id,
+        warning_resolved, inspect_record_id, source, created_at, updated_at
+    </sql>
+
+    <insert id="insert" parameterType="com.at.pojo.Task" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO task (title, description, type, status,
+                          warning_history_id, gas_type, assignee_type, car_id, employee_id,
+                          x, y, area_name, creator_user_id,
+                          warning_resolved, source)
+        VALUES (#{title}, #{description},
+                <choose>
+                    <when test="type != null and type != ''">#{type}</when>
+                    <otherwise>'incident'</otherwise>
+                </choose>,
+                <choose>
+                    <when test="status != null and status != ''">#{status}</when>
+                    <otherwise>'pending'</otherwise>
+                </choose>,
+                #{warningHistoryId}, #{gasType}, #{assigneeType}, #{carId}, #{employeeId},
+                #{x}, #{y}, #{areaName}, #{creatorUserId},
+                <choose>
+                    <when test="warningResolved != null">#{warningResolved}</when>
+                    <otherwise>0</otherwise>
+                </choose>,
+                <choose>
+                    <when test="source != null and source != ''">#{source}</when>
+                    <otherwise>'mobile'</otherwise>
+                </choose>)
+    </insert>
+
+    <!-- 动态 set：仅更新非 null 字段。状态流转由 updateStatus CAS 负责，此方法不碰 status。 -->
+    <update id="updateById" parameterType="com.at.pojo.Task">
+        UPDATE task
+        <set>
+            <if test="title != null">title = #{title},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="warningHistoryId != null">warning_history_id = #{warningHistoryId},</if>
+            <if test="gasType != null">gas_type = #{gasType},</if>
+            <if test="assigneeType != null">assignee_type = #{assigneeType},</if>
+            <if test="carId != null">car_id = #{carId},</if>
+            <if test="employeeId != null">employee_id = #{employeeId},</if>
+            <if test="x != null">x = #{x},</if>
+            <if test="y != null">y = #{y},</if>
+            <if test="areaName != null">area_name = #{areaName},</if>
+            <if test="assignedTime != null">assigned_time = #{assignedTime},</if>
+            <if test="acceptedTime != null">accepted_time = #{acceptedTime},</if>
+            <if test="checkinTime != null">checkin_time = #{checkinTime},</if>
+            <if test="checkinX != null">checkin_x = #{checkinX},</if>
+            <if test="checkinY != null">checkin_y = #{checkinY},</if>
+            <if test="checkinPhotoBase64 != null">checkin_photo_base64 = #{checkinPhotoBase64},</if>
+            <if test="yoloPersonCount != null">yolo_person_count = #{yoloPersonCount},</if>
+            <if test="checkinRemark != null">checkin_remark = #{checkinRemark},</if>
+            <if test="reviewResult != null">review_result = #{reviewResult},</if>
+            <if test="reviewRemark != null">review_remark = #{reviewRemark},</if>
+            <if test="reviewTime != null">review_time = #{reviewTime},</if>
+            <if test="reviewerUserId != null">reviewer_user_id = #{reviewerUserId},</if>
+            <if test="warningResolved != null">warning_resolved = #{warningResolved},</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectById" resultMap="taskResultMap">
+        SELECT <include refid="taskColumns"/>
+        FROM task
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectByQuery" resultMap="taskResultMap">
+        SELECT <include refid="taskColumns"/>
+        FROM task
+        <where>
+            <if test="status != null and status != ''">AND status = #{status}</if>
+            <if test="assigneeType != null and assigneeType != ''">AND assignee_type = #{assigneeType}</if>
+            <if test="carId != null">AND car_id = #{carId}</if>
+            <if test="employeeId != null">AND employee_id = #{employeeId}</if>
+            <if test="warningHistoryId != null">AND warning_history_id = #{warningHistoryId}</if>
+            <if test="keyword != null and keyword != ''">AND (title LIKE CONCAT('%', #{keyword}, '%') OR area_name LIKE CONCAT('%', #{keyword}, '%'))</if>
+        </where>
+        ORDER BY created_at DESC, id DESC
+    </select>
+
+    <select id="selectByAssignee" resultMap="taskResultMap">
+        SELECT <include refid="taskColumns"/>
+        FROM task
+        <where>
+            <if test="assigneeType != null and assigneeType != ''">AND assignee_type = #{assigneeType}</if>
+            <if test="employeeId != null">AND employee_id = #{employeeId}</if>
+            <if test="carId != null">AND car_id = #{carId}</if>
+            <if test="(employeeId == null and carId == null)">AND 1 = 0</if>
+        </where>
+        ORDER BY created_at DESC, id DESC
+    </select>
+
+    <!-- 状态机 CAS 原语：仅 fromStatus 匹配时更新。不碰业务字段，避免覆盖。 -->
+    <update id="updateStatus">
+        UPDATE task SET status = #{toStatus}, updated_at = NOW()
+        WHERE id = #{id} AND status = #{fromStatus}
+    </update>
+
+    <!-- 指派补字段（status 已由 updateStatus 改为 assigned）。 -->
+    <update id="updateAssignee" parameterType="com.at.pojo.Task">
+        UPDATE task
+        SET assignee_type = #{assigneeType},
+            car_id = #{carId},
+            employee_id = #{employeeId},
+            assigned_time = #{assignedTime},
+            updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <!-- 打卡补字段（status 已由 updateStatus 改为 pending_review）。 -->
+    <update id="updateCheckin" parameterType="com.at.pojo.Task">
+        UPDATE task
+        SET checkin_time = #{checkinTime},
+            checkin_x = #{checkinX},
+            checkin_y = #{checkinY},
+            checkin_photo_base64 = #{checkinPhotoBase64},
+            yolo_person_count = #{yoloPersonCount},
+            checkin_remark = #{checkinRemark},
+            updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <!-- 验收补字段（status 已由 updateStatus 改为 completed/processing）。 -->
+    <update id="updateReview" parameterType="com.at.pojo.Task">
+        UPDATE task
+        SET review_result = #{reviewResult},
+            review_remark = #{reviewRemark},
+            review_time = #{reviewTime},
+            reviewer_user_id = #{reviewerUserId},
+            <if test="warningResolved != null">warning_resolved = #{warningResolved},</if>
+            updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+</mapper>

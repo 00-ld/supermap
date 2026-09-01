@@ -166,28 +166,6 @@ ON DUPLICATE KEY UPDATE
     `y` = VALUES(`y`),
     `gas_type` = VALUES(`gas_type`);
 
-CREATE TABLE IF NOT EXISTS `sensor` (
-    `id` VARCHAR(50) NOT NULL,
-    `x` DOUBLE NOT NULL,
-    `y` DOUBLE NOT NULL,
-    `installation_height` DOUBLE DEFAULT 1.5,
-    `effective_range` DOUBLE DEFAULT 20,
-    `detection_range` VARCHAR(200) DEFAULT 'CO / CH4 / NH3 / O2',
-    `install_remark` VARCHAR(500) DEFAULT '',
-    `priority` INT DEFAULT 3,
-    `risk` DOUBLE DEFAULT 0.3,
-    `type` VARCHAR(20) DEFAULT 'gas',
-    `mode` VARCHAR(10) DEFAULT 'auto',
-    `last_sample_time` BIGINT DEFAULT NULL,
-    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='传感器布点表';
-
--- Older local databases created sensor.id as INT. Keep startup re-runnable
--- before sensor_reading adds a VARCHAR(50) foreign key to sensor(id).
-ALTER TABLE `sensor` MODIFY COLUMN `id` VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL;
-
 CREATE TABLE IF NOT EXISTS `sensor_layout` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `layout_name` VARCHAR(100) NOT NULL,
@@ -242,31 +220,6 @@ CREATE TABLE IF NOT EXISTS `simulation_scenario` (
     KEY `idx_simulation_scenario_started_at` (`started_at`),
     KEY `idx_simulation_scenario_gas_type` (`gas_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='仿真监测场景表';
-
-CREATE TABLE IF NOT EXISTS `sensor_reading` (
-    `id` BIGINT NOT NULL AUTO_INCREMENT,
-    `scenario_id` BIGINT DEFAULT NULL COMMENT '仿真场景 ID；真实硬件接入前不冒充实测',
-    `sensor_id` VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '传感器点位 ID',
-    `gas_type` VARCHAR(20) NOT NULL COMMENT '气体类型',
-    `concentration` DOUBLE NOT NULL COMMENT '浓度读数',
-    `unit` VARCHAR(16) NOT NULL DEFAULT 'ppm' COMMENT '浓度单位',
-    `sampled_at` DATETIME NOT NULL COMMENT '采样时间',
-    `received_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '入库接收时间',
-    `source` VARCHAR(32) NOT NULL DEFAULT 'simulation' COMMENT 'simulation / hardware / manual；当前接口只写 simulation',
-    `quality_status` VARCHAR(32) NOT NULL DEFAULT 'SIMULATED' COMMENT 'SIMULATED 表示仿真派生读数',
-    `raw_payload` JSON DEFAULT NULL COMMENT '原始仿真输入摘要',
-    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '入库创建时间',
-    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `uq_sensor_reading_sample` (`scenario_id`, `sensor_id`, `gas_type`, `sampled_at`),
-    KEY `idx_sensor_reading_sensor_time` (`sensor_id`, `sampled_at`),
-    KEY `idx_sensor_reading_scenario_time` (`scenario_id`, `sampled_at`),
-    KEY `idx_sensor_reading_gas_time` (`gas_type`, `sampled_at`),
-    CONSTRAINT `fk_sensor_reading_scenario`
-        FOREIGN KEY (`scenario_id`) REFERENCES `simulation_scenario`(`id`) ON DELETE SET NULL,
-    CONSTRAINT `fk_sensor_reading_sensor`
-        FOREIGN KEY (`sensor_id`) REFERENCES `sensor`(`id`) ON DELETE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='气体传感器连续采样读数表';
 
 CREATE TABLE IF NOT EXISTS `warning_history` (
     `id` INT NOT NULL AUTO_INCREMENT,
@@ -357,113 +310,6 @@ CREATE TABLE IF NOT EXISTS `inspect_record` (
     KEY `idx_inspect_record_status` (`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='YOLO 图像识别记录表';
 
-CREATE TABLE IF NOT EXISTS `monitor_point` (
-    `id` BIGINT NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(100) NOT NULL,
-    `area_name` VARCHAR(100) DEFAULT NULL COMMENT '所属区域',
-    `source_type` VARCHAR(32) NOT NULL DEFAULT 'manual' COMMENT '监测点来源：manual / imported / generated',
-    `sensor_id` VARCHAR(50) DEFAULT NULL COMMENT '绑定传感器编号，未绑定时为空',
-    `camera_url` VARCHAR(255) DEFAULT NULL COMMENT '绑定视频源地址，未绑定时为空',
-    `x` DOUBLE DEFAULT NULL COMMENT '园区地图 X 坐标',
-    `y` DOUBLE DEFAULT NULL COMMENT '园区地图 Y 坐标',
-    `quality_status` VARCHAR(32) NOT NULL DEFAULT 'UNBOUND' COMMENT '绑定质量状态：UNBOUND / SIMULATED / CONFIGURED / VERIFIED',
-    `create_time` DATETIME DEFAULT CURRENT_TIMESTAMP,
-    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='监测点表';
-
-SET @add_monitor_point_area_name_column = (
-    SELECT IF(COUNT(*) = 0, 'ALTER TABLE `monitor_point` ADD COLUMN `area_name` VARCHAR(100) DEFAULT NULL COMMENT ''所属区域''', 'SELECT 1')
-    FROM information_schema.COLUMNS
-    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'monitor_point' AND COLUMN_NAME = 'area_name'
-);
-PREPARE add_monitor_point_area_name_column_stmt FROM @add_monitor_point_area_name_column;
-EXECUTE add_monitor_point_area_name_column_stmt;
-DEALLOCATE PREPARE add_monitor_point_area_name_column_stmt;
-
-SET @add_monitor_point_source_type_column = (
-    SELECT IF(COUNT(*) = 0, 'ALTER TABLE `monitor_point` ADD COLUMN `source_type` VARCHAR(32) NOT NULL DEFAULT ''manual'' COMMENT ''监测点来源：manual / imported / generated / seeded_dom_sensor''', 'SELECT 1')
-    FROM information_schema.COLUMNS
-    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'monitor_point' AND COLUMN_NAME = 'source_type'
-);
-PREPARE add_monitor_point_source_type_column_stmt FROM @add_monitor_point_source_type_column;
-EXECUTE add_monitor_point_source_type_column_stmt;
-DEALLOCATE PREPARE add_monitor_point_source_type_column_stmt;
-
-SET @add_monitor_point_sensor_id_column = (
-    SELECT IF(COUNT(*) = 0, 'ALTER TABLE `monitor_point` ADD COLUMN `sensor_id` VARCHAR(50) DEFAULT NULL COMMENT ''绑定传感器编号，未绑定时为空''', 'SELECT 1')
-    FROM information_schema.COLUMNS
-    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'monitor_point' AND COLUMN_NAME = 'sensor_id'
-);
-PREPARE add_monitor_point_sensor_id_column_stmt FROM @add_monitor_point_sensor_id_column;
-EXECUTE add_monitor_point_sensor_id_column_stmt;
-DEALLOCATE PREPARE add_monitor_point_sensor_id_column_stmt;
-
-SET @add_monitor_point_camera_url_column = (
-    SELECT IF(COUNT(*) = 0, 'ALTER TABLE `monitor_point` ADD COLUMN `camera_url` VARCHAR(255) DEFAULT NULL COMMENT ''绑定视频源地址，未绑定时为空''', 'SELECT 1')
-    FROM information_schema.COLUMNS
-    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'monitor_point' AND COLUMN_NAME = 'camera_url'
-);
-PREPARE add_monitor_point_camera_url_column_stmt FROM @add_monitor_point_camera_url_column;
-EXECUTE add_monitor_point_camera_url_column_stmt;
-DEALLOCATE PREPARE add_monitor_point_camera_url_column_stmt;
-
-SET @add_monitor_point_x_column = (
-    SELECT IF(COUNT(*) = 0, 'ALTER TABLE `monitor_point` ADD COLUMN `x` DOUBLE DEFAULT NULL COMMENT ''园区地图 X 坐标''', 'SELECT 1')
-    FROM information_schema.COLUMNS
-    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'monitor_point' AND COLUMN_NAME = 'x'
-);
-PREPARE add_monitor_point_x_column_stmt FROM @add_monitor_point_x_column;
-EXECUTE add_monitor_point_x_column_stmt;
-DEALLOCATE PREPARE add_monitor_point_x_column_stmt;
-
-SET @add_monitor_point_y_column = (
-    SELECT IF(COUNT(*) = 0, 'ALTER TABLE `monitor_point` ADD COLUMN `y` DOUBLE DEFAULT NULL COMMENT ''园区地图 Y 坐标''', 'SELECT 1')
-    FROM information_schema.COLUMNS
-    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'monitor_point' AND COLUMN_NAME = 'y'
-);
-PREPARE add_monitor_point_y_column_stmt FROM @add_monitor_point_y_column;
-EXECUTE add_monitor_point_y_column_stmt;
-DEALLOCATE PREPARE add_monitor_point_y_column_stmt;
-
-SET @add_monitor_point_quality_status_column = (
-    SELECT IF(COUNT(*) = 0, 'ALTER TABLE `monitor_point` ADD COLUMN `quality_status` VARCHAR(32) NOT NULL DEFAULT ''UNBOUND'' COMMENT ''绑定质量状态：UNBOUND / SIMULATED / CONFIGURED / VERIFIED''', 'SELECT 1')
-    FROM information_schema.COLUMNS
-    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'monitor_point' AND COLUMN_NAME = 'quality_status'
-);
-PREPARE add_monitor_point_quality_status_column_stmt FROM @add_monitor_point_quality_status_column;
-EXECUTE add_monitor_point_quality_status_column_stmt;
-DEALLOCATE PREPARE add_monitor_point_quality_status_column_stmt;
-
-SET @add_monitor_point_updated_at_column = (
-    SELECT IF(COUNT(*) = 0, 'ALTER TABLE `monitor_point` ADD COLUMN `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT ''更新时间''', 'SELECT 1')
-    FROM information_schema.COLUMNS
-    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'monitor_point' AND COLUMN_NAME = 'updated_at'
-);
-PREPARE add_monitor_point_updated_at_column_stmt FROM @add_monitor_point_updated_at_column;
-EXECUTE add_monitor_point_updated_at_column_stmt;
-DEALLOCATE PREPARE add_monitor_point_updated_at_column_stmt;
-
-UPDATE monitor_point
-SET source_type = COALESCE(NULLIF(source_type, ''), 'manual'),
-    quality_status = COALESCE(NULLIF(quality_status, ''), 'UNBOUND');
-
-INSERT INTO monitor_point (id, name, area_name, source_type, sensor_id, camera_url, x, y, quality_status)
-VALUES
-    (1, 'P1 甲烷重点监测点', '生产一区 P1', 'seeded_dom_sensor', 'P1-01H', '/gas_video/气体1.mp4', 318.0, 258.0, 'CONFIGURED'),
-    (2, 'P2 生产装置监测点', '西北生产装置区', 'seeded_dom_sensor', 'P2-01L', '/gas_video/气体2.mp4', 984.0, 456.0, 'CONFIGURED'),
-    (3, '储罐区甲烷监测点', '储罐与泵区', 'seeded_dom_sensor', 'TK-01L', '/gas_video/气体3.mp4', 276.0, 456.0, 'CONFIGURED'),
-    (4, '仓储物流边界监测点', '仓储物流区', 'seeded_dom_sensor', 'WH-01', '/gas_video/气体4.mp4', 1100.0, 560.0, 'CONFIGURED')
-ON DUPLICATE KEY UPDATE
-    name = VALUES(name),
-    area_name = VALUES(area_name),
-    source_type = VALUES(source_type),
-    sensor_id = VALUES(sensor_id),
-    camera_url = VALUES(camera_url),
-    x = VALUES(x),
-    y = VALUES(y),
-    quality_status = VALUES(quality_status);
-
 CREATE TABLE IF NOT EXISTS `employee` (
     `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键',
     `name` VARCHAR(50) NOT NULL COMMENT '姓名',
@@ -524,86 +370,6 @@ ON DUPLICATE KEY UPDATE `name` = VALUES(`name`), `age` = VALUES(`age`), `gender`
     `phone` = VALUES(`phone`), `department` = VALUES(`department`), `employee_no` = VALUES(`employee_no`),
     `status` = VALUES(`status`), `job_desc` = VALUES(`job_desc`);
 
--- 真实 DOM 二维地图传感器布点种子数据。
--- 源地图：external-real-dom-source/ResultDOM_2.tiff（脱敏来源标识，不记录本机绝对路径）
--- 源分辨率：0.05 m/pixel；前端资源：frontend/public/maps/real-park-dom.jpg。
--- 坐标为真实地图米制坐标，严格限制在 1587.2m x 947.2m 数据边界内。
--- 布点依据：GB/T 50493-2019。CO/CH4/NH3/O2 混合点按有毒气体 4m 水平覆盖半径控制；
--- 仓储区和应急边界点使用 8m 覆盖半径。
-
-
--- 重建真实 DOM 点位集，避免旧版 canvas 假点位继续混入数据库。
-DELETE FROM sensor_reading;
-DELETE FROM sensor;
-
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('PA-01L', 272.0, 286.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.2.1；真实DOM识别区域：生产装置区；点位坐标(272.0m,286.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.86, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('PA-01H', 272.0, 286.0, 2.2, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 6.1.2；真实DOM识别区域：生产装置区；点位坐标(272.0m,286.0m)，安装高度2.2m，覆盖半径4.0m；高位配对点，覆盖轻气上浮或顶部积聚风险', 1, 0.86, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('PA-02L', 336.0, 332.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.2.1；真实DOM识别区域：生产装置区；点位坐标(336.0m,332.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.84, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('PA-03L', 420.0, 354.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.2.1；真实DOM识别区域：生产装置区；点位坐标(420.0m,354.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.82, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('PA-03H', 420.0, 354.0, 2.2, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 6.1.2；真实DOM识别区域：生产装置区；点位坐标(420.0m,354.0m)，安装高度2.2m，覆盖半径4.0m；高位配对点，覆盖轻气上浮或顶部积聚风险', 1, 0.82, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('PA-04L', 510.0, 304.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.2.1；真实DOM识别区域：生产装置区；点位坐标(510.0m,304.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.80, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('PA-05L', 548.0, 398.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.2.1；真实DOM识别区域：生产装置区；点位坐标(548.0m,398.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.78, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('PA-05H', 548.0, 398.0, 2.2, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 6.1.2；真实DOM识别区域：生产装置区；点位坐标(548.0m,398.0m)，安装高度2.2m，覆盖半径4.0m；高位配对点，覆盖轻气上浮或顶部积聚风险', 1, 0.78, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('P1-01L', 318.0, 258.0, 0.5, 4.0, 'CH4/CO/NH3/O2', '依据 GB/T 50493-2019 4.2.1；真实DOM识别区域：生产一区 P1；点位坐标(318.0m,258.0m)，安装高度0.5m，覆盖半径4.0m；补充甲烷泄漏源近区低位监测点', 1, 0.88, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('P1-01H', 318.0, 258.0, 2.2, 4.0, 'CH4/CO/NH3/O2', '依据 GB/T 50493-2019 6.1.2；真实DOM识别区域：生产一区 P1；点位坐标(318.0m,258.0m)，安装高度2.2m，覆盖半径4.0m；甲烷轻气高位配对监测点', 1, 0.88, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('P1-02L', 392.0, 306.0, 0.5, 4.0, 'CH4/CO/NH3/O2', '依据 GB/T 50493-2019 4.2.1；真实DOM识别区域：生产一区 P1；点位坐标(392.0m,306.0m)，安装高度0.5m，覆盖半径4.0m；补充工艺设备间低位监测点', 1, 0.86, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('P1-03L', 468.0, 278.0, 0.5, 4.0, 'CH4/CO/NH3/O2', '依据 GB/T 50493-2019 4.2.1；真实DOM识别区域：生产一区 P1；点位坐标(468.0m,278.0m)，安装高度0.5m，覆盖半径4.0m；补充装置平台低位监测点', 1, 0.84, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('P1-03H', 468.0, 278.0, 2.2, 4.0, 'CH4/CO/NH3/O2', '依据 GB/T 50493-2019 6.1.2；真实DOM识别区域：生产一区 P1；点位坐标(468.0m,278.0m)，安装高度2.2m，覆盖半径4.0m；甲烷轻气高位配对监测点', 1, 0.84, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('P1-04L', 560.0, 356.0, 0.5, 4.0, 'CH4/CO/NH3/O2', '依据 GB/T 50493-2019 4.2.1；真实DOM识别区域：生产一区 P1；点位坐标(560.0m,356.0m)，安装高度0.5m，覆盖半径4.0m；补充东侧连通管廊低位监测点', 1, 0.82, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('TK-01L', 276.0, 456.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.3.1；真实DOM识别区域：储罐与泵区；点位坐标(276.0m,456.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.90, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('TK-02L', 346.0, 500.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.3.1；真实DOM识别区域：储罐与泵区；点位坐标(346.0m,500.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.90, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('TK-02H', 346.0, 500.0, 2.2, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 6.1.2；真实DOM识别区域：储罐与泵区；点位坐标(346.0m,500.0m)，安装高度2.2m，覆盖半径4.0m；高位配对点，覆盖轻气上浮或顶部积聚风险', 1, 0.88, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('TK-03L', 430.0, 470.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.3.1；真实DOM识别区域：储罐与泵区；点位坐标(430.0m,470.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.86, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('TK-04L', 520.0, 510.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.3.1；真实DOM识别区域：储罐与泵区；点位坐标(520.0m,510.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.84, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('TK-05L', 292.0, 598.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.3.1；真实DOM识别区域：储罐与泵区；点位坐标(292.0m,598.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.82, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('TK-06L', 372.0, 636.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.3.1；真实DOM识别区域：储罐与泵区；点位坐标(372.0m,636.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.82, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('TK-07L', 470.0, 604.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.3.1；真实DOM识别区域：储罐与泵区；点位坐标(470.0m,604.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.80, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('TK-08L', 558.0, 648.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.3.1；真实DOM识别区域：储罐与泵区；点位坐标(558.0m,648.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.80, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('TK-08H', 558.0, 648.0, 2.2, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 6.1.2；真实DOM识别区域：储罐与泵区；点位坐标(558.0m,648.0m)，安装高度2.2m，覆盖半径4.0m；高位配对点，覆盖轻气上浮或顶部积聚风险', 1, 0.78, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('PA-06L', 612.0, 292.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.2.1；真实DOM识别区域：生产装置区；点位坐标(612.0m,292.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 2, 0.70, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('PA-07L', 674.0, 288.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.2.1；真实DOM识别区域：生产装置区；点位坐标(674.0m,288.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 2, 0.70, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('PA-08L', 730.0, 366.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.2.1；真实DOM识别区域：生产装置区；点位坐标(730.0m,366.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 2, 0.68, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('PA-08H', 730.0, 366.0, 2.2, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 6.1.2；真实DOM识别区域：生产装置区；点位坐标(730.0m,366.0m)，安装高度2.2m，覆盖半径4.0m；高位配对点，覆盖轻气上浮或顶部积聚风险', 2, 0.68, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('PA-09L', 620.0, 456.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.2.1；真实DOM识别区域：生产装置区；点位坐标(620.0m,456.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.74, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('PA-10L', 704.0, 504.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.2.1；真实DOM识别区域：生产装置区；点位坐标(704.0m,504.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.74, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('PA-11L', 642.0, 590.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.2.1；真实DOM识别区域：生产装置区；点位坐标(642.0m,590.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.76, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('PA-12L', 736.0, 650.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.2.1；真实DOM识别区域：生产装置区；点位坐标(736.0m,650.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 2, 0.68, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('UT-01L', 782.0, 300.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.4.4；真实DOM识别区域：公用工程与管廊区；点位坐标(782.0m,300.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 2, 0.52, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('UT-01H', 782.0, 300.0, 2.2, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 6.1.2；真实DOM识别区域：公用工程与管廊区；点位坐标(782.0m,300.0m)，安装高度2.2m，覆盖半径4.0m；高位配对点，覆盖轻气上浮或顶部积聚风险', 2, 0.52, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('UT-02L', 826.0, 426.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.4.4；真实DOM识别区域：公用工程与管廊区；点位坐标(826.0m,426.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 2, 0.50, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('UT-03L', 800.0, 520.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.4.4；真实DOM识别区域：公用工程与管廊区；点位坐标(800.0m,520.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 2, 0.48, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('UT-04L', 832.0, 628.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.4.4；真实DOM识别区域：公用工程与管廊区；点位坐标(832.0m,628.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 2, 0.48, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('TW-01L', 872.0, 286.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.2.1；真实DOM识别区域：塔器与罐组区；点位坐标(872.0m,286.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.82, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('TW-01H', 872.0, 286.0, 2.2, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 6.1.2；真实DOM识别区域：塔器与罐组区；点位坐标(872.0m,286.0m)，安装高度2.2m，覆盖半径4.0m；高位配对点，覆盖轻气上浮或顶部积聚风险', 1, 0.82, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('TW-02L', 920.0, 326.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.2.1；真实DOM识别区域：塔器与罐组区；点位坐标(920.0m,326.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.82, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('TW-03L', 892.0, 410.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.2.1；真实DOM识别区域：塔器与罐组区；点位坐标(892.0m,410.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.80, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('TW-04L', 922.0, 500.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.2.1；真实DOM识别区域：塔器与罐组区；点位坐标(922.0m,500.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.78, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('TW-04H', 922.0, 500.0, 2.2, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 6.1.2；真实DOM识别区域：塔器与罐组区；点位坐标(922.0m,500.0m)，安装高度2.2m，覆盖半径4.0m；高位配对点，覆盖轻气上浮或顶部积聚风险', 1, 0.78, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('TW-05L', 880.0, 610.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.2.1；真实DOM识别区域：塔器与罐组区；点位坐标(880.0m,610.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.76, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('TW-06L', 938.0, 650.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.2.1；真实DOM识别区域：塔器与罐组区；点位坐标(938.0m,650.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 2, 0.68, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('PB-01L', 982.0, 284.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.3.1；真实DOM识别区域：东北罐组与管汇区；点位坐标(982.0m,284.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.80, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('PB-01H', 982.0, 284.0, 2.2, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 6.1.2；真实DOM识别区域：东北罐组与管汇区；点位坐标(982.0m,284.0m)，安装高度2.2m，覆盖半径4.0m；高位配对点，覆盖轻气上浮或顶部积聚风险', 1, 0.80, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('PB-02L', 1030.0, 294.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.3.1；真实DOM识别区域：东北罐组与管汇区；点位坐标(1030.0m,294.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.82, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('PB-03L', 1082.0, 304.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.3.1；真实DOM识别区域：东北罐组与管汇区；点位坐标(1082.0m,304.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.82, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('PB-03H', 1082.0, 304.0, 2.2, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 6.1.2；真实DOM识别区域：东北罐组与管汇区；点位坐标(1082.0m,304.0m)，安装高度2.2m，覆盖半径4.0m；高位配对点，覆盖轻气上浮或顶部积聚风险', 1, 0.82, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('PB-04L', 1132.0, 314.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.3.1；真实DOM识别区域：东北罐组与管汇区；点位坐标(1132.0m,314.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.80, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('PB-05L', 1180.0, 344.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.3.1；真实DOM识别区域：东北罐组与管汇区；点位坐标(1180.0m,344.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 1, 0.78, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('PB-06L', 1000.0, 386.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.3.1；真实DOM识别区域：东北罐组与管汇区；点位坐标(1000.0m,386.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 2, 0.70, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('PB-07L', 1100.0, 394.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.3.1；真实DOM识别区域：东北罐组与管汇区；点位坐标(1100.0m,394.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 2, 0.70, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('P2-01L', 984.0, 456.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.2.1；真实DOM识别区域：东中生产与污水装置区；点位坐标(984.0m,456.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 2, 0.64, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('P2-02L', 1060.0, 470.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.2.1；真实DOM识别区域：东中生产与污水装置区；点位坐标(1060.0m,470.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 2, 0.62, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('P2-03L', 1150.0, 470.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.2.1；真实DOM识别区域：东中生产与污水装置区；点位坐标(1150.0m,470.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 2, 0.62, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('P2-03H', 1150.0, 470.0, 2.2, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 6.1.2；真实DOM识别区域：东中生产与污水装置区；点位坐标(1150.0m,470.0m)，安装高度2.2m，覆盖半径4.0m；高位配对点，覆盖轻气上浮或顶部积聚风险', 2, 0.62, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('P2-04L', 990.0, 520.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.4.4；真实DOM识别区域：东中生产与污水装置区；点位坐标(990.0m,520.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 2, 0.58, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('P2-05L', 1130.0, 520.0, 0.5, 4.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.4.4；真实DOM识别区域：东中生产与污水装置区；点位坐标(1130.0m,520.0m)，安装高度0.5m，覆盖半径4.0m；低位近源点，覆盖有毒/重气贴地扩散风险', 2, 0.58, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('WH-01', 1100.0, 560.0, 1.5, 8.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.3.4；真实DOM识别区域：仓储物流区；点位坐标(1100.0m,560.0m)，安装高度1.5m，覆盖半径8.0m；边界/装卸通道巡检点，覆盖仓储与应急通道风险', 2, 0.48, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('WH-02', 1160.0, 560.0, 1.5, 8.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.3.4；真实DOM识别区域：仓储物流区；点位坐标(1160.0m,560.0m)，安装高度1.5m，覆盖半径8.0m；边界/装卸通道巡检点，覆盖仓储与应急通道风险', 2, 0.48, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('WH-03', 1200.0, 592.0, 1.5, 8.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.3.4；真实DOM识别区域：仓储物流区；点位坐标(1200.0m,592.0m)，安装高度1.5m，覆盖半径8.0m；边界/装卸通道巡检点，覆盖仓储与应急通道风险', 2, 0.46, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('WH-04', 1120.0, 630.0, 1.5, 8.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.3.4；真实DOM识别区域：仓储物流区；点位坐标(1120.0m,630.0m)，安装高度1.5m，覆盖半径8.0m；边界/装卸通道巡检点，覆盖仓储与应急通道风险', 2, 0.46, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('WH-05', 1180.0, 650.0, 1.5, 8.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.3.4；真实DOM识别区域：仓储物流区；点位坐标(1180.0m,650.0m)，安装高度1.5m，覆盖半径8.0m；边界/装卸通道巡检点，覆盖仓储与应急通道风险', 2, 0.46, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('FS-01', 1000.0, 560.0, 1.5, 8.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.4.3；真实DOM识别区域：东侧应急与装卸边界区；点位坐标(1000.0m,560.0m)，安装高度1.5m，覆盖半径8.0m；边界/装卸通道巡检点，覆盖仓储与应急通道风险', 2, 0.40, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-INSERT INTO sensor (id, x, y, installation_height, effective_range, detection_range, install_remark, priority, risk, type, mode) VALUES ('FS-02', 1040.0, 620.0, 1.5, 8.0, 'CO/CH4/NH3/O2', '依据 GB/T 50493-2019 4.4.3；真实DOM识别区域：东侧应急与装卸边界区；点位坐标(1040.0m,620.0m)，安装高度1.5m，覆盖半径8.0m；边界/装卸通道巡检点，覆盖仓储与应急通道风险', 2, 0.40, 'gas', 'auto') ON DUPLICATE KEY UPDATE x = VALUES(x), y = VALUES(y), installation_height = VALUES(installation_height), effective_range = VALUES(effective_range), detection_range = VALUES(detection_range), install_remark = VALUES(install_remark), priority = VALUES(priority), risk = VALUES(risk), type = VALUES(type), mode = VALUES(mode);
-
 -- 开发演示用仿真读数。无硬件接入时必须显式标记 simulation / SIMULATED，不冒充真实实测。
 INSERT INTO simulation_scenario
     (scenario_code, name, source, gas_type, leak_x, leak_y, emission_rate, wind_speed, wind_direction, seed, started_at, ended_at)
@@ -622,29 +388,47 @@ ON DUPLICATE KEY UPDATE
     started_at = VALUES(started_at),
     ended_at = VALUES(ended_at);
 
-INSERT INTO sensor_reading
-    (scenario_id, sensor_id, gas_type, concentration, unit, sampled_at, source, quality_status, raw_payload)
-VALUES
-    ((SELECT id FROM simulation_scenario WHERE scenario_code = 'DEMO-LEAK-20260619'), 'TK-01L', 'CH4', 31.4, 'ppm', '2026-06-19 10:00:00', 'simulation', 'SIMULATED', JSON_OBJECT('seed', 2026061901, 'model', 'gaussian-plume-demo')),
-    ((SELECT id FROM simulation_scenario WHERE scenario_code = 'DEMO-LEAK-20260619'), 'TK-02L', 'CH4', 44.8, 'ppm', '2026-06-19 10:02:00', 'simulation', 'SIMULATED', JSON_OBJECT('seed', 2026061901, 'model', 'gaussian-plume-demo')),
-    ((SELECT id FROM simulation_scenario WHERE scenario_code = 'DEMO-LEAK-20260619'), 'TK-03L', 'CH4', 52.6, 'ppm', '2026-06-19 10:04:00', 'simulation', 'SIMULATED', JSON_OBJECT('seed', 2026061901, 'model', 'gaussian-plume-demo')),
-    ((SELECT id FROM simulation_scenario WHERE scenario_code = 'DEMO-LEAK-20260619'), 'PA-03L', 'CH4', 25.9, 'ppm', '2026-06-19 10:06:00', 'simulation', 'SIMULATED', JSON_OBJECT('seed', 2026061901, 'model', 'gaussian-plume-demo')),
-    ((SELECT id FROM simulation_scenario WHERE scenario_code = 'DEMO-LEAK-20260619'), 'P2-01L', 'CO', 18.2, 'ppm', '2026-06-26 09:34:00', 'simulation', 'SIMULATED', JSON_OBJECT('seed', 2026062603, 'carId', 3, 'model', 'patrol-co-demo')),
-    ((SELECT id FROM simulation_scenario WHERE scenario_code = 'DEMO-LEAK-20260619'), 'P2-02L', 'CO', 25.6, 'ppm', '2026-06-26 09:38:00', 'simulation', 'SIMULATED', JSON_OBJECT('seed', 2026062603, 'carId', 3, 'model', 'patrol-co-demo')),
-    ((SELECT id FROM simulation_scenario WHERE scenario_code = 'DEMO-LEAK-20260619'), 'P2-03L', 'CO', 41.3, 'ppm', '2026-06-26 09:42:00', 'simulation', 'SIMULATED', JSON_OBJECT('seed', 2026062603, 'carId', 3, 'model', 'patrol-co-demo')),
-    ((SELECT id FROM simulation_scenario WHERE scenario_code = 'DEMO-LEAK-20260619'), 'P2-04L', 'CO', 57.9, 'ppm', '2026-06-26 09:46:00', 'simulation', 'SIMULATED', JSON_OBJECT('seed', 2026062603, 'carId', 3, 'model', 'patrol-co-demo')),
-    ((SELECT id FROM simulation_scenario WHERE scenario_code = 'DEMO-LEAK-20260619'), 'P2-05L', 'CO', 76.4, 'ppm', '2026-06-26 09:50:00', 'simulation', 'SIMULATED', JSON_OBJECT('seed', 2026062603, 'carId', 3, 'model', 'patrol-co-demo')),
-    ((SELECT id FROM simulation_scenario WHERE scenario_code = 'DEMO-LEAK-20260619'), 'PA-01L', 'CO', 92.7, 'ppm', '2026-06-26 09:54:00', 'simulation', 'SIMULATED', JSON_OBJECT('seed', 2026062603, 'carId', 3, 'model', 'patrol-co-demo')),
-    ((SELECT id FROM simulation_scenario WHERE scenario_code = 'DEMO-LEAK-20260619'), 'PA-02L', 'CO', 111.8, 'ppm', '2026-06-26 09:58:00', 'simulation', 'SIMULATED', JSON_OBJECT('seed', 2026062603, 'carId', 3, 'model', 'patrol-co-demo')),
-    ((SELECT id FROM simulation_scenario WHERE scenario_code = 'DEMO-LEAK-20260619'), 'PA-03L', 'CO', 124.5, 'ppm', '2026-06-26 10:02:00', 'simulation', 'SIMULATED', JSON_OBJECT('seed', 2026062603, 'carId', 3, 'model', 'patrol-co-demo')),
-    ((SELECT id FROM simulation_scenario WHERE scenario_code = 'DEMO-LEAK-20260619'), 'PA-04L', 'CO', 132.6, 'ppm', '2026-06-26 10:06:00', 'simulation', 'SIMULATED', JSON_OBJECT('seed', 2026062603, 'carId', 3, 'model', 'patrol-co-demo')),
-    ((SELECT id FROM simulation_scenario WHERE scenario_code = 'DEMO-LEAK-20260619'), 'PA-05L', 'CO', 119.4, 'ppm', '2026-06-26 10:10:00', 'simulation', 'SIMULATED', JSON_OBJECT('seed', 2026062603, 'carId', 3, 'model', 'patrol-co-demo')),
-    ((SELECT id FROM simulation_scenario WHERE scenario_code = 'DEMO-LEAK-20260619'), 'TK-01L', 'CH4', 22.1, 'ppm', '2026-06-26 09:40:00', 'simulation', 'SIMULATED', JSON_OBJECT('seed', 2026062601, 'carId', 1, 'model', 'patrol-demo')),
-    ((SELECT id FROM simulation_scenario WHERE scenario_code = 'DEMO-LEAK-20260619'), 'PA-06L', 'NH3', 12.4, 'ppm', '2026-06-26 09:44:00', 'simulation', 'SIMULATED', JSON_OBJECT('seed', 2026062602, 'carId', 2, 'model', 'patrol-demo')),
-    ((SELECT id FROM simulation_scenario WHERE scenario_code = 'DEMO-LEAK-20260619'), 'FS-01', 'O2', 18.1, 'ppm', '2026-06-26 10:08:00', 'simulation', 'SIMULATED', JSON_OBJECT('seed', 2026062604, 'carId', 4, 'model', 'patrol-demo'))
-ON DUPLICATE KEY UPDATE
-    concentration = VALUES(concentration),
-    unit = VALUES(unit),
-    source = VALUES(source),
-    quality_status = VALUES(quality_status),
-    raw_payload = VALUES(raw_payload);
+-- ========================================
+-- task 表：移动端任务指派闭环（事故→指派→打卡→验收→异常解除）
+-- 详见 db/migrations/005_add_task_table.sql
+-- ========================================
+CREATE TABLE IF NOT EXISTS `task` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `title` VARCHAR(200) NOT NULL COMMENT '任务标题',
+    `description` VARCHAR(1000) DEFAULT NULL COMMENT '任务描述',
+    `type` VARCHAR(20) NOT NULL DEFAULT 'incident' COMMENT '任务类型：incident事故/patrol巡检/drill演练',
+    `status` VARCHAR(20) NOT NULL DEFAULT 'pending' COMMENT '状态：pending待指派/assigned已指派/processing处置中/pending_review待验收/completed已完成/canceled已取消',
+    `warning_history_id` INT DEFAULT NULL COMMENT '关联告警历史ID',
+    `gas_type` VARCHAR(20) DEFAULT NULL COMMENT '气体类型（冗余自告警）',
+    `assignee_type` VARCHAR(10) DEFAULT NULL COMMENT '指派对象：car/employee',
+    `car_id` INT DEFAULT NULL COMMENT '指派巡检车ID',
+    `employee_id` BIGINT DEFAULT NULL COMMENT '指派员工ID',
+    `x` DOUBLE DEFAULT NULL COMMENT '目标X坐标（园区本地米制）',
+    `y` DOUBLE DEFAULT NULL COMMENT '目标Y坐标',
+    `area_name` VARCHAR(100) DEFAULT NULL COMMENT '区域名称',
+    `creator_user_id` BIGINT DEFAULT NULL COMMENT '创建人用户ID',
+    `assigned_time` DATETIME DEFAULT NULL COMMENT '指派时间',
+    `accepted_time` DATETIME DEFAULT NULL COMMENT '接单时间',
+    `checkin_time` DATETIME DEFAULT NULL COMMENT '打卡时间',
+    `checkin_x` DOUBLE DEFAULT NULL COMMENT '打卡经度（WGS84）',
+    `checkin_y` DOUBLE DEFAULT NULL COMMENT '打卡纬度（WGS84）',
+    `checkin_photo_base64` LONGTEXT DEFAULT NULL COMMENT '打卡照片base64（与inspect_record.image_base64同类型）',
+    `yolo_person_count` INT DEFAULT NULL COMMENT 'YOLO识别人数（算法不可用时为空）',
+    `checkin_remark` VARCHAR(500) DEFAULT NULL COMMENT '打卡备注',
+    `review_result` VARCHAR(20) DEFAULT NULL COMMENT '验收结果：pass/reject',
+    `review_remark` VARCHAR(500) DEFAULT NULL COMMENT '验收备注',
+    `review_time` DATETIME DEFAULT NULL COMMENT '验收时间',
+    `reviewer_user_id` BIGINT DEFAULT NULL COMMENT '验收人用户ID',
+    `warning_resolved` TINYINT NOT NULL DEFAULT 0 COMMENT '异常解除幂等标志：0未解除/1已解除',
+    `inspect_record_id` BIGINT DEFAULT NULL COMMENT '关联巡检记录ID（预留，首版不写）',
+    `source` VARCHAR(32) NOT NULL DEFAULT 'mobile' COMMENT '任务来源：mobile/web',
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    PRIMARY KEY (`id`),
+    KEY `idx_task_status` (`status`),
+    KEY `idx_task_warning` (`warning_history_id`),
+    KEY `idx_task_car` (`car_id`),
+    KEY `idx_task_employee` (`employee_id`),
+    KEY `idx_task_creator` (`creator_user_id`),
+    KEY `idx_task_created` (`created_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='任务指派表（巡检/事故处置闭环）';

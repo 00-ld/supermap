@@ -8,7 +8,7 @@
       "path": "deploy/mysql/init.sql",
       "type": "schema-and-seed",
       "purpose": "Docker MySQL initialization entrypoint — schema + seed data combined.",
-      "maintainer_note": "Keep this file compatible with deploy/docker-compose.yml. Its 61 real-DOM sensor rows are the canonical deployed seed and must stay synchronized with frontend/src/data/realSensorLayout.ts."
+      "maintainer_note": "Keep this file compatible with deploy/docker-compose.yml. Sensor / sensor_reading / monitor_point tables were removed in the A-suite to B-suite migration; keep it consistent with the retained sensor_layout and simulation_scenario tables."
     },
     {
       "path": "deploy/mysql/init_appuser.sql",
@@ -36,6 +36,16 @@
       "purpose": "Canonical idempotent migration that binds public demo video sources under frontend/public/gas_video to the four seeded monitor_point records."
     },
     {
+      "path": "db/migrations/005_add_task_table.sql",
+      "type": "migration",
+      "purpose": "Canonical idempotent migration that creates the task table backing the mobile task-assignment loop: accident → assign car/employee → field check-in with photo → admin review → warning resolved."
+    },
+    {
+      "path": "db/migrations/006_add_realtime_sensor_reading.sql",
+      "type": "migration",
+      "purpose": "Adds idempotent event IDs and sequence numbers for HTTP sensor ingestion and SSE replay."
+    },
+    {
       "path": "deploy/mysql/migration_add_role.sql",
       "type": "deployment-compat-migration",
       "purpose": "Compatibility migration entrypoint retained for existing Docker/MySQL deployment flows. Keep its behavior aligned with db/migrations/001_add_user_role.sql."
@@ -48,20 +58,12 @@
     {
       "path": "backend/src/main/resources/schema-sensor.sql",
       "type": "schema-fragment",
-      "purpose": "Sensor and sensor layout table schema for backend local initialization."
+      "purpose": "Sensor layout and environment reading table schema for backend local initialization."
     },
     {
       "path": "backend/src/main/resources/init-sensor-db.sql",
       "type": "schema-and-seed-fragment",
-      "purpose": "Sensor-related backend local initialization."
-    }
-  ],
-  "deprecated_scripts": [
-    {
-      "path": "deploy/mysql/sensor_data.sql",
-      "type": "legacy-seed-reference",
-      "purpose": "Historical real-DOM sensor seed reference only. It is not a Docker/MySQL initialization entrypoint and is excluded from default validation.",
-      "maintainer_note": "Do not treat this file as canonical. If it is intentionally refreshed, run tools/validate_real_sensor_layout.py --include-legacy-sensor-data."
+      "purpose": "Sensor layout, environment reading and gas backend local initialization."
     }
   ],
   "do_not_commit": [

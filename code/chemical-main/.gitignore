@@ -74,6 +74,7 @@ frontend/dist2/
 # Large frontend media must be reviewed before being tracked
 *.mp4
 !frontend/public/gas_video/*.mp4
+!frontend/public/video/*.mp4
 *.glb
 
 # Assets — ChatGPT/AI 生成图不得提交（见 assets/README.md 规则）
@@ -117,4 +118,10 @@ datasets/processed/
 
 # 调试/冒烟测试产物（playwright 截图等）
 output/
+frontend/logs/
+frontend/explode-shot-*.png
+frontend/explode-test-*.png
+frontend/tsconfig*.tsbuildinfo
+frontend/_env_block.bin
+*.f9bak
 *.bundle

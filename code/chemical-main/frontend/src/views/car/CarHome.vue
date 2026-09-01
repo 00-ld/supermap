@@ -3,21 +3,37 @@
     <!-- 背景图片 -->
     <div class="background-image"></div>
 
-    <el-tabs v-model="activeTab" class="integrated-tabs" @tab-click="handleTabClick">
+    <el-tabs
+      v-model="activeTab"
+      class="integrated-tabs"
+      @tab-click="handleTabClick"
+    >
       <!-- ========== Tab 1: 小车总览 ========== -->
       <el-tab-pane label="小车总览" name="overview">
         <!-- 横向导航栏 -->
         <nav class="nav-bar">
           <ul>
-            <li @click="goToHome" :class="{ active: $route.name === 'CarInspectionHome' }">小车总览</li>
+            <li
+              @click="goToHome"
+              :class="{ active: $route.name === 'CarInspectionHome' }"
+            >
+              小车总览
+            </li>
             <li
               v-for="car in carList"
               :key="car.id"
               @click="goToCarDetail(car.id)"
-              :class="{ active: $route.name === 'CarDetail' && $route.params.id === car.id.toString() }"
+              :class="{
+                active:
+                  $route.name === 'CarDetail' &&
+                  $route.params.id === car.id.toString(),
+              }"
             >
               小车 {{ car.id }}
-              <span v-if="getCarStatus(car.id) === 'warning'" class="warning-dot"></span>
+              <span
+                v-if="getCarStatus(car.id) === 'warning'"
+                class="warning-dot"
+              ></span>
             </li>
           </ul>
         </nav>
@@ -25,7 +41,7 @@
         <div class="content">
           <!-- 左侧气体浓度曲线 -->
           <div class="chart-group left-charts">
-            <div class="chart-item" v-for="i in [1,2]" :key="`left-${i}`">
+            <div class="chart-item" v-for="i in [1, 2]" :key="`left-${i}`">
               <div class="chart-header">
                 <span class="gas-type">{{ carGasMap[i] }}</span>
                 <span class="car-badge" :class="getCarStatus(i)">
@@ -57,7 +73,9 @@
                   @click="goToCarDetail(car.id)"
                 >
                   <span class="car-id">{{ car.id }}</span>
-                  <span class="car-status">{{ getCarStatus(car.id) === 'normal' ? '正常' : '异常' }}</span>
+                  <span class="car-status">
+                    {{ getCarStatus(car.id) === 'normal' ? '正常' : '异常' }}
+                  </span>
                 </div>
               </div>
             </div>
@@ -65,7 +83,7 @@
 
           <!-- 右侧气体浓度曲线 -->
           <div class="chart-group right-charts">
-            <div class="chart-item" v-for="i in [3,4]" :key="`right-${i}`">
+            <div class="chart-item" v-for="i in [3, 4]" :key="`right-${i}`">
               <div class="chart-header">
                 <span class="gas-type">{{ carGasMap[i] }}</span>
                 <span class="car-badge" :class="getCarStatus(i)">
@@ -94,8 +112,14 @@
                 </span>
               </div>
               <div class="card-body">
-                <p><span class="label">检测气体：</span>{{ gasType[car.id] }}</p>
-                <p><span class="label">当前位置：</span>X: {{ car.x }} / Y: {{ car.y }}</p>
+                <p>
+                  <span class="label">检测气体：</span>
+                  {{ gasType[car.id] }}
+                </p>
+                <p>
+                  <span class="label">当前位置：</span>
+                  X: {{ car.x }} / Y: {{ car.y }}
+                </p>
               </div>
               <div class="card-footer">
                 <button
@@ -134,28 +158,64 @@
               :data="warningHistory"
               border
               stripe
-              :header-cell-style="{background: '#f5f7fa', color: '#303133', fontWeight: '600'}"
+              :header-cell-style="{
+                background: '#f5f7fa',
+                color: '#303133',
+                fontWeight: '600',
+              }"
               class="warning-table"
               max-height="400"
             >
-              <el-table-column prop="carId" label="小车编号" align="center" width="120" />
-              <el-table-column prop="areaName" label="所属区域" align="center" width="120" />
-              <el-table-column prop="gasType" label="气体类型" align="center" width="100">
+              <el-table-column
+                prop="carId"
+                label="小车编号"
+                align="center"
+                width="120"
+              />
+              <el-table-column
+                prop="areaName"
+                label="所属区域"
+                align="center"
+                width="120"
+              />
+              <el-table-column
+                prop="gasType"
+                label="气体类型"
+                align="center"
+                width="100"
+              >
                 <template #default="scope">
-                  <el-tag size="small" :type="scope.row.gasType === 'ch4' ? 'danger' : 'warning'">
+                  <el-tag
+                    size="small"
+                    :type="scope.row.gasType === 'ch4' ? 'danger' : 'warning'"
+                  >
                     {{ scope.row.gasType }}
                   </el-tag>
                 </template>
               </el-table-column>
-              <el-table-column prop="gasValue" label="浓度值" align="center" width="120" />
-              <el-table-column prop="warningTime" label="预警时间" align="center" width="180">
+              <el-table-column
+                prop="gasValue"
+                label="浓度值"
+                align="center"
+                width="120"
+              />
+              <el-table-column
+                prop="warningTime"
+                label="预警时间"
+                align="center"
+                width="180"
+              >
                 <template #default="scope">
                   {{ formatWarningTime(scope.row.warningTime) }}
                 </template>
               </el-table-column>
               <el-table-column label="关联操作" align="center" width="200">
                 <template #default="scope">
-                  <el-button size="small" type="primary" @click="goToCarDetail(scope.row.carId)">
+                  <el-button
+                    size="small"
+                    type="primary"
+                    @click="goToCarDetail(scope.row.carId)"
+                  >
                     查看小车
                   </el-button>
                 </template>
@@ -175,51 +235,7 @@
         </div>
       </el-tab-pane>
 
-      <!-- ========== Tab 3: 智慧地图 ========== -->
-      <el-tab-pane label="智慧地图" name="smartmap">
-        <div class="tab-content map-tab">
-          <el-card class="tab-card" shadow="hover">
-            <template #header>
-              <span class="card-title-text">
-                <el-icon><MapLocation /></el-icon>
-                厂区智慧地图
-              </span>
-            </template>
-            <div class="map-tab-body">
-              <div class="map-preview">
-                <img
-                  src="/maps/real-park-dom.jpg"
-                  alt="厂区地图预览"
-                  class="map-preview-img"
-                  @click="goToSmartMap"
-                />
-                <!-- 在预览图上叠加小车点位 -->
-                <div class="preview-markers">
-                  <div
-                    v-for="car in carList"
-                    :key="`pv-${car.id}`"
-                    class="pv-marker"
-                    :class="getCarStatus(car.id)"
-                    :style="{ left: `${(car.x / REAL_MAP_WIDTH) * 100}%`, top: `${(car.y / REAL_MAP_HEIGHT) * 100}%` }"
-                  >
-                    {{ car.id }}
-                  </div>
-                </div>
-              </div>
-              <div class="map-info">
-                <h4>智慧地图平台</h4>
-                <p>集成 GIS 地理信息、实时气体扩散模型、设施定位与巡检路径规划</p>
-                <el-button type="primary" size="large" @click="goToSmartMap" class="action-btn">
-                  <el-icon><View /></el-icon>
-                  打开完整智慧地图
-                </el-button>
-              </div>
-            </div>
-          </el-card>
-        </div>
-      </el-tab-pane>
-
-      <!-- ========== Tab 4: 厂区图像巡检 ========== -->
+      <!-- ========== Tab 3: 厂区图像巡检 ========== -->
       <el-tab-pane label="厂区图像巡检" name="yolo">
         <div class="tab-content yolo-tab">
           <el-card class="tab-card" shadow="hover">
@@ -232,22 +248,31 @@
             <div class="yolo-summary">
               <div class="yolo-metrics">
                 <div class="metric-box">
-                  <div class="metric-value color-blue">{{ yoloMetrics.currentCount ?? '—' }}</div>
+                  <div class="metric-value color-blue">
+                    {{ yoloMetrics.currentCount ?? '—' }}
+                  </div>
                   <div class="metric-label">当前识别人员</div>
                 </div>
                 <div class="metric-box">
                   <div class="metric-value color-green">
-                    <template v-if="yoloMetrics.analysisTime != null">{{ yoloMetrics.analysisTime }}<small>ms</small></template>
+                    <template v-if="yoloMetrics.analysisTime != null">
+                      {{ yoloMetrics.analysisTime }}
+                      <small>ms</small>
+                    </template>
                     <template v-else>—</template>
                   </div>
                   <div class="metric-label">识别耗时</div>
                 </div>
                 <div class="metric-box">
-                  <div class="metric-value color-orange">{{ yoloMetrics.riskCount }}</div>
+                  <div class="metric-value color-orange">
+                    {{ yoloMetrics.riskCount }}
+                  </div>
                   <div class="metric-label">告警数</div>
                 </div>
                 <div class="metric-box">
-                  <div class="metric-value color-purple">{{ yoloMetrics.onlineDevices }}</div>
+                  <div class="metric-value color-purple">
+                    {{ yoloMetrics.onlineDevices }}
+                  </div>
                   <div class="metric-label">在线设备</div>
                 </div>
               </div>
@@ -270,9 +295,14 @@
                   <el-icon><UploadFilled /></el-icon>
                   导入图片识别
                 </el-button>
-                <el-button type="primary" size="large" @click="goToYoloMonitor" class="action-btn">
+                <el-button
+                  type="primary"
+                  size="large"
+                  @click="goToYoloMonitor"
+                  class="action-btn"
+                >
                   <el-icon><FullScreen /></el-icon>
-                进入图像巡检
+                  进入图像巡检
                 </el-button>
               </div>
               <div v-if="carYoloResult" class="car-yolo-result">
@@ -285,11 +315,21 @@
                 <div class="car-yolo-result-meta">
                   <span>最近识别：{{ carYoloResult.count }} 人</span>
                   <span>目标框：{{ carYoloResult.detections.length }} 个</span>
-                  <span v-if="carYoloResult.frameIndex !== undefined">帧编号：{{ carYoloResult.frameIndex }}</span>
-                  <span v-if="carYoloResult.capturedAt">拍摄时间：{{ formatYoloCapturedAt(carYoloResult.capturedAt) }}</span>
+                  <span v-if="carYoloResult.frameIndex !== undefined">
+                    帧编号：{{ carYoloResult.frameIndex }}
+                  </span>
+                  <span v-if="carYoloResult.capturedAt">
+                    拍摄时间：{{
+                      formatYoloCapturedAt(carYoloResult.capturedAt)
+                    }}
+                  </span>
                   <span>耗时：{{ carYoloResult.analysisTime }}ms</span>
-                  <span v-if="carYoloResult.requestId">追踪：{{ carYoloResult.requestId }}</span>
-                  <span v-if="carYoloResult.modelVersion">模型：{{ carYoloResult.modelVersion }}</span>
+                  <span v-if="carYoloResult.requestId">
+                    追踪：{{ carYoloResult.requestId }}
+                  </span>
+                  <span v-if="carYoloResult.modelVersion">
+                    模型：{{ carYoloResult.modelVersion }}
+                  </span>
                 </div>
               </div>
             </div>
@@ -299,19 +339,35 @@
             <template #header>
               <span class="card-title-text">
                 <el-icon><VideoCamera /></el-icon>
-                视频源未绑定
+                重点监控视频
               </span>
             </template>
             <div class="video-grid">
-              <div v-for="i in 4" :key="i" class="video-item-wrapper">
+              <div
+                v-for="(source, index) in priorityMonitorVideos"
+                :key="source"
+                class="video-item-wrapper"
+              >
                 <div class="video-box">
+                  <video
+                    v-if="!failedPriorityMonitorVideos.has(source)"
+                    :src="source"
+                    muted
+                    loop
+                    autoplay
+                    playsinline
+                    controls
+                    preload="metadata"
+                    @error="handlePriorityMonitorVideoError(source)"
+                  ></video>
                   <img
+                    v-else
                     src="/gas_video/novideo.png"
-                    alt="视频源未绑定占位"
+                    :alt="`${carGasMap[index + 1]}监控视频加载失败`"
                     class="video-placeholder-img"
                   />
                 </div>
-                <div class="video-label">{{ carGasMap[i] }}</div>
+                <div class="video-label">{{ carGasMap[index + 1] }}</div>
               </div>
             </div>
           </el-card>
@@ -320,7 +376,11 @@
     </el-tabs>
 
     <!-- 预警操作弹窗 -->
-    <div v-if="showWarningDialog" class="dialog-overlay" @click.self="closeWarningDialog">
+    <div
+      v-if="showWarningDialog"
+      class="dialog-overlay"
+      @click.self="closeWarningDialog"
+    >
       <div class="dialog-container">
         <div class="dialog-header">
           <h3>⚠️ 预警操作 - 小车 {{ selectedCarId }}</h3>
@@ -328,18 +388,32 @@
         </div>
         <div class="dialog-body">
           <div class="car-info">
-            <p><span class="info-label">检测气体：</span>{{ gasType[selectedCarIndex] }}</p>
-            <p><span class="info-label">当前位置：</span>X: {{ getCarPosition(selectedCarIndex).x }} / Y: {{ getCarPosition(selectedCarIndex).y }}</p>
+            <p>
+              <span class="info-label">检测气体：</span>
+              {{ gasType[selectedCarIndex] }}
+            </p>
+            <p>
+              <span class="info-label">当前位置：</span>
+              X: {{ getCarPosition(selectedCarIndex).x }} / Y:
+              {{ getCarPosition(selectedCarIndex).y }}
+            </p>
           </div>
           <div class="dialog-actions">
-            <button class="action-btn quick-mark" :disabled="!userStore.isAdmin" @click="handleQuickMark">
+            <button
+              class="action-btn quick-mark"
+              :disabled="!userStore.isAdmin"
+              @click="handleQuickMark"
+            >
               <div class="action-icon">🚨</div>
               <div class="action-text">
                 <div class="action-title">快速标记</div>
                 <div class="action-desc">仅设置预警状态</div>
               </div>
             </button>
-            <button class="action-btn simulate-diffusion" @click="handleSimulateDiffusion">
+            <button
+              class="action-btn simulate-diffusion"
+              @click="handleSimulateDiffusion"
+            >
               <div class="action-icon">💨</div>
               <div class="action-text">
                 <div class="action-title">模拟扩散</div>
@@ -359,9 +433,20 @@ import type { CSSProperties } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useCarStore } from '@/store/carStore'
 import * as echarts from 'echarts'
-import { Clock, DataLine, MapLocation, View, Monitor, FullScreen, VideoCamera, UploadFilled } from '@element-plus/icons-vue'
+import {
+  Clock,
+  DataLine,
+  Monitor,
+  FullScreen,
+  VideoCamera,
+  UploadFilled,
+} from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
-import { CAR_GAS_CHART_NAME, CAR_GAS_NAV_LABEL, getCarGasSpec } from '@/data/gasCatalog'
+import {
+  CAR_GAS_CHART_NAME,
+  CAR_GAS_NAV_LABEL,
+  getCarGasSpec,
+} from '@/data/gasCatalog'
 import { reqYoloSummary } from '@/api/yoloSummary'
 import { reqMonitoringOverview } from '@/api/monitoringData'
 import { reqWarningHistoryList } from '@/api/warningHistory'
@@ -370,6 +455,10 @@ import type { ConcentrationTrendPoint } from '@/api/monitoringData'
 import type { WarningHistoryRecord } from '@/api/warningHistory'
 import type { YoloAnalysisData, YoloDetection } from '@/api/analysis'
 import useUserStore from '@/store/modules/user'
+import {
+  PRIORITY_MONITOR_VIDEO_SOURCES,
+  resolvePatrolCarReadings,
+} from '@/data/patrolCarMonitoring'
 
 interface CarItem {
   id: number
@@ -415,7 +504,7 @@ const INSPECTION_CAR_POSITIONS: Record<number, { x: number; y: number }> = {
   1: { x: 450, y: 565 },
   2: { x: 690, y: 500 },
   3: { x: 925, y: 430 },
-  4: { x: 1125, y: 610 }
+  4: { x: 1125, y: 610 },
 }
 
 const toFiniteCoordinate = (value: unknown): number | null => {
@@ -442,12 +531,25 @@ const mapImgLoaded = ref(false)
 const carGasMap = CAR_GAS_CHART_NAME
 const chartInstances = ref<DisposableChart[]>([])
 const monitoringTrend = ref<ConcentrationTrendPoint[]>([])
+const failedPriorityMonitorVideos = ref(new Set<string>())
+const priorityMonitorVideos = PRIORITY_MONITOR_VIDEO_SOURCES
 
 const showWarningDialog = ref(false)
 const selectedCarId = ref<number | null>(null)
 const selectedCarIndex = computed(() => selectedCarId.value ?? 0)
 
 const gasType = CAR_GAS_NAV_LABEL
+
+const patrolCarReadings = computed(() =>
+  resolvePatrolCarReadings(monitoringTrend.value, warningHistory.value),
+)
+
+const handlePriorityMonitorVideoError = (source: string) => {
+  failedPriorityMonitorVideos.value = new Set([
+    ...failedPriorityMonitorVideos.value,
+    source,
+  ])
+}
 
 // ========== Tab 切换处理 ==========
 const handleTabClick = () => {
@@ -462,7 +564,7 @@ const handleTabClick = () => {
 
 // ========== 导航函数（小车总览） ==========
 const goToHome = () => {
-  router.push('/car/home').catch(err => {
+  router.push('/car/home').catch((err) => {
     if (!err.message.includes('Avoided redundant navigation')) {
       console.error('跳转失败:', err)
     }
@@ -470,21 +572,19 @@ const goToHome = () => {
 }
 
 const goToCarDetail = (id: number | string) => {
-  router.push({
-    path: `/car/${id}`,
-    query: { t: new Date().getTime() }
-  }).catch(err => {
-    if (!err.message.includes('Avoided redundant navigation')) {
-      console.error('跳转失败:', err)
-    }
-  })
+  router
+    .push({
+      path: `/car/${id}`,
+      query: { t: new Date().getTime() },
+    })
+    .catch((err) => {
+      if (!err.message.includes('Avoided redundant navigation')) {
+        console.error('跳转失败:', err)
+      }
+    })
 }
 
-// ========== 导航函数（智慧地图 / 厂区图像巡检） ==========
-const goToSmartMap = () => {
-  router.push('/smart-map')
-}
-
+// ========== 导航函数（厂区图像巡检） ==========
 const goToYoloMonitor = () => {
   router.push('/yolo')
 }
@@ -509,7 +609,7 @@ const getCarStatus = (carId: number) => {
 }
 
 const getCarPosition = (id: number) => {
-  const car = carList.value.find(c => c.id === id)
+  const car = carList.value.find((c) => c.id === id)
   return car ? { x: car.x, y: car.y } : { x: 0, y: 0 }
 }
 
@@ -519,7 +619,7 @@ const getMarkerStyle = computed(() => (car: CarItem): CSSProperties => {
     top: `${(car.y / REAL_MAP_HEIGHT) * 100}%`,
     left: `${(car.x / REAL_MAP_WIDTH) * 100}%`,
     transform: 'translate(-50%, -50%)',
-    zIndex: getCarStatus(car.id) === 'warning' ? 999 : 100
+    zIndex: getCarStatus(car.id) === 'warning' ? 999 : 100,
   }
 })
 
@@ -537,7 +637,9 @@ const closeWarningDialog = () => {
 const handleQuickMark = async () => {
   try {
     await carStore.setCarWarning(selectedCarId.value!)
-    nextTick(() => { initCharts() })
+    nextTick(() => {
+      initCharts()
+    })
     closeWarningDialog()
     ElMessage.success('预警设置成功')
   } catch (error) {
@@ -548,9 +650,11 @@ const handleQuickMark = async () => {
 const handleSimulateDiffusion = async () => {
   try {
     await carStore.setCarWarning(selectedCarId.value!)
-    nextTick(() => { initCharts() })
+    nextTick(() => {
+      initCharts()
+    })
 
-    router.push('/smart-map')
+    router.push('/screen')
 
     closeWarningDialog()
   } catch (error) {
@@ -561,7 +665,9 @@ const handleSimulateDiffusion = async () => {
 const handleResetCar = async (id: number) => {
   try {
     await carStore.resetCarStatus(id)
-    nextTick(() => { initCharts() })
+    nextTick(() => {
+      initCharts()
+    })
   } catch (error) {
     ElMessage.error(`重置失败：${(error as Error).message}`)
   }
@@ -571,7 +677,7 @@ const handleResetCar = async (id: number) => {
 const initCharts = () => {
   if (!mapImgLoaded.value || !mapContainer.value) return
 
-  chartInstances.value.forEach(instance => {
+  chartInstances.value.forEach((instance) => {
     if (instance.dispose) instance.dispose()
   })
   chartInstances.value = []
@@ -584,58 +690,88 @@ const initCharts = () => {
       const myChart = echarts.init(chartDom)
       const isWarning = getCarStatus(i) === 'warning'
 
-      // 数据源：后端监测概览的 concentrationTrend，只消费 sensor_reading 仿真采样；
-      // 无采样读数时保持空态，warning_history 只用于预警历史列表。
+      // 优先使用连续采样；迁移后的后端尚无采样时，展示数据库中的真实预警事件观测。
       const spec = getCarGasSpec(i)
-      const records = monitoringTrend.value
-        .filter(item => Number(item.carId) === i)
+      const records = patrolCarReadings.value
+        .filter((item) => Number(item.carId) === i)
         .slice()
         .sort((a, b) => new Date(a.time).getTime() - new Date(b.time).getTime())
 
-      const xAxisData = records.map(r => formatChartTime(r.time))
-      const yAxisData = records.map(r => Number(r.gasValue))
+      const xAxisData = records.map((r) => formatChartTime(r.time))
+      const yAxisData = records.map((r) => Number(r.gasValue))
       const hasData = records.length > 0
-      const hasSimulatedSource = records.some(r => r.qualityStatus === 'SIMULATED')
+      const hasSimulatedSource = records.some(
+        (r) => r.qualityStatus === 'SIMULATED',
+      )
+      const hasEventSource = records.some((r) => r.source === 'warning_history')
 
-      const lineColor = isWarning ? '#e74c3c' : (i === 3 ? '#f39c12' : (i === 4 ? '#3498db' : '#27ae60'))
+      const lineColor = isWarning
+        ? '#e74c3c'
+        : i === 3
+          ? '#f39c12'
+          : i === 4
+            ? '#3498db'
+            : '#27ae60'
 
       const option = {
         title: {
           text: hasData
-            ? (hasSimulatedSource ? '仿真采样浓度' : '监测浓度趋势')
-            : '暂无监测采样数据',
+            ? hasSimulatedSource
+              ? '仿真采样浓度'
+              : hasEventSource
+                ? '预警事件观测'
+                : '监测浓度趋势'
+            : '暂无监测数据',
           left: 'center',
           top: 2,
-          textStyle: { color: '#90a4b8', fontSize: 11, fontWeight: 'normal' as const }
+          textStyle: {
+            color: '#90a4b8',
+            fontSize: 11,
+            fontWeight: 'normal' as const,
+          },
         },
-        graphic: hasData ? [] : [{
-          type: 'text',
-          left: 'center',
-          top: 'middle',
-          style: { text: '暂无数据', fill: '#90a4b8', fontSize: 13 }
-        }],
+        graphic: hasData
+          ? []
+          : [
+              {
+                type: 'text',
+                left: 'center',
+                top: 'middle',
+                style: { text: '暂无数据', fill: '#90a4b8', fontSize: 13 },
+              },
+            ],
         xAxis: { type: 'category', data: xAxisData },
         yAxis: {
           type: 'value',
           name: `浓度 (${spec.unit})`,
-          min: 0
+          min: 0,
         },
-        series: hasData ? [{
-          data: yAxisData,
-          type: 'line',
-          smooth: true,
-          itemStyle: { color: lineColor },
-          lineStyle: { width: 2, color: lineColor },
-          areaStyle: isWarning ? {
-            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-              { offset: 0, color: 'rgba(231, 76, 60, 0.3)' },
-              { offset: 1, color: 'rgba(231, 76, 60, 0.05)' }
-            ])
-          } : null
-        }] : [],
+        series: hasData
+          ? [
+              {
+                data: yAxisData,
+                type: hasEventSource ? 'scatter' : 'line',
+                smooth: !hasEventSource,
+                symbolSize: hasEventSource ? 9 : undefined,
+                itemStyle: { color: lineColor },
+                lineStyle: hasEventSource
+                  ? undefined
+                  : { width: 2, color: lineColor },
+                areaStyle:
+                  isWarning && !hasEventSource
+                    ? {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                          { offset: 0, color: 'rgba(231, 76, 60, 0.3)' },
+                          { offset: 1, color: 'rgba(231, 76, 60, 0.05)' },
+                        ]),
+                      }
+                    : null,
+              },
+            ]
+          : [],
         tooltip: { trigger: 'axis' },
         grid: { left: '15%', right: '10%', bottom: '15%', top: '20%' },
-        textStyle: { color: '#e0e6ed' }
+        textStyle: { color: '#e0e6ed' },
       }
 
       myChart.setOption(option)
@@ -647,7 +783,7 @@ const initCharts = () => {
         dispose: () => {
           window.removeEventListener('resize', resizeHandler)
           myChart.dispose()
-        }
+        },
       })
     } catch (error) {
       console.error(`初始化小车${i}图表失败：`, error)
@@ -663,14 +799,14 @@ let alertsChart: echarts.ECharts | null = null
 const formatWarningTime = (timeStr: string) => {
   if (!timeStr) return '-'
   const d = new Date(timeStr)
-  return `${d.getFullYear()}-${(d.getMonth()+1).toString().padStart(2,'0')}-${d.getDate().toString().padStart(2,'0')} ${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}`
+  return `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getDate().toString().padStart(2, '0')} ${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}`
 }
 
 // 趋势图 X 轴只显示「时:分」，更贴合浓度曲线的横轴密度。
 const formatChartTime = (timeStr: string) => {
   if (!timeStr) return '-'
   const d = new Date(timeStr)
-  return `${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}`
+  return `${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}`
 }
 
 const fetchWarningHistory = async () => {
@@ -713,13 +849,13 @@ const renderAlertsChart = () => {
   }
 
   const areaCount: Record<string, number> = {}
-  warningHistory.value.forEach(item => {
+  warningHistory.value.forEach((item) => {
     const name = item.areaName || '未知区域'
     areaCount[name] = (areaCount[name] || 0) + 1
   })
 
   const names = Object.keys(areaCount)
-  const values = names.map(k => areaCount[k])
+  const values = names.map((k) => areaCount[k])
 
   alertsChart.setOption({
     tooltip: { trigger: 'axis' },
@@ -728,25 +864,27 @@ const renderAlertsChart = () => {
       type: 'category',
       data: names,
       axisLabel: { color: '#e0e6ed' },
-      axisLine: { lineStyle: { color: 'rgba(255,255,255,0.2)' } }
+      axisLine: { lineStyle: { color: 'rgba(255,255,255,0.2)' } },
     },
     yAxis: {
       type: 'value',
       axisLabel: { color: '#e0e6ed' },
-      splitLine: { lineStyle: { color: 'rgba(255,255,255,0.1)' } }
+      splitLine: { lineStyle: { color: 'rgba(255,255,255,0.1)' } },
     },
-    series: [{
-      type: 'bar',
-      data: values,
-      itemStyle: {
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          { offset: 0, color: '#409eff' },
-          { offset: 1, color: '#40e0d0' }
-        ]),
-        borderRadius: [4, 4, 0, 0]
+    series: [
+      {
+        type: 'bar',
+        data: values,
+        itemStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: '#409eff' },
+            { offset: 1, color: '#40e0d0' },
+          ]),
+          borderRadius: [4, 4, 0, 0],
+        },
+        barWidth: 40,
       },
-      barWidth: 40
-    }]
+    ],
   })
 }
 
@@ -754,7 +892,7 @@ const yoloMetrics = ref<YoloMetrics>({
   currentCount: null,
   analysisTime: null,
   riskCount: 0,
-  onlineDevices: 0
+  onlineDevices: 0,
 })
 const carYoloFileInput = ref<HTMLInputElement | null>(null)
 const carYoloUploading = ref(false)
@@ -768,7 +906,7 @@ const fetchYoloSummary = async () => {
         currentCount: res.data.currentCount,
         analysisTime: res.data.analysisTime,
         riskCount: Number(res.data.riskCount || 0),
-        onlineDevices: Number(res.data.onlineDevices || 0)
+        onlineDevices: Number(res.data.onlineDevices || 0),
       }
     }
   } catch (error) {
@@ -834,8 +972,15 @@ const analyzeCarYoloImage = async (file: File) => {
 }
 
 const readYoloAnalysisTime = (data: YoloAnalysisResult, fallbackMs: number) => {
-  const value = data.runtime?.costMs ?? data.analysisTime ?? data.analysis_time ?? data.processing_time_ms
-  return Math.max(0, Number.isFinite(Number(value)) ? Number(value) : fallbackMs)
+  const value =
+    data.runtime?.costMs ??
+    data.analysisTime ??
+    data.analysis_time ??
+    data.processing_time_ms
+  return Math.max(
+    0,
+    Number.isFinite(Number(value)) ? Number(value) : fallbackMs,
+  )
 }
 
 const normalizeYoloImage = (imageBase64: string) => {
@@ -857,7 +1002,7 @@ watch(
       nextTick(() => initCharts())
     }
   },
-  { deep: true }
+  { deep: true },
 )
 
 // ========== 生命周期 ==========
@@ -879,7 +1024,7 @@ onMounted(async () => {
 })
 
 onUnmounted(() => {
-  chartInstances.value.forEach(instance => {
+  chartInstances.value.forEach((instance) => {
     if (instance.dispose) instance.dispose()
   })
   chartInstances.value = []
@@ -1030,7 +1175,10 @@ onUnmounted(() => {
 .content {
   --car-map-zoom: 1.22;
   display: grid;
-  grid-template-columns: minmax(190px, 245px) minmax(760px, 1.65fr) minmax(190px, 245px);
+  grid-template-columns: minmax(190px, 245px) minmax(760px, 1.65fr) minmax(
+      190px,
+      245px
+    );
   align-items: stretch;
   padding: 14px 0;
   gap: 12px;
@@ -1054,7 +1202,9 @@ onUnmounted(() => {
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(64, 224, 208, 0.2);
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
   color: #e0e6ed;
   flex: 1 1 0;
   min-height: 0;
@@ -1076,7 +1226,9 @@ onUnmounted(() => {
   font-size: 17px;
   font-weight: 700;
   color: #40e0d0;
-  text-shadow: 0 0 10px rgba(64, 224, 208, 0.5), 0 0 20px rgba(64, 224, 208, 0.3);
+  text-shadow:
+    0 0 10px rgba(64, 224, 208, 0.5),
+    0 0 20px rgba(64, 224, 208, 0.3);
   letter-spacing: 1px;
 }
 .car-badge {
@@ -1124,7 +1276,9 @@ onUnmounted(() => {
   font-size: 20px;
   font-weight: 700;
   color: #40e0d0;
-  text-shadow: 0 0 10px rgba(64, 224, 208, 0.5), 0 0 20px rgba(64, 224, 208, 0.3);
+  text-shadow:
+    0 0 10px rgba(64, 224, 208, 0.5),
+    0 0 20px rgba(64, 224, 208, 0.3);
   letter-spacing: 2px;
 }
 
@@ -1197,21 +1351,38 @@ onUnmounted(() => {
 }
 
 @keyframes pulse {
-  0% { transform: translate(-50%, -50%) scale(1) !important; }
-  50% { transform: translate(-50%, -50%) scale(1.1) !important; }
-  100% { transform: translate(-50%, -50%) scale(1) !important; }
+  0% {
+    transform: translate(-50%, -50%) scale(1) !important;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1) !important;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1) !important;
+  }
 }
 @keyframes blink {
-  0% { opacity: 1; box-shadow: 0 0 8px #ff4d4f; }
-  50% { opacity: 0.3; box-shadow: 0 0 2px #ff4d4f; }
-  100% { opacity: 1; box-shadow: 0 0 8px #ff4d4f; }
+  0% {
+    opacity: 1;
+    box-shadow: 0 0 8px #ff4d4f;
+  }
+  50% {
+    opacity: 0.3;
+    box-shadow: 0 0 2px #ff4d4f;
+  }
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 8px #ff4d4f;
+  }
 }
 .car-id {
   font-weight: 900;
   font-size: 13px;
   line-height: 1;
   letter-spacing: 0;
-  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 255, 255, 0.5);
+  text-shadow:
+    0 0 5px rgba(0, 0, 0, 0.8),
+    0 0 10px rgba(255, 255, 255, 0.5);
   margin-bottom: 2px;
 }
 .car-status {
@@ -1387,8 +1558,14 @@ onUnmounted(() => {
 }
 
 @keyframes dialogSlideIn {
-  from { opacity: 0; transform: translateY(-50px) scale(0.9); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .dialog-header {
@@ -1479,13 +1656,35 @@ onUnmounted(() => {
   flex-shrink: 0;
 }
 
-.action-text { text-align: left; }
-.action-title { color: #e0e6ed; font-size: 16px; font-weight: 700; margin-bottom: 4px; }
-.action-desc { color: #8fa6b8; font-size: 13px; }
-.quick-mark { border-color: rgba(255, 77, 79, 0.4); }
-.quick-mark:hover { border-color: rgba(255, 77, 79, 0.8); background: rgba(255, 77, 79, 0.1); box-shadow: 0 6px 20px rgba(255, 77, 79, 0.3); }
-.simulate-diffusion { border-color: rgba(64, 224, 208, 0.4); }
-.simulate-diffusion:hover { border-color: rgba(64, 224, 208, 0.8); background: rgba(64, 224, 208, 0.1); box-shadow: 0 6px 20px rgba(64, 224, 208, 0.3); }
+.action-text {
+  text-align: left;
+}
+.action-title {
+  color: #e0e6ed;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.action-desc {
+  color: #8fa6b8;
+  font-size: 13px;
+}
+.quick-mark {
+  border-color: rgba(255, 77, 79, 0.4);
+}
+.quick-mark:hover {
+  border-color: rgba(255, 77, 79, 0.8);
+  background: rgba(255, 77, 79, 0.1);
+  box-shadow: 0 6px 20px rgba(255, 77, 79, 0.3);
+}
+.simulate-diffusion {
+  border-color: rgba(64, 224, 208, 0.4);
+}
+.simulate-diffusion:hover {
+  border-color: rgba(64, 224, 208, 0.8);
+  background: rgba(64, 224, 208, 0.1);
+  box-shadow: 0 6px 20px rgba(64, 224, 208, 0.3);
+}
 
 /* 预警历史表格 */
 .warning-table {
@@ -1506,88 +1705,6 @@ onUnmounted(() => {
 }
 .warning-table :deep(.el-table__row:nth-child(even)) {
   background: rgba(255, 255, 255, 0.05) !important;
-}
-
-/* 智慧地图 Tab */
-.map-tab-body {
-  display: flex;
-  gap: 24px;
-  align-items: center;
-}
-
-.map-preview {
-  position: relative;
-  flex: 1;
-  aspect-ratio: 1587.2 / 947.2;
-  border-radius: 8px;
-  overflow: hidden;
-  cursor: pointer;
-  border: 1px solid rgba(64, 224, 208, 0.2);
-  max-width: 720px;
-  background: rgba(0, 0, 0, 0.3);
-}
-
-.map-preview-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-  transition: transform 0.3s;
-}
-
-.map-preview-img:hover {
-  transform: scale(1.02);
-}
-
-.preview-markers {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.pv-marker {
-  position: absolute;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 700;
-  color: #fff;
-  transform: translate(-50%, -50%);
-  border: 2px solid rgba(255, 255, 255, 0.8);
-}
-
-.pv-marker.normal {
-  background: rgba(39, 174, 96, 0.9);
-}
-
-.pv-marker.warning {
-  background: rgba(255, 77, 79, 0.9);
-  animation: pulse 1.5s infinite;
-}
-
-.map-info {
-  flex: 0 0 280px;
-  padding: 20px;
-}
-
-.map-info h4 {
-  color: #40e0d0;
-  font-size: 20px;
-  margin: 0 0 12px;
-}
-
-.map-info p {
-  color: #b8e8e4;
-  font-size: 14px;
-  line-height: 1.6;
-  margin-bottom: 24px;
 }
 
 .action-btn {
@@ -1641,10 +1758,18 @@ onUnmounted(() => {
   color: #b8e8e4;
 }
 
-.color-blue { color: #409eff; }
-.color-green { color: #67c23a; }
-.color-orange { color: #e6a23c; }
-.color-purple { color: #b37feb; }
+.color-blue {
+  color: #409eff;
+}
+.color-green {
+  color: #67c23a;
+}
+.color-orange {
+  color: #e6a23c;
+}
+.color-purple {
+  color: #b37feb;
+}
 
 .yolo-action {
   display: grid;
@@ -1732,7 +1857,10 @@ onUnmounted(() => {
     padding-inline: 14px;
   }
   .content {
-    grid-template-columns: minmax(185px, 235px) minmax(660px, 1.5fr) minmax(185px, 235px);
+    grid-template-columns: minmax(185px, 235px) minmax(660px, 1.5fr) minmax(
+        185px,
+        235px
+      );
     gap: 12px;
   }
   .chart-item {
@@ -1750,7 +1878,9 @@ onUnmounted(() => {
 }
 
 @media (max-width: 1400px) {
-  .integrated-tabs { padding: 0 18px 24px; }
+  .integrated-tabs {
+    padding: 0 18px 24px;
+  }
   .content {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -1763,17 +1893,27 @@ onUnmounted(() => {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .chart-item { width: 100%; min-height: 260px; }
-  .map-tab-body { flex-direction: column; }
-  .map-preview { max-width: 100%; }
-  .map-info { flex: none; width: 100%; text-align: center; }
-  .yolo-metrics { grid-template-columns: repeat(2, 1fr); }
-  .video-grid { grid-template-columns: repeat(2, 1fr); }
+  .chart-item {
+    width: 100%;
+    min-height: 260px;
+  }
+  .yolo-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .video-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 @media (max-width: 768px) {
-  .card-list { grid-template-columns: 1fr; }
-  .yolo-metrics { grid-template-columns: repeat(2, 1fr); }
-  .video-grid { grid-template-columns: 1fr; }
+  .card-list {
+    grid-template-columns: 1fr;
+  }
+  .yolo-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .video-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Detail polish */
@@ -1791,8 +1931,16 @@ onUnmounted(() => {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 14% 10%, rgba(64, 224, 208, 0.13), transparent 32%),
-    radial-gradient(circle at 86% 4%, rgba(230, 162, 60, 0.16), transparent 28%),
+    radial-gradient(
+      circle at 14% 10%,
+      rgba(64, 224, 208, 0.13),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 86% 4%,
+      rgba(230, 162, 60, 0.16),
+      transparent 28%
+    ),
     linear-gradient(135deg, rgba(3, 12, 24, 0.82), rgba(7, 25, 35, 0.78));
 }
 
@@ -1841,7 +1989,11 @@ onUnmounted(() => {
 }
 
 .nav-bar li.active {
-  background: linear-gradient(135deg, rgba(64, 224, 208, 0.18), rgba(230, 162, 60, 0.09));
+  background: linear-gradient(
+    135deg,
+    rgba(64, 224, 208, 0.18),
+    rgba(230, 162, 60, 0.09)
+  );
   box-shadow: inset 0 0 0 1px rgba(64, 224, 208, 0.35);
 }
 
@@ -1881,13 +2033,17 @@ onUnmounted(() => {
 }
 
 .map::after,
-.map-preview::after,
 .video-box::after {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 18%, rgba(0, 0, 0, 0.18));
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.05),
+    transparent 18%,
+    rgba(0, 0, 0, 0.18)
+  );
 }
 
 .car-marker {
@@ -1912,15 +2068,22 @@ onUnmounted(() => {
 
 .dialog-overlay {
   background:
-    radial-gradient(circle at center, rgba(64, 224, 208, 0.08), transparent 36%),
+    radial-gradient(
+      circle at center,
+      rgba(64, 224, 208, 0.08),
+      transparent 36%
+    ),
     rgba(1, 8, 18, 0.76);
 }
 
 .dialog-container {
   width: min(560px, calc(100vw - 28px));
   min-width: 0;
-  background:
-    linear-gradient(160deg, rgba(9, 27, 43, 0.98), rgba(5, 19, 31, 0.96));
+  background: linear-gradient(
+    160deg,
+    rgba(9, 27, 43, 0.98),
+    rgba(5, 19, 31, 0.96)
+  );
 }
 
 .dialog-header h3 {
@@ -1939,8 +2102,11 @@ onUnmounted(() => {
 }
 
 .metric-box {
-  background:
-    linear-gradient(160deg, rgba(4, 15, 28, 0.68), rgba(7, 35, 42, 0.44));
+  background: linear-gradient(
+    160deg,
+    rgba(4, 15, 28, 0.68),
+    rgba(7, 35, 42, 0.44)
+  );
 }
 
 .metric-value {

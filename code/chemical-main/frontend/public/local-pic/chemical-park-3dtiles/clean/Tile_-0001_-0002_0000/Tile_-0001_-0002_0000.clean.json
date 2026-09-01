@@ -1,0 +1,78 @@
+{
+  "asset": {
+    "version": "1.0"
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "boundingVolume": {
+                  "sphere": [
+                    163.18418505894897,
+                    -396.88443263151566,
+                    0.013535665348172188,
+                    1046.344303968095
+                  ]
+                },
+                "geometricError": 167163.47946604824,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "/pic/chemical-park-3dtiles/Tile_-0001_-0002_0000/Tile_-0001_-0002_0000_0000_0000.b3dm"
+                }
+              }
+            ],
+            "boundingVolume": {
+              "sphere": [
+                163.1842001487777,
+                -396.88218137347695,
+                0.013535535510082634,
+                1046.3465552767088
+              ]
+            },
+            "geometricError": 16.313197610543416,
+            "refine": "REPLACE",
+            "content": {
+              "uri": "/pic/chemical-park-3dtiles/Tile_-0001_-0002_0000/Tile_-0001_-0002_0000_0001_0000.b3dm"
+            }
+          }
+        ],
+        "boundingVolume": {
+          "sphere": [
+            163.1842001487777,
+            -396.88218137347695,
+            0.013535535510082634,
+            1046.3465552767088
+          ]
+        },
+        "geometricError": 16.313197610543416,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "/pic/chemical-park-3dtiles/Tile_-0001_-0002_0000/Tile_-0001_-0002_0000_0002_0000.b3dm"
+        }
+      }
+    ],
+    "boundingVolume": {
+      "sphere": [
+        163.1842001487777,
+        -396.8821813734753,
+        0.013535535510082505,
+        1046.3465552767104
+      ]
+    },
+    "geometricError": 16.313197610543416,
+    "refine": "REPLACE",
+    "content": {
+      "uri": "/pic/chemical-park-3dtiles/Tile_-0001_-0002_0000/Tile_-0001_-0002_0000.b3dm"
+    }
+  },
+  "properties": {
+    "supermapCupClean": {
+      "strategy": "preserve building/coarse content; prune malformed _-0001_ leaf b3dm; rely on skipLevelOfDetail=false to avoid parent-child overlap artifacts",
+      "source": "/pic/chemical-park-3dtiles/Tile_-0001_-0002_0000/Tile_-0001_-0002_0000.json",
+      "generatedAt": "2026-07-20"
+    }
+  }
+}

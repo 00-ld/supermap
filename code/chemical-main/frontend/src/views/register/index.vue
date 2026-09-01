@@ -243,8 +243,8 @@ const goToLogin = () => {
 
 .logo-icon {
   font-size: 64px;
-  color: #6effc8;
-  filter: drop-shadow(0 0 18px rgba(110, 255, 200, 0.65));
+  color: #6ee7ff;
+  filter: drop-shadow(0 0 18px rgba(110, 231, 255, 0.65));
   position: relative;
   z-index: 2;
   animation: iconFloat 4s ease-in-out infinite;
@@ -254,7 +254,7 @@ const goToLogin = () => {
   position: absolute;
   width: 110px;
   height: 110px;
-  background: radial-gradient(circle, rgba(110, 255, 200, 0.28) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(110, 231, 255, 0.28) 0%, transparent 70%);
   border-radius: 50%;
   z-index: 1;
   animation: glowPulse 4s ease-in-out infinite;
@@ -294,9 +294,9 @@ const goToLogin = () => {
   padding: 5px 14px;
   font-size: 13px;
   letter-spacing: 2px;
-  color: #6effc8;
-  background: rgba(110, 255, 200, 0.1);
-  border: 1px solid rgba(110, 255, 200, 0.4);
+  color: #6ee7ff;
+  background: rgba(110, 231, 255, 0.1);
+  border: 1px solid rgba(110, 231, 255, 0.4);
   border-radius: 20px;
   backdrop-filter: blur(4px);
 }
@@ -309,16 +309,16 @@ const goToLogin = () => {
 }
 
 .title-gradient {
-  background: linear-gradient(90deg, #6effc8 0%, #10b981 50%, #06b6d4 100%);
+  background: linear-gradient(90deg, #6ee7ff 0%, #3b82f6 50%, #06b6d4 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 30px rgba(110, 255, 200, 0.35);
+  text-shadow: 0 0 30px rgba(110, 231, 255, 0.35);
 }
 
 .logo-subtitle {
   font-size: 24px;
-  color: #d6ffe8;
+  color: #d6e8ff;
   font-weight: 600;
   letter-spacing: 2px;
   opacity: 0.95;
@@ -326,12 +326,12 @@ const goToLogin = () => {
 
 .logo-desc {
   font-size: 15px;
-  color: #9fd4b8;
+  color: #9fb8d4;
   opacity: 0.9;
   letter-spacing: 0.5px;
   line-height: 1.8;
   padding: 6px 0 6px 16px;
-  border-left: 3px solid rgba(110, 255, 200, 0.6);
+  border-left: 3px solid rgba(110, 231, 255, 0.6);
   max-width: 540px;
 }
 
@@ -348,7 +348,7 @@ const goToLogin = () => {
   gap: 6px;
   padding: 6px 14px;
   font-size: 13px;
-  color: #b8eecf;
+  color: #b8d4ee;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 16px;
@@ -359,8 +359,8 @@ const goToLogin = () => {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #6effc8;
-  box-shadow: 0 0 6px #6effc8;
+  background: #6ee7ff;
+  box-shadow: 0 0 6px #6ee7ff;
 }
 
 /* ====================== 注册卡 ====================== */
@@ -371,11 +371,11 @@ const goToLogin = () => {
   right: 8%;
   transform: translateY(-50%);
   width: 460px;
-  background: linear-gradient(160deg, rgba(12, 50, 38, 0.85) 0%, rgba(6, 40, 30, 0.78) 100%);
+  background: linear-gradient(160deg, rgba(12, 30, 64, 0.85) 0%, rgba(6, 20, 48, 0.78) 100%);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: 20px;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(110, 255, 200, 0.12),
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(110, 231, 255, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
   padding: 52px 42px 36px;
   box-sizing: border-box;
@@ -388,7 +388,7 @@ const goToLogin = () => {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, transparent 0%, #6effc8 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, #6ee7ff 50%, transparent 100%);
   opacity: 0.8;
 }
 
@@ -403,12 +403,12 @@ const goToLogin = () => {
   color: #ffffff;
   margin-bottom: 10px;
   letter-spacing: 2px;
-  text-shadow: 0 0 18px rgba(110, 255, 200, 0.3);
+  text-shadow: 0 0 18px rgba(110, 231, 255, 0.3);
 }
 
 .register-subtitle {
   font-size: 13px;
-  color: #8fc4a4;
+  color: #8fa8c4;
   letter-spacing: 1px;
 }
 
@@ -423,7 +423,7 @@ const goToLogin = () => {
 .input-label {
   font-size: 14px;
   font-weight: 600;
-  color: #c9eed4;
+  color: #c9d8ee;
   margin-bottom: 8px;
   display: block;
   letter-spacing: 0.5px;
@@ -444,9 +444,9 @@ const goToLogin = () => {
 }
 
 :deep(.el-input__wrapper:focus-within) {
-  border-color: #6effc8 !important;
-  box-shadow: 0 0 0 3px rgba(110, 255, 200, 0.15) !important;
-  background-color: rgba(16, 185, 129, 0.08) !important;
+  border-color: #6ee7ff !important;
+  box-shadow: 0 0 0 3px rgba(110, 231, 255, 0.15) !important;
+  background-color: rgba(6, 182, 212, 0.08) !important;
 }
 
 :deep(.el-input__inner) {
@@ -458,8 +458,17 @@ const goToLogin = () => {
   color: rgba(255, 255, 255, 0.45) !important;
 }
 
+:deep(.el-input__inner:-webkit-autofill),
+:deep(.el-input__inner:-webkit-autofill:hover),
+:deep(.el-input__inner:-webkit-autofill:focus) {
+  -webkit-text-fill-color: #fff !important;
+  caret-color: #fff;
+  -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+  transition: background-color 9999s ease-out 0s;
+}
+
 :deep(.el-input__prefix) {
-  color: #6effc8;
+  color: #6ee7ff;
 }
 
 .register-btn-item {
@@ -468,7 +477,7 @@ const goToLogin = () => {
 }
 
 .register-btn {
-  background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%) !important;
+  background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%) !important;
   border: none !important;
   font-weight: 600;
   height: 52px;
@@ -476,12 +485,12 @@ const goToLogin = () => {
   letter-spacing: 3px;
   border-radius: 10px;
   transition: all 0.3s ease;
-  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+  box-shadow: 0 6px 20px rgba(6, 182, 212, 0.35);
 }
 
 .register-btn:hover {
-  background: linear-gradient(135deg, #1bd49a 0%, #0bcde8 100%) !important;
-  box-shadow: 0 8px 26px rgba(16, 185, 129, 0.5);
+  background: linear-gradient(135deg, #0bbfe0 0%, #4f93f8 100%) !important;
+  box-shadow: 0 8px 26px rgba(6, 182, 212, 0.5);
   transform: translateY(-2px);
 }
 
@@ -492,12 +501,12 @@ const goToLogin = () => {
 .login-tip {
   text-align: center;
   font-size: 14px;
-  color: #8fc4a4;
+  color: #8fa8c4;
   margin-top: 12px;
 }
 
 .login-tip a {
-  color: #6effc8;
+  color: #6ee7ff;
   text-decoration: none;
   font-weight: 600;
   transition: all 0.3s ease;
@@ -506,13 +515,13 @@ const goToLogin = () => {
 
 .login-tip a:hover {
   color: #fff;
-  text-shadow: 0 0 8px rgba(110, 255, 200, 0.6);
+  text-shadow: 0 0 8px rgba(110, 231, 255, 0.6);
 }
 
 .footer-copy {
   text-align: center;
   font-size: 11px;
-  color: rgba(143, 196, 164, 0.5);
+  color: rgba(143, 168, 196, 0.5);
   margin-top: 28px;
   letter-spacing: 0.5px;
 }

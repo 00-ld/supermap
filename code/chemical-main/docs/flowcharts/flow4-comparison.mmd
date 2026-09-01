@@ -1,0 +1,11 @@
+flowchart LR
+    subgraph PF["粒子滤波（主力 · 全局）"]
+        PF1["12000 粒子<br/>全局均匀先验"] --> PF2["退火 + 重采样<br/>+ MCMC 复兴"]
+        PF2 --> PF3["点估计 + 概率山<br/>+ 95% 可信半径"]
+    end
+    subgraph EKI["两阶段 + EKI（对照 · 局部）"]
+        EK1["粗搜索候选区"] --> EK2["64 集合卡尔曼更新<br/>无需求导"]
+        EK2 --> EK3["点估计 + 置信椭圆<br/>+ 收缩动画"]
+    end
+    FM["共用前向模型 ForwardModel<br/>深度代理 + 物理锚点"] --> PF
+    FM --> EKI

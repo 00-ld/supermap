@@ -2712,6 +2712,8 @@ def check_algorithm_map_scale_contract(repo_root: Path) -> list[Finding]:
 def check_smart_map_manual_entry_panel(repo_root: Path) -> list[Finding]:
     findings: list[Finding] = []
     index_path = "frontend/src/views/smart_map/index.vue"
+    if not (repo_root / index_path).exists():
+        return findings
     entry_panel_path = "frontend/src/views/smart_map/components/SmartMapSensorManualEntryPanel.vue"
     config_panel_path = "frontend/src/views/smart_map/components/SmartMapSensorManualConfigPanel.vue"
     entry_panel_file = repo_root / entry_panel_path
@@ -2924,6 +2926,8 @@ def check_environment_schema_truth_boundary(repo_root: Path) -> list[Finding]:
 def check_smart_map_extraction(repo_root: Path) -> list[Finding]:
     findings: list[Finding] = []
     index_path = "frontend/src/views/smart_map/index.vue"
+    if not (repo_root / index_path).exists():
+        return findings
     index_style_path = "frontend/src/views/smart_map/index.css"
     helper_path = "frontend/src/views/smart_map/useSmartMapUi.ts"
     catalog_path = "frontend/src/views/smart_map/useSmartMapCatalogPersistence.ts"
@@ -6261,6 +6265,8 @@ def check_frontend_type_hotspots(repo_root: Path) -> list[Finding]:
 
 def check_smart_map_evacuation_reachability(repo_root: Path) -> list[Finding]:
     findings: list[Finding] = []
+    if not (repo_root / "frontend/src/views/smart_map/index.vue").exists():
+        return findings
     checks = {
         "frontend/src/views/smart_map/components/SmartMapEvacuationBuildingPanel.vue": (
             (
@@ -6296,6 +6302,75 @@ def check_smart_map_evacuation_reachability(repo_root: Path) -> list[Finding]:
                     ),
                 )
             )
+    return findings
+
+
+def check_screen_map_workspace_contract(repo_root: Path) -> list[Finding]:
+    findings: list[Finding] = []
+    workspace_path = "frontend/src/views/screen/map-workspace/index.vue"
+    screen_path = "frontend/src/views/screen/index.vue"
+    routes_path = "frontend/src/router/routes.ts"
+    workspace_file = repo_root / workspace_path
+    if not workspace_file.exists():
+        findings.append(
+            Finding(
+                path=workspace_path,
+                rule="screen-map-workspace-contract",
+                detail="digital park must retain its two-dimensional algorithm workspace",
+            )
+        )
+        return findings
+
+    workspace_text = workspace_file.read_text(encoding="utf-8", errors="replace")
+    screen_text = (repo_root / screen_path).read_text(encoding="utf-8", errors="replace")
+    routes_text = (repo_root / routes_path).read_text(encoding="utf-8", errors="replace")
+    required_workspace_fragments = (
+        "<SuperMap2DLayer />",
+        "SmartMapSensorManualConfigPanel",
+        "'source-change'",
+        "'diffusion-frame'",
+        "'inversion-stage'",
+        "'evacuation-route'",
+        "runDiffusion: runDiffusionSimulation",
+        "runEvacuation: runEmbeddedEvacuation",
+        "runLeakTracing: runParticleFilterInversionPreview",
+    )
+    forbidden_workspace_fragments = (
+        "ParkScene3D",
+        "SmartMapBottomToolbar",
+        "SmartMapDeviceFullscreen",
+        "SmartMapSensorEditDialog",
+        "defineProps<{\n    embedded?: boolean",
+    )
+    missing_workspace = [
+        fragment for fragment in required_workspace_fragments if fragment not in workspace_text
+    ]
+    bad_workspace = [
+        fragment for fragment in forbidden_workspace_fragments if fragment in workspace_text
+    ]
+    missing_screen = [
+        fragment
+        for fragment in (
+            "from './map-workspace/index.vue'",
+            "@diffusion-frame=\"handleUnifiedDiffusionFrame\"",
+            "@inversion-stage=\"handleUnifiedInversionStage\"",
+            "@evacuation-route=\"handleUnifiedEvacuationRoute\"",
+        )
+        if fragment not in screen_text
+    ]
+    has_removed_route = "path: '/smart-map'" in routes_text
+    if missing_workspace or bad_workspace or missing_screen or has_removed_route:
+        findings.append(
+            Finding(
+                path=workspace_path,
+                rule="screen-map-workspace-contract",
+                detail=(
+                    "digital park workspace contract regressed: "
+                    f"workspace_missing={missing_workspace}, workspace_forbidden={bad_workspace}, "
+                    f"screen_missing={missing_screen}, removed_route_restored={has_removed_route}"
+                ),
+            )
+        )
     return findings
 
 
@@ -6456,11 +6531,11 @@ def check_frontend_api_boundaries(repo_root: Path) -> list[Finding]:
             "car home must use src/api/analysis.ts for image analysis",
         ),
         (
-            "frontend/src/views/smart_map/useSmartMapCarInteraction.ts",
+            "frontend/src/views/screen/map-workspace/useSmartMapCarInteraction.ts",
             "frontend-analysis-api-boundary",
             ("reqAnalyzePersonImage",),
             ("/analysis/person", "from '@/utils/request'"),
-            "smart_map car interaction must use src/api/analysis.ts for YOLO capture analysis",
+            "screen map workspace car interaction must use src/api/analysis.ts for YOLO capture analysis",
         ),
         (
             "frontend/src/views/emergency/index.vue",
@@ -6556,6 +6631,8 @@ def check_monitor_point_closure(repo_root: Path) -> list[Finding]:
     directory_path = "frontend/src/views/monitor/index.vue"
     history_path = "frontend/src/views/thing/monitor_history/index.vue"
     route_path = "frontend/src/router/routes.ts"
+    if not all((repo_root / path).exists() for path in (monitor_path, directory_path, history_path)):
+        return findings
     monitor_text = (repo_root / monitor_path).read_text(encoding="utf-8", errors="replace")
     directory_text = (repo_root / directory_path).read_text(encoding="utf-8", errors="replace")
     history_text = (repo_root / history_path).read_text(encoding="utf-8", errors="replace")
@@ -7091,6 +7168,7 @@ def main() -> int:
     findings.extend(check_frontend_media_truth_boundary(repo_root))
     findings.extend(check_environment_schema_truth_boundary(repo_root))
     findings.extend(check_smart_map_extraction(repo_root))
+    findings.extend(check_screen_map_workspace_contract(repo_root))
     findings.extend(check_frontend_type_hotspots(repo_root))
     findings.extend(check_smart_map_evacuation_reachability(repo_root))
     findings.extend(check_backend_controller_service_boundaries(repo_root))

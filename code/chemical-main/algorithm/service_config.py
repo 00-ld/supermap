@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hmac
 import logging
 import os
 from typing import Iterable
@@ -59,12 +60,12 @@ def validate_algorithm_api_key(
   logger: logging.Logger,
   invalid_message: str = "无效的算法服务密钥",
 ) -> None:
-    if api_key is None:
-        if require_auth:
-            raise HTTPException(status_code=503, detail=f"{service_name}未配置密钥，拒绝服务")
+    if not require_auth:
         logger.warning("%s鉴权已被显式关闭，当前进程仅应绑定在本地开发地址", service_name)
         return
-    if provided_key != api_key:
+    if api_key is None:
+        raise HTTPException(status_code=503, detail=f"{service_name}未配置密钥，拒绝服务")
+    if provided_key is None or not hmac.compare_digest(provided_key, api_key):
         raise HTTPException(status_code=401, detail=invalid_message)
 
 

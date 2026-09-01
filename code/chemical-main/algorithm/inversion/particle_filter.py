@@ -17,6 +17,7 @@ can be used both by the FastAPI backend and by reproducible terminal validation.
 from __future__ import annotations
 
 from dataclasses import dataclass
+import math
 from typing import Dict, Iterable, Sequence
 
 import numpy as np
@@ -38,6 +39,13 @@ class ParticleFilterConfig:
     mcmc_steps: int = 2
     sensor_noise_relative: float = 0.10
     model_noise_relative: float = 0.05
+    # 模型噪声自标定：按粒子集合预测与观测的相对失配尺度动态放大
+    # 模型噪声，避免真实模型-数据失配（评估实测 50-100%）下似然过早
+    # 坍缩导致后验置信区间失准（评估报告 03 §6.4、§9.1-1）。
+    # 自标定噪声 = clamp(残差75分位 × 0.5, model_noise_relative, 2.0)。
+    # 合成场景（正演=反演同模型）下残差小，自动回落至配置值，不影响
+    # 名义噪声口径；真实数据失配大时噪声随之放大，置信区间恢复可信。
+    model_noise_autocalibrate: bool = True
     min_noise_ppm: float = 1e-4
     detection_threshold_ppm: float = 0.0
     arrival_time_weight: float = 0.9
@@ -165,8 +173,10 @@ def run_particle_filter_inversion_task(payload: Dict) -> Dict:
     """Backend task wrapper compatible with ``engine.task_router``."""
 
     sensors = _extract_sensors(payload)
-    if not sensors:
-        raise ValueError("particle filter inversion requires at least one sensor observation")
+    if len(sensors) < 3:
+        raise ValueError(
+            "particle filter inversion requires at least three valid sensor observations"
+        )
 
     scenario = payload.get("scenario") or {}
     gas = payload.get("gas") or {}
@@ -211,6 +221,11 @@ def run_particle_filter_inversion_task(payload: Dict) -> Dict:
         map_meters_per_unit=map_meters_per_unit,
         density_config=payload.get("posteriorDensityConfig") or payload.get("particleKdeConfig") or {},
     )
+    posterior_particles = build_posterior_particle_sample(
+        result.particles,
+        result.weights,
+        max_samples=160,
+    )
 
     return {
         "datasetVersion": "deep-surrogate-particle-filter-v1",
@@ -233,6 +248,7 @@ def run_particle_filter_inversion_task(payload: Dict) -> Dict:
             },
         },
         "posteriorDensityGeoJSON": posterior_density_geojson,
+        "posteriorParticles": posterior_particles,
         "diagnostics": {
             "particles": config.num_particles,
             "iterations": config.iterations,
@@ -266,6 +282,67 @@ def run_particle_filter_inversion_task(payload: Dict) -> Dict:
             "implementation": "python.inversion.particle_filter+python.deep_learning.gas_surrogate",
         },
     }
+
+
+def build_posterior_particle_sample(
+    particles: np.ndarray,
+    weights: np.ndarray,
+    *,
+    max_samples: int = 160,
+) -> list[Dict[str, float | int]]:
+    """Return a bounded deterministic sample for three-dimensional rendering.
+
+    Particle-filter computation keeps the full population. Only this compact
+    weighted sample crosses the API boundary, so the browser can show the
+    posterior's particle character without receiving thousands of records.
+    """
+
+    particle_array = np.asarray(particles, dtype=float)
+    weight_array = np.asarray(weights, dtype=float).reshape(-1)
+    if (
+        particle_array.ndim != 2
+        or particle_array.shape[1] < 3
+        or particle_array.shape[0] != weight_array.size
+        or particle_array.shape[0] == 0
+    ):
+        return []
+    finite_mask = np.all(np.isfinite(particle_array[:, :3]), axis=1) & np.isfinite(
+        weight_array
+    )
+    particle_array = particle_array[finite_mask]
+    weight_array = np.maximum(weight_array[finite_mask], 0.0)
+    weight_sum = float(weight_array.sum())
+    if particle_array.shape[0] == 0 or weight_sum <= 0:
+        return []
+    normalized_weights = weight_array / weight_sum
+    sample_count = min(max(int(max_samples), 1), particle_array.shape[0])
+    cumulative_weights = np.cumsum(normalized_weights)
+    quantiles = (np.arange(sample_count, dtype=float) + 0.5) / sample_count
+    selected_indices = np.searchsorted(
+        cumulative_weights,
+        quantiles,
+        side="left",
+    )
+    selected_indices = np.clip(
+        selected_indices,
+        0,
+        particle_array.shape[0] - 1,
+    )
+    maximum_weight = max(float(normalized_weights.max()), 1e-12)
+    return [
+        {
+            "sampleIndex": int(sample_index),
+            "x": round(float(particle_array[index, 0]), 4),
+            "y": round(float(particle_array[index, 1]), 4),
+            "emissionRate": round(float(particle_array[index, 2]), 6),
+            "probabilityWeight": round(float(normalized_weights[index]), 9),
+            "relativeWeight": round(
+                float(normalized_weights[index] / maximum_weight),
+                6,
+            ),
+        }
+        for sample_index, index in enumerate(selected_indices.tolist())
+    ]
 
 
 def effective_sample_size(weights: np.ndarray) -> float:
@@ -385,6 +462,9 @@ def build_particle_kde_geojson(
         "features": features,
         "metadata": {
             "coordinateSystem": "algorithm-map-planar",
+            "presentationTargetCrs": "EPSG:4490",
+            "presentationTransformApplied": False,
+            "transformVersion": "cgcs2000-scene-anchor-2026-07-29",
             "zMeaning": "posterior probability terrain height in meters relative to scene ground",
             "interpolation": "weighted-gaussian-kde",
             "gridSize": grid_size,
@@ -499,9 +579,20 @@ def _log_likelihood(
             np.full_like(predicted, threshold),
         ]
     )
+    if config.model_noise_autocalibrate:
+        # 跨粒子集合的中位预测与观测的相对失配尺度（稳健 75 分位）。
+        # 噪声不会低于配置值；失配大时自动放大（上限 2.0），使似然
+        # 面保持健康、置信区间不被伪确定性点估计取代。
+        predicted_median = np.median(predicted, axis=0)
+        residual_denom = np.maximum(np.maximum(np.abs(observed_vector), threshold), 1e-12)
+        relative_residual = np.abs(predicted_median - observed_vector) / residual_denom
+        robust_scale = float(np.percentile(relative_residual, 75))
+        model_noise = min(max(robust_scale * 0.5, config.model_noise_relative), 2.0)
+    else:
+        model_noise = config.model_noise_relative
     sigma = np.sqrt(
         (config.sensor_noise_relative * np.maximum(np.abs(observed), threshold)) ** 2
-        + (config.model_noise_relative * scale) ** 2
+        + (model_noise * scale) ** 2
         + config.min_noise_ppm**2
     )
     residual = predicted - observed
@@ -700,6 +791,10 @@ def _extract_sensors(payload: Dict) -> list[Dict]:
     )
     sensors: list[Dict] = []
     min_signal = float((payload.get("config") or {}).get("minSignalThreshold", 0.0))
+    if not math.isfinite(min_signal) or min_signal < 0:
+        raise ValueError("minSignalThreshold must be a non-negative finite number")
+    sensor_ids: set[str] = set()
+    sensor_points: set[tuple[float, float]] = set()
     for sensor in raw_sensors:
         point = sensor.get("mapPoint") or {}
         x = sensor.get("x", point.get("x"))
@@ -711,16 +806,36 @@ def _extract_sensors(payload: Dict) -> list[Dict]:
         )
         if x is None or y is None or signal is None:
             continue
+        sensor_x = float(x)
+        sensor_y = float(y)
         value = float(signal)
+        if not all(math.isfinite(number) for number in (sensor_x, sensor_y, value)):
+            raise ValueError("sensor coordinates and signal must be finite")
+        if value < 0:
+            raise ValueError("sensor signal must be non-negative")
         if value < min_signal:
             continue
+        sensor_id = str(
+            sensor.get("id")
+            or sensor.get("sensor_id")
+            or f"S{len(sensors) + 1}"
+        ).strip()
+        point_key = (round(sensor_x, 6), round(sensor_y, 6))
+        if sensor_id in sensor_ids:
+            raise ValueError(f"duplicate sensor id: {sensor_id}")
+        if point_key in sensor_points:
+            raise ValueError(
+                f"duplicate sensor position: ({sensor_x}, {sensor_y})"
+            )
+        sensor_ids.add(sensor_id)
+        sensor_points.add(point_key)
         arrival_time = _optional_float(sensor.get("arrivalTimeSec"))
         arrival_frame = sensor.get("arrivalFrame")
         sensors.append(
             {
-                "id": sensor.get("id") or sensor.get("sensor_id") or f"S{len(sensors) + 1}",
+                "id": sensor_id,
                 "priority": int(sensor.get("priority") or 0),
-                "mapPoint": {"x": float(x), "y": float(y)},
+                "mapPoint": {"x": sensor_x, "y": sensor_y},
                 "signal": value,
                 "currentConcentration": value,
                 "sampledPeak": _optional_float(sensor.get("sampledPeak")),
@@ -752,6 +867,7 @@ def _config_from_payload(payload: Dict, sensors: Sequence[Dict]) -> ParticleFilt
         mcmc_steps=min(max(int(raw.get("mcmcSteps", 2)), 0), 12),
         sensor_noise_relative=max(float(raw.get("sensorNoiseRelative", 0.10)), 1e-6),
         model_noise_relative=max(float(raw.get("modelNoiseRelative", 0.05)), 0.0),
+        model_noise_autocalibrate=bool(raw.get("modelNoiseAutocalibrate", True)),
         min_noise_ppm=max(float(raw.get("minNoisePpm", 1e-4)), 1e-12),
         detection_threshold_ppm=max(float(raw.get("detectionThresholdPpm", 0.0)), 0.0),
         arrival_time_weight=min(max(float(raw.get("arrivalTimeWeight", 0.9)), 0.0), 5.0),
